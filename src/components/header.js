@@ -5,12 +5,12 @@ import React from "react"
 const Header = ({ siteTitle }) => (
   <header>
     <div>
-      <h1>
+      <h2>
         <Link
           to="/">
           {siteTitle}
         </Link>
-      </h1>
+      </h2>
     </div>
   </header>
 )
