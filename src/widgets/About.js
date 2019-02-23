@@ -57,7 +57,9 @@ export class About extends Component {
         <WrapperGroup>
           <h1>ABOUT THE AUTHOR</h1>
           <Content>
-            <WrapperImage src={swizec} alt="pic" />
+            <WrapperImage>
+              <img src={swizec} alt='swiz'/>
+            </WrapperImage>
             <WrapperCopy>
             <p>Hi, I’m Swizec Teller. I help coders become software engineers.</p>
     
