@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import styled from 'styled-components'
 
-import swizec from '../images/swizec.png'
+import Swizec from '../images/Swizec.png'
 
 const Wrapper = styled.div`
 max-width: 700px;
@@ -58,7 +58,7 @@ export class About extends Component {
           <h1>ABOUT THE AUTHOR</h1>
           <Content>
             <WrapperImage>
-              <img src={swizec} alt='swiz'/>
+              <img src={Swizec} alt='swiz'/>
             </WrapperImage>
             <WrapperCopy>
             <p>Hi, I’m Swizec Teller. I help coders become software engineers.</p>
