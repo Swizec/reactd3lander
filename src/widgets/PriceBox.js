@@ -12,7 +12,7 @@ const WrapperGroup = styled.div`
   text-align: center;
   -webkit-border-radius: 5px;
   -moz-border-radius: 5px;
-  border-radius: 5px;
+  border-radius: 20px;
   background-color: #fff;
   box-shadow: 0 5px 25px 0 
               rgba(0,0,0, .25);

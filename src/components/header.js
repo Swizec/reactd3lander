@@ -8,7 +8,7 @@ const Header = ({ siteTitle }) => (
       <h2>
         <Link
           to="/">
-          {siteTitle}
+          💪
         </Link>
       </h2>
     </div>
