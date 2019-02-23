@@ -13,7 +13,7 @@ const WrapperGroup = styled.div`
  }
 `
 
-const WrapperImage = styled.img`
+const WrapperImage = styled.div`
 margin: 0 auto;
 display: block;
   height: 300px;
