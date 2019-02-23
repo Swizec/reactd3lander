@@ -5,6 +5,8 @@ import BarChart from '../images/BarChart.png'
 
 
 const Wrapper = styled.div`
+max-width: 700px;
+margin: 9rem auto 0;
 height: 100%;
 text-align: center;
 img {

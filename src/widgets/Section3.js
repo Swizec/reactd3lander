@@ -8,6 +8,8 @@ import VideoBlock from '../widgets/VideoBlock'
 
 
 const Wrapper = styled.div`
+max-width: 700px;
+margin: 0 auto;
 img {
     height: 300px;
     display: block;

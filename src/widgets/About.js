@@ -4,13 +4,18 @@ import styled from 'styled-components'
 import swizec from '../images/swizec.png'
 
 const Wrapper = styled.div`
-
+max-width: 700px;
+margin: 0 auto;
 `
 const WrapperGroup = styled.div`
- 
+ h1 {
+     text-align: center;
+ }
 `
 
 const WrapperImage = styled.img`
+margin: 0 auto;
+display: block;
   height: 300px;
   grid-area: Picture;
   @media (max-width: 940px) {
@@ -25,7 +30,7 @@ const WrapperCopy = styled.div`
 
 const Content = styled.div`
   margin: 0 2rem;
-  display: grid;
+  {/*display: grid;
   align-items: top;
   justify-items: center;
   grid-gap: 1rem;
@@ -42,7 +47,7 @@ const Content = styled.div`
       'Picture'
       'Copy'
       'Feat';
-  }
+  }*/}
 `
 
 export class About extends Component {
