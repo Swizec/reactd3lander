@@ -14,12 +14,12 @@ const WrapperGroup = styled.div`
 `
 
 const WrapperImage = styled.div`
-margin: 0 auto;
+img {margin: 0 auto;
 display: block;
   height: 300px;
-  grid-area: Picture;
+  grid-area: Picture;}
   @media (max-width: 940px) {
-    height: 200px;
+    img {height: 200px;}
   }
 `
 
@@ -29,7 +29,7 @@ const WrapperCopy = styled.div`
 
 
 const Content = styled.div`
-  margin: 0 2rem;
+  margin: 0 0rem;
   {/*display: grid;
   align-items: top;
   justify-items: center;

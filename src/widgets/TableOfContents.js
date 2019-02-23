@@ -4,12 +4,21 @@ import styled from 'styled-components'
 const Wrapper = styled.div`
 max-width: 700px;
 margin: 0 auto;
+h2 {
+    font-size: 24px;
+}
+p {
+    font-size: 18px;
+}
+li {
+    font-size: 16px;
+}
 .header {
     text-align: center;
 }
 .chapter {
-padding: 3rem;
-margin: 1rem 1rem;
+padding: 2rem ;
+margin: 1rem 0rem;
 border-radius: 20px;
 background-color: #fff;
 box-shadow: 0 5px 25px 0 

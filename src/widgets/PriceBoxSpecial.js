@@ -9,8 +9,6 @@ const WrapperGroup = styled.div`
   padding: 3rem;
   margin: 0 1rem;
   text-align: center;
-  -webkit-border-radius: 5px;
-  -moz-border-radius: 5px;
   border-radius: 20px;
   background-color: #fff;
   box-shadow: 0 5px 25px 0 
@@ -37,8 +35,6 @@ const WrapperGroup = styled.div`
     font-size: 52px;
     font-weight: 300;
     margin: 0px auto;
-    -webkit-border-radius: 100%;
-    -moz-border-radius: 100%;
     border-radius: 100%;
     width: 140px;
     height: 140px;
@@ -76,7 +72,6 @@ const WrapperGroup = styled.div`
   .btn-grey {
     background-color: #ff871c;
     line-height: 1.8;
-    -webkit-box-shadow: 0 3px 0 rgb(214, 106, 18);
     box-shadow: 0 3px 0 rgb(214, 106, 18);
     color: #fff;
     text-decoration: none;
@@ -95,10 +90,6 @@ const WrapperGroup = styled.div`
     font-size: 14px;
     line-height: 1.42857143;
     border-radius: 4px;
-    -webkit-user-select: none;
-    -moz-user-select: none;
-    -ms-user-select: none;
-    user-select: none;
   }
 `
 

@@ -10,8 +10,6 @@ const WrapperGroup = styled.div`
   padding: 3rem;
   margin: 0 1rem;
   text-align: center;
-  -webkit-border-radius: 5px;
-  -moz-border-radius: 5px;
   border-radius: 20px;
   background-color: #fff;
   box-shadow: 0 5px 25px 0 
@@ -24,8 +22,6 @@ const WrapperGroup = styled.div`
     font-weight: 300;
     margin: 0px auto;
     background: #e5e8ec;
-    -webkit-border-radius: 100%;
-    -moz-border-radius: 100%;
     border-radius: 100%;
     width: 140px;
     height: 140px;
@@ -64,7 +60,6 @@ const WrapperGroup = styled.div`
     background-color: #868c96;
     line-height: 1.8;
     color: #fff;
-    -webkit-box-shadow: 0 3px 0 rgb(108, 115, 107);
     box-shadow: 0 3px 0 rgb(108, 115, 107);
     text-decoration: none;
   }
@@ -82,10 +77,7 @@ const WrapperGroup = styled.div`
     font-size: 14px;
     line-height: 1.42857143;
     border-radius: 4px;
-    -webkit-user-select: none;
-    -moz-user-select: none;
-    -ms-user-select: none;
-    user-select: none;
+   
   }
 `
 

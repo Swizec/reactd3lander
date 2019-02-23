@@ -6,7 +6,7 @@ import PriceBoxSpecial from '../widgets/PriceBoxSpecial.js'
 const Wrapper = styled.div`
   height: 100%;
   margin: 0rem 0rem;
-  padding: 2rem;
+  
 
 `
 const WrapperBlock = styled.div`
