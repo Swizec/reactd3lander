@@ -10,6 +10,7 @@ import Section3 from "../widgets/Section3";
 import Section4 from "../widgets/Section4";
 import Section5 from "../widgets/Section5";
 import Section6 from "../widgets/Section6";
+import About from "../widgets/About";
 
 const Wrapper = styled.div`
 hr {
@@ -34,6 +35,7 @@ const IndexPage = () => (
       <Section5/>
       <hr></hr>
       <Section6/>
+      <About/>
     </Wrapper>
   </Layout>
 )

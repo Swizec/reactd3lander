@@ -8,7 +8,7 @@ const Wrapper = styled.div`
   color: #f77b12;
   float: left;
   font-weight: 900;
-  font-size: 150px;
+  font-size: 120px;
   line-height: 60px;
   padding-top: 4px;
   padding-right: 8px;
