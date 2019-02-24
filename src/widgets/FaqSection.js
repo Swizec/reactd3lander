@@ -4,7 +4,11 @@ import styled from 'styled-components'
 
 
 const Wrapper = styled.div`
-margin: 7rem 0;
+max-width: 700px;
+margin: 7rem auto;
+h2 {
+  margin: 0;
+}
 `
 
 
@@ -12,6 +16,7 @@ export class FaqSection extends Component {
   render() {
     return (
       <Wrapper>
+      <h2>FAQ</h2>
         <FAQ 
         question='IS REACT+D3V4 FOR ME?'
         answer="Yes. 

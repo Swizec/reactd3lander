@@ -1,6 +1,6 @@
 import React from 'react'
 
-const EmailForm = () => {
+const EmailSubmit = () => {
   return (
     <div>
       <form
@@ -10,15 +10,15 @@ const EmailForm = () => {
         data-drip-embedded-form="5362865"
         >
         <input
-            type="text"
-            placeholder="Enter your email"
-            label="Email Address"
-            name="fields[email]"
-            className="form-control"
+            type="submit"
+            name="submit"
+            value="Sign Up"
+            data-drip-attribute="sign-up-button"
+            className="btn"
         />
-     </form>
+      </form>
     </div>
   )
 }
 
-export default EmailForm
+export default EmailSubmit

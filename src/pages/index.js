@@ -16,6 +16,10 @@ import Pricing from "../widgets/Pricing";
 import TableOfContents from "../widgets/TableOfContents";
 import Testimonial from "../widgets/Testimonial";
 import Test1 from '../images/Test1.jpg'
+import EmailSignup from "../widgets/EmailSignup";
+import EmailHeaderText from "../widgets/EmailHeaderText";
+import EmailForm from "../widgets/EmailForm";
+import EmailSubmit from "../widgets/EmailSubmit";
 
 const Wrapper = styled.div`
 hr {
@@ -42,6 +46,11 @@ const IndexPage = () => (
       <Section5/>
       <Section6/>
       <TableOfContents/>
+      <EmailSignup
+            header={<EmailHeaderText />}
+            input={<EmailForm />}
+            submit={<EmailSubmit />}
+          />
       <About/>
       <Pricing/>
       <FaqSection/>
