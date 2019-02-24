@@ -37,12 +37,12 @@ export default class Section1 extends Component {
         <p>But React and D3 are declarative. You don't write How you want your code to work, you write What you want to achieve. Your bell pepper salad recipe looks more like this:</p>
         <pre>
             <code className="language-javascript">
-            {`
-            <Salad>
-              <Oil />
-              <BellPepper cut salted />
-            </Salad>
-            `}       
+  {`
+  <Salad>
+    <Oil />
+    <BellPepper cut salted />
+  </Salad>
+  `}       
             </code>
         </pre>
         <p>You look at that and you immediately know it's a salad. It involves oil and bell peppers. You don't have to read all the steps to know the result. The recipe declares what it's making.</p>

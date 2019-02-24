@@ -1,11 +1,17 @@
 import React, { Component } from 'react'
 import FAQ from '../widgets/Faq'
+import styled from 'styled-components'
+
+
+const Wrapper = styled.div`
+margin: 7rem 0;
+`
 
 
 export class FaqSection extends Component {
   render() {
     return (
-      <div>
+      <Wrapper>
         <FAQ 
         question='IS REACT+D3V4 FOR ME?'
         answer="Yes. 
@@ -28,7 +34,7 @@ export class FaqSection extends Component {
         answer="Send me an email and I'll click the magic refund button. You even get to keep the book."
         />
         
-      </div>
+      </Wrapper>
     )
   }
 }

@@ -24,3 +24,7 @@ p {
   font-weight: 300;
   line-height: 1.975rem;
 }
+footer {
+  text-align: center;
+  margin: 3rem 0;
+}

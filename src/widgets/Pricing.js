@@ -5,7 +5,7 @@ import PriceBoxSpecial from '../widgets/PriceBoxSpecial.js'
 
 const Wrapper = styled.div`
   height: 100%;
-  margin: 0rem 0rem;
+  margin: 7rem 0rem;
   
 
 `
@@ -40,7 +40,7 @@ export class Pricing extends Component {
     Money-back guarantee
     </div>
   }
-  button={<a href="#" class="btn btn-grey btn-min-width">PRE-ORDER</a>}
+  button={<a href="/" class="btn btn-grey btn-min-width">PRE-ORDER</a>}
   />
   <PriceBox
   price={<div class="price"> <span class="curr">$</span>149</div>}
@@ -63,7 +63,7 @@ export class Pricing extends Component {
     Money-back guarantee
     </div>
   }
-  button={<a href="#" class="btn btn-grey btn-min-width">PRE-ORDER</a>}
+  button={<a href="/" class="btn btn-grey btn-min-width">PRE-ORDER</a>}
   />
   <PriceBoxSpecial
   price={<div class="price"> <span class="curr">$</span>399</div>}
@@ -89,7 +89,7 @@ export class Pricing extends Component {
     Money-back guarantee
     </div>
   }
-  button={<a href="#" class="btn btn-grey btn-min-width">PRE-ORDER</a>}
+  button={<a href="/" class="btn btn-grey btn-min-width">PRE-ORDER</a>}
   />
   </WrapperBlock>
       </Wrapper>

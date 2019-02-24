@@ -20,11 +20,11 @@ const Layout = ({ children }) => (
         <Header siteTitle={data.site.siteMetadata.title} />
         <div>
           <main>{children}</main>
-          {/*<footer>
-            © {new Date().getFullYear()}, Built with
+          <footer>
+            © {new Date().getFullYear()}, Built by
             {` `}
-            <a href="https://www.gatsbyjs.org">Gatsby</a>
-          </footer>*/}
+            <a href="https://swizec.com/">Swizec</a>
+          </footer>
         </div>
       </>
     )}

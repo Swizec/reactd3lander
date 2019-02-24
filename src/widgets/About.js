@@ -72,7 +72,7 @@ export class About extends Component {
             talks to improve their technical skills, get promotions, change jobs, and ship
             their products faster.</p>
     
-            <p>Story time 👇</p>
+            <p>Story time <span role='img' aria-label='point'>👇</span></p>
     
             <p>React+D3 started as a bet in April 2015. A friend wanted to learn React and
             challenged me to publish a book. A month later React+D3 launched with 79 pages
@@ -93,7 +93,7 @@ export class About extends Component {
             been doing this all my life and that's why I know every learning technique
             inside and out.</p>
     
-            <p>Some of my work has been featured in 👇</p>
+            <p>Some of my work has been featured in <span role='img' aria-label='point'>👇</span></p>
             </WrapperCopy>
             <Features>{<AboutMeFeatures />}</Features>
           </Content>
