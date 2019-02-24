@@ -8,7 +8,7 @@ import FeatureList from '../widgets/FeatureList'
 
 const Wrapper = styled.div`
 max-width: 700px;
-margin: 0 auto;
+margin: 7rem auto;
 padding: 0;
 img {
     height: 300px;

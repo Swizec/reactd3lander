@@ -5,7 +5,7 @@ import styled from 'styled-components'
 
 const Wrapper = styled.div`
 max-width: 700px;
-margin: 0 auto;
+margin: 0rem auto;
 .firstcharacter {
   color: #f77b12;
   float: left;

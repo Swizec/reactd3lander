@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import styled from 'styled-components'
+import AboutMeFeatures from '../widgets/AboutMeFeatures'
 
 import Swizec from '../images/Swizec.png'
 
@@ -26,7 +27,10 @@ display: block;
 const WrapperCopy = styled.div`
   grid-area: Copy;
 `
-
+const Features = styled.div`
+  text-align: center;
+  grid-area: Feat;
+`
 
 const Content = styled.div`
   margin: 0 0rem;
@@ -91,6 +95,7 @@ export class About extends Component {
     
             <p>Some of my work has been featured in 👇</p>
             </WrapperCopy>
+            <Features>{<AboutMeFeatures />}</Features>
           </Content>
         </WrapperGroup>
       </Wrapper>

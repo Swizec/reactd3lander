@@ -14,6 +14,8 @@ import About from "../widgets/About";
 import FaqSection from "../widgets/FaqSection";
 import Pricing from "../widgets/Pricing";
 import TableOfContents from "../widgets/TableOfContents";
+import Testimonial from "../widgets/Testimonial";
+import Test1 from '../images/Test1.jpg'
 
 const Wrapper = styled.div`
 hr {
@@ -28,17 +30,17 @@ const IndexPage = () => (
     <Wrapper>
       <Hero/>
       <Section1/>
-      <hr></hr>
+      <Testimonial
+        quote="I'm starting a new position where I will focus on data visualization using React and d3. I got everything I needed from the book, your examples were straight forward and easy to follow. Thanks!"
+        image={Test1}
+        name='Aristides Staffieri'
+        company='Engineer at ProtectWise'
+      />
       <Section2/>
-      <hr></hr>
       <Section3/>
-      <hr></hr>
       <Section4/>
-      <hr></hr>
       <Section5/>
-      <hr></hr>
       <Section6/>
-      <hr></hr>
       <TableOfContents/>
       <About/>
       <Pricing/>

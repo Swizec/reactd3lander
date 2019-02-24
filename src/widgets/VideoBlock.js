@@ -3,7 +3,9 @@ import styled from 'styled-components'
 
 
 
-const Wrapper = styled.div``
+const Wrapper = styled.div`
+
+`
 
 const WrapperVideo = styled.div`
   max-width: 1000px;
