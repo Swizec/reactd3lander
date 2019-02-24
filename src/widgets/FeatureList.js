@@ -25,7 +25,7 @@ li {
   font-size: 24px;
   position: relative;
   padding-left: 30px;
-  margin: 0 0 4rem 0;
+  margin: 0 0 3rem 0;
   
   &:before {
     display: block;

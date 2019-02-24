@@ -4,6 +4,14 @@ import styled from 'styled-components'
 const Wrapper = styled.div`
 max-width: 700px;
 margin: 7rem auto;
+hr {
+    border: 5px dashed #f77b12;
+    width: 40px;
+}
+.border {
+    max-width: 50px;
+    margin: 0 auto;
+}
 h2 {
     font-size: 24px;
 }
@@ -11,7 +19,7 @@ p {
     font-size: 18px;
 }
 li {
-    font-size: 16px;
+    font-size: 18px;
 }
 .header {
     text-align: center;
@@ -32,6 +40,9 @@ export class TableOfContents extends Component {
       <Wrapper>
         <h1 className='header'>WHAT'S IN THE BOOK</h1>
         <h3 className='header'>Table of contents</h3>
+        <div className='border'>
+        <hr></hr>
+        </div>
         <div className='chapter'>
             <h2>INTRODUCTION</h2>
             <p>Foreword</p>

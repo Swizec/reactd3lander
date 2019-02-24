@@ -16,6 +16,9 @@ const Wrapper = styled.div`
 max-width: 700px;
 margin: 7rem auto;
 padding: 0;
+h1 {
+  margin: 0;
+}
 img {
     height: 300px;
     display: block;

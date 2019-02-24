@@ -6,6 +6,10 @@ html {
 body {
   padding: 0 2rem;
   margin: 0 auto;
+  background-color: #ffffff;
+}
+a {
+  color: #f77b12;
 }
 h1 {
   font-weight: 900;

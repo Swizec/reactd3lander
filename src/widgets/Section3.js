@@ -15,6 +15,9 @@ img {
     display: block;
     margin: 0 auto;
 }
+h2 {
+  text-align: center;
+}
 `;
 
 export default class Section1 extends Component {

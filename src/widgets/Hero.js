@@ -1,12 +1,12 @@
 import React, { Component } from 'react'
 import styled from 'styled-components'
 
-import BarChart from '../images/BarChart.png'
+import Mock1 from '../images/Mock1.png'
 
 
 const Wrapper = styled.div`
 max-width: 700px;
-margin: 7rem auto 0;
+margin: 0rem auto 0;
 height: 100%;
 text-align: center;
 img {
@@ -26,10 +26,10 @@ export default class Hero extends Component {
     return (
       <Wrapper>
         <WrapperGroup>
-            <h1>Stuck copy/pasting random D3 examples?</h1>
+            <h1>Stuck Copy/Pasting Random D3 Examples?</h1>
             <h3>Become a <strong>Data Visualization Engineer</strong> with React for Data Visualization.</h3>
            
-            <img src={BarChart} alt='barchart'/>
+            <img src={Mock1} alt='barchart'/>
         </WrapperGroup>
       </Wrapper>
     )
