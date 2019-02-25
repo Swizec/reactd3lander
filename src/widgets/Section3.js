@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import styled from 'styled-components'
-import BarChart from '../images/BarChart.png'
+//import BarChart from '../images/BarChart.png'
 import VideoBlock from '../widgets/VideoBlock'
 
 
@@ -51,7 +51,7 @@ export default class Section1 extends Component {
   render() {
     return (
       <Wrapper>
-        <img src={BarChart} alt='bc' />
+        {/*<img src={BarChart} alt='bc' />*/}
         <h2>Reusable data visualization with React and D3</h2>
         <div className='videocase'>
         <div className='Video1'>

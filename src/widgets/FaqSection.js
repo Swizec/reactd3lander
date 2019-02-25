@@ -6,6 +6,7 @@ import styled from 'styled-components'
 const Wrapper = styled.div`
 max-width: 700px;
 margin: 7rem auto;
+padding: 0 2rem;
 h2 {
   margin: 0;
 }

@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import styled from 'styled-components'
-import BarChart from '../images/BarChart.png'
+import pshot2 from '../images/pshot2.gif'
 import Prism from "prismjs";
 import "./prism.css";
 
@@ -17,6 +17,11 @@ img {
     display: block;
     margin: 0 auto;
 }
+@media (max-width: 940px) {
+  img {
+    height: 200px;
+  }
+}
 
 `;
 
@@ -27,7 +32,7 @@ export default class Section1 extends Component {
   render() {
     return (
       <Wrapper>
-        <img src={BarChart} alt='bc' />
+        <img src={pshot2} alt='bc' />
         <h2>React is the biggest revolution in JavaScript programming since jQuery hit the scene 10 years ago, and D3 is unlike anything you've seen before.</h2>
 
         <p>"How the hell is it doing that?" is the most common phrase I hear when teaching people about React and D3. "What do I put in a component? Should it be a state or a prop? These D3 examples don't make any sense"</p>

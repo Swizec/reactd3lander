@@ -45,6 +45,12 @@ const IndexPage = () => (
       <Section3/>
       <Section4/>
       <Section5/>
+      <Testimonial
+        quote="I'm starting a new position where I will focus on data visualization using React and d3. I got everything I needed from the book, your examples were straight forward and easy to follow. Thanks!"
+        image={Test1}
+        name='Aristides Staffieri'
+        company='Engineer at ProtectWise'
+      />
       <Section6/>
       <TableOfContents/>
       <EmailSignup
@@ -68,6 +74,12 @@ const IndexPage = () => (
       />
       <Pricing/>
       <FaqSection/>
+      <Testimonial
+        quote="I'm starting a new position where I will focus on data visualization using React and d3. I got everything I needed from the book, your examples were straight forward and easy to follow. Thanks!"
+        image={Test1}
+        name='Aristides Staffieri'
+        company='Engineer at ProtectWise'
+      />
     </Wrapper>
   </Layout>
 )

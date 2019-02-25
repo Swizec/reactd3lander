@@ -28,6 +28,9 @@ img {
   height: 100px;
 }
 @media (max-width: 940px) {
+  h1 {
+    font-size: 30px;
+  }
     .dash {
       height: 50px;
     }
