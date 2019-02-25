@@ -35,8 +35,16 @@ function SEO({ description, lang, meta, keywords, title }) {
                 content: `website`,
               },
               {
+                name: `og:image`,
+                content: `https://reactd3lander.netlify.com/static/metaimage-92d136087bd1db37d514c61acaa84e1b.png`
+              },
+              {
                 name: `twitter:card`,
                 content: `summary`,
+              },
+              {
+                name:`twitter:image:src`,
+                content: `https://reactd3lander.netlify.com/static/metaimage-92d136087bd1db37d514c61acaa84e1b.png`
               },
               {
                 name: `twitter:creator`,
