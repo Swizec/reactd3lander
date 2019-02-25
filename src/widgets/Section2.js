@@ -11,7 +11,7 @@ import "./prism.css";
 const Wrapper = styled.div`
 max-width: 700px;
 margin: 7rem auto;
-padding: 0;
+padding: 0 2rem;
 img {
     height: 300px;
     display: block;

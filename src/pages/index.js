@@ -20,6 +20,7 @@ import EmailSignup from "../widgets/EmailSignup";
 import EmailHeaderText from "../widgets/EmailHeaderText";
 import EmailForm from "../widgets/EmailForm";
 import EmailSubmit from "../widgets/EmailSubmit";
+import CopyBlock from "../widgets/CopyBlock";
 
 const Wrapper = styled.div`
 hr {
@@ -51,7 +52,20 @@ const IndexPage = () => (
             input={<EmailForm />}
             submit={<EmailSubmit />}
           />
+      <Testimonial
+        quote="I'm starting a new position where I will focus on data visualization using React and d3. I got everything I needed from the book, your examples were straight forward and easy to follow. Thanks!"
+        image={Test1}
+        name='Aristides Staffieri'
+        company='Engineer at ProtectWise'
+      />
       <About/>
+      <CopyBlock/>
+      <Testimonial
+        quote="I'm starting a new position where I will focus on data visualization using React and d3. I got everything I needed from the book, your examples were straight forward and easy to follow. Thanks!"
+        image={Test1}
+        name='Aristides Staffieri'
+        company='Engineer at ProtectWise'
+      />
       <Pricing/>
       <FaqSection/>
     </Wrapper>

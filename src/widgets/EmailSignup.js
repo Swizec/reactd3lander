@@ -1,16 +1,19 @@
 import React from 'react'
 import styled from 'styled-components'
-import Sample from '../images/sample.png'
+import pshot1 from '../images/pshot1.png'
 
 const Wrapper = styled.div`
 max-width: 900px;
 margin: 7rem auto;
-padding: 0;
+padding: 0 2rem;
 text-align: center;
 img {
   height: 300px;
 }  
 @media (max-width: 940px) {
+  h1 {
+    font-size: 30px;
+  }
   img {
     height: 140px;
   }
@@ -65,7 +68,7 @@ const EmailSignup = props => (
   <Wrapper>
     <h1>START WITH A FREE CHAPTER AND EMAIL CRASH COURSE</h1>
     <h3>See what React+D3v4 is like and learn the basics.</h3>
-    <img src={Sample} alt="readymade-logo" />
+    <img src={pshot1} alt="readymade-logo" />
     <WrapperHeader>{props.header}</WrapperHeader>
     <WrapperForm>{props.input}</WrapperForm>
     <WrapperSubmit>{props.submit}</WrapperSubmit>

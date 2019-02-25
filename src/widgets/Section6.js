@@ -15,7 +15,7 @@ import examp8 from '../images/examp8.gif'
 const Wrapper = styled.div`
 max-width: 700px;
 margin: 7rem auto;
-padding: 0;
+padding: 0 2rem;
 h1 {
   margin: 0;
 }

@@ -4,6 +4,7 @@ import styled from 'styled-components'
 const Wrapper = styled.div`
 max-width: 700px;
 margin: 7rem auto;
+padding: 0 2rem;
 hr {
     border: 5px dashed #f77b12;
     width: 40px;
@@ -38,7 +39,7 @@ export class TableOfContents extends Component {
   render() {
     return (
       <Wrapper>
-        <h1 className='header'>WHAT'S IN THE BOOK</h1>
+        <h1 className='header'>WHAT'S IN THE COURSE</h1>
         <h3 className='header'>Table of contents</h3>
         <div className='border'>
         <hr></hr>

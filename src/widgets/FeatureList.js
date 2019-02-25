@@ -9,9 +9,7 @@ h2 {
   }
 
 .listwrapper {
-  width: 650px;
-  margin-left: auto;
-  margin-right: auto;
+  margin: 0 auto;
 }
 
 ul,

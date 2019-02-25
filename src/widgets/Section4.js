@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import styled from 'styled-components'
-import BarChart from '../images/BarChart.png'
+import pshot2 from '../images/pshot2.gif'
 
 
 
@@ -8,11 +8,16 @@ import BarChart from '../images/BarChart.png'
 const Wrapper = styled.div`
 max-width: 700px;
 margin: 7rem auto;
-padding: 0;
+padding: 0 2rem;
 img {
     height: 300px;
     display: block;
     margin: 0 auto;
+}
+@media (max-width: 940px) {
+  img {
+    height: 200px;
+  }
 }
 
 `;
@@ -21,7 +26,7 @@ export default class Section1 extends Component {
   render() {
     return (
       <Wrapper>
-        <img src={BarChart} alt='bc' />
+        <img src={pshot2} alt='bc' />
         <h2>React for Data Visualization shows you the way</h2>
         <p>React+D3v4 gives you a quick overview of the basics to get you started, followed by a deep dive that solidifies your knowledge through varied projects and examples. Build working code that you can show off to your friends, boss, and coworkers.</p>
         <p>Learn the basics with interactive examples right in your browser — no need to install anything. Forget about Npm and Webpack and Babel and Node. Just React and D3.</p>
