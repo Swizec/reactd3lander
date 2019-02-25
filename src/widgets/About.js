@@ -66,11 +66,11 @@ export class About extends Component {
               <img src={Swizec} alt='swiz'/>
             </WrapperImage>
             <WrapperCopy>
-            <p>Hi, I’m Swizec Teller. I help coders become software engineers.</p>
+            <p>Hi, I’m <strong>Swizec Teller</strong>. I help <strong>coders become software engineers.</strong></p>
     
-            <p>Over the years I've helped over 10,000 engineers hone their craft. People
-            from Uber, Oracle, Apple and many others have used my books, articles, and
-            talks to improve their technical skills, get promotions, change jobs, and ship
+            <p>Over the years I've helped over <strong>10,000 engineers</strong> hone their craft. People
+            from Uber, Oracle, Apple and many others have used my <strong>books, articles, and
+            talks</strong> to improve their technical skills, get promotions, change jobs, and ship
             their products faster.</p>
     
             <p>Story time <span role='img' aria-label='point'>👇</span></p>
@@ -79,19 +79,19 @@ export class About extends Component {
             challenged me to publish a book. A month later React+D3 launched with 79 pages
             of hard earned knowledge.</p>
     
-            <p>In April 2016 it became React+D3 ES6. 117 pages and growing beyond a single
+            <p>In April 2016 it became <strong>React+D3</strong> ES6. 117 pages and growing beyond a single
             big project it was a huge success. I kept going, started live streaming, and
             publishing videos on YouTube.</p>
     
-            <p>It's 2017 now and after 10 months of work, React+D3v4 is the best book
+            <p>It's 2017 now and after 10 months of work, <strong>React+D3v4 is the best book</strong>
             I've ever written. 249 pages, many examples, much code to play with. It's
-            designed like a step-by-step course so you can follow along without breaking a
-            sweat.</p>
+            designed like a step-by-step course so you can <strong>follow along without breaking a
+            sweat.</strong></p>
     
-            <p>I based React+D3v4 on 20 years of experience with learning how to code on
-            my own, reading blogs and articles, listening to professors, and working
-            with mentors. Yes, that means I wrote my first program when I was 9. I've
-            been doing this all my life and that's why I know every learning technique
+            <p>I based React+D3v4 on <strong>20 years of experience</strong> with learning how to code <strong>on
+            my own</strong>, reading blogs and articles, listening to <strong>professors</strong>, and <strong>working
+            with mentors</strong>. Yes, that means I wrote my <strong>first program when I was 9</strong>. I've
+            been doing this all my life and that's why <strong>I know every learning technique</strong>
             inside and out.</p>
     
             <p>Some of my work has been featured in <span role='img' aria-label='point'>👇</span></p>

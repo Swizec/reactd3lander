@@ -32,10 +32,10 @@ export default class Section1 extends Component {
       <Wrapper>
         <img src={pshot3} alt='bc' />
         <h2>React for Data Visualization shows you the way</h2>
-        <p>React+D3v4 gives you a quick overview of the basics to get you started, followed by a deep dive that solidifies your knowledge through varied projects and examples. Build working code that you can show off to your friends, boss, and coworkers.</p>
-        <p>Learn the basics with interactive examples right in your browser — no need to install anything. Forget about Npm and Webpack and Babel and Node. Just React and D3.</p>
-        <p>Dive into 7 projects that teach you how it all fits together. Build interactive visualizations, create animations, and build fast performance with canvas. Learn everything there is to know about building beautiful apps with React and D3.</p>
-        <p>From the very basics of React and D3, to state handling with Redux and MobX, React alternatives like Preact and Inferno.</p>
+        <p>React+D3v4 gives you a <strong>quick overview of the basics</strong> to get you started, followed by a <strong>deep dive</strong> that <strong>solidifies your knowledge</strong> through varied projects and examples. <strong>Build working code</strong> that you can <strong>show off to your friends, boss, and coworkers.</strong></p>
+        <p>Learn the basics with <strong>interactive examples right in your browser</strong> — no need to install anything. Forget about Npm and Webpack and Babel and Node. <strong>Just React and D3.</strong></p>
+        <p><strong>Dive into 7 projects</strong> that teach you how it all fits together. Build <strong>interactive visualizations</strong>, create <strong>animations</strong>, and build <strong>fast performance with canvas</strong>. Learn everything there is to know about building <strong>beautiful apps with React and D3.</strong></p>
+        <p>From the very <strong>basics of React and D3</strong>, to state handling with <strong>Redux</strong> and <strong>MobX</strong>, React alternatives like <strong>Preact</strong> and <strong>Inferno.</strong></p>
         
       </Wrapper>
     )

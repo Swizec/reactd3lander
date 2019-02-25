@@ -1,6 +1,11 @@
 import React from 'react'
 import styled from 'styled-components'
-import pshot1 from '../images/pshot1.png'
+import block1 from '../images/block1.png'
+import block2 from '../images/block2.png'
+import block3 from '../images/block3.png'
+import block4 from '../images/block4.png'
+import block5 from '../images/block5.png'
+import block6 from '../images/block6.png'
 
 
 
@@ -66,27 +71,27 @@ const FeatureList = props => (
     <h2>Start with the building blocks</h2>
     <div className='boxes'>
     <div className='box1'>
-      <img src={pshot1} alt='img'/>
+      <img src={block1} alt='img'/>
       <p><strong>1.) </strong>Start with the basics. Right in your browser.</p>
     </div>
     <div className='box2'>
-      <img src={pshot1} alt='img'/>
+      <img src={block2} alt='img'/>
       <p><strong>2.) </strong>Learn about blackbox rendering with a reusable axis component. Teaches you all about giving up control, using higher order componnents, and more. You can use this approach to render *anything* inside your React app. Even Vue.</p>
     </div>
     <div className='box3'>
-      <img src={pshot1} alt='img'/>
+      <img src={block3} alt='img'/>
       <p><strong>3.) </strong>Learn full integration rendering with a scatterplot. Use the axis from before, add a bunch of data, then go as far as usinng render props to make your scatterplot shine.</p>
     </div>
     <div className='box4'>
-      <img src={pshot1} alt='img'/>
+      <img src={block4} alt='img'/>
       <p><strong>4.) </strong>Both times youre learning how to make your components reusable. Plug-and-play buildign blocks for your team.</p>
     </div>
     <div className='box5'>
-      <img src={pshot1} alt='img'/>
+      <img src={block5} alt='img'/>
       <p><strong>5.) </strong>Jump into animation with game loops where you learn about havign full control, how to think in frames andn movement. Youll be suprrised how powerful this can be.</p>
     </div>
     <div className='box6'>
-      <img src={pshot1} alt='img'/>
+      <img src={block6} alt='img'/>
       <p><strong>6.) </strong>When full animation is too much, youll need transitiosn. Learn about keyframes and easing functions and makign your animation look antural and smooth.</p>
     </div>
     </div>
