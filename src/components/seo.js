@@ -75,12 +75,6 @@ function SEO({ description, lang, meta, keywords, title }) {
                             defer
                             async
                         />
-                        <script
-                            defer
-                            async
-                            data-uid="4ee0fe7a23"
-                            src="https://f.convertkit.com/4ee0fe7a23/1d1948462f.js"
-                        />
                     </Helmet>
                 );
             }}
