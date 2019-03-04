@@ -32,6 +32,21 @@ module.exports = {
                 display: `minimal-ui`,
                 icon: `src/images/gatsby-icon.png` // This path is relative to the root of the site.
             }
+        },
+        {
+            resolve: "gatsby-plugin-facebook-pixel",
+            options: {
+                pixelId: "714190382013726"
+            }
+        },
+        {
+            resolve: "gatsby-plugin-google-analytics",
+            options: {
+                trackingId: "UA-1464315-23",
+                head: false,
+                anonymize: false,
+                respectDNT: true
+            }
         }
         // this (optional) plugin enables Progressive Web App + Offline functionality
         // To learn more, visit: https://gatsby.app/offline
