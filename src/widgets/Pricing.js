@@ -16,6 +16,29 @@ const WrapperBlock = styled.div`
     }
 `;
 
+export const BigBuyButton = ({ id, price }) => {
+    // let offer = price * context.offer.value,
+    //     strike = offer === price ? "" : <strike>${price}</strike>;
+
+    return (
+        // <a
+        //     href={`https://gumroad.com/l/${id}?wanted=true`}
+        //     data-gumroad-single-product="true"
+        //     data-gumroad-produc-id={id}
+        //     className="btn btn-grey btn-min-width gumroad-product-embed"
+        // >
+        //     Buy now for ${price}
+        // </a>
+        <a
+            href={`https://gumroad.com/l/${id}`}
+            className=" btn btn-grey btn-min-width gumroad-button"
+            data-gumroad-product-id={id}
+        >
+            Buy now for ${price}
+        </a>
+    );
+};
+
 export class Pricing extends Component {
     render() {
         return (
@@ -23,8 +46,8 @@ export class Pricing extends Component {
                 <WrapperBlock>
                     <PriceBox
                         price={
-                            <div class="price">
-                                <span class="curr">$</span>49
+                            <div className="price">
+                                <span className="curr">$</span>49
                             </div>
                         }
                         plan="Basics course"
@@ -40,23 +63,23 @@ export class Pricing extends Component {
                                 integration
                                 <br />
                                 Downloadable PDF/epub/mobi
+                                <b>
+                                    3 extra projects you can use as a cookbook
+                                </b>
+                                <br />
                                 <br />
                                 Money-back guarantee
                                 <br />
                                 Yours forever
                             </div>
                         }
-                        button={
-                            <a href="/" class="btn btn-grey btn-min-width">
-                                PRE-ORDER
-                            </a>
-                        }
+                        button={<BigBuyButton id="Fqwwi" price={49} />}
                     />
                     <PriceBoxSpecial
                         price={
-                            <div class="price">
+                            <div className="price">
                                 {" "}
-                                <span class="curr">$</span>249
+                                <span className="curr">$</span>249
                             </div>
                         }
                         plan={
@@ -102,22 +125,23 @@ export class Pricing extends Component {
                                 <br />
                                 Downloadable PDF/epub/mobi
                                 <br />
+                                <b>
+                                    14 extra projects you can use as a cookbook
+                                </b>
+                                <br />
+                                <br />
                                 Money-back guarantee
                                 <br />
                                 Yours forever
                             </div>
                         }
-                        button={
-                            <a href="/" class="btn btn-grey btn-min-width">
-                                PRE-ORDER
-                            </a>
-                        }
+                        button={<BigBuyButton id="Hnbtz" price={249} />}
                     />
                     <PriceBox
                         price={
-                            <div class="price">
+                            <div className="price">
                                 {" "}
-                                <span class="curr">$</span>149
+                                <span className="curr">$</span>149
                             </div>
                         }
                         plan="FULL COURSE"
@@ -149,16 +173,17 @@ export class Pricing extends Component {
                                 <br />
                                 Downloadable PDF/epub/mobi
                                 <br />
+                                <b>
+                                    14 extra projects you can use as a cookbook
+                                </b>
+                                <br />
+                                <br />
                                 Money-back guarantee
                                 <br />
                                 Yours forever
                             </div>
                         }
-                        button={
-                            <a href="/" class="btn btn-grey btn-min-width">
-                                PRE-ORDER
-                            </a>
-                        }
+                        button={<BigBuyButton id="KDLxE" price={149} />}
                     />
                 </WrapperBlock>
             </Wrapper>

@@ -63,6 +63,7 @@ const IndexPage = () => (
             />
             <Section6 />
             <TableOfContents />
+            <Pricing />
             <EmailSignup
                 header={<EmailHeaderText />}
                 input={<EmailForm />}

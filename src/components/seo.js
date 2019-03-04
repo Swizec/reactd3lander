@@ -75,6 +75,11 @@ function SEO({ description, lang, meta, keywords, title }) {
                             defer
                             async
                         />
+                        <script
+                            src="https://gumroad.com/js/gumroad.js"
+                            defer
+                            async
+                        />
                     </Helmet>
                 );
             }}
