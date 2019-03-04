@@ -1,64 +1,116 @@
-import React, { Component } from 'react'
-import styled from 'styled-components'
-import pshot2 from '../images/pshot2.gif'
+import React, { Component } from "react";
+import styled from "styled-components";
+import pshot2 from "../images/pshot2.gif";
 import Prism from "prismjs";
 import "./prism.css";
 
-
-
-
-
 const Wrapper = styled.div`
-max-width: 700px;
-margin: 7rem auto;
-padding: 0 2rem;
-h2 {
-  font-weight: 400;
-}
-img {
-    height: 300px;
-    display: block;
-    margin: 0 auto;
-}
-@media (max-width: 940px) {
-  img {
-    height: 200px;
-  }
-}
+    max-width: 700px;
+    margin: 7rem auto;
+    padding: 0 2rem;
 
+    img {
+        height: 300px;
+        display: block;
+        margin: 0 auto;
+    }
+    @media (max-width: 940px) {
+        img {
+            height: 200px;
+        }
+    }
 `;
 
 export default class Section1 extends Component {
-  componentDidMount() {
-    Prism.highlightAll();
-  }
-  render() {
-    return (
-      <Wrapper>
-        <img src={pshot2} alt='bc' />
-        <h2><strong>React is the biggest revolution</strong> in JavaScript programming since jQuery hit the scene 10 years ago, and <strong>D3 is unlike anything</strong> you've seen before.</h2>
+    componentDidMount() {
+        Prism.highlightAll();
+    }
+    render() {
+        return (
+            <Wrapper>
+                <h2>
+                    "without it I'm stuck using stack overflow in a disjointed,
+                    incorrect mess"
+                </h2>
+                <img src={pshot2} alt="bc" />
 
-        <p><i>"How the hell is it doing that?"</i> is the most common phrase I hear when teaching people about React and D3. <i>"What do I put in a component? Should it be a state or a prop?</i> These D3 examples don't make any sense"</p>
-        <p>The problem comes from how most of us first learn to code. "It's like a cooking recipe", teachers will say.</p>
-        <p>Take a bell pepper and cut it up. Then sprinkle some salt and pepper, add olive oil, and voila: you have a refreshing salad. A very simple salad with a single ingredient, but it's a salad. You can follow along and eventually you will understand what the code does.</p>
-        <p>That's called imperative programming. It reads as a series of steps. How to do something.</p>
-        <p>But React and D3 are declarative. <strong>You don't write How you want your code to work, you write What you want to achieve.</strong> Your bell pepper salad recipe looks more like this:</p>
-        <pre>
-            <code className="language-javascript">
-  {`
+                <p>
+                    You can avoid all that and learn how to build scalable and
+                    reusable dataviz components your whole team <em>and</em>{" "}
+                    future you can understand with{" "}
+                    <strong>React for Data Visualization</strong>.
+                </p>
+
+                <p>
+                    Get the confidence you need to excel and build anything you
+                    can imagine. 💪
+                </p>
+
+                <p>
+                    React is the biggest revolution in JavaScript programming
+                    since jQuery hit the scene 10 years ago, and D3 is unlike
+                    anything you've seen before.
+                </p>
+
+                <p>
+                    The problem comes from how most of us first learn to code.
+                    &quot;It's like a cooking recipe&quot;, teachers will say.
+                </p>
+
+                <p>
+                    Take a bell pepper and cut it up. Then sprinkle some salt
+                    and pepper, add olive oil, and voila: you have a refreshing
+                    salad. A very simple salad with a single ingredient, but a
+                    salad nonetheless. You can follow along and eventually you
+                    will understand what the code does.
+                </p>
+
+                <p>
+                    That's imperative programming. It reads as a series of
+                    steps. How to do something.
+                </p>
+
+                <p>
+                    React and D3 are declarative. You don't write <em>How</em>{" "}
+                    you want your code to work, you write <em>What</em> you want
+                    to achieve. Your bell pepper salad recipe looks more like
+                    this:{" "}
+                </p>
+                <pre>
+                    <code className="language-javascript">
+                        {`
   <Salad>
     <Oil />
     <BellPepper cut salted />
   </Salad>
-  `}       
-            </code>
-        </pre>
-        <p>You look at that and you immediately know it's a salad. It involves oil and bell peppers. You don't have to read all the steps to know the result. <strong>The recipe declares what it's making.</strong></p>
-        <p>Declarative code makes your project <strong>cleaner</strong> and <strong>easier to maintain</strong>, which means you <strong>spend more time delivering value to your users and clients.</strong></p>
-        <p>But <strong>learning how to think declaratively</strong> is hard. It feels like voodoo <strong>magic until you get used to it.</strong> We've all been there. To this day it still hurts my brain sometimes.</p>
-        <p>That's why <strong>React+D3v4</strong> takes you on a journey through <strong>7 projects and 5 interactive examples. Learn the basics in about an hour</strong> then dive as deep as you want to solidify your knowledge. Get <strong>the confidence you need to excel</strong> at your job.
-        </p>
-      </Wrapper>
-    )
-  }
+  `}
+                    </code>
+                </pre>
+                <p>
+                    You look at that and you know it's a salad. It involves oil
+                    and bell peppers. You don't have to read the steps to know
+                    the result. The recipe declares what it's making.
+                </p>
+
+                <p>
+                    Declarative code makes your project cleaner and easier to
+                    maintain. Means more time creating value for your users and
+                    clients.
+                </p>
+
+                <p>
+                    But learning how to think declaratively is hard. It starts
+                    like voodoo magic. We've all been there. It still hurts my
+                    brain sometimes.
+                </p>
+
+                <p>
+                    That's why <strong>React for Data Visualization</strong>{" "}
+                    starts with small building blocks then builds up to entire
+                    dashboards. Learn the basics in about an hour, then dive as
+                    deep as you want
+                </p>
+            </Wrapper>
+        );
+    }
 }
