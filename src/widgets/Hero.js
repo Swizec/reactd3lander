@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import styled from "styled-components";
 import VideoBlock from "../widgets/VideoBlock";
+import YouTube from "react-youtube";
 
 //import Mock1 from '../images/Mock1.png'
 
@@ -47,20 +48,8 @@ export default class Hero extends Component {
                             your whole team can understand with React for Data
                             Visualization.
                         </h3>
-                        <VideoBlock
-                            video={
-                                <iframe
-                                    className="youtubevid"
-                                    width="560"
-                                    height="315"
-                                    title="This is a unique title"
-                                    src="https://www.youtube.com/embed/7HQzbq4s7MQ"
-                                    frameBorder="0"
-                                    allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"
-                                    allowfullscreen
-                                />
-                            }
-                        />
+                        <YouTube videoId="CoTTJ-vR1Mc" />
+
                         {/*<img src={Mock1} alt='barchart'/>*/}
                     </WrapperGroup>
                 </Wrapper>
