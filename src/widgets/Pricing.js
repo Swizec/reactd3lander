@@ -21,25 +21,90 @@ export class Pricing extends Component {
         return (
             <Wrapper>
                 <WrapperBlock>
-                    PACKAGES AND BUY BUTTONS HERE
-                    {/* <PriceBox
+                    <PriceBox
                         price={
                             <div class="price">
                                 <span class="curr">$</span>49
                             </div>
                         }
-                        plan="BOOK"
+                        plan="Basics course"
                         features={
                             <div>
-                                React+D3v4 [PDF/epub/mobi]
-                                <br />3 recap videos
-                                <br />7 full projects
+                                A quick intro to D3
                                 <br />
-                                Weekly livecoding sessions
+                                How React makes D3 easier
                                 <br />
-                                Free updates
+                                Quick React+D3 integration
+                                <br />
+                                Scalable dataviz components with full
+                                integration
+                                <br />
+                                Downloadable PDF/epub/mobi
                                 <br />
                                 Money-back guarantee
+                                <br />
+                                Yours forever
+                            </div>
+                        }
+                        button={
+                            <a href="/" class="btn btn-grey btn-min-width">
+                                PRE-ORDER
+                            </a>
+                        }
+                    />
+                    <PriceBoxSpecial
+                        price={
+                            <div class="price">
+                                {" "}
+                                <span class="curr">$</span>249
+                            </div>
+                        }
+                        plan={
+                            <div>
+                                <p>
+                                    <strong>FULL COURSE</strong>
+                                </p>
+                                <p>
+                                    <strong>+ consultation</strong>
+                                </p>
+                            </div>
+                        }
+                        features={
+                            <div>
+                                <b>
+                                    30min consultation where we discuss your
+                                    usecase
+                                </b>
+                                <br />
+                                A quick intro to D3
+                                <br />
+                                How React makes D3 easier
+                                <br />
+                                Quick React+D3 integration
+                                <br />
+                                Scalable dataviz components with full
+                                integration
+                                <br />
+                                Detailed walkthrough of a large dataviz
+                                dashboard project
+                                <br />
+                                Game loop animation
+                                <br />
+                                Animating with transitions
+                                <br />
+                                Enter/update/exit animation
+                                <br />
+                                Redux and MobX basics
+                                <br />
+                                Rendering to Canvas
+                                <br />
+                                Refactoring to React Hooks
+                                <br />
+                                Downloadable PDF/epub/mobi
+                                <br />
+                                Money-back guarantee
+                                <br />
+                                Yours forever
                             </div>
                         }
                         button={
@@ -55,21 +120,38 @@ export class Pricing extends Component {
                                 <span class="curr">$</span>149
                             </div>
                         }
-                        plan="BOOK + COURSE"
+                        plan="FULL COURSE"
                         features={
                             <div>
-                                React+D3v4 [PDF/epub/mobi]
-                                <br />3 recap videos
-                                <br />4 full HD screencasts
-                                <br />7 full projects
+                                A quick intro to D3
                                 <br />
-                                Weekly livecoding sessions
+                                How React makes D3 easier
                                 <br />
-                                Interactive course
+                                Quick React+D3 integration
                                 <br />
-                                Free updates
+                                Scalable dataviz components with full
+                                integration
+                                <br />
+                                Detailed walkthrough of a large dataviz
+                                dashboard project
+                                <br />
+                                Game loop animation
+                                <br />
+                                Animating with transitions
+                                <br />
+                                Enter/update/exit animation
+                                <br />
+                                Redux and MobX basics
+                                <br />
+                                Rendering to Canvas
+                                <br />
+                                Refactoring to React Hooks
+                                <br />
+                                Downloadable PDF/epub/mobi
                                 <br />
                                 Money-back guarantee
+                                <br />
+                                Yours forever
                             </div>
                         }
                         button={
@@ -78,46 +160,6 @@ export class Pricing extends Component {
                             </a>
                         }
                     />
-                    <PriceBoxSpecial
-                        price={
-                            <div class="price">
-                                {" "}
-                                <span class="curr">$</span>399
-                            </div>
-                        }
-                        plan={
-                            <div>
-                                <p>
-                                    <strong>BOOK + COURSE</strong>
-                                </p>
-                                <p>
-                                    <strong>+ coaching</strong>
-                                </p>
-                            </div>
-                        }
-                        features={
-                            <div>
-                                React+D3v4 [PDF/epub/mobi]
-                                <br />3 recap videos
-                                <br />4 full HD screencasts
-                                <br />7 full projects
-                                <br />
-                                Weekly livecoding sessions
-                                <br />
-                                Interactive course
-                                <br />1 week personal coaching
-                                <br />
-                                Free updates
-                                <br />
-                                Money-back guarantee
-                            </div>
-                        }
-                        button={
-                            <a href="/" class="btn btn-grey btn-min-width">
-                                PRE-ORDER
-                            </a>
-                        }
-                    /> */}
                 </WrapperBlock>
             </Wrapper>
         );

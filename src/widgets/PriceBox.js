@@ -1,12 +1,12 @@
 import React from 'react'
 import styled from 'styled-components'
 
-const Wrapper = styled.div`
+const Wrapper = styled.div `
   margin: 2rem auto;
   display: inline-block;
   
 `
-const WrapperGroup = styled.div`
+const WrapperGroup = styled.div `
   padding: 3rem;
   margin: 0 1rem;
   text-align: center;
@@ -41,6 +41,7 @@ const WrapperGroup = styled.div`
     line-height: 2;
     font-size: 16px;
     margin-bottom: 20px;
+    max-width: 200px;
   }
   .action-btn {
     position: absolute;
@@ -81,17 +82,28 @@ const WrapperGroup = styled.div`
   }
 `
 
-const PriceBox = props => (
-  <Wrapper>
-    <WrapperGroup>
-      <div className="pricing">
-        <div className="price">{props.price}</div>
-        <div className="planname">{props.plan}</div>
-        <div className="plan-features">{props.features}</div>
-        <div className="action-btn">{props.button}</div>
-      </div>
-    </WrapperGroup>
-  </Wrapper>
+const PriceBox = props => ( <
+    Wrapper >
+    <
+    WrapperGroup >
+    <
+    div className = "pricing" >
+    <
+    div className = "price" > {
+        props.price
+    } < /div> <
+    div className = "planname" > {
+        props.plan
+    } < /div> <
+    div className = "plan-features" > {
+        props.features
+    } < /div> <
+    div className = "action-btn" > {
+        props.button
+    } < /div> < /
+    div > <
+    /WrapperGroup> < /
+    Wrapper >
 )
 
 export default PriceBox
