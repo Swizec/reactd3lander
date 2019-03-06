@@ -27,23 +27,6 @@ export default class Section6 extends Component {
     render() {
         return (
             <Wrapper>
-                {/*<img src={BarChart} alt='bc' />*/}
-
-                <div className="iframe-container">
-                    <iframe
-                        src="https://codesandbox.io/embed/km3l21y60r"
-                        title="This is a unique title"
-                        style={{
-                            width: 1000,
-                            height: 500,
-                            border: 0,
-                            borderRadius: 4,
-                            overflow: "hidden"
-                        }}
-                        sandbox="allow-modals allow-forms allow-popups allow-scripts allow-same-origin"
-                    />
-                </div>
-
                 <FeatureList />
             </Wrapper>
         );

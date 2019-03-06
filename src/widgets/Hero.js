@@ -2,8 +2,6 @@ import React, { Component } from "react";
 import styled from "styled-components";
 import Video from "../widgets/VideoBlock";
 
-//import Mock1 from '../images/Mock1.png'
-
 const Wrapper = styled.div`
     max-width: 750px;
     margin: 0rem auto 0;
@@ -48,8 +46,6 @@ export default class Hero extends Component {
                             Visualization.
                         </h3>
                         <Video videoId="CoTTJ-vR1Mc" />
-
-                        {/*<img src={Mock1} alt='barchart'/>*/}
                     </WrapperGroup>
                 </Wrapper>
             </React.Fragment>
