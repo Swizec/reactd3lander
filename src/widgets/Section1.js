@@ -1,25 +1,18 @@
-import React, { Component } from "react";
+import React from "react";
 import styled from "styled-components";
+
+import Image from "../widgets/Image";
 
 const Wrapper = styled.div`
     max-width: 700px;
     margin: 0rem auto;
     padding: 0 2rem;
-    .firstcharacter {
-        color: #f77b12;
-        float: left;
-        font-weight: 900;
-        font-size: 120px;
-        line-height: 60px;
-        padding-top: 4px;
-        padding-right: 8px;
-        padding-left: 3px;
-    }
 `;
 
-export default class Section1 extends Component {
-    render() {
-        return (
+export default ({ data }) => {
+    console.log(data);
+    return (
+        <React.Fragment>
             <Wrapper>
                 <p>
                     So you want to build a beautiful data viz. You've got data
@@ -40,14 +33,11 @@ export default class Section1 extends Component {
                     I remember building my first data visualization back in
                     2012. Visualized my coding habits from GitHub data.
                 </p>
+            </Wrapper>
 
-                <figure>
-                    <img
-                        src="https://swizec.com/blog/wp-content/uploads/2012/09/scatterplot-finished.png"
-                        alt=""
-                    />
-                </figure>
+            <Image {...data.scatterplotImg.childImageSharp} />
 
+            <Wrapper>
                 <p>I was so proud! Only took me a week. 💪</p>
 
                 <h2>
@@ -79,14 +69,11 @@ export default class Section1 extends Component {
                     You hunt the web for examples and omaigod what is this!? How
                     the hell is D3 doing that? 😳
                 </p>
+            </Wrapper>
 
-                <figure>
-                    <img
-                        src="https://reactd3workshop.com/static/barchartcode-6fbc274eed4cba9b32493cab9607ff61-d9514.png"
-                        alt=""
-                    />
-                </figure>
+            <Image {...data.spaghettiImg.childImageSharp} />
 
+            <Wrapper>
                 <p>
                     That's a bar chart by the way. You'd never guess just
                     looking at the code. I've been doing this for years and I
@@ -202,6 +189,6 @@ export default class Section1 extends Component {
 
                 <p>ugh</p>
             </Wrapper>
-        );
-    }
-}
+        </React.Fragment>
+    );
+};
