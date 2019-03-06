@@ -1,29 +1,18 @@
-import React from 'react'
-import styled from 'styled-components'
+import React from "react";
+import styled from "styled-components";
+import YouTube from "react-youtube";
+import FadeIn from "react-lazyload-fadein";
 
+const VideoBlock = ({ videoId }) => (
+    <FadeIn height={360} duration={300}>
+        {onload => (
+            <YouTube
+                videoId={videoId}
+                onReady={onload}
+                containerClassName="centered"
+            />
+        )}
+    </FadeIn>
+);
 
-
-const Wrapper = styled.div`
-
-`
-
-const WrapperVideo = styled.div`
-  max-width: 1000px;
-  margin: 0 auto;
-  padding: 1rem 0 2rem;
-  text-align: center;
-  @media (max-width: 940px) {
-    .youtubevid {
-      width: 300px;
-      height: 169px; /* 225px */
-    }
-  }
-`
-
-const VideoBlock = props => (
-  <Wrapper>
-    <WrapperVideo>{props.video}</WrapperVideo>
-  </Wrapper>
-)
-
-export default VideoBlock
+export default VideoBlock;

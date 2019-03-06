@@ -1,5 +1,7 @@
 import React from "react";
 import Img from "gatsby-image";
+import FadeIn from "react-lazyload-fadein";
+import { CenterDiv } from "../styles";
 
 const NonStretchedImage = props => {
     let normalizedProps = props;
@@ -17,5 +19,13 @@ const NonStretchedImage = props => {
 
     return <Img {...normalizedProps} />;
 };
+
+export const LazyImage = ({ height, src }) => (
+    <CenterDiv>
+        <FadeIn height={height} duration={300}>
+            {onload => <img src={src} alt="" onLoad={onload} />}
+        </FadeIn>
+    </CenterDiv>
+);
 
 export default NonStretchedImage;

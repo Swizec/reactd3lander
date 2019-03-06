@@ -6,3 +6,8 @@ export const Title = styled.h1`
     margin: 7rem auto;
     margin-bottom: 3rem;
 `;
+
+export const CenterDiv = styled.div`
+    width: 100%;
+    text-align: center;
+`;

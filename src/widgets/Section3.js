@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import styled from "styled-components";
-import YouTube from "react-youtube";
+import Video from "../widgets/VideoBlock";
 
 import { Title } from "../styles";
 
@@ -44,20 +44,14 @@ export default class Section1 extends Component {
                     </P>
                     <P>Watch some of my conference talks for a sneak peek 👇</P>
 
-                    <YouTube
-                        videoId="UP1nCXG2t4M"
-                        containerClassName="centered"
-                    />
+                    <Video videoId="UP1nCXG2t4M" />
                     <P>
                         The talk shows a proof of concept approach to making
                         fancy animations with React and d3js - a Space Invaders
                         game. I explain the basic approach, where I got the
                         idea, and show off some code.
                     </P>
-                    <YouTube
-                        videoId="47uMw-2mb4U"
-                        containerClassName="centered"
-                    />
+                    <Video videoId="47uMw-2mb4U" />
 
                     <P>
                         This talk is more hands on. I show how the animated
@@ -65,10 +59,7 @@ export default class Section1 extends Component {
                         benefits of componentization when it comes to building
                         modern data visualization.
                     </P>
-                    <YouTube
-                        videoId="9JvIyz7uB2s"
-                        containerClassName="centered"
-                    />
+                    <Video videoId="9JvIyz7uB2s" />
 
                     <P>
                         You don't have to watch the whole talk, it's all in

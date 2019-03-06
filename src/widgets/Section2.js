@@ -4,6 +4,8 @@ import pshot2 from "../images/pshot2.gif";
 import Prism from "prismjs";
 import "./prism.css";
 
+import { LazyImage } from "../widgets/Image";
+
 const Wrapper = styled.div`
     max-width: 700px;
     margin: 7rem auto;
@@ -25,6 +27,7 @@ export default class Section1 extends Component {
     componentDidMount() {
         Prism.highlightAll();
     }
+
     render() {
         return (
             <Wrapper>
@@ -32,7 +35,8 @@ export default class Section1 extends Component {
                     "without it I'm stuck using stack overflow in a disjointed,
                     incorrect mess"
                 </h2>
-                <img src={pshot2} alt="bc" />
+
+                <LazyImage height={300} src={pshot2} />
 
                 <p>
                     You can avoid all that and learn how to build scalable and
