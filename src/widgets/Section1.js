@@ -1,7 +1,8 @@
-import React from "react";
+import React, { useContext } from "react";
 import styled from "styled-components";
 
 import Image, { LazyImage } from "../widgets/Image";
+import { StaticQuery, graphql } from "gatsby";
 
 const Wrapper = styled.div`
     max-width: 700px;
@@ -9,7 +10,7 @@ const Wrapper = styled.div`
     padding: 0 2rem;
 `;
 
-export default ({ data }) => (
+const Section1 = ({ scatterplotImg, spaghettiImg }) => (
     <React.Fragment>
         <Wrapper>
             <p>
@@ -33,7 +34,7 @@ export default ({ data }) => (
             </p>
         </Wrapper>
 
-        <Image {...data.scatterplotImg.childImageSharp} />
+        <Image {...scatterplotImg.childImageSharp} />
 
         <Wrapper>
             <p>I was so proud! Only took me a week. 💪</p>
@@ -69,7 +70,7 @@ export default ({ data }) => (
             </p>
         </Wrapper>
 
-        <Image {...data.spaghettiImg.childImageSharp} />
+        <Image {...spaghettiImg.childImageSharp} />
 
         <Wrapper>
             <p>
@@ -180,4 +181,32 @@ export default ({ data }) => (
             <p>ugh</p>
         </Wrapper>
     </React.Fragment>
+);
+
+export default () => (
+    <StaticQuery
+        query={graphql`
+            query {
+                scatterplotImg: file(
+                    relativePath: { eq: "scatterplot-finished.png" }
+                ) {
+                    childImageSharp {
+                        fluid(maxWidth: 960, quality: 100) {
+                            ...GatsbyImageSharpFluid
+                            presentationWidth
+                        }
+                    }
+                }
+                spaghettiImg: file(relativePath: { eq: "spaghettiImg.png" }) {
+                    childImageSharp {
+                        fluid(maxWidth: 960, quality: 100) {
+                            ...GatsbyImageSharpFluid
+                            presentationWidth
+                        }
+                    }
+                }
+            }
+        `}
+        render={data => <Section1 {...data} />}
+    />
 );

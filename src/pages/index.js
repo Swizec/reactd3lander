@@ -34,14 +34,13 @@ const Wrapper = styled.div`
     }
 `;
 
-const IndexPage = ({ data }) => {
-    console.log(data);
+const IndexPage = () => {
     return (
         <Layout>
             <SEO title="Home" keywords={[`gatsby`, `application`, `react`]} />
             <Wrapper>
                 <Hero />
-                <Section1 data={data} />
+                <Section1 />
                 <Testimonial
                     quote="I'm starting a new position where I will focus on data visualization using React and d3. I got everything I needed from the book, your examples were straight forward and easy to follow. Thanks!"
                     image={Test3}
@@ -100,24 +99,3 @@ const IndexPage = ({ data }) => {
 };
 
 export default IndexPage;
-
-export const query = graphql`
-    query {
-        scatterplotImg: file(relativePath: { eq: "scatterplot-finished.png" }) {
-            childImageSharp {
-                fluid(maxWidth: 960, quality: 100) {
-                    ...GatsbyImageSharpFluid
-                    presentationWidth
-                }
-            }
-        }
-        spaghettiImg: file(relativePath: { eq: "spaghettiImg.png" }) {
-            childImageSharp {
-                fluid(maxWidth: 960, quality: 100) {
-                    ...GatsbyImageSharpFluid
-                    presentationWidth
-                }
-            }
-        }
-    }
-`;

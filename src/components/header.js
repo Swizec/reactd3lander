@@ -1,42 +1,57 @@
-import { Link } from "gatsby"
-import PropTypes from "prop-types"
-import React from "react"
-import styled from 'styled-components'
+import { Link } from "gatsby";
+import PropTypes from "prop-types";
+import React from "react";
+import styled from "styled-components";
+import { StaticQuery, graphql } from "gatsby";
 
-import logo from '../images/logo.png'
+import Image from "../widgets/Image";
 
 const Wrapper = styled.div`
-img {
-  margin: 4rem 0rem 0rem 4rem;
-  height: 50px;
-}
-@media (max-width: 940px) {
-  img {
-    margin: 4rem auto 0;
-    display: block;
-  }
-}
-`
+    .gatsby-image-wrapper {
+        margin: 4rem 0rem 0rem 4rem;
+        height: 50px;
+    }
+    @media (max-width: 940px) {
+        .gatsby-image-wrapper {
+            margin: 4rem auto 0;
+            display: block;
+        }
+    }
+`;
 
-const Header = ({ siteTitle }) => (
-  <header>
-    <div>
-      <Wrapper>
-        <Link
-          to="/">
-          <img src={logo} alt='logo'/>
-        </Link>
-      </Wrapper>
-    </div>
-  </header>
-)
+const Header = () => (
+    <StaticQuery
+        query={graphql`
+            query {
+                logo: file(relativePath: { eq: "logo.png" }) {
+                    childImageSharp {
+                        fixed(width: 128, height: 50) {
+                            ...GatsbyImageSharpFixed
+                        }
+                    }
+                }
+            }
+        `}
+        render={({ logo }) => (
+            <header>
+                <div>
+                    <Wrapper>
+                        <Link to="/">
+                            <Image {...logo.childImageSharp} />
+                        </Link>
+                    </Wrapper>
+                </div>
+            </header>
+        )}
+    />
+);
 
 Header.propTypes = {
-  siteTitle: PropTypes.string,
-}
+    siteTitle: PropTypes.string
+};
 
 Header.defaultProps = {
-  siteTitle: ``,
-}
+    siteTitle: ``
+};
 
-export default Header
+export default Header;
