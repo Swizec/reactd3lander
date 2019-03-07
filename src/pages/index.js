@@ -47,6 +47,7 @@ const IndexPage = () => {
                     name="Aristides Staffieri"
                     company="Engineer at ProtectWise"
                 />
+                <CopyBlock />
                 <Section2 />
                 <Testimonial
                     quote="I use React because it is the sane way of doing things. I use D3 because I have to. I want nice interactive charts. I want to stay sane."
