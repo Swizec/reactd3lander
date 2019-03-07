@@ -4,6 +4,31 @@ import styled from "styled-components";
 const Wrapper = styled.div`
     margin: 2rem auto;
     display: inline-block;
+    .btn-grey {
+        background-color: #868c96;
+        line-height: 1.8;
+        color: #fff;
+        box-shadow: 0 3px 0 rgb(108, 115, 107);
+        text-decoration: none;
+    }
+    .btn {
+        display: inline-block;
+        margin-bottom: 0;
+        font-weight: 900;
+        text-align: center;
+        vertical-align: middle;
+        cursor: pointer;
+        background-image: none;
+        border: 1px solid transparent;
+        white-space: nowrap;
+        padding: 10px 20px;
+        font-size: 20px;
+        line-height: 1.42857143;
+        border-radius: 4px;
+
+        position: relative;
+        margin-top: -30px;
+    }
 `;
 const WrapperGroup = styled.div`
     padding: 3rem;
@@ -39,14 +64,9 @@ const WrapperGroup = styled.div`
         line-height: 2;
         font-size: 16px;
         margin-bottom: 20px;
-        max-width: 200px;
+        max-width: 250px;
     }
-    .action-btn {
-        position: absolute;
-        bottom: -15px;
-        left: 50%;
-        margin-left: -95px;
-    }
+
     .action-btn a:hover {
         background: #384047;
     }
@@ -55,40 +75,16 @@ const WrapperGroup = styled.div`
         font-size: 20px;
         vertical-align: super;
     }
-    .btn-grey {
-        background-color: #868c96;
-        line-height: 1.8;
-        color: #fff;
-        box-shadow: 0 3px 0 rgb(108, 115, 107);
-        text-decoration: none;
-    }
-    .btn {
-        display: inline-block;
-        margin-bottom: 0;
-        font-weight: 900;
-        text-align: center;
-        vertical-align: middle;
-        cursor: pointer;
-        background-image: none;
-        border: 1px solid transparent;
-        white-space: nowrap;
-        padding: 9px 18px;
-        font-size: 18px;
-        line-height: 1.42857143;
-        border-radius: 4px;
-    }
 `;
 
-const PriceBox = props => (
+const PriceBox = ({ price, plan, features, button }) => (
     <Wrapper>
         <WrapperGroup>
-            <div className="pricing">
-                <div className="price"> {props.price} </div>{" "}
-                <div className="planname"> {props.plan} </div>{" "}
-                <div className="plan-features"> {props.features} </div>{" "}
-                <div className="action-btn"> {props.button} </div>{" "}
-            </div>{" "}
-        </WrapperGroup>{" "}
+            <div className="price">{price}</div>
+            <div className="planname">{plan}</div>
+            <div className="plan-features">{features}</div>
+        </WrapperGroup>
+        <div className="action-btn">{button}</div>
     </Wrapper>
 );
 

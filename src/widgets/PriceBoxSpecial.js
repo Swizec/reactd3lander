@@ -4,6 +4,33 @@ import styled from "styled-components";
 const Wrapper = styled.div`
     margin: 2rem auto;
     display: inline-block;
+    max-width: 500px;
+
+    .btn-grey {
+        background-color: #ff871c;
+        line-height: 1.8;
+        box-shadow: 0 3px 0 rgb(214, 106, 18);
+        color: #fff;
+        text-decoration: none;
+    }
+    .btn {
+        display: inline-block;
+        margin-bottom: 0;
+        font-weight: 900;
+        text-align: center;
+        vertical-align: middle;
+        cursor: pointer;
+        background-image: none;
+        border: 1px solid transparent;
+        white-space: nowrap;
+        padding: 10px 25px;
+        font-size: 24px;
+        line-height: 1.42857143;
+        border-radius: 4px;
+
+        position: relative;
+        margin-top: -30px;
+    }
 `;
 const WrapperGroup = styled.div`
     padding: 3rem;
@@ -57,8 +84,6 @@ const WrapperGroup = styled.div`
     .action-btn {
         position: absolute;
         bottom: -15px;
-        left: 50%;
-        margin-left: -100px;
     }
     .action-btn a:hover {
         background: orange;
@@ -68,40 +93,16 @@ const WrapperGroup = styled.div`
         font-size: 20px;
         vertical-align: super;
     }
-    .btn-grey {
-        background-color: #ff871c;
-        line-height: 1.8;
-        box-shadow: 0 3px 0 rgb(214, 106, 18);
-        color: #fff;
-        text-decoration: none;
-    }
-    .btn {
-        display: inline-block;
-        margin-bottom: 0;
-        font-weight: 900;
-        text-align: center;
-        vertical-align: middle;
-        cursor: pointer;
-        background-image: none;
-        border: 1px solid transparent;
-        white-space: nowrap;
-        padding: 9px 18px;
-        font-size: 18px;
-        line-height: 1.42857143;
-        border-radius: 4px;
-    }
 `;
 
-const PriceBoxSpecial = props => (
+const PriceBoxSpecial = ({ price, plan, features, button }) => (
     <Wrapper>
         <WrapperGroup>
-            <div className="pricing">
-                <div className="price">{props.price}</div>
-                <div className="planname">{props.plan}</div>
-                <div className="plan-features">{props.features}</div>
-                <div className="action-btn">{props.button}</div>
-            </div>
+            <div className="price">{price}</div>
+            <div className="planname">{plan}</div>
+            <div className="plan-features">{features}</div>
         </WrapperGroup>
+        <div className="action-btn">{button}</div>
     </Wrapper>
 );
 

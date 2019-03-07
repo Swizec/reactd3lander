@@ -33,8 +33,9 @@ export default class Hero extends Component {
         return (
             <React.Fragment>
                 <H1>
-                    Stop copy pasting D3 examples <br /> create data
-                    visualizations of your own
+                    Stop copy pasting D3 examples,
+                    <br />
+                    create data visualizations of your own
                 </H1>
 
                 <Wrapper>
