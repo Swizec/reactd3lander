@@ -1,22 +1,22 @@
-import React from 'react'
-import styled from 'styled-components'
+import React from "react";
+import styled from "styled-components";
 
-
+import { LazyImage } from "../widgets/Image";
 
 const Wrapper = styled.div`
-margin: 7rem 0;
-`
+    margin: 7rem 0;
 
-const WrapperImage = styled.div`
-  
-`
+    img {
+        max-width: 500px;
+    }
+`;
 
-const Examples = props => (
-  <Wrapper>
-    <WrapperImage>{props.image}</WrapperImage>
-    <h4>{props.header}</h4>
-    <p>{props.copy}</p>
-  </Wrapper>
-)
+const Examples = ({ image, header, copy }) => (
+    <Wrapper>
+        <LazyImage height={567} src={image} />
+        <h4>{header}</h4>
+        <p>{copy}</p>
+    </Wrapper>
+);
 
-export default Examples
+export default Examples;

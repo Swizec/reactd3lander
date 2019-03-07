@@ -1,48 +1,153 @@
-import React, { Component } from 'react'
-import styled from 'styled-components'
-import About1 from '../images/About1.png'
-import About2 from '../images/About2.png'
-import About3 from '../images/About3.png'
-import About4 from '../images/About4.png'
-import About5 from '../images/About5.png'
-import About6 from '../images/About6.png'
-import About7 from '../images/About7.png'
-import About8 from '../images/About8.png'
-import About9 from '../images/About9.png'
-import About10 from '../images/About10.png'
-import About11 from '../images/About11.svg'
-import About12 from '../images/About12.png'
-import About13 from '../images/About13.svg'
-import About14 from '../images/About14.png'
+import React from "react";
+import styled from "styled-components";
+import { StaticQuery, graphql } from "gatsby";
+import Image from "../widgets/Image";
 
 const Wrapper = styled.div`
-  img {
-    width: 100px;
-    padding: 5px;
-    max-height: 80px;
-    filter: greyscale(100%);
-  }
-`
+    .gatsby-image-wrapper {
+        width: 100px;
+        padding: 5px;
+        max-height: 80px;
+        display: inline-block;
+    }
+`;
 
-export default class AboutMeFeatures extends Component {
-  render() {
-    return (
-      <Wrapper>
-        <img src={About1} alt="" />
-        <img src={About2} alt="" />
-        <img src={About3} alt="" />
-        <img src={About4} alt="" />
-        <img src={About5} alt="" />
-        <img src={About6} alt="" />
-        <img src={About7} alt="" />
-        <img src={About8} alt="" />
-        <img src={About9} alt="" />
-        <img src={About10} alt="" />
-        <img src={About11} alt="" />
-        <img src={About12} alt="" />
-        <img src={About13} alt="" />
-        <img src={About14} alt="" />
-      </Wrapper>
-    )
-  }
-}
+const AboutMeFeatures = images => (
+    <Wrapper>
+        {Object.values(images).map((image, i) => (
+            <Image {...image.childImageSharp} key={i} />
+        ))}
+    </Wrapper>
+);
+
+export default () => (
+    <StaticQuery
+        query={graphql`
+            query {
+                about1: file(relativePath: { eq: "publications/About1.png" }) {
+                    childImageSharp {
+                        fluid(maxWidth: 100, quality: 100) {
+                            ...GatsbyImageSharpFluid
+                            presentationWidth
+                        }
+                    }
+                }
+                about2: file(relativePath: { eq: "publications/About2.png" }) {
+                    childImageSharp {
+                        fluid(maxWidth: 100, quality: 100) {
+                            ...GatsbyImageSharpFluid
+                            presentationWidth
+                        }
+                    }
+                }
+                about3: file(relativePath: { eq: "publications/About3.png" }) {
+                    childImageSharp {
+                        fluid(maxWidth: 100, quality: 100) {
+                            ...GatsbyImageSharpFluid
+                            presentationWidth
+                        }
+                    }
+                }
+                about4: file(relativePath: { eq: "publications/About4.png" }) {
+                    childImageSharp {
+                        fluid(maxWidth: 100, quality: 100) {
+                            ...GatsbyImageSharpFluid
+                            presentationWidth
+                        }
+                    }
+                }
+                about5: file(relativePath: { eq: "publications/About5.png" }) {
+                    childImageSharp {
+                        fluid(maxWidth: 100, quality: 100) {
+                            ...GatsbyImageSharpFluid
+                            presentationWidth
+                        }
+                    }
+                }
+                about6: file(relativePath: { eq: "publications/About6.png" }) {
+                    childImageSharp {
+                        fluid(maxWidth: 100, quality: 100) {
+                            ...GatsbyImageSharpFluid
+                            presentationWidth
+                        }
+                    }
+                }
+                about7: file(relativePath: { eq: "publications/About7.png" }) {
+                    childImageSharp {
+                        fluid(maxWidth: 100, quality: 100) {
+                            ...GatsbyImageSharpFluid
+                            presentationWidth
+                        }
+                    }
+                }
+                about8: file(relativePath: { eq: "publications/About8.png" }) {
+                    childImageSharp {
+                        fluid(maxWidth: 100, quality: 100) {
+                            ...GatsbyImageSharpFluid
+                            presentationWidth
+                        }
+                    }
+                }
+                about9: file(relativePath: { eq: "publications/About9.png" }) {
+                    childImageSharp {
+                        fluid(maxWidth: 100, quality: 100) {
+                            ...GatsbyImageSharpFluid
+                            presentationWidth
+                        }
+                    }
+                }
+                about10: file(
+                    relativePath: { eq: "publications/About10.png" }
+                ) {
+                    childImageSharp {
+                        fluid(maxWidth: 100, quality: 100) {
+                            ...GatsbyImageSharpFluid
+                            presentationWidth
+                        }
+                    }
+                }
+                about11: file(
+                    relativePath: { eq: "publications/About11.png" }
+                ) {
+                    childImageSharp {
+                        fluid(maxWidth: 100, quality: 100) {
+                            ...GatsbyImageSharpFluid
+                            presentationWidth
+                        }
+                    }
+                }
+                about12: file(
+                    relativePath: { eq: "publications/About12.png" }
+                ) {
+                    childImageSharp {
+                        fluid(maxWidth: 100, quality: 100) {
+                            ...GatsbyImageSharpFluid
+                            presentationWidth
+                        }
+                    }
+                }
+                about13: file(
+                    relativePath: { eq: "publications/About13.png" }
+                ) {
+                    childImageSharp {
+                        fluid(maxWidth: 100, quality: 100) {
+                            ...GatsbyImageSharpFluid
+                            presentationWidth
+                        }
+                    }
+                }
+                about14: file(
+                    relativePath: { eq: "publications/About14.png" }
+                ) {
+                    childImageSharp {
+                        fluid(maxWidth: 100, quality: 100) {
+                            ...GatsbyImageSharpFluid
+                            presentationWidth
+                        }
+                    }
+                }
+            }
+        `}
+        render={data => <AboutMeFeatures {...data} />}
+    />
+);

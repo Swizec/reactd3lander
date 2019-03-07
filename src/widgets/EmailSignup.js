@@ -1,6 +1,8 @@
 import React from "react";
 import styled from "styled-components";
-import pshot1 from "../images/pshot1.png";
+import { StaticQuery, graphql } from "gatsby";
+
+import Image from "../widgets/Image";
 
 const Wrapper = styled.div`
     max-width: 900px;
@@ -19,36 +21,10 @@ const Wrapper = styled.div`
         }
     }
 `;
-const WrapperHeader = styled.div``;
 
 const WrapperForm = styled.div`
     form {
         margin: 0 auto;
-    }
-`;
-const WrapperSubmit = styled.div`
-    input {
-        background-color: #ff871c;
-        line-height: 1.8;
-        -webkit-box-shadow: 0 3px 0 rgb(214, 106, 18);
-        box-shadow: 0 3px 0 rgb(214, 106, 18);
-        text-transform: uppercase;
-        padding: 0.5rem;
-        margin: 1rem 0;
-        display: inline-block;
-        margin-bottom: 0;
-        font-weight: 400;
-        color: #fff;
-        text-align: center;
-        vertical-align: middle;
-        cursor: pointer;
-        background-image: none;
-        border: 1px solid transparent;
-        white-space: nowrap;
-        padding: 6px 12px;
-        font-size: 14px;
-        line-height: 1.42857143;
-        border-radius: 4px;
     }
 `;
 
@@ -56,13 +32,13 @@ const H1 = styled.h1`
     text-transform: uppercase;
 `;
 
-const EmailSignup = props => (
+const EmailSignup = ({ headerImg }) => (
     <Wrapper>
         <H1>Try a free chapter</H1>
-        <h3>
+        <h2>
             See what React for Data Visualization is like and learn some basics.
-        </h3>
-        <img src={pshot1} alt="readymade-logo" />
+        </h2>
+        <Image {...headerImg.childImageSharp} />
         <WrapperForm
             dangerouslySetInnerHTML={{
                 __html: `
@@ -73,4 +49,20 @@ const EmailSignup = props => (
     </Wrapper>
 );
 
-export default EmailSignup;
+export default () => (
+    <StaticQuery
+        query={graphql`
+            query {
+                headerImg: file(relativePath: { eq: "pshot1.png" }) {
+                    childImageSharp {
+                        fluid(maxWidth: 700, quality: 100) {
+                            ...GatsbyImageSharpFluid
+                            presentationWidth
+                        }
+                    }
+                }
+            }
+        `}
+        render={data => <EmailSignup {...data} />}
+    />
+);
