@@ -83,6 +83,21 @@ function SEO({ description, lang, meta, keywords, title, includeTypeform }) {
                         {includeTypeform ? (
                             <script>{` (function() { var qs,js,q,s,d=document, gi=d.getElementById, ce=d.createElement, gt=d.getElementsByTagName, id="typef_orm_share", b="https://embed.typeform.com/"; if(!gi.call(d,id)){js = ce.call(d, "script"); js.id=id; js.src=b+"embed.js"; q=gt.call(d,"script")[0]; q.parentNode.insertBefore(js,q) } })() `}</script>
                         ) : null}
+                        <script type="text/javascript">{`
+                        <!-- SegMetrics -->
+                            var _segq = _segq || [];
+                        var _segs = _segs || {};
+                        _segs.integration = '1763';
+                        _segs.link = ['swizec.com', 'reactfordataviz.com', 'es6cheatsheet.com', 'es2017.io', 'es2018.io'];
+                        (function () {
+                            var dc = document.createElement('script');
+                            dc.type = 'text/javascript';
+                            dc.async = true;
+                            dc.src = '//tag.segmetrics.io/seg.js';
+                            var s = document.getElementsByTagName('script')[0];
+                            s.parentNode.insertBefore(dc, s);
+                        })(); 
+                        `}</script>
                     </Helmet>
                 );
             }}
