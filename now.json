@@ -1,11 +1,19 @@
 {
-    "version": 2,
-    "name": "gatsby",
-    "builds": [{
-        "src": "package.json",
-        "use": "@now/static-build",
-        "config": {
-            "distDir": "public"
-        }
-    }]
+  "version": 2,
+  "scope": "swizec-agentofuser",
+  "name": "gatsby",
+  "build": {
+    "env": {
+      "GIPHY_API_KEY": "@giphy-api-key"
+    }
+  },
+  "builds": [
+    {
+      "src": "package.json",
+      "use": "@now/static-build",
+      "config": {
+        "distDir": "public"
+      }
+    }
+  ]
 }
