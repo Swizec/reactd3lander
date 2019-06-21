@@ -1,7 +1,7 @@
 {
   "version": 2,
   "scope": "swizec-agentofuser",
-  "name": "gatsby",
+  "name": "reactfordataviz-staging",
   "build": {
     "env": {
       "GIPHY_API_KEY": "@giphy-api-key"
