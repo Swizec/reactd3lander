@@ -55,6 +55,19 @@ module.exports = {
           'gatsby-remark-prismjs',
           'gatsby-remark-copy-linked-files',
           'gatsby-remark-smartypants',
+          {
+            resolve: `@raae/gatsby-remark-oembed`,
+            options: {
+              // defaults to false
+              // usePrefix: true,
+              providers: {
+                // Important to exclude providers
+                // that adds js to the page.
+                // If you do not need them.
+                exclude: ['Reddit'],
+              },
+            },
+          },
         ],
       },
     },

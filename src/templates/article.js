@@ -15,6 +15,10 @@ const Wrapper = styled.div`
     max-width: 100%;
     margin: auto;
   }
+
+  iframe {
+    max-width: 100%;
+  }
 `
 
 const ArticleTemplate = props => {
