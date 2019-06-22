@@ -38,6 +38,7 @@ module.exports = {
       resolve: 'gatsby-transformer-remark',
       options: {
         plugins: [
+          'gatsby-remark-youtube',
           {
             resolve: 'gatsby-remark-images',
             options: {
