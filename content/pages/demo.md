@@ -39,13 +39,13 @@ https://vmjxjl7y73.codesandbox.io/
 
 ---
 
-Example
+Example (github gist also not supported at the moment):
 `https://gist.github.com/Swizec/100cf58948c84e7454ad9c9dbe9e1d37#file-gistfile1-txt`:
 
 https://gist.github.com/Swizec/100cf58948c84e7454ad9c9dbe9e1d37#file-gistfile1-txt
 
 ---
 
-Example `https://www.twitch.tv/videos/432063522`:
+Example `https://www.twitch.tv/riotgames/v/72749628`:
 
-https://www.twitch.tv/videos/432063522
+https://www.twitch.tv/riotgames/v/72749628
