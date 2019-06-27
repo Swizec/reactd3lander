@@ -24,7 +24,7 @@ function youtubeIframeFromUrl(url) {
             left: 0;
             top: 0;
           "
-          src="https://www.youtube-nocookie.com/embed/${videoId}"
+          src="https://www.youtube.com/embed/${videoId}"
           frameborder="0"
           allow="
             accelerometer;
