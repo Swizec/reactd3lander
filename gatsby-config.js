@@ -78,6 +78,7 @@ module.exports = {
               },
             },
           },
+          'gatsby-remark-a11y-emoji',
         ],
       },
     },
