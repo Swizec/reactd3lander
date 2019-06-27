@@ -8,6 +8,10 @@ module.exports = {
     description: `Learn how to build scalable dataviz components your whole team can understand with React for Data Visualization.`,
     author: `@swizec`,
     coverImageStaticPath: 'metaimage.png',
+    convertkit: {
+      userId: '7189e3bd4c',
+      formId: 'b9fc6faf5d',
+    },
   },
   plugins: [
     `gatsby-plugin-react-helmet`,

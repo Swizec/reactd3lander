@@ -4,6 +4,7 @@ import styled from 'styled-components'
 import Layout from '../components/layout'
 import SEO from '../components/seo'
 import DateText from '../components/date-text'
+import ConvertkitForm from '../widgets/ConvertkitForm'
 
 const Wrapper = styled.div`
   max-width: 700px;
@@ -45,6 +46,7 @@ const ArticleTemplate = props => {
             __html: post.html,
           }}
         />
+        <ConvertkitForm />
         <hr />
         {/* <Bio /> */}
 
