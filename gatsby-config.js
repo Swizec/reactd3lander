@@ -1,3 +1,7 @@
+const path = require('path')
+const dotenvPath = path.resolve(process.cwd(), '.env.build')
+require('dotenv').config({ path: dotenvPath, debug: true })
+
 module.exports = {
   siteMetadata: {
     title: `React for Data Visualization`,
@@ -39,6 +43,12 @@ module.exports = {
       options: {
         plugins: [
           'gatsby-remark-youtube',
+          {
+            resolve: 'gatsby-remark-giphy',
+            options: {
+              giphyApiKey: process.env.GIPHY_API_KEY,
+            },
+          },
           {
             resolve: 'gatsby-remark-images',
             options: {

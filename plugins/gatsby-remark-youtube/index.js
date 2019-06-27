@@ -1,4 +1,5 @@
-const select = require('unist-util-select')
+const { selectAll } = require('unist-util-select')
+
 const { stripIndent } = require('common-tags')
 
 // assumes URL in format https://www.youtube.com/watch?v=q5xxyGwTxZs
@@ -43,9 +44,9 @@ function youtubeIframeFromUrl(url) {
 
 module.exports = ({ markdownAST }, pluginOptions) => {
   // Manipulate AST
-  const soloYoutubeLinks = select(
-    markdownAST,
-    'paragraph link:only-child'
+  const soloYoutubeLinks = selectAll(
+    'paragraph link:only-child',
+    markdownAST
   ).filter(node =>
     node.url.match(/^https:\/\/www\.youtube\.com\/watch\?v=(\S+)$/)
   )
