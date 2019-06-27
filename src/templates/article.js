@@ -4,6 +4,7 @@ import styled from 'styled-components'
 import Layout from '../components/layout'
 import SEO from '../components/seo'
 import DateText from '../components/date-text'
+import About from '../widgets/About'
 import ConvertkitForm from '../widgets/ConvertkitForm'
 
 const Wrapper = styled.div`
@@ -48,7 +49,7 @@ const ArticleTemplate = props => {
         />
         <ConvertkitForm />
         <hr />
-        {/* <Bio /> */}
+        <About />
 
         <ul
           style={{
