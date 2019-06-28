@@ -46,6 +46,13 @@ module.exports = {
       resolve: 'gatsby-transformer-remark',
       options: {
         plugins: [
+          {
+            resolve: 'gatsby-remark-convertkit-form',
+            options: {
+              userId: '7189e3bd4c',
+              formId: 'b9fc6faf5d',
+            },
+          },
           'gatsby-remark-youtube',
           {
             resolve: 'gatsby-remark-giphy',

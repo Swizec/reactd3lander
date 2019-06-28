@@ -11,6 +11,8 @@ https://www.youtube.com/watch?v=wTIeVA0ylmw
 Session 7 was all about getting our Gatsby UI talking to our Lambda backend.
 Click Export, save to DynamoDB, get ready to collect those thumbsup and down.
 
+[convertkit]
+
 Works great 👌
 
 Oh and we added an `allWidget` query to get a list of existing widgets and
