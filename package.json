@@ -43,7 +43,7 @@
   ],
   "license": "MIT",
   "scripts": {
-    "bootstrap": "cd plugins/gatsby-remark-giphy && yarn install && cd ../gatsby-remark-youtube && yarn install && cd ../../",
+    "bootstrap": "cd plugins/gatsby-remark-giphy && yarn install && cd ../gatsby-remark-youtube && yarn install && cd ../gatsby-remark-convertkit-form && yarn install && cd ../../",
     "build": "yarn bootstrap && gatsby build",
     "develop": "gatsby develop",
     "format": "prettier --write ./**/*.{js,ts,tsx,json,md,mdx,html,css}",
