@@ -28,8 +28,13 @@ const Wrapper = styled.div`
   h4,
   h5,
   h6 {
-    margin-left: -3rem;
-    margin-right: -3rem;
+    margin-left: -4rem;
+    margin-right: -4rem;
+  }
+
+  pre {
+    margin-left: -4rem !important;
+    margin-right: -4rem !important;
   }
 `
 
