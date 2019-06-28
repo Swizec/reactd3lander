@@ -21,6 +21,16 @@ const Wrapper = styled.div`
   iframe {
     max-width: 100%;
   }
+
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
+    margin-left: -3rem;
+    margin-right: -3rem;
+  }
 `
 
 const ArticleTemplate = props => {
