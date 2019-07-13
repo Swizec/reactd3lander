@@ -32,6 +32,10 @@ const Wrapper = styled.div`
     margin-right: -4rem;
   }
 
+  form h1 {
+    margin: inherit;
+  }
+
   pre {
     margin-left: -4rem !important;
     margin-right: -4rem !important;
