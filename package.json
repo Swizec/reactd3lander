@@ -50,7 +50,7 @@
     "now-build": "yarn build",
     "serve": "gatsby serve",
     "start": "rm -rf ./.cache ./public && yarn develop",
-    "watch": "now dev",
+    "watch": "nodemon",
     "test": "echo \"Write tests! -> https://gatsby.app/unit-testing\""
   },
   "repository": {
@@ -69,7 +69,32 @@
     "tabWidth": 2,
     "trailingComma": "es5"
   },
+  "nodemonConfig": {
+    "ignore": [
+      ".DS_Store",
+      ".cache",
+      ".git",
+      "node_modules",
+      "public",
+      "yarn-error.log",
+      "yarn.lock",
+      "*flycheck*"
+    ],
+    "watch": [
+      "content",
+      "gatsby-browser.js",
+      "gatsby-config.js",
+      "gatsby-node.js",
+      "package.json",
+      "src",
+      "tsconfig.json"
+    ],
+    "ext": "js,ts,tsx,md",
+    "verbose": true,
+    "exec": "yarn build && yarn serve"
+  },
   "devDependencies": {
+    "nodemon": "^1.19.1",
     "now": "^15.6.1"
   }
 }
