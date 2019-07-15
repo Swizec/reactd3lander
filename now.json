@@ -1,19 +1,25 @@
 {
-  "version": 2,
-  "scope": "swizec-agentofuser",
-  "name": "reactfordataviz-staging",
-  "build": {
-    "env": {
-      "GIPHY_API_KEY": "@giphy-api-key"
-    }
-  },
-  "builds": [
-    {
-      "src": "package.json",
-      "use": "@now/static-build",
-      "config": {
-        "distDir": "public"
-      }
-    }
-  ]
+    "version": 2,
+    "scope": "swizec",
+    "name": "reactfordataviz-staging",
+    "alias": "reactfordataviz.com",
+    "build": {
+        "env": {
+            "GIPHY_API_KEY": "@giphy-api-key"
+        }
+    },
+    "routes": [{
+        "src": "^/(.*).html",
+        "headers": {
+            "cache-control": "public,max-age=0,must-revalidate"
+        },
+        "dest": "$1.html"
+    }],
+    "builds": [{
+        "src": "package.json",
+        "use": "@now/static-build",
+        "config": {
+            "distDir": "public"
+        }
+    }]
 }
