@@ -12,8 +12,9 @@ module.exports = {
         author: `@swizec`,
         coverImageStaticPath: 'metaimage.png',
         convertkit: {
-            userId: '7189e3bd4c',
-            formId: 'b9fc6faf5d',
+            userId: '785fc7ef1f',
+            formId: '772ba7c9ba',
+            url: 'https://pages.convertkit.com/785fc7ef1f/772ba7c9ba'
         },
         articles: {
             title: `React for Data Visualization Articles`,
@@ -55,8 +56,8 @@ module.exports = {
                 plugins: [{
                         resolve: 'gatsby-remark-convertkit-form',
                         options: {
-                            userId: '7189e3bd4c',
-                            formId: 'b9fc6faf5d',
+                            userId: '785fc7ef1f',
+                            formId: '772ba7c9ba',
                         },
                     },
                     'gatsby-remark-youtube',

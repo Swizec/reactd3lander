@@ -1,13 +1,8 @@
 import React from 'react'
 
 function DateText({ date, lastUpdated }) {
-  const changed = date && lastUpdated && date !== lastUpdated
-  return (
-    <>
-      {date}
-      {changed ? <em>{` · Last updated: ${lastUpdated}`}</em> : null}
-    </>
-  )
+  const time = date === lastUpdated ? date : lastUpdated
+  return <em>Last updated: {time}</em>
 }
 
 export default DateText

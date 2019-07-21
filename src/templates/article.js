@@ -48,6 +48,7 @@ const ArticleTemplate = props => {
   const post = props.data.markdownRemark
   const siteTitle = props.data.site.siteMetadata.title
   const { previous, next } = props.pageContext
+  const convertkitURL = props.data.site.siteMetadata.convertkit.url
 
   const pathname = post.fields.slug
   return (
@@ -62,6 +63,13 @@ const ArticleTemplate = props => {
         <h1>{post.frontmatter.title}</h1>
         <p>
           <DateText {...post.frontmatter} />
+          <em>
+            &nbsp;👉 livestreamed every last Sunday of the month.{' '}
+            <a href="https://www.youtube.com/channel/UCoyHgaeLLI7Knp7LDHOwZMw">
+              Join live
+            </a>{' '}
+            or <a href={convertkitURL}>subscribe by email 💌</a>
+          </em>
         </p>
         <div
           dangerouslySetInnerHTML={{
@@ -70,7 +78,6 @@ const ArticleTemplate = props => {
         />
         <ConvertkitForm />
         <hr />
-        <About />
 
         <ul
           style={{
@@ -96,6 +103,8 @@ const ArticleTemplate = props => {
             )}
           </li>
         </ul>
+
+        <About />
       </Wrapper>
     </Layout>
   )
@@ -109,6 +118,9 @@ export const pageQuery = graphql`
       siteMetadata {
         title
         author
+        convertkit {
+          url
+        }
       }
     }
     markdownRemark(fields: { slug: { eq: $slug } }) {
@@ -117,8 +129,8 @@ export const pageQuery = graphql`
       html
       frontmatter {
         title
-        date(formatString: "MMMM DD, YYYY")
-        lastUpdated(formatString: "MMMM DD, YYYY")
+        date(formatString: "MMMM YYYY")
+        lastUpdated(formatString: "MMMM YYYY")
         description
         image {
           publicURL
