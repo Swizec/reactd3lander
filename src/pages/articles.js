@@ -7,6 +7,7 @@ import About from '../widgets/About'
 import ConvertkitForm from '../widgets/ConvertkitForm'
 import Image from 'gatsby-image'
 import { isMobile } from 'react-device-detect'
+import { HeroTitle } from '../styles'
 
 const Wrapper = styled.div`
   max-width: 700px;
@@ -65,7 +66,7 @@ const ArticleTemplate = props => {
     <Layout location={props.location} title={title}>
       <SEO description={description} pathname="/articles" title={title} />
       <Wrapper>
-        <h1>React for Dataviz</h1>
+        <HeroTitle>React for Dataviz</HeroTitle>
         <p>
           A monthly data visualization built with React, D3, and others.
           Livecoded last Sunday of the month.{' '}

@@ -7,6 +7,7 @@ import SEO from '../components/seo'
 import DateText from '../components/date-text'
 import About from '../widgets/About'
 import ConvertkitForm from '../widgets/ConvertkitForm'
+import { HeroTitle } from '../styles'
 
 const Wrapper = styled.div`
   max-width: 700px;
@@ -61,7 +62,9 @@ const ArticleTemplate = props => {
         image={post.frontmatter.image}
       />
       <Wrapper>
-        <h1>{post.frontmatter.title}</h1>
+        <HeroTitle style={{ marginLeft: 'auto', marginRight: 'auto' }}>
+          {post.frontmatter.title}
+        </HeroTitle>
         <p>
           <DateText {...post.frontmatter} />
           <em>
