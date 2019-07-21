@@ -1,6 +1,7 @@
 import { graphql, Link } from 'gatsby'
 import React from 'react'
 import styled from 'styled-components'
+import { isMobile } from 'react-device-detect'
 import Layout from '../components/layout'
 import SEO from '../components/seo'
 import DateText from '../components/date-text'
@@ -10,7 +11,7 @@ import ConvertkitForm from '../widgets/ConvertkitForm'
 const Wrapper = styled.div`
   max-width: 700px;
   margin: 0rem auto;
-  padding: 0 2rem;
+  padding: 0 ${isMobile ? '1rem' : '2rem'};
 
   img {
     display: block;
@@ -28,8 +29,8 @@ const Wrapper = styled.div`
   h4,
   h5,
   h6 {
-    margin-left: -4rem;
-    margin-right: -4rem;
+    margin-left: ${isMobile ? '-1rem' : '-4rem'};
+    margin-right: ${isMobile ? '-1rem' : '-4rem'};
     text-align: center;
     padding-top: 1rem;
   }
@@ -39,8 +40,8 @@ const Wrapper = styled.div`
   }
 
   pre {
-    margin-left: -4rem !important;
-    margin-right: -4rem !important;
+    margin-left: ${isMobile ? '-1rem' : '-4rem !important'};
+    margin-right: ${isMobile ? '-1rem' : '-4rem !important'};
   }
 `
 

@@ -7,11 +7,12 @@ import DateText from '../components/date-text'
 import About from '../widgets/About'
 import ConvertkitForm from '../widgets/ConvertkitForm'
 import Image from 'gatsby-image'
+import { isMobile } from 'react-device-detect'
 
 const Wrapper = styled.div`
   max-width: 700px;
   margin: 0rem auto;
-  padding: 0 2rem;
+  padding: 0 ${isMobile ? '1rem' : '2rem'};
 
   img {
     display: block;
