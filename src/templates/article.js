@@ -30,6 +30,8 @@ const Wrapper = styled.div`
   h6 {
     margin-left: -4rem;
     margin-right: -4rem;
+    text-align: center;
+    padding-top: 1rem;
   }
 
   form h1 {
