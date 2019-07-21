@@ -3,7 +3,20 @@ import PropTypes from 'prop-types'
 import Helmet from 'react-helmet'
 import { StaticQuery, graphql } from 'gatsby'
 
-function SEO({ description, lang, meta, keywords, title, includeTypeform }) {
+function SEO({
+  description,
+  lang,
+  meta,
+  keywords,
+  title,
+  image,
+  includeTypeform,
+}) {
+  const thumbnail =
+    image ||
+    'https://reactd3lander.netlify.com/static/metaimage-92d136087bd1db37d514c61acaa84e1b.png'
+  const pageTitle = title || `React for Data Visualization`
+
   return (
     <StaticQuery
       query={detailsQuery}
@@ -16,8 +29,8 @@ function SEO({ description, lang, meta, keywords, title, includeTypeform }) {
             htmlAttributes={{
               lang,
             }}
-            title={title}
-            titleTemplate={title}
+            title={pageTitle}
+            titleTemplate={pageTitle}
             meta={[
               {
                 name: `description`,
@@ -25,7 +38,7 @@ function SEO({ description, lang, meta, keywords, title, includeTypeform }) {
               },
               {
                 property: `og:title`,
-                content: `React for Data Visualization`,
+                content: pageTitle,
               },
               {
                 property: `og:description`,
@@ -37,7 +50,7 @@ function SEO({ description, lang, meta, keywords, title, includeTypeform }) {
               },
               {
                 name: `og:image`,
-                content: `https://reactd3lander.netlify.com/static/metaimage-92d136087bd1db37d514c61acaa84e1b.png`,
+                content: thumbnail,
               },
               {
                 name: `twitter:card`,
@@ -45,7 +58,7 @@ function SEO({ description, lang, meta, keywords, title, includeTypeform }) {
               },
               {
                 name: `twitter:image:src`,
-                content: `https://reactd3lander.netlify.com/static/metaimage-92d136087bd1db37d514c61acaa84e1b.png`,
+                content: thumbnail,
               },
               {
                 name: `twitter:creator`,
@@ -53,7 +66,7 @@ function SEO({ description, lang, meta, keywords, title, includeTypeform }) {
               },
               {
                 name: `twitter:title`,
-                content: `React for Data Visualization`,
+                content: pageTitle,
               },
               {
                 name: `twitter:description`,
