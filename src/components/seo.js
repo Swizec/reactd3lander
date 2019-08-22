@@ -83,7 +83,11 @@ function SEO({
               )
               .concat(meta)}
           >
-            <script src="https://f.convertkit.com/ckjs/ck.5.js" defer async />
+            <script
+              src="https://f.convertkit.com/785fc7ef1f/772ba7c9ba.js"
+              defer
+              async
+            />
             <script src="https://gumroad.com/js/gumroad.js" defer async />
             {includeTypeform ? (
               <script>{` (function() { var qs,js,q,s,d=document, gi=d.getElementById, ce=d.createElement, gt=d.getElementsByTagName, id="typef_orm_share", b="https://embed.typeform.com/"; if(!gi.call(d,id)){js = ce.call(d, "script"); js.id=id; js.src=b+"embed.js"; q=gt.call(d,"script")[0]; q.parentNode.insertBefore(js,q) } })() `}</script>
