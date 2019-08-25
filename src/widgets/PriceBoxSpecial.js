@@ -31,6 +31,13 @@ const Wrapper = styled.div`
     position: relative;
     margin-top: -30px;
   }
+  small {
+    font-size: 0.7rem;
+    vertical-align: middle;
+    color: #808080;
+    margin-top: 0.5em;
+    display: inline-block;
+  }
 `
 const WrapperGroup = styled.div`
   padding: 3rem;
@@ -95,7 +102,7 @@ const WrapperGroup = styled.div`
   }
 `
 
-const PriceBoxSpecial = ({ price, plan, features, button }) => (
+const PriceBoxSpecial = ({ price, plan, features, button, location }) => (
   <Wrapper>
     <WrapperGroup>
       <div className="price">{price}</div>
@@ -103,6 +110,7 @@ const PriceBoxSpecial = ({ price, plan, features, button }) => (
       <div className="plan-features">{features}</div>
     </WrapperGroup>
     <div className="action-btn">{button}</div>
+    <small> ❤️️price parity adjusted for {location} ❤️</small>
   </Wrapper>
 )
 

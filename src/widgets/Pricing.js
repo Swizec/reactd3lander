@@ -1,11 +1,9 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useReducer } from 'react'
 import styled from 'styled-components'
 import PriceBox from '../widgets/PriceBox.js'
 import PriceBoxSpecial from '../widgets/PriceBoxSpecial.js'
 import FadeIn from 'react-lazyload-fadein'
 import { ParityPrice } from 'bigmac-index-price-calculator'
-
-console.log(ParityPrice)
 
 const parityPrice = new ParityPrice('cb952dd732eb8e511d44d441788fcf67', true)
 
@@ -54,20 +52,47 @@ export const FadeInButton = ({ id, price }) => {
   )
 }
 
+const priceReducer = (state, action) => {
+  console.log(action)
+  switch (action.type) {
+    case 'loaded':
+      return {
+        ...action.data,
+      }
+    default:
+      return state
+  }
+}
+
 const Pricing = () => {
-  const [tier1, setTier1] = useState(49)
-  const [tier2, setTier2] = useState(149)
-  const [tier3, setTier3] = useState(249)
+  const [{ tier1, tier2, tier3, location }, dispatch] = useReducer(
+    priceReducer,
+    { data: { tier1: 59, tier2: 179, tier3: 279, location: {} } }
+  )
 
   const calcPrices = async () => {
-    setTier1(await parityPrice.price(tier1))
-    setTier2(await parityPrice.price(tier2))
-    setTier3(await parityPrice.price(tier3))
+    // parityPrice is internally memoized so this fires only 1 request
+    const { location } = await parityPrice.priceWithLocation(tier1)
+    const tier1 = await parityPrice.price(59)
+    const tier2 = await parityPrice.price(179)
+    const tier3 = await parityPrice.price(279)
+
+    dispatch({
+      type: 'loaded',
+      data: {
+        location,
+        tier1,
+        tier2,
+        tier3,
+      },
+    })
   }
 
   useEffect(() => {
     calcPrices()
   }, [])
+
+  const country = location && location.country_name
 
   return (
     <Wrapper>
@@ -101,6 +126,7 @@ const Pricing = () => {
             </div>
           }
           button={<FadeInButton id="Fqwwi" price={tier1} />}
+          location={country}
         />
         <PriceBoxSpecial
           price={
@@ -156,6 +182,7 @@ const Pricing = () => {
             </div>
           }
           button={<FadeInButton id="Hnbtz" price={tier3} />}
+          location={country}
         />
         <PriceBox
           price={
@@ -200,6 +227,7 @@ const Pricing = () => {
             </div>
           }
           button={<FadeInButton id="KDLxE" price={tier2} />}
+          location={country}
         />
       </WrapperBlock>
     </Wrapper>
