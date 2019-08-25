@@ -7,7 +7,7 @@ import { ParityPrice } from 'bigmac-index-price-calculator'
 
 console.log(ParityPrice)
 
-const parityPrice = new ParityPrice('cb952dd732eb8e511d44d441788fcf67')
+const parityPrice = new ParityPrice('cb952dd732eb8e511d44d441788fcf67', true)
 
 const Wrapper = styled.div`
   margin: 7rem 0rem;
@@ -59,15 +59,15 @@ const Pricing = () => {
   const [tier2, setTier2] = useState(149)
   const [tier3, setTier3] = useState(249)
 
-  useEffect(
-    () =>
-      (async () => {
-        setTier1(await parityPrice.price(tier1))
-        setTier2(await parityPrice.price(tier2))
-        setTier3(await parityPrice.price(tier3))
-      })(),
-    []
-  )
+  const calcPrices = async () => {
+    setTier1(await parityPrice.price(tier1))
+    setTier2(await parityPrice.price(tier2))
+    setTier3(await parityPrice.price(tier3))
+  }
+
+  useEffect(() => {
+    calcPrices()
+  }, [])
 
   return (
     <Wrapper>
@@ -75,7 +75,8 @@ const Pricing = () => {
         <PriceBox
           price={
             <>
-              <span className="curr">$</span>49
+              <span className="curr">$</span>
+              {tier1}
             </>
           }
           plan="Basics course"
@@ -99,12 +100,13 @@ const Pricing = () => {
               Yours forever
             </div>
           }
-          button={<FadeInButton id="Fqwwi" price={49} />}
+          button={<FadeInButton id="Fqwwi" price={tier1} />}
         />
         <PriceBoxSpecial
           price={
             <>
-              <span className="curr">$</span>249
+              <span className="curr">$</span>
+              {tier3}
             </>
           }
           plan={
@@ -153,12 +155,13 @@ const Pricing = () => {
               Yours forever
             </div>
           }
-          button={<FadeInButton id="Hnbtz" price={249} />}
+          button={<FadeInButton id="Hnbtz" price={tier3} />}
         />
         <PriceBox
           price={
             <>
-              <span className="curr">$</span>149
+              <span className="curr">$</span>
+              {tier2}
             </>
           }
           plan="FULL COURSE"
@@ -196,7 +199,7 @@ const Pricing = () => {
               Yours forever
             </div>
           }
-          button={<FadeInButton id="KDLxE" price={149} />}
+          button={<FadeInButton id="KDLxE" price={tier2} />}
         />
       </WrapperBlock>
     </Wrapper>
