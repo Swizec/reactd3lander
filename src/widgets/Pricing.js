@@ -200,6 +200,8 @@ const Pricing = () => {
               <br />
               <b>3 extra projects you can use as a cookbook</b>
               <br />
+              <b>​Monthly livestream of a real dataviz project</b>
+              <br />
               <br />
               Money-back guarantee
               <br />
@@ -250,6 +252,8 @@ const Pricing = () => {
               <br />
               Animating with transitions
               <br />
+              Hybrid animation for complex interactions
+              <br />
               Enter/update/exit animation
               <br />
               Redux and MobX basics
@@ -261,6 +265,8 @@ const Pricing = () => {
               Downloadable PDF/epub/mobi
               <br />
               <b>14 extra projects you can use as a cookbook</b>
+              <br />
+              <b>​Monthly livestream of a real dataviz project</b>
               <br />
               <br />
               Money-back guarantee
@@ -301,6 +307,8 @@ const Pricing = () => {
               <br />
               Animating with transitions
               <br />
+              Hybrid animation for complex interactions
+              <br />
               Enter/update/exit animation
               <br />
               Redux and MobX basics
@@ -312,6 +320,8 @@ const Pricing = () => {
               Downloadable PDF/epub/mobi
               <br />
               <b>14 extra projects you can use as a cookbook</b>
+              <br />
+              <b>​Monthly livestream of a real dataviz project</b>
               <br />
               <br />
               Money-back guarantee
