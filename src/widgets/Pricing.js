@@ -19,11 +19,16 @@ const WrapperBlock = styled.div`
   }
 `
 
-const BigBuyButton = ({ id, price, onload }) => {
+const BigBuyButton = ({ id, price, onload, coupon }) => {
   useEffect(() => onload(), [])
+
+  const url = coupon
+    ? `https://gumroad.com/l/${id}/${coupon}`
+    : `https://gumroad.com/l/${id}`
+
   return (
     <a
-      href={`https://gumroad.com/l/${id}`}
+      href={url}
       className="btn btn-grey btn-min-width"
       data-gumroad-product-id={id}
       data-gumroad-single-product="true"
@@ -33,7 +38,7 @@ const BigBuyButton = ({ id, price, onload }) => {
   )
 }
 
-export const FadeInButton = ({ id, price }) => {
+export const FadeInButton = ({ id, price, coupon }) => {
   // let offer = price * context.offer.value,
   //     strike = offer === price ? "" : <strike>${price}</strike>;
 
@@ -47,13 +52,14 @@ export const FadeInButton = ({ id, price }) => {
     //     Buy now for ${price}
     // </a>
     <FadeIn height={55} duration={150}>
-      {onload => <BigBuyButton id={id} price={price} onload={onload} />}
+      {onload => (
+        <BigBuyButton id={id} coupon={coupon} price={price} onload={onload} />
+      )}
     </FadeIn>
   )
 }
 
 const priceReducer = (state, action) => {
-  console.log(action)
   switch (action.type) {
     case 'loaded':
       return {
@@ -64,18 +70,88 @@ const priceReducer = (state, action) => {
   }
 }
 
+const countryList = [
+  'Canada',
+  'Denmark',
+  'Israel',
+  'Brazil',
+  'Australia',
+  'Lebanon',
+  'Uruguay',
+  'Singapore',
+  'New Zealand',
+  'Britain',
+  'South Korea',
+  'Chile',
+  'United Arab Emirates',
+  'Czech Republic',
+  'Costa Rica',
+  'Colombia',
+  'Thailand',
+  'Japan',
+  'Honduras',
+  'Kuwait',
+  'Pakistan',
+  'Qatar',
+  'Croatia',
+  'Guatemala',
+  'Saudi Arabia',
+  'Bahrain',
+  'Nicaragua',
+  'Sri Lanka',
+  'Peru',
+  'China',
+  'Hungary',
+  'Vietnam',
+  'Poland',
+  'Jordan',
+  'Oman',
+  'Philippines',
+  'India',
+  'Hong Kong',
+  'Mexico',
+  'Indonesia',
+  'Azerbaijan',
+  'Moldova',
+  'Romania',
+  'Taiwan',
+  'South Africa',
+  'Egypt',
+  'Malaysia',
+  'Argentina',
+  'Turkey',
+  'Ukraine',
+  'Russia',
+].map(s => s.toLowerCase())
+
 const Pricing = () => {
-  const [{ tier1, tier2, tier3, location }, dispatch] = useReducer(
+  const [{ tier1, tier2, tier3, location, adjusted }, dispatch] = useReducer(
     priceReducer,
-    { data: { tier1: 59, tier2: 179, tier3: 279, location: {} } }
+    {
+      data: {
+        tier1: 59,
+        tier2: 179,
+        tier3: 279,
+        location: {},
+        adjusted: false,
+      },
+    }
   )
 
   const calcPrices = async () => {
     // parityPrice is internally memoized so this fires only 1 request
     const { location } = await parityPrice.priceWithLocation(tier1)
-    const tier1 = await parityPrice.price(59)
-    const tier2 = await parityPrice.price(179)
-    const tier3 = await parityPrice.price(279)
+    let tier1 = await parityPrice.price(59)
+    let tier2 = await parityPrice.price(179)
+    let tier3 = await parityPrice.price(279)
+    let adjusted = true
+
+    if (tier1 >= 59) {
+      tier1 = 59
+      tier2 = 179
+      tier3 = 279
+      adjusted = false
+    }
 
     dispatch({
       type: 'loaded',
@@ -84,6 +160,7 @@ const Pricing = () => {
         tier1,
         tier2,
         tier3,
+        adjusted,
       },
     })
   }
@@ -93,6 +170,10 @@ const Pricing = () => {
   }, [])
 
   const country = location && location.country_name
+  const coupon =
+    country && countryList.includes(country.toLowerCase())
+      ? country
+      : country && location.continent_code
 
   return (
     <Wrapper>
@@ -125,8 +206,14 @@ const Pricing = () => {
               Yours forever
             </div>
           }
-          button={<FadeInButton id="Fqwwi" price={tier1} />}
-          location={country}
+          button={
+            <FadeInButton
+              id="Fqwwi"
+              price={tier1}
+              coupon={adjusted ? coupon : null}
+            />
+          }
+          location={adjusted ? country : null}
         />
         <PriceBoxSpecial
           price={
@@ -181,8 +268,14 @@ const Pricing = () => {
               Yours forever
             </div>
           }
-          button={<FadeInButton id="Hnbtz" price={tier3} />}
-          location={country}
+          button={
+            <FadeInButton
+              id="Hnbtz"
+              price={tier3}
+              coupon={adjusted ? coupon : null}
+            />
+          }
+          location={adjusted ? country : null}
         />
         <PriceBox
           price={
@@ -226,8 +319,14 @@ const Pricing = () => {
               Yours forever
             </div>
           }
-          button={<FadeInButton id="KDLxE" price={tier2} />}
-          location={country}
+          button={
+            <FadeInButton
+              id="KDLxE"
+              price={tier2}
+              coupon={adjusted ? coupon : null}
+            />
+          }
+          location={adjusted ? country : null}
         />
       </WrapperBlock>
     </Wrapper>

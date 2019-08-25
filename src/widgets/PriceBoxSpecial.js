@@ -110,7 +110,9 @@ const PriceBoxSpecial = ({ price, plan, features, button, location }) => (
       <div className="plan-features">{features}</div>
     </WrapperGroup>
     <div className="action-btn">{button}</div>
-    <small> ❤️️price parity adjusted for {location} ❤️</small>
+    {location ? (
+      <small> ❤️️price parity adjusted for {location} ❤️</small>
+    ) : null}
   </Wrapper>
 )
 
