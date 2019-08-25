@@ -176,7 +176,7 @@ const Pricing = () => {
       : country && location.continent_code
 
   return (
-    <Wrapper>
+    <Wrapper id="pricing">
       <WrapperBlock>
         <PriceBox
           price={

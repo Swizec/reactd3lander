@@ -1,8 +1,9 @@
 import React, { useContext } from 'react'
 import styled from 'styled-components'
+import { StaticQuery, graphql } from 'gatsby'
 
 import Image, { LazyImage } from '../widgets/Image'
-import { StaticQuery, graphql } from 'gatsby'
+import ActionButton from './ActionButton'
 
 const Wrapper = styled.div`
   max-width: 700px;
@@ -93,6 +94,8 @@ const Section1 = ({ scatterplotImg, spaghettiImg }) => (
         src="https://media.giphy.com/media/woZVO2B8ZQ55DqKsmN/giphy.gif"
         height={260}
       />
+
+      <ActionButton to="#pricing">👇Jump into ReactForDataviz👇</ActionButton>
 
       <h2>Libraries are hard to customize</h2>
 
