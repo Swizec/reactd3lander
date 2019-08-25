@@ -36,7 +36,10 @@ const Wrapper = styled.div`
 const IndexPage = () => {
   return (
     <Layout>
-      <SEO title="Home" keywords={[`gatsby`, `application`, `react`]} />
+      <SEO
+        title="React for Data Visualization"
+        keywords={[`d3`, `data visualization`, `react`, `dataviz`]}
+      />
       <Wrapper>
         <Hero />
         <Section1 />
