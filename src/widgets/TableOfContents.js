@@ -16,6 +16,7 @@ const Wrapper = styled.div`
   }
   h3 {
     font-size: 1em;
+    margin-top: 1rem;
   }
   p {
     margin-bottom: 0px;
