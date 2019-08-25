@@ -26,6 +26,7 @@ import EmailHeaderText from '../widgets/EmailHeaderText'
 import EmailForm from '../widgets/EmailForm'
 import EmailSubmit from '../widgets/EmailSubmit'
 import CopyBlock from '../widgets/CopyBlock'
+import ActionButton from '../widgets/ActionButton'
 
 const Wrapper = styled.div`
   hr {
@@ -67,6 +68,9 @@ const IndexPage = () => {
           company="Frontend Developer"
         />
         <Section6 />
+        <ActionButton to="#pricing" style={{ marginTop: '15px' }}>
+          👇Jump into ReactForDataviz👇
+        </ActionButton>
         <TableOfContents />
         <Pricing />
         <EmailSignup
