@@ -1,0 +1,431 @@
+---
+title: "Visualizing Moore's Law with React & D3"
+description:
+  "Moore's Law states that the number of transistors on a chip roughly doubles
+  every two years. But how does that stack up against reality?"
+date: '2019-10-07T09:13:00.000Z'
+lastUpdated: '2019-10-07T09:13:00.000Z'
+image: '../images/moores-law.png'
+---
+
+[Moore's Law](https://en.wikipedia.org/wiki/Moore%27s_law) states that the
+number of transistors on a chip roughly doubles every two years. But how does
+that stack up against reality?
+
+I was inspired by this
+[data visualization of Moore's law](https://www.youtube.com/watch?v=7uvUiq_jTLM)
+from @datagrapha going viral on Twitter and decided to replicate it in React
+and D3.
+
+[![](https://i.imgur.com/W3OVpFL.gif)](https://moores-law-swizec.swizec-react-dataviz.now.sh/)
+
+Some data bugs break it down in the end and there's something funky with Voodoo
+Rush, but those transitions came out wonderful 👌
+
+You can watch me build it from scratch, here 👇
+
+https://www.youtube.com/watch?v=m34_D8Va-F4
+
+First 30min eaten by a technical glitch 🤷‍♀️
+
+Try it live in your browser, here 👉
+[https://moores-law-swizec.swizec-react-dataviz.now.sh](https://moores-law-swizec.swizec-react-dataviz.now.sh)
+
+And here's the
+[full source code on GitHub](https://github.com/Swizec/moores-law).
+
+# How it works
+
+At its core Moore's Law in React & D3 is a bar chart flipped on its side.
+
+We started with fake data and a React component that renders a bar chart. Then
+we made the data go through time and looped through. The bar chart jumped
+around.
+
+So our next step was to add transitions. Made the bar chart look smooth.
+
+Then we made our data gain an entry each year and created an enter transition
+to each bar. Makes it smoother to see how new entries fly in.
+
+At this point we had the building blocks and it was time to use real data. We
+used [wikitable2csv](https://wikitable2csv.ggor.de/) to download data from
+Wikipedia's [Transistor Count](https://en.wikipedia.org/wiki/Transistor_count)
+page and fed it into our dataviz.
+
+Pretty much everything worked right away 💪
+
+## Start with fake data
+
+Data visualization projects are best started with fake date. This approach lets
+you focus on the visualization itself. Build the components, the transitions,
+make it all fit together ... all without worrying about the exact shape of your
+data.
+
+Of course it's best if your fake data looks like your final dataset will.
+Array, object, grouped by year, that sort of thing.
+
+Plus you save time when you aren't waiting for large datasets to parse :)
+
+Here's the fake data generator we used:
+
+```javascript
+// src/App.js
+
+const useData = () => {
+  const [data, setData] = useState(null)
+
+  // Replace this with actual data loading
+  useEffect(() => {
+    // Create 5 imaginary processors
+    const processors = d3.range(10).map(i => `CPU ${i}`),
+      random = d3.randomUniform(1000, 50000)
+
+    let N = 1
+
+    // create random transistor counts for each year
+    const data = d3.range(1970, 2026).map(year => {
+      if (year % 5 === 0 && N < 10) {
+        N += 1
+      }
+
+      return d3.range(N).map(i => ({
+        year: year,
+        name: processors[i],
+        transistors: Math.round(random()),
+      }))
+    })
+
+    setData(data)
+  }, [])
+
+  return data
+}
+```
+
+Create 5 imaginary processors, iterate over the years, and give them random
+transistor counts. Every 5 years we increase the total `N` of processors in our
+visualization.
+
+We create data inside a `useEffect` to simulate that data loads asynchronously.
+
+## Driving animation through the years
+
+A large part of visualizing Moore's Law is showing its progression over the
+years. Transistor counts increased as new CPUs and GPUs entered the market.
+
+Best way to drive that progress animation is with a `useEffect` and a D3 timer.
+We do that in our `App` component.
+
+```javascript
+// src/App.js
+
+function App() {
+    const data = useData();
+    const [currentYear, setCurrentYear] = useState(1970);
+
+    const yearIndex = d3
+        .scaleOrdinal()
+        .domain(d3.range(1970, 2025))
+        .range(d3.range(0, 2025 - 1970));
+
+    // Drives the main animation progressing through the years
+    // It's actually a simple counter :P
+    useEffect(() => {
+        const interval = d3.interval(() => {
+            setCurrentYear(year => {
+                if (year + 1 > 2025) {
+                    interval.stop();
+                }
+
+                return year + 1;
+            });
+        }, 2000);
+
+        return () => interval.stop();
+    }, []);
+```
+
+`useData()` runs our data generation custom hook. We `useState` for the current
+year. A linear scale helps us translate from meaningful `1970` to `2026`
+numbers to indexes in our data array.
+
+The `useEffect` starts a `d3.interval`, which is like a `setInterval` but more
+reliable. We update current year state in the interval callback.
+
+Remember that state setters accept a function that gets current state as an
+argument. Useful trick in this case where we don't want to restart the effect
+on every year change.
+
+We return `interval.stop()` as our cleanup function so React stops the loop
+when our component unmounts.
+
+## The basic render
+
+Our main component renders a `<Barchart>` inside an `<Svg>`. Using styled
+components for size and some layout.
+
+```javascript
+// src/App.js
+
+return (
+    <Svg>
+        <Title x={"50%"} y={30}>
+            Moore's law vs. actual transistor count in React & D3
+        </Title>
+        {data ? (
+            <Barchart
+                data={data[yearIndex(currentYear)]}
+                x={100}
+                y={50}
+                barThickness={20}
+                width={500}
+            />
+        ) : null}
+        <Year x={"95%"} y={"95%"}>
+            {currentYear}
+        </Year>
+    </Svg>
+```
+
+Our `Svg` is styled to take up the entire viewport and the `Year` component is
+a big text.
+
+The `<Barchart>` is where our dataviz work happens. From the outside it's a
+component that takes "current data" and handles the rest. Positioning and
+sizing props make it more reusable.
+
+## A smoothly transitioning Barchart
+
+[![](https://i.imgur.com/W3OVpFL.gif)](https://moores-law-swizec.swizec-react-dataviz.now.sh/)
+
+Our goal with the Barchart component was to:
+
+- always render current state
+- have smooth transitions on changes
+- follow React-y principles
+- easy to use from the outside
+
+You can [watch the video](https://www.youtube.com/watch?v=m34_D8Va-F4) to see
+how it evolved. Here I explain the final state 😇
+
+### The <Barchart> component
+
+The Barchart component takes in data, sets up vertical and horizontal D3
+scales, and loops through data to render individual bars.
+
+```javascript
+// src/Barchart.js
+
+// Draws the barchart for a single year
+const Barchart = ({ data, x, y, barThickness, width }) => {
+    const yScale = useMemo(
+        () =>
+            d3
+                .scaleBand()
+                .domain(d3.range(0, data.length))
+                .paddingInner(0.2)
+                .range([data.length * barThickness, 0]),
+        [data.length, barThickness]
+    );
+
+    // not worth memoizing because data changes every time
+    const xScale = d3
+        .scaleLinear()
+        .domain([0, d3.max(data, d => d.transistors)])
+        .range([0, width]);
+
+    const formatter = xScale.tickFormat();
+```
+
+D3 scales help us translate between datapoints and pixels on a screen. I like
+to memoize them when it makes sense.
+
+Memoizing is particularly important with large datasets. You don't want to
+waste time looking for the max in 100,000 elements on every render.
+
+We were able to memoize `yScale` because `data.length` and `barThickness` don't
+change _every_ time.
+
+`xScale` on the other hand made no sense to memoize since we know `<Barchart>`
+gets a new data object for every render. At least in theory.
+
+We borrow xScale's tick formatter to help us render `10000` as `10,000`. Built
+into D3 ✌️
+
+**Rendering** our Barchart component looks like this:
+
+```javascript
+// src/Barchart.js
+
+return (
+  <g transform={`translate(${x}, ${y})`}>
+    {data
+      .sort((a, b) => a.transistors - b.transistors)
+      .map((d, index) => (
+        <Bar
+          data={d}
+          key={d.name}
+          y={yScale(index)}
+          width={xScale(d.transistors)}
+          endLabel={formatter(d.transistors)}
+          thickness={yScale.bandwidth()}
+        />
+      ))}
+  </g>
+)
+```
+
+A grouping element holds our bars together and moves them into place. Using a
+group element changes the internal coordinate system so individual bars don't
+have to know about overall positioning.
+
+Just like in HTML when you position a div and its children don't need to know
+:)
+
+We sort data by transistor count and render a `<Bar>` element for each.
+Individual bars get all needed info via props.
+
+### The <Bar> component
+
+Individual `<Bar>` components render a rectangle flanked on each side by a
+label.
+
+```javascript
+return (
+  <g transform={`translate(${renderX}, ${renderY})`}>
+    <rect x={10} y={0} width={renderWidth} height={thickness} fill={color} />
+    <Label y={thickness / 2}>{data.name}</Label>
+    <EndLabel y={thickness / 2} x={renderWidth + 15}>
+      {data.designer === 'Moore'
+        ? formatter(Math.round(transistors))
+        : formatter(data.transistors)}
+    </EndLabel>
+  </g>
+)
+```
+
+A grouping element groups the 3 elements, styled components style the labels,
+and a `rect` SVG element creates the rectangle. Simple React markup stuff ✌️
+
+Where the `<Bar>` component gets interesting is the positioning. We use
+`renderX` and `renderY` even though the vertical position comes from props as
+`y` and `x` is static.
+
+That's got to do with transitions.
+
+### Transitions
+
+The `<Bar>` component uses the hybrid animation approach from my
+[React For DataViz](https://reactfordataviz.com) course.
+
+A key insight is that we use _independent_ transitions on each axis to create a
+_coordinated_ transition. Both for entering into the chart and for moving
+around later.
+
+Special case for the `Moore's Law` bar itself where we also transition the
+label so it looks like it's counting.
+
+We created a `useTransition` custom hook to make our code easier to understand
+and cleaner to read.
+
+#### useTransition
+
+The `useTransition` custom hook helps us move values from props to state. State
+becomes the staging area and props are the target we want to reach.
+
+To run a transition we create an effect and set up a D3 transition. On each
+tick of the animation we update state proportionately to time spent animating.
+
+```javascript
+const useTransition = ({ targetValue, name, startValue, easing }) => {
+  const [renderValue, setRenderValue] = useState(startValue || targetValue)
+
+  useEffect(() => {
+    d3.selection()
+      .transition(name)
+      .duration(2000)
+      .ease(easing || d3.easeLinear)
+      .tween(name, () => {
+        const interpolate = d3.interpolate(renderValue, targetValue)
+        return t => setRenderValue(interpolate(t))
+      })
+  }, [targetValue])
+
+  return renderValue
+}
+```
+
+State update happens inside that custom `.tween` method. We interpolate between
+the current value and the target value.
+
+D3 handles the rest.
+
+#### Using useTransition
+
+We can reuse that same transition approach for each independent axis we want to
+animate. D3 makes sure all transitions start at the same time and run at the
+same pace. Any dropped frames or browser slow downs are handled for us.
+
+```javascript
+// src/Bar.js
+const Bar = ({ data, y, width, thickness, formatter, color }) => {
+    const renderWidth = useTransition({
+        targetValue: width,
+        name: `width-${data.name}`,
+        easing: data.designer === "Moore" ? d3.easeLinear : d3.easeCubicInOut
+    });
+    const renderY = useTransition({
+        targetValue: y,
+        name: `y-${data.name}`,
+        startValue: -500 + Math.random() * 200,
+        easing: d3.easeCubicInOut
+    });
+    const renderX = useTransition({
+        targetValue: 0,
+        name: `x-${data.name}`,
+        startValue: 1000 + Math.random() * 200,
+        easing: d3.easeCubicInOut
+    });
+    const transistors = useTransition({
+        targetValue: data.transistors,
+        name: `trans-${data.name}`,
+        easing: d3.easeLinear
+    });
+```
+
+Each transition returns the current value for the transitioned axis.
+`renderWidth`, `renderX`, `renderY`, and even `transistors`.
+
+When a transition updates, its internal `useState` setter runs. That triggers a
+re-render and updates the value in our `<Bar>` component, which then
+re-renders.
+
+Because D3 transitions run at 60fps, we get a smooth animation ✌️
+
+Yes that's a lot of state updates for each frame of animation. At least 4 per
+frame per datapoint. About 4\*60\*298 = 71,520 per second at max.
+
+And React can handle it all. At least on my machine, I haven't tested elsewhere
+yet :)
+
+## Conclusion
+
+And that's how you can combine React & D3 to get a smoothly transitioning
+barchart visualizing Moore's Law through the years.
+
+[![](https://i.imgur.com/W3OVpFL.gif)](https://moores-law-swizec.swizec-react-dataviz.now.sh/)
+
+Key takeaways:
+
+- React for rendering
+- D3 for data loading
+- D3 runs and coordinates transitions
+- state updates drive re-rendering animation
+- build custom hooks for common setup
+
+Cheers,<br> ~Swizec
+
+_See a mistake?
+[Suggest an edit](https://github.com/Swizec/reactd3lander/tree/master/content/articles)_
+
+<div class="mj-container container" style="border-radius: 5px; background-color: #FFFFFF; width: 100%;"> <!--[if mso | IE]> <table role="presentation" border="0" cellpadding="0" cellspacing="0" width="600" align="center" style="width:600px;"> <tr> <td style="line-height:0px;font-size:0px;mso-line-height-rule:exactly;"> <![endif]--> <div style="margin:0px auto;max-width:600px;background:#FFFFFF;"> <table role="presentation" cellpadding="0" cellspacing="0" style="font-size: 0px; width: 100%; background: #FFFFFF; border-spacing: 0px;" align="center" border="0" width="100%"> <tbody> <tr> <td style="text-align:center;vertical-align:top;direction:ltr;font-size:0px;padding:30px 0px 10px 0px;"> <!--[if mso | IE]> <table role="presentation" border="0" cellpadding="0" cellspacing="0"> <tr> <td style="width:600px;" class="title-outlook"> <![endif]--> <div style="margin: 0px auto; max-width: 600px; width: 96%;" class="title"> <table role="presentation" cellpadding="0" cellspacing="0" style="font-size: 0px; width: 100%; border-spacing: 0px;" align="center" border="0" width="100%"> <tbody> <tr> <td style="text-align:center;vertical-align:top;direction:ltr;font-size:0px;padding:0px 28px 20px 28px;"> <!--[if mso | IE]> <table role="presentation" border="0" cellpadding="0" cellspacing="0"> <tr> <td style="vertical-align:top;width:600px;"> <![endif]--> <div class="mj-column-per-100 outlook-group-fix" style="vertical-align: top; display: inline-block; direction: ltr; font-size: 13px; text-align: left; width: 100%;"> <table role="presentation" cellpadding="0" cellspacing="0" width="100%" border="0" style="border-spacing: 0px;"> <tbody> <tr class="titleText"> <td style="word-wrap:break-word;font-size:0px;padding:0px;" align="left"> <div style="cursor:auto;color:#3D3D3D;font-family:Font, 'Karla', Helvetica, Arial;font-size:22px;line-height:1.4;text-align:left;">Did you enjoy this email? (5 is yes)</div> </td> </tr> </tbody> </table> </div> <!--[if mso | IE]> </td></tr></table> <![endif]--> </td> </tr> </tbody> </table> </div> <!--[if mso | IE]> </td> </tr> <tr> <td style="width:600px;" class="hidden-outlook description-outlook"> <![endif]--> <div style="margin: 0px auto; max-width: 600px; width: 96%;" class="hidden description"> <table role="presentation" cellpadding="0" cellspacing="0" style="font-size: 0px; width: 100%; border-spacing: 0px;" align="center" border="0" width="100%"> <tbody> <tr> <td style="text-align:center;vertical-align:top;direction:ltr;font-size:0px;padding:0px 28px 20px 28px;"> <!--[if mso | IE]> <table role="presentation" border="0" cellpadding="0" cellspacing="0"> <tr> <td style="vertical-align:top;width:600px;"> <![endif]--> <div class="mj-column-per-100 outlook-group-fix" style="vertical-align: top; display: inline-block; direction: ltr; font-size: 13px; text-align: left; width: 100%;"> <table role="presentation" cellpadding="0" cellspacing="0" width="100%" border="0" style="border-spacing: 0px;"> <tbody> <tr class="descriptionText"> <td style="word-wrap:break-word;font-size:0px;padding:0px;" align="left"> <div style="cursor:auto;color:#3D3D3D;font-family:Font, 'Karla', Helvetica, Arial;font-size:16px;line-height:22px;text-align:left;"></div> </td> </tr> </tbody> </table> </div> <!--[if mso | IE]> </td></tr></table> <![endif]--> </td> </tr> </tbody> </table> </div> <!--[if mso | IE]> </td> </tr> <tr> <td style="width:600px;" class="mobile-label-outlook"> <![endif]--> <div style="margin: 0px auto; max-width: 600px; display: none; width: 0; height: 0; max-height: 0;" class="mobile-label"> <table role="presentation" cellpadding="0" cellspacing="0" style="font-size: 0px; width: 100%; border-spacing: 0px;" align="center" border="0" width="100%"> <tbody> <tr> <td style="text-align:center;vertical-align:top;direction:ltr;font-size:0px;padding:0px 0px 5px 0px;"> <!--[if mso | IE]> <table role="presentation" border="0" cellpadding="0" cellspacing="0"> <tr> <td style="vertical-align:undefined;width:600px;"> <![endif]--> <div style="cursor:auto;color:#4FB0AE;font-family:Font, 'Karla', Helvetica, Arial;font-size:13px;font-weight:200;line-height:22px;text-align:center;"> <!--[if mso | IE]> <table role="presentation" border="0" cellpadding="0" cellspacing="0"> <tr> <td style="display:none;mso-hide:all;width:600px;"> <![endif]--> <!--[if mso | IE]> </td></tr></table> <![endif]--> </div> <!--[if mso | IE]> </td></tr></table> <![endif]--> </td> </tr> </tbody> </table> </div> <!--[if mso | IE]> </td> </tr> <tr> <td style="width:600px;" class="opinionScale-outlook"> <![endif]--> <div style="margin:0px auto;max-width:600px;" class="opinionScale"> <table role="presentation" cellpadding="0" cellspacing="0" style="font-size: 0px; width: 100%; border-spacing: 0px;" align="center" border="0" width="100%"> <tbody> <tr> <td style="text-align:center;vertical-align:top;direction:ltr;font-size:0px;padding:0px 28px;"> <!--[if mso | IE]> <table role="presentation" border="0" cellpadding="0" cellspacing="0"> <tr> <td style="vertical-align:top;width:96px;" class="opinionScaleStep-outlook"> <![endif]--> <div class="mj-column-per-16 outlook-group-fix opinionScaleStep" style="vertical-align: top; display: inline-block; direction: ltr; font-size: 13px; text-align: left; width: 16%;"> <table role="presentation" cellpadding="0" cellspacing="0" width="100%" border="0" style="border-spacing: 0px;"> <tbody> <tr> <td style="word-wrap:break-word;font-size:0px;padding:0px;" align="center"> <table role="presentation" cellpadding="0" cellspacing="0" style="border-collapse: separate; width: 100%; border-spacing: 0px;" align="center" border="0" width="100%"> <tbody> <tr> <td style="border:none;border-bottom:1px solid #4FB0AE;border-left:1px solid #4FB0AE;border-radius:3px 0px 0px 3px;border-top:1px solid #4FB0AE;color:#4FB0AE;cursor:auto;padding:0px;" align="center" valign="middle" bgcolor="#f6fbfa"><a href="https://swizecteller.typeform.com/to/NwY6ox?prefilled_answer=0" style="text-decoration:none;background:#f6fbfa;color:#4FB0AE;font-family:Font, 'Karla', Helvetica, Arial;font-size:15px;font-weight:normal;line-height:4;text-transform:none;margin:0;padding:0;display:block;" target="_blank">0</a></td> </tr> </tbody> </table> </td> </tr> </tbody> </table> </div> <!--[if mso | IE]> </td><td style="vertical-align:top;width:96px;" class="opinionScaleStep-outlook"> <![endif]--> <div class="mj-column-per-16 outlook-group-fix opinionScaleStep" style="vertical-align: top; display: inline-block; direction: ltr; font-size: 13px; text-align: left; width: 16%;"> <table role="presentation" cellpadding="0" cellspacing="0" width="100%" border="0" style="border-spacing: 0px;"> <tbody> <tr> <td style="word-wrap:break-word;font-size:0px;padding:0px;" align="center"> <table role="presentation" cellpadding="0" cellspacing="0" style="border-collapse: separate; width: 100%; border-spacing: 0px;" align="center" border="0" width="100%"> <tbody> <tr> <td style="border:none;border-bottom:1px solid #4FB0AE;border-left:1px solid #4FB0AE;border-radius:0px;border-top:1px solid #4FB0AE;color:#4FB0AE;cursor:auto;padding:0px;" align="center" valign="middle" bgcolor="#f6fbfa"><a href="https://swizecteller.typeform.com/to/NwY6ox?prefilled_answer=1" style="text-decoration:none;background:#f6fbfa;color:#4FB0AE;font-family:Font, 'Karla', Helvetica, Arial;font-size:15px;font-weight:normal;line-height:4;text-transform:none;margin:0;padding:0;display:block;" target="_blank">1</a></td> </tr> </tbody> </table> </td> </tr> </tbody> </table> </div> <!--[if mso | IE]> </td><td style="vertical-align:top;width:96px;" class="opinionScaleStep-outlook"> <![endif]--> <div class="mj-column-per-16 outlook-group-fix opinionScaleStep" style="vertical-align: top; display: inline-block; direction: ltr; font-size: 13px; text-align: left; width: 16%;"> <table role="presentation" cellpadding="0" cellspacing="0" width="100%" border="0" style="border-spacing: 0px;"> <tbody> <tr> <td style="word-wrap:break-word;font-size:0px;padding:0px;" align="center"> <table role="presentation" cellpadding="0" cellspacing="0" style="border-collapse: separate; width: 100%; border-spacing: 0px;" align="center" border="0" width="100%"> <tbody> <tr> <td style="border:none;border-bottom:1px solid #4FB0AE;border-left:1px solid #4FB0AE;border-radius:0px;border-top:1px solid #4FB0AE;color:#4FB0AE;cursor:auto;padding:0px;" align="center" valign="middle" bgcolor="#f6fbfa"><a href="https://swizecteller.typeform.com/to/NwY6ox?prefilled_answer=2" style="text-decoration:none;background:#f6fbfa;color:#4FB0AE;font-family:Font, 'Karla', Helvetica, Arial;font-size:15px;font-weight:normal;line-height:4;text-transform:none;margin:0;padding:0;display:block;" target="_blank">2</a></td> </tr> </tbody> </table> </td> </tr> </tbody> </table> </div> <!--[if mso | IE]> </td><td style="vertical-align:top;width:96px;" class="opinionScaleStep-outlook"> <![endif]--> <div class="mj-column-per-16 outlook-group-fix opinionScaleStep" style="vertical-align: top; display: inline-block; direction: ltr; font-size: 13px; text-align: left; width: 16%;"> <table role="presentation" cellpadding="0" cellspacing="0" width="100%" border="0" style="border-spacing: 0px;"> <tbody> <tr> <td style="word-wrap:break-word;font-size:0px;padding:0px;" align="center"> <table role="presentation" cellpadding="0" cellspacing="0" style="border-collapse: separate; width: 100%; border-spacing: 0px;" align="center" border="0" width="100%"> <tbody> <tr> <td style="border:none;border-bottom:1px solid #4FB0AE;border-left:1px solid #4FB0AE;border-radius:0px;border-top:1px solid #4FB0AE;color:#4FB0AE;cursor:auto;padding:0px;" align="center" valign="middle" bgcolor="#f6fbfa"><a href="https://swizecteller.typeform.com/to/NwY6ox?prefilled_answer=3" style="text-decoration:none;background:#f6fbfa;color:#4FB0AE;font-family:Font, 'Karla', Helvetica, Arial;font-size:15px;font-weight:normal;line-height:4;text-transform:none;margin:0;padding:0;display:block;" target="_blank">3</a></td> </tr> </tbody> </table> </td> </tr> </tbody> </table> </div> <!--[if mso | IE]> </td><td style="vertical-align:top;width:96px;" class="opinionScaleStep-outlook"> <![endif]--> <div class="mj-column-per-16 outlook-group-fix opinionScaleStep" style="vertical-align: top; display: inline-block; direction: ltr; font-size: 13px; text-align: left; width: 16%;"> <table role="presentation" cellpadding="0" cellspacing="0" width="100%" border="0" style="border-spacing: 0px;"> <tbody> <tr> <td style="word-wrap:break-word;font-size:0px;padding:0px;" align="center"> <table role="presentation" cellpadding="0" cellspacing="0" style="border-collapse: separate; width: 100%; border-spacing: 0px;" align="center" border="0" width="100%"> <tbody> <tr> <td style="border:none;border-bottom:1px solid #4FB0AE;border-left:1px solid #4FB0AE;border-radius:0px;border-top:1px solid #4FB0AE;color:#4FB0AE;cursor:auto;padding:0px;" align="center" valign="middle" bgcolor="#f6fbfa"><a href="https://swizecteller.typeform.com/to/NwY6ox?prefilled_answer=4" style="text-decoration:none;background:#f6fbfa;color:#4FB0AE;font-family:Font, 'Karla', Helvetica, Arial;font-size:15px;font-weight:normal;line-height:4;text-transform:none;margin:0;padding:0;display:block;" target="_blank">4</a></td> </tr> </tbody> </table> </td> </tr> </tbody> </table> </div> <!--[if mso | IE]> </td><td style="vertical-align:top;width:96px;" class="opinionScaleStep-outlook"> <![endif]--> <div class="mj-column-per-16 outlook-group-fix opinionScaleStep" style="vertical-align: top; display: inline-block; direction: ltr; font-size: 13px; text-align: left; width: 16%;"> <table role="presentation" cellpadding="0" cellspacing="0" width="100%" border="0" style="border-spacing: 0px;"> <tbody> <tr> <td style="word-wrap:break-word;font-size:0px;padding:0px;" align="center"> <table role="presentation" cellpadding="0" cellspacing="0" style="border-collapse: separate; width: 100%; border-spacing: 0px;" align="center" border="0" width="100%"> <tbody> <tr> <td style="border:none;border-bottom:1px solid #4FB0AE;border-left:1px solid #4FB0AE;border-radius:0px 3px 3px 0px;border-right:1px solid #4FB0AE;border-top:1px solid #4FB0AE;color:#4FB0AE;cursor:auto;padding:0px;" align="center" valign="middle" bgcolor="#f6fbfa"><a href="https://swizecteller.typeform.com/to/NwY6ox?prefilled_answer=5" style="text-decoration:none;background:#f6fbfa;color:#4FB0AE;font-family:Font, 'Karla', Helvetica, Arial;font-size:15px;font-weight:normal;line-height:4;text-transform:none;margin:0;padding:0;display:block;" target="_blank">5</a></td> </tr> </tbody> </table> </td> </tr> </tbody> </table> </div> <!--[if mso | IE]> </td></tr></table> <![endif]--> </td> </tr> </tbody> </table> </div> <!--[if mso | IE]> </td> </tr> <tr> <td style="width:600px;" class="mobile-label-outlook"> <![endif]--> <div style="margin: 0px auto; max-width: 600px; display: none; width: 0; height: 0; max-height: 0;" class="mobile-label"> <table role="presentation" cellpadding="0" cellspacing="0" style="font-size: 0px; width: 100%; border-spacing: 0px;" align="center" border="0" width="100%"> <tbody> <tr> <td style="text-align:center;vertical-align:top;direction:ltr;font-size:0px;padding:5px;"> <!--[if mso | IE]> <table role="presentation" border="0" cellpadding="0" cellspacing="0"> <tr> <td style="vertical-align:undefined;width:600px;"> <![endif]--> <div style="cursor:auto;color:#4FB0AE;font-family:Font, 'Karla', Helvetica, Arial;font-size:13px;font-weight:200;line-height:22px;text-align:center;"> <!--[if mso | IE]> <table role="presentation" border="0" cellpadding="0" cellspacing="0"> <tr> <td style="display:none;mso-hide:all;width:600px;"> <![endif]--> <!--[if mso | IE]> </td></tr></table> <![endif]--> </div> <!--[if mso | IE]> </td></tr></table> <![endif]--> </td> </tr> </tbody> </table> </div> <!--[if mso | IE]> </td> </tr> <tr> <td style="width:600px;" class="desktop-labels-outlook"> <![endif]--> <div style="margin: 0px auto; max-width: 600px; word-break: break-all;" class="desktop-labels"> <table role="presentation" cellpadding="0" cellspacing="0" style="font-size: 0px; width: 100%; border-spacing: 0px;" align="center" border="0" width="100%"> <tbody> <tr> <td style="text-align:center;vertical-align:top;direction:ltr;font-size:0px;padding:0px;"> <!--[if mso | IE]> <table role="presentation" border="0" cellpadding="0" cellspacing="0"> <tr> <td style="vertical-align:top;width:192px;"> <![endif]--> <div class="mj-column-per-32 outlook-group-fix" style="vertical-align: top; display: inline-block; direction: ltr; font-size: 13px; text-align: left; width: 32%;"> <table role="presentation" cellpadding="0" cellspacing="0" width="100%" border="0" style="border-spacing: 0px;"> <tbody> <tr> <td style="word-wrap:break-word;font-size:0px;padding:10px 0px 10px 28px;" align="left"> <div style="cursor:auto;color:#4FB0AE;font-family:Font, 'Karla', Helvetica, Arial;font-size:13px;font-weight:200;line-height:22px;text-align:left;"></div> </td> </tr> </tbody> </table> </div> <!--[if mso | IE]> </td><td style="vertical-align:top;width:192px;"> <![endif]--> <div class="mj-column-per-32 outlook-group-fix" style="vertical-align: top; display: inline-block; direction: ltr; font-size: 13px; text-align: left; width: 32%;"> <table role="presentation" cellpadding="0" cellspacing="0" width="100%" border="0" style="border-spacing: 0px;"> <tbody> <tr> <td style="word-wrap:break-word;font-size:0px;padding:10px 0px;" align="center"> <div style="cursor:auto;color:#4FB0AE;font-family:Font, 'Karla', Helvetica, Arial;font-size:13px;font-weight:200;line-height:22px;text-align:center;"></div> </td> </tr> </tbody> </table> </div> <!--[if mso | IE]> </td><td style="vertical-align:top;width:192px;"> <![endif]--> <div class="mj-column-per-32 outlook-group-fix" style="vertical-align: top; display: inline-block; direction: ltr; font-size: 13px; text-align: left; width: 32%;"> <table role="presentation" cellpadding="0" cellspacing="0" width="100%" border="0" style="border-spacing: 0px;"> <tbody> <tr> <td style="word-wrap:break-word;font-size:0px;padding:10px 28px 10px 0px;" align="right"> <div style="cursor:auto;color:#4FB0AE;font-family:Font, 'Karla', Helvetica, Arial;font-size:13px;font-weight:200;line-height:22px;text-align:right;"></div> </td> </tr> </tbody> </table> </div> <!--[if mso | IE]> </td></tr></table> <![endif]--> </td> </tr> </tbody> </table> </div> <!--[if mso | IE]> </td> </tr> </table> <![endif]--> </td> </tr> </tbody> </table> </div> <!--[if mso | IE]> </td></tr></table> <![endif]--> <!--[if mso | IE]> <table role="presentation" border="0" cellpadding="0" cellspacing="0" width="600" align="center" style="width:600px;"> <tr> <td style="line-height:0px;font-size:0px;mso-line-height-rule:exactly;"> <![endif]--> <div style="margin:0px auto;max-width:600px;background:#FFFFFF;"> <table role="presentation" cellpadding="0" cellspacing="0" style="font-size: 0px; width: 100%; background: #FFFFFF; border-spacing: 0px;" align="center" border="0" width="100%"> <tbody> <tr> <td style="text-align:center;vertical-align:top;direction:ltr;font-size:0px;padding:0px 0px 20px 0px;"> <!--[if mso | IE]> <table role="presentation" border="0" cellpadding="0" cellspacing="0"> <tr> <td style="vertical-align:undefined;width:300px;"> <![endif]--> <div style="cursor:auto;color:#000000;font-family:Helvetica, Arial;font-size:12px;font-weight:normal;line-height:22px;text-align:center;"><a href="https://admin.typeform.com/signup?utm_campaign=NwY6ox&utm_source=typeform.com-11725853-Pro&utm_medium=typeform&utm_content=typeform-embed-email&utm_term=EN" target="_blank" style="color: #3D3D3D; text-decoration: none;"> Powered by <strong>Typeform</strong> </a></div> <!--[if mso | IE]> </td><td style="vertical-align:undefined;width:1px;"> <![endif]--> <table role="presentation" cellpadding="0" cellspacing="0" style="border-collapse: collapse; border-spacing: 0px;" align="center" border="0"> <tbody> <tr> <td style="width:1px;"><img alt height="1px" src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" style="border:none;border-radius:0px;display:block;font-size:13px;outline:none;text-decoration:none;width:100%;height:1px;" width="1"></td> </tr> </tbody> </table> <!--[if mso | IE]> </td></tr></table> <![endif]--> </td> </tr> </tbody> </table> </div> <!--[if mso | IE]> </td></tr></table> <![endif]--> </div>
