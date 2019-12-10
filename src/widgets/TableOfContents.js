@@ -56,7 +56,7 @@ export class TableOfContents extends Component {
         <p>D3 layouts(1: 41)</p>
         <p>Recap(1: 49)</p>
         <h3>How React makes D3 easier</h3>
-        <p>React + D3 = <span role="img" aria-label="heart">❤</span> (4:53)</p>
+        <p>React + D3 = <span role="img" aria-label="heart">❤️</span> (4:53)</p>
         <p>What about existing libraries? (2:13)</p>
         <p>Victory.js(1: 04)</p>
         <p>Recharts(0: 54)</p>

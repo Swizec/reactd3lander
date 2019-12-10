@@ -94,7 +94,7 @@ const PriceBox = ({ price, plan, features, button, location }) => (
     </WrapperGroup>
     <div className="action-btn">{button}</div>
     {location ? (
-      <small> <span role="img" aria-label="finger-down">❤</span>price parity adjusted for {location} <span role="img" aria-label="heart">❤️</span></small>
+      <small> <span role="img" aria-label="finger-down">❤️</span>price parity adjusted for {location} <span role="img" aria-label="heart">❤️</span></small>
     ) : null}
   </Wrapper>
 )

@@ -62,7 +62,7 @@ const IndexPage = () => (
             includeTypeform
         />
         <Wrapper>
-            <h1>Thanks for buying React for Data Visualization <span role="img" aria-label="heart">❤</span></h1>
+            <h1>Thanks for buying React for Data Visualization <span role="img" aria-label="heart">❤️</span></h1>
             <div style={{ textAlign: "center" }}>
                 <YouTube videoId="-t27yOeVEik" />
             </div>
