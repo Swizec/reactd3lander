@@ -1,4 +1,4 @@
-import React, { useEffect, useReducer } from 'react'
+import React, { useEffect, useReducer, } from 'react'
 import styled from 'styled-components'
 import PriceBox from '../widgets/PriceBox.js'
 import PriceBoxSpecial from '../widgets/PriceBoxSpecial.js'
@@ -19,6 +19,7 @@ const WrapperBlock = styled.div`
   }
 `
 
+/* eslint-disable react-hooks/exhaustive-deps */
 const BigBuyButton = ({ id, price, onload, coupon }) => {
   useEffect(() => onload(), [])
 
@@ -37,6 +38,7 @@ const BigBuyButton = ({ id, price, onload, coupon }) => {
     </a>
   )
 }
+/* eslint-enable react-hooks/exhaustive-deps */
 
 export const FadeInButton = ({ id, price, coupon }) => {
   // let offer = price * context.offer.value,
@@ -140,11 +142,11 @@ const Pricing = () => {
 
   const calcPrices = async () => {
     // parityPrice is internally memoized so this fires only 1 request
-    const { location } = await parityPrice.priceWithLocation(tier1)
     let tier1 = await parityPrice.price(59)
     let tier2 = await parityPrice.price(179)
     let tier3 = await parityPrice.price(279)
     let adjusted = true
+    const { location } = await parityPrice.priceWithLocation(tier1)
 
     if (tier1 >= 59) {
       tier1 = 59

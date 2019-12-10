@@ -1,4 +1,4 @@
-import React, { Component } from 'react'
+import React  from 'react'
 import styled from 'styled-components'
 import AboutMeFeatures from '../widgets/AboutMeFeatures'
 import { StaticQuery, graphql } from 'gatsby'
@@ -17,19 +17,19 @@ const WrapperGroup = styled.div`
   }
 `
 
-const WrapperImage = styled.div`
-  img {
-    margin: 0 auto;
-    display: block;
-    height: 300px;
-    grid-area: Picture;
-  }
-  @media (max-width: 940px) {
-    img {
-      height: 200px;
-    }
-  }
-`
+// const WrapperImage = styled.div`
+//   img {
+//     margin: 0 auto;
+//     display: block;
+//     height: 300px;
+//     grid-area: Picture;
+//   }
+//   @media (max-width: 940px) {
+//     img {
+//       height: 200px;
+//     }
+//   }
+// `
 
 const WrapperCopy = styled.div`
   grid-area: Copy;
@@ -80,7 +80,7 @@ const About = ({ swizec }) => (
           <p>
             Story time{' '}
             <span role="img" aria-label="point">
-              👇
+              <span role="img" aria-label="finger-down">👇</span>
             </span>
           </p>
 

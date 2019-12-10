@@ -47,7 +47,7 @@ export default class Section1 extends Component {
 
         <p>
           Get the confidence you need to excel and build anything you can
-          imagine. 💪
+          imagine. <span role="img" aria-label="strong arm"> 💪</span>
         </p>
 
         <p>
@@ -112,7 +112,7 @@ export default class Section1 extends Component {
         </p>
 
         <ActionButton to="#pricing" style={{ marginTop: '15px' }}>
-          👇Jump into ReactForDataviz👇
+          <span role="img" aria-label="finger-down">👇</span>Jump into ReactForDataviz<span role="img" aria-label="finger-down">👇</span>
         </ActionButton>
       </Wrapper>
     )

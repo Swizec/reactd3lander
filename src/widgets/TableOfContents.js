@@ -41,7 +41,7 @@ export class TableOfContents extends Component {
       <Wrapper>
         <h2 className="header">Table of Contents</h2>
         <h3>Introduction</h3>
-        <p>Hello new friend 👋 (6:08)</p>
+        <p>Hello new friend <span role="img" aria-label="wave"> 👋</span> (6:08)</p>
         <p>What you need to know (2:16)</p>
         <p>How to approach React for Dataviz(3: 16)</p>
         <p>Why React and D3(0: 22)</p>
@@ -56,7 +56,7 @@ export class TableOfContents extends Component {
         <p>D3 layouts(1: 41)</p>
         <p>Recap(1: 49)</p>
         <h3>How React makes D3 easier</h3>
-        <p>React + D3 = ❤️ (4:53)</p>
+        <p>React + D3 = <span role="img" aria-label="heart">❤</span> (4:53)</p>
         <p>What about existing libraries? (2:13)</p>
         <p>Victory.js(1: 04)</p>
         <p>Recharts(0: 54)</p>
@@ -78,7 +78,7 @@ export class TableOfContents extends Component {
         <p>A scatterplot When props do change(6: 36)</p>
         <p>Making your components more flexible with render props(6: 08)</p>
         <h3>You're awesome</h3>
-        <p>💪 (0:39)</p>
+        <p><span role="img" aria-label="strong arm">💪</span> (0:39)</p>
         <h3>A note about state and app structure</h3>
         <p>Handling state in your React app (0:48)</p>
         <p>Basic architecture we'll use (2:11)</p>
@@ -111,7 +111,7 @@ export class TableOfContents extends Component {
         <p>Step 2: CountyMap index.js (0:44)</p>
         <p>Step 3: CountyMap CountyMap.js (11:56)</p>
         <p>Step 4: CountyMap County.js (2:03)</p>
-        <p>A map appears 🗺 (1:26)</p>
+        <p>A map appears <span role="img" aria-label="map">🗺</span> (1:26)</p>
         <h3>Render a Histogram of salaries</h3>
         <p>Render a Histogram of salaries (0:23)</p>
         <p>Step 1: Prep App.js (2:24)</p>
@@ -136,7 +136,7 @@ export class TableOfContents extends Component {
         <p>Prep your app for launch</p>
         <p>Twitter and Facebook cards and SEO</p>
         <p>Use full dataset (3:05)</p>
-        <p>Launch! 🚀</p>
+        <p>Launch! <span role="img" aria-label="rocket">🚀</span></p>
         <h3>Animation</h3>
         <p>Intro (0:51)</p>
         <p>Using a game loop for rich animation (1:15)</p>
@@ -167,7 +167,7 @@ export class TableOfContents extends Component {
         <p>onExit</p>
         <p>componentDidUpdate</p>
         <p>render</p>
-        <p>That's it 👍🏼</p>
+        <p>That's it <span role="img" aria-label="thumbs-up">👍🏼</span></p>
         <p>Key transition takeaways</p>
         <h3>Animating with React, Redux, and D3</h3>
         <p>Redux animation intro</p>
@@ -215,7 +215,7 @@ export class TableOfContents extends Component {
         <p>Custom tweens in practice (8:42)</p>
         <p>Use tweens to drive state </p>
         <p>hybrid animation (6:42)</p>
-        <h3>You finished! 🚀</h3>
+        <h3>You finished! <span role="img" aria-label="rocket">🚀</span></h3>
         <p>You're the best</p>
         <h3>Cookbook: Various visualizations and how to build them</h3>
         <p>Intro to cookbook area</p>

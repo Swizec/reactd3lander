@@ -68,11 +68,11 @@ const ArticleTemplate = props => {
         <p>
           <DateText {...post.frontmatter} />
           <em>
-            &nbsp;👉 livestreamed every last Sunday of the month.{' '}
+            &nbsp;<span role="img" aria-label="finger-right">👉 </span> livestreamed every last Sunday of the month.{' '}
             <a href="https://www.youtube.com/channel/UCoyHgaeLLI7Knp7LDHOwZMw">
               Join live
             </a>{' '}
-            or <a href={convertkitURL}>subscribe by email 💌</a>
+            or <a href={convertkitURL}>subscribe by email <span role="img" aria-label="heart">💌</span></a>
           </em>
         </p>
         <div

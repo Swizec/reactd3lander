@@ -69,7 +69,7 @@ const IndexPage = () => {
         />
         <Section6 />
         <ActionButton to="#pricing" style={{ marginTop: '15px' }}>
-          👇Jump into ReactForDataviz👇
+          <span role="img" aria-label="finger-down">👇</span> Jump into ReactForDataviz<span role="img" aria-label="finger-down">👇</span>
         </ActionButton>
         <TableOfContents />
         <Pricing />

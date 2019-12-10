@@ -62,7 +62,7 @@ const IndexPage = () => (
             includeTypeform
         />
         <Wrapper>
-            <h1>Thanks for buying React for Data Visualization ❤️</h1>
+            <h1>Thanks for buying React for Data Visualization <span role="img" aria-label="heart">❤</span></h1>
             <div style={{ textAlign: "center" }}>
                 <YouTube videoId="-t27yOeVEik" />
             </div>
@@ -70,7 +70,7 @@ const IndexPage = () => (
                 Hey thanks again for buying React for Data Visualization. I
                 really appreciate it and I hope it helps you on your journey.
             </p>
-            <p>Here's what happens next 👇</p>
+            <p>Here's what happens next <span role="img" aria-label="finger-down">👇</span></p>
             <p>
                 I just enrolled you in a Teachable course. You should've gotten
                 an email about it. If you didn't, click on the cover below. You
