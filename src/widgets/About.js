@@ -41,27 +41,27 @@ const Features = styled.div`
 
 const Content = styled.div`
   margin: 0 0rem;
-   {
-    /*display: grid;
-  align-items: top;
-  justify-items: center;
-  grid-gap: 1rem;
-  grid-template-columns: 1fr 1fr;
-  grid-template-areas:
-    'Picture Copy'
-    '. Feat';
-  @media (max-width: 940px) {
-    align-items: center;
-    justify-items: center;
-    display: grid;
-    grid-template-columns: 1fr;
-    grid-template-areas:
-      'Picture'
-      'Copy'
-      'Feat';
-  }*/
-  }
 `
+
+/*{
+ /*display: grid;
+align-items: top;
+justify-items: center;
+grid-gap: 1rem;
+grid-template-columns: 1fr 1fr;
+grid-template-areas:
+ 'Picture Copy'
+ '. Feat';
+@media (max-width: 940px) {
+ align-items: center;
+ justify-items: center;
+ display: grid;
+ grid-template-columns: 1fr;
+ grid-template-areas:
+   'Picture'
+   'Copy'
+   'Feat';
+}*/
 
 const About = ({ swizec }) => (
   <Wrapper>
