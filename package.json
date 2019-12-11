@@ -101,6 +101,9 @@
     },
     "devDependencies": {
         "nodemon": "^1.19.1",
-        "now": "^15.6.1"
+        "now": "^16.6.3"
+    },
+    "engines": {
+        "node": "12.x"
     }
 }
