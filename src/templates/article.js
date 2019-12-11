@@ -59,7 +59,7 @@ const ArticleTemplate = props => {
         description={post.frontmatter.description || post.excerpt}
         pathname={pathname}
         title={post.frontmatter.title}
-        image={post.frontmatter.image}
+        image={post.frontmatter.image.publicURL}
       />
       <Wrapper>
         <HeroTitle style={{ marginLeft: 'auto', marginRight: 'auto' }}>

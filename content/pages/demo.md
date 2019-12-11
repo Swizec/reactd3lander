@@ -1,3 +1,15 @@
+---
+title: 'Building a Piet Mondrian art generator with React & D3 treemaps'
+description:
+  You can become a famous artist by just painting colorful squares. So I
+  figured what better way to experiment with D3 treemaps than to pay homage to
+  Piet Mondrian.
+date: 2019-11-13T15:13:00.000Z
+lastUpdated: 2019-11-13T15:13:00.000Z
+image: '../images/kNmeD4K.png'
+excerpt: 'demo page
+---
+
 # Testing markdown processing
 
 ## Giphy
