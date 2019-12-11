@@ -53,11 +53,11 @@ function SEO({
               },
               {
                 name: `twitter:card`,
-                content: `summary`,
+                content: `summary_large_image`,
               },
               {
-                name: `twitter:image:src`,
-                content: thumbnail,
+                name: `twitter:image`,
+                content: `https://reactfordataviz.com/${thumbnail}`,
               },
               {
                 name: `twitter:creator`,
