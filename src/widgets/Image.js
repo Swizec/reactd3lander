@@ -28,5 +28,6 @@ export const LazyImage = ({ height, src }) => (
         </FadeIn>
     </CenterDiv>
 );
+/* eslint-enable jsx-a11y/no-noninteractive-element-interactions */
 
 export default NonStretchedImage;
