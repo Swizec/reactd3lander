@@ -8,6 +8,7 @@ import DateText from '../components/date-text'
 import About from '../widgets/About'
 import ConvertkitForm from '../widgets/ConvertkitForm'
 import { HeroTitle } from '../styles'
+import SparkJoy from '../widgets/sparkjoy'
 
 const Wrapper = styled.div`
   max-width: 700px;
@@ -53,6 +54,7 @@ const ArticleTemplate = props => {
   const convertkitURL = props.data.site.siteMetadata.convertkit.url
 
   const pathname = post.fields.slug
+
   return (
     <Layout location={props.location} title={siteTitle}>
       <SEO
@@ -80,6 +82,7 @@ const ArticleTemplate = props => {
             __html: post.html,
           }}
         />
+        <SparkJoy pathname={props['*']} />
         <ConvertkitForm />
         <hr />
 
@@ -129,6 +132,8 @@ export const pageQuery = graphql`
     }
     markdownRemark(fields: { slug: { eq: $slug } }) {
       id
+      excerpt(pruneLength: 160)
+      html
       frontmatter {
         title
         date(formatString: "MMMM YYYY")
