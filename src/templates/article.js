@@ -8,7 +8,7 @@ import DateText from '../components/date-text'
 import About from '../widgets/About'
 import ConvertkitForm from '../widgets/ConvertkitForm'
 import { HeroTitle } from '../styles'
-import SparkJoy from '../widgets/sparkjoy'
+import Reactions from '../widgets/reactions'
 
 const Wrapper = styled.div`
   max-width: 700px;
@@ -82,7 +82,7 @@ const ArticleTemplate = props => {
             __html: post.html,
           }}
         />
-        <SparkJoy pathname={props['*']} />
+        <Reactions pathname={props['*']} />
         <ConvertkitForm />
         <hr />
 
