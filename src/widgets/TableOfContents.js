@@ -1,6 +1,23 @@
 import React, { Component } from 'react'
 import styled from 'styled-components'
-import Topic from './topic'
+import Topic from './Topic'
+
+import christmasTree from '../images/christmas-trees.gif'
+import moneySpentChristmas from '../images/money-spent-christmas.png'
+import christmasMovies from '../images/christmas-movies.gif'
+import whatAmericasWhant from '../images/what-americas-want.png'
+import christmasCarols from '../images/christmas-carols.png'
+import willYouBuyChritmasTree from '../images/will-you-buy-christmas-tree.png'
+import christmasStockings from '../images/christmas-stockings.png'
+import whenChristmasStart from '../images/when-christmas-start.png'
+import weeklyCandyRetails from '../images/weekly-candy-retails.gif'
+import responsiveStackChart from '../images/responsive-stack-chart.png'
+import sankey from '../images/sankey.png'
+import compoundArc from '../images/compound-arc.png'
+import emailsJoy from '../images/emails-joy.gif'
+import mooresLaw from '../images/moores-law.gif'
+import mondrian from '../images/mondrian.gif'
+
 
 const Wrapper = styled.div`
   max-width: 700px;
@@ -43,7 +60,7 @@ export class TableOfContents extends Component {
       <Wrapper>
         <h2 className="header">Table of Contents</h2>
         <Topic
-          title="Introduction"
+          title="Introduction (14:22)"
           content={
             [
               "Hello new friend 👋 (6:08)",
@@ -57,7 +74,7 @@ export class TableOfContents extends Component {
           }
         />
         <Topic
-          title="A quick intro to D3"
+          title="A quick intro to D3 (17:15)"
           content={
             [
               "3 key insights to learn D3 from scratch (2:23)",
@@ -69,7 +86,7 @@ export class TableOfContents extends Component {
           }
         />
         <Topic
-          title="How React makes D3 easier"
+          title="How React makes D3 easier (11:46)"
           content={
             [
               "React + D3 = ❤️ (4:53)",
@@ -83,7 +100,7 @@ export class TableOfContents extends Component {
           }
         />
         <Topic
-          title="Quickly integrate any D3 code in your React project with Blackbox Components"
+          title="Quickly integrate any D3 code in your React project with Blackbox Components (17:29)"
           content={
             [
               "The idea behind blackbox components (0:57)",
@@ -95,7 +112,7 @@ export class TableOfContents extends Component {
           }
         />
         <Topic
-          title="Build scalable dataviz components with full integration"
+          title="Build scalable dataviz components with full integration (24:02)"
           content={
             [
               "The approach (1:52)",
@@ -114,7 +131,7 @@ export class TableOfContents extends Component {
           }
         />
         <Topic
-          title="A note about state and app structure"
+          title="A note about state and app structure (2:59)"
           content={
             [
               "Handling state in your React app (0:48)",
@@ -126,7 +143,7 @@ export class TableOfContents extends Component {
           }
         />
         <Topic
-          title="Set up a local environment with create-react-app"
+          title="Set up a local environment with create-react-app (1:53)"
           content={
             [
               "Local environment setup",
@@ -137,7 +154,7 @@ export class TableOfContents extends Component {
           }
         />
         <Topic
-          title="176,113 tech salaries visualized – a dataviz dashboard"
+          title="176,113 tech salaries visualized – a dataviz dashboard (2:54)"
           content={
             [
               "176,113 tech salaries visualized (2:54)",
@@ -145,7 +162,7 @@ export class TableOfContents extends Component {
           }
         />
         <Topic
-          title="Show a Preloader"
+          title="Show a Preloader (6:47)"
           content={
             [
               "Show a Preloader (1:11)",
@@ -157,7 +174,7 @@ export class TableOfContents extends Component {
           }
         />
         <Topic
-          title="Load and parse your data"
+          title="Load and parse your data (8:26)"
           content={
             [
               "Asynchronously load data",
@@ -171,7 +188,7 @@ export class TableOfContents extends Component {
           }
         />
         <Topic
-          title="Render a choropleth map of the US"
+          title="Render a choropleth map of the US (20:14)"
           content={
             [
               "Step 1: Prep App.js (3:54)",
@@ -183,7 +200,7 @@ export class TableOfContents extends Component {
           }
         />
         <Topic
-          title="Render a Histogram of salaries"
+          title="Render a Histogram of salaries (22:57)"
           content={
             [
               "Render a Histogram of salaries",
@@ -196,7 +213,7 @@ export class TableOfContents extends Component {
           }
         />
         <Topic
-          title="Make it understandable with meta info"
+          title="Make it understandable with meta info (20:47)"
           content={
             [
               "Add meta info",
@@ -207,7 +224,7 @@ export class TableOfContents extends Component {
           }
         />
         <Topic
-          title="Add user controls for exploration"
+          title="Add user controls for exploration (18:46)"
           content={
             [
               "Add user controls for data slicing and dicing (1:10)",
@@ -220,7 +237,7 @@ export class TableOfContents extends Component {
           }
         />
         <Topic
-          title="Make it work in the real world"
+          title="Make it work in the real world (4:56)"
           content={
             [
               "Add rudimentary routing (1:51)",
@@ -232,7 +249,7 @@ export class TableOfContents extends Component {
           }
         />
         <Topic
-          title="Animation"
+          title="Animation (2:06)"
           content={
             [
               "Intro (0:51)",
@@ -241,7 +258,7 @@ export class TableOfContents extends Component {
           }
         />
         <Topic
-          title="A bouncy ball game loop animation example"
+          title="A bouncy ball game loop animation example (6:46)"
           content={
             [
               "Step 1: stub out App and Ball",
@@ -254,7 +271,7 @@ export class TableOfContents extends Component {
           }
         />
         <Topic
-          title="Use transitions for simple animation"
+          title="Use transitions for simple animation (0:27)"
           content={
             [
               "Transition basics"
@@ -262,7 +279,7 @@ export class TableOfContents extends Component {
           }
         />
         <Topic
-          title="Build a swipe transition component"
+          title="Build a swipe transition component (7:58)"
           content={
             [
               "A swipe transition component (0:47)",
@@ -362,7 +379,7 @@ export class TableOfContents extends Component {
           }
         />
         <Topic
-          title="Refactor your components with React Hooks"
+          title="Refactor your components with React Hooks (35:42)"
           content={
             [
               "An intro to hooks (2:10)",
@@ -374,7 +391,7 @@ export class TableOfContents extends Component {
           }
         />
         <Topic
-          title="Powerful animation with transitions and game loops combined"
+          title="Powerful animation with transitions and game loops combined (20:56)"
           content={
             [
               "Merging transitions and game loops (2:53)",
@@ -404,7 +421,7 @@ export class TableOfContents extends Component {
               "What Americans want for Christmas - horizontal stack chart",
               "Christmas carols and their words - a word cloud",
               "Will you buy a christmas tree? - a pie chart",
-              "What goes in Christmas stockings - a piechart with tooltips",
+              "What goes in Chrstmas stockings - a piechart with tooltips",
               "When Americans buy Christmas presents - a curved line chart",
               "When people buy candy - animated barchart with easing",
               "A responsive stack chart of smartphone market share",
@@ -412,6 +429,24 @@ export class TableOfContents extends Component {
               "Try Uber's WebGL dataviz library",
               "Real-time WebGL map of all airplanes in the world",
               "A compound arc chart",
+              "Which emails sparked joy – an animated timeline",
+              "A barchart race visualizing Moore's Law",
+              "Building a Piet Mondrian art generator with treemaps",
+              <img src={christmasTree}           title="Christmas trees sold in USA - an emoji barchart"             alt="Christmas trees sold in USA - an emoji barchart"             loading="lazy" />,
+              <img src={moneySpentChristmas}     title="Money spent on Christmas - a line chart"                     alt="Money spent on Christmas - a line chart"                     loading="lazy" />,
+              <img src={christmasMovies}         title="Christmas movies at the box office - horizontal bar chart"   alt="Christmas movies at the box office - horizontal bar chart"   loading="lazy" />,
+              <img src={whatAmericasWhant}       title="What Americans want for Christmas - horizontal stack chart"  alt="What Americans want for Christmas - horizontal stack chart"  loading="lazy" />,
+              <img src={christmasCarols}         title="Christmas carols and their words - a word cloud"             alt="Christmas carols and their words - a word cloud"             loading="lazy" />,
+              <img src={willYouBuyChritmasTree}  title="Will you buy a christmas tree? - a pie chart"                alt="Will you buy a christmas tree? - a pie chart"                loading="lazy" />,
+              <img src={christmasStockings}      title="What goes in Chrstmas stockings - a piechart with tooltips"  alt="What goes in Chrstmas stockings - a piechart with tooltips"  loading="lazy" />,
+              <img src={whenChristmasStart}      title="When Americans buy Christmas presents - a curved line chart" alt="When Americans buy Christmas presents - a curved line chart" loading="lazy" />,
+              <img src={weeklyCandyRetails}      title="When people buy candy - animated barchart with easing"       alt="When people buy candy - animated barchart with easing"       loading="lazy" />,
+              <img src={responsiveStackChart}    title="A responsive stack chart of smartphone market share"         alt="A responsive stack chart of smartphone market share"         loading="lazy" />,
+              <img src={sankey}                  title="A Sankey diagram"                                            alt="A Sankey diagram"                                            loading="lazy" />,
+              <img src={compoundArc}             title="A compound arc chart"                                        alt="A compound arc chart"                                        loading="lazy" />,
+              <img src={emailsJoy}               title="Which emails sparked joy – an animated timeline"             alt="Which emails sparked joy – an animated timeline"             loading="lazy" />,
+              <img src={mooresLaw}               title="A barchart race visualizing Moore's Law"                     alt="A barchart race visualizing Moore's Law"                     loading="lazy" />,
+              <img src={mondrian}                title="Building a Piet Mondrian art generator with treemaps"        alt="Building a Piet Mondrian art generator with treemaps"        loading="lazy" />,
             ]
           }
         />
