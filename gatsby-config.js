@@ -68,6 +68,7 @@ module.exports = {
               formId: '772ba7c9ba',
             },
           },
+          'gatsby-remark-cta',
           'gatsby-remark-youtube',
           {
             resolve: 'gatsby-remark-giphy',
