@@ -8,6 +8,7 @@ import ConvertkitForm from '../widgets/ConvertkitForm'
 import Image from 'gatsby-image'
 import { isMobile } from 'react-device-detect'
 import { HeroTitle } from '../styles'
+import CTA from '../widgets/cta'
 
 const Wrapper = styled.div`
   max-width: 700px;
@@ -80,6 +81,7 @@ const ArticleTemplate = props => {
           <Article key={article.id} {...article} />
         ))}
         <hr />
+        <CTA />
         <About />
       </Wrapper>
     </Layout>

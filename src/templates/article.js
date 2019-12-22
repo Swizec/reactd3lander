@@ -1,5 +1,6 @@
 import { graphql, Link } from 'gatsby'
-import React from 'react'
+import React, {useEffect} from 'react'
+import ReactDOM from 'react-dom'
 import styled from 'styled-components'
 import { isMobile } from 'react-device-detect'
 import Layout from '../components/layout'
@@ -9,6 +10,7 @@ import About from '../widgets/About'
 import ConvertkitForm from '../widgets/ConvertkitForm'
 import { HeroTitle } from '../styles'
 import Reactions from '../widgets/reactions'
+import CTA from '../widgets/cta'
 
 const Wrapper = styled.div`
   max-width: 700px;
@@ -48,11 +50,25 @@ const Wrapper = styled.div`
 `
 
 const ArticleTemplate = props => {
+  useEffect(() => {
+    if (typeof window !== 'undefined') {
+      window.requestAnimationFrame(
+        () => {
+          let nodes = document.querySelectorAll('.remark-cta')
+          
+          for (let i = 0; i < nodes.length; i++) {
+            ReactDOM.render((<CTA />), nodes.item(i))
+          }
+        }
+      )
+    }
+  }, [])
+
+
   const post = props.data.markdownRemark
   const siteTitle = props.data.site.siteMetadata.title
   const { previous, next } = props.pageContext
   const convertkitURL = props.data.site.siteMetadata.convertkit.url
-
   const pathname = post.fields.slug
 
   return (
@@ -83,8 +99,9 @@ const ArticleTemplate = props => {
           }}
         />
         <Reactions pathname={props['*']} />
-        <ConvertkitForm />
         <hr />
+        <CTA />
+        <ConvertkitForm />
 
         <ul
           style={{
