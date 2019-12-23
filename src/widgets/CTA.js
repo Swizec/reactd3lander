@@ -14,38 +14,49 @@ const Container = styled.div`
   max-width: 700px;
   margin: auto auto;
   text-align: center;
-  /* border-top: 1px solid #e3e3e3; */
   margin-bottom: 50px;
   
   h3 {
     padding-top: 1rem;
     margin: auto auto !important;
   }
+  a {
+    background-image: none;
+  }
 
   p {
     padding-top: 20px;
     margin-bottom: -20px;
   }
+`
 
-  a {
-    display: block;
-    background-image: none;
-    margin-top: -20px;
-  }
+const MainAction = styled.a`
+  display: block;
+  margin-top: -20px;
+  background-color: #ff871c;
+  border: 1px solid transparent;
+  border-radius: 4px;
+  box-shadow: #d66a12 0 5px 0;
+  color: #fff;
+  cursor: pointer;
+  display: inline-block;
+  font-size: 20px;
+  font-weight: 900;
+  line-height: 1.42857;
+  margin-bottom: 0;
+  padding: 10px 20px;
+  text-shadow: none;
+`;
 
-  button {
-    background-color: #ff871c;
-    border: 1px solid transparent;
-    border-radius: 4px;
-    box-shadow: #d66a12 0 5px 0;
-    color: #fff;
-    cursor: pointer;
-    display: inline-block;
-    font-size: 20px;
-    font-weight: 900;
-    line-height: 1.42857;
-    margin-bottom: 0;
-    padding: 10px 20px;
+const AuxAction = styled(Link)`
+  color: #666;
+  display: block;
+  text-decoration: none;
+  font-size: 16px;
+  margin-top: 5px;
+
+  &:hover {
+    text-decoration: underline;
   }
 `
 
@@ -106,9 +117,13 @@ const CTA = () => {
         company = {selectedTestimonial.company}
         image   = {selectedTestimonial.image}
       />
-      <Link to="/">
-        <button>Get Started</button>
-      </Link>
+      <MainAction data-formkit-toggle="c3e0a312c3" href="https://swizec-llc.ck.page/c3e0a312c3" >
+        Get Started with a Free Preview
+      </MainAction>
+
+      <AuxAction to="/">
+        or buy now
+      </AuxAction>
     </Container>
   );
 }
