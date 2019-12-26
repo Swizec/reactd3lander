@@ -87,6 +87,12 @@ function SEO({
               defer
               async
             />
+            <script
+              async
+              defer
+              data-uid="c3e0a312c3"
+              src="https://swizec-llc.ck.page/c3e0a312c3/index.js"
+            ></script>
             <script src="https://gumroad.com/js/gumroad.js" defer async />
             {includeTypeform ? (
               <script>{` (function() { var qs,js,q,s,d=document, gi=d.getElementById, ce=d.createElement, gt=d.getElementsByTagName, id="typef_orm_share", b="https://embed.typeform.com/"; if(!gi.call(d,id)){js = ce.call(d, "script"); js.id=id; js.src=b+"embed.js"; q=gt.call(d,"script")[0]; q.parentNode.insertBefore(js,q) } })() `}</script>
