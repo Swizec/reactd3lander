@@ -8,7 +8,7 @@ import ConvertkitForm from '../widgets/ConvertkitForm'
 import Image from 'gatsby-image'
 import { isMobile } from 'react-device-detect'
 import { HeroTitle } from '../styles'
-import CTA from '../widgets/cta'
+import CTA from '../widgets/CTA'
 
 const Wrapper = styled.div`
   max-width: 700px;
@@ -74,7 +74,12 @@ const ArticleTemplate = props => {
           <a href="https://www.youtube.com/channel/UCoyHgaeLLI7Knp7LDHOwZMw">
             Join live
           </a>{' '}
-          or subscribe to the newsletter <span role="img" aria-label="heart">  💌</span>.
+          or subscribe to the newsletter{' '}
+          <span role="img" aria-label="heart">
+            {' '}
+            💌
+          </span>
+          .
         </p>
         <ConvertkitForm />
         {articles.map(article => (

@@ -1,5 +1,5 @@
 import { graphql, Link } from 'gatsby'
-import React, {useEffect} from 'react'
+import React, { useEffect } from 'react'
 import ReactDOM from 'react-dom'
 import styled from 'styled-components'
 import { isMobile } from 'react-device-detect'
@@ -10,7 +10,7 @@ import About from '../widgets/About'
 import ConvertkitForm from '../widgets/ConvertkitForm'
 import { HeroTitle } from '../styles'
 import Reactions from '../widgets/reactions'
-import CTA from '../widgets/cta'
+import CTA from '../widgets/CTA'
 
 const Wrapper = styled.div`
   max-width: 700px;
@@ -52,18 +52,15 @@ const Wrapper = styled.div`
 const ArticleTemplate = props => {
   useEffect(() => {
     if (typeof window !== 'undefined') {
-      window.requestAnimationFrame(
-        () => {
-          let nodes = document.querySelectorAll('.remark-cta')
-          
-          for (let i = 0; i < nodes.length; i++) {
-            ReactDOM.render((<CTA />), nodes.item(i))
-          }
+      window.requestAnimationFrame(() => {
+        let nodes = document.querySelectorAll('.remark-cta')
+
+        for (let i = 0; i < nodes.length; i++) {
+          ReactDOM.render(<CTA />, nodes.item(i))
         }
-      )
+      })
     }
   }, [])
-
 
   const post = props.data.markdownRemark
   const siteTitle = props.data.site.siteMetadata.title
@@ -86,11 +83,21 @@ const ArticleTemplate = props => {
         <p>
           <DateText {...post.frontmatter} />
           <em>
-            &nbsp;<span role="img" aria-label="finger-right">👉 </span> livestreamed every last Sunday of the month.{' '}
+            &nbsp;
+            <span role="img" aria-label="finger-right">
+              👉{' '}
+            </span>{' '}
+            livestreamed every last Sunday of the month.{' '}
             <a href="https://www.youtube.com/channel/UCoyHgaeLLI7Knp7LDHOwZMw">
               Join live
             </a>{' '}
-            or <a href={convertkitURL}>subscribe by email <span role="img" aria-label="heart">💌</span></a>
+            or{' '}
+            <a href={convertkitURL}>
+              subscribe by email{' '}
+              <span role="img" aria-label="heart">
+                💌
+              </span>
+            </a>
           </em>
         </p>
         <div
