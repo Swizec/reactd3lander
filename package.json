@@ -1,9 +1,9 @@
 {
-    "name": "gatsby-starter-default",
+    "name": "reactd3lander",
     "private": true,
-    "description": "A simple starter to get up and developing quickly with Gatsby",
+    "description": "reactfordataviz.com",
     "version": "0.1.0",
-    "author": "Kyle Mathews <mathews.kyle@gmail.com>",
+    "author": "Swizec",
     "dependencies": {
         "@raae/gatsby-remark-oembed": "^0.0.7",
         "babel-plugin-styled-components": "^1.10.1",
