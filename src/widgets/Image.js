@@ -20,6 +20,7 @@ const NonStretchedImage = props => {
     return <Img {...normalizedProps} />;
 };
 
+/* eslint-disable jsx-a11y/no-noninteractive-element-interactions */
 export const LazyImage = ({ height, src }) => (
     <CenterDiv>
         <FadeIn height={height} duration={300}>
@@ -27,5 +28,6 @@ export const LazyImage = ({ height, src }) => (
         </FadeIn>
     </CenterDiv>
 );
+/* eslint-enable jsx-a11y/no-noninteractive-element-interactions */
 
 export default NonStretchedImage;

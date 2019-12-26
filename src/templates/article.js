@@ -1,5 +1,6 @@
 import { graphql, Link } from 'gatsby'
-import React from 'react'
+import React, {useEffect} from 'react'
+import ReactDOM from 'react-dom'
 import styled from 'styled-components'
 import { isMobile } from 'react-device-detect'
 import Layout from '../components/layout'
@@ -8,6 +9,8 @@ import DateText from '../components/date-text'
 import About from '../widgets/About'
 import ConvertkitForm from '../widgets/ConvertkitForm'
 import { HeroTitle } from '../styles'
+import Reactions from '../widgets/reactions'
+import CTA from '../widgets/cta'
 
 const Wrapper = styled.div`
   max-width: 700px;
@@ -47,19 +50,34 @@ const Wrapper = styled.div`
 `
 
 const ArticleTemplate = props => {
+  useEffect(() => {
+    if (typeof window !== 'undefined') {
+      window.requestAnimationFrame(
+        () => {
+          let nodes = document.querySelectorAll('.remark-cta')
+          
+          for (let i = 0; i < nodes.length; i++) {
+            ReactDOM.render((<CTA />), nodes.item(i))
+          }
+        }
+      )
+    }
+  }, [])
+
+
   const post = props.data.markdownRemark
   const siteTitle = props.data.site.siteMetadata.title
   const { previous, next } = props.pageContext
   const convertkitURL = props.data.site.siteMetadata.convertkit.url
-
   const pathname = post.fields.slug
+
   return (
     <Layout location={props.location} title={siteTitle}>
       <SEO
         description={post.frontmatter.description || post.excerpt}
         pathname={pathname}
         title={post.frontmatter.title}
-        image={post.frontmatter.image}
+        image={post.frontmatter.image.publicURL}
       />
       <Wrapper>
         <HeroTitle style={{ marginLeft: 'auto', marginRight: 'auto' }}>
@@ -68,11 +86,11 @@ const ArticleTemplate = props => {
         <p>
           <DateText {...post.frontmatter} />
           <em>
-            &nbsp;👉 livestreamed every last Sunday of the month.{' '}
+            &nbsp;<span role="img" aria-label="finger-right">👉 </span> livestreamed every last Sunday of the month.{' '}
             <a href="https://www.youtube.com/channel/UCoyHgaeLLI7Knp7LDHOwZMw">
               Join live
             </a>{' '}
-            or <a href={convertkitURL}>subscribe by email 💌</a>
+            or <a href={convertkitURL}>subscribe by email <span role="img" aria-label="heart">💌</span></a>
           </em>
         </p>
         <div
@@ -80,8 +98,10 @@ const ArticleTemplate = props => {
             __html: post.html,
           }}
         />
-        <ConvertkitForm />
+        <Reactions pathname={props['*']} />
         <hr />
+        <CTA />
+        <ConvertkitForm />
 
         <ul
           style={{

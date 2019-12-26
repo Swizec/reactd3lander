@@ -42,7 +42,7 @@ export default class Section1 extends Component {
             dataviz. Together they represent two of the most popular JavaScript
             libraries on the web.
           </P>
-          <P>Watch some of my conference talks for a sneak peek 👇</P>
+          <P>Watch some of my conference talks for a sneak peek <span role="img" aria-label="finger-down">👇</span></P>
 
           <Video videoId="UP1nCXG2t4M" />
           <P>

@@ -75,25 +75,25 @@ exports.createPages = ({ graphql, actions }) => {
     }
 
     // create pages pages
-    {
-      const mdEdges = fp.filter(md => getCollection(md) === 'pages')(mds)
-      mdEdges.forEach((mdEdge, index) => {
-        const previous =
-          index === mdEdges.length - 1 ? null : mdEdges[index + 1].node
-        const next = index === 0 ? null : mdEdges[index - 1].node
+    // {
+    //   const mdEdges = fp.filter(md => getCollection(md) === 'pages')(mds)
+    //   mdEdges.forEach((mdEdge, index) => {
+    //     const previous =
+    //       index === mdEdges.length - 1 ? null : mdEdges[index + 1].node
+    //     const next = index === 0 ? null : mdEdges[index - 1].node
 
-        createPage({
-          path: mdEdge.node.fields.slug,
-          component: articleTemplate,
-          context: {
-            slug: mdEdge.node.fields.slug,
-            collection: getCollection(mdEdge),
-            previous,
-            next,
-          },
-        })
-      })
-    }
+    //     createPage({
+    //       path: mdEdge.node.fields.slug,
+    //       component: articleTemplate,
+    //       context: {
+    //         slug: mdEdge.node.fields.slug,
+    //         collection: getCollection(mdEdge),
+    //         previous,
+    //         next,
+    //       },
+    //     })
+    //   })
+    // }
 
     return null
   })

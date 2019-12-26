@@ -33,6 +33,7 @@
         "prismjs": "^1.16.0",
         "prop-types": "^15.7.2",
         "react": "^16.8.6",
+        "react-collapse": "^5.0.0",
         "react-device-detect": "^1.6.5",
         "react-dom": "^16.8.6",
         "react-helmet": "^5.2.1",
@@ -49,7 +50,7 @@
     ],
     "license": "MIT",
     "scripts": {
-        "bootstrap": "cd plugins/gatsby-remark-giphy && yarn install && cd ../gatsby-remark-youtube && yarn install && cd ../gatsby-remark-convertkit-form && yarn install && cd ../../",
+        "bootstrap": "cd plugins/gatsby-remark-giphy && yarn install && cd ../gatsby-remark-youtube && yarn install && cd ../gatsby-remark-convertkit-form && yarn install && cd ../gatsby-remark-cta && yarn install && cd ../../",
         "build": "yarn bootstrap && gatsby build",
         "develop": "gatsby develop",
         "format": "prettier --write ./**/*.{js,ts,tsx,json,md,mdx,html,css}",
@@ -101,6 +102,6 @@
     },
     "devDependencies": {
         "nodemon": "^1.19.1",
-        "now": "^15.6.1"
+        "now": "^16.6.3"
     }
 }

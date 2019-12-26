@@ -2,6 +2,7 @@ import React from 'react'
 import PropTypes from 'prop-types'
 import Helmet from 'react-helmet'
 import { StaticQuery, graphql } from 'gatsby'
+import defaultThumb from '../images/metaimage.png'
 
 function SEO({
   description,
@@ -12,9 +13,7 @@ function SEO({
   image,
   includeTypeform,
 }) {
-  const thumbnail =
-    image ||
-    'https://reactd3lander.netlify.com/static/metaimage-92d136087bd1db37d514c61acaa84e1b.png'
+  const thumbnail = image || defaultThumb
   const pageTitle = title || `React for Data Visualization`
 
   return (
@@ -54,11 +53,11 @@ function SEO({
               },
               {
                 name: `twitter:card`,
-                content: `summary`,
+                content: `summary_large_image`,
               },
               {
-                name: `twitter:image:src`,
-                content: thumbnail,
+                name: `twitter:image`,
+                content: `https://reactfordataviz.com/${thumbnail}`,
               },
               {
                 name: `twitter:creator`,

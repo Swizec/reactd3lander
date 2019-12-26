@@ -1,14 +1,15 @@
+
 # Testing markdown processing
 
 ## Giphy
 
 Example `![](<giphy:galaxy brain> 'galaxy brain')`
 
-![](<giphy:galaxy brain> 'galaxy brain')
+`![](<giphy:galaxy brain> 'galaxy brain')`
 
 Example `![whats up](giphy:whats_up)`
 
-![whats up](giphy:whats_up)
+`![whats up](giphy:whats_up)`
 
 ## Embeds galore
 
