@@ -1,0 +1,324 @@
+---
+title: 'Visualizing how viruses spread in a population'
+description:
+  Let's build a simulation of how viruses spread in populations and see the impact of social distancing for ourselves.
+date: 2020-03-16T15:13:00.000Z
+lastUpdated: 2020-03-16T15:13:00.000Z
+image: '../images/kNmeD4K.png'
+---
+
+We live in strange times. Canada cancelled hockey, Ireland closed its pubs, USA banned baseball. Large gatherings the world over are closed until further notice. People are working from home, afraid to go out.
+
+Toilet paper is a rare commodity. You couldn't buy hand sanitizer, if your life depended on it.
+
+And it's all because of a novel coronavirus – [Covid19](https://en.wikipedia.org/wiki/Coronavirus_disease_2019) – turning into a global pandemic. We're told [social distancing](https://en.wikipedia.org/wiki/Social_distancing) is our best bet to [Flatten The Curve](https://www.flattenthecurve.com/) and save thousands, maybe millions, of lives.
+
+![](https://www.flattenthecurve.com/images/en/flatten-the-curve.jpg)
+
+But how much does social distancing *really* slow down the spread of Covid19?
+
+I decided to build a simulation and see for myself.
+
+You can watch the [full build on YouTube](https://www.youtube.com/watch?v=gbMiGtGcq6E), see the [code on Github](https://github.com/Swizec/corona-simulation), and read on for interactive examples of past epidemics. 
+
+https://www.youtube.com/watch?v=gbMiGtGcq6E
+
+## How big an impact does social distancing have?
+
+Not much is known about Covid19 yet. We know it's about 2x as virulent as the flu and 30x as deadly. Meaning each infected person infects 3 others on average (vs. 1.5 for flu) and is 30x more likely to die.
+
+Estimates range from [3% to 6% mortality rate](https://www.thelancet.com/journals/laninf/article/PIIS1473-3099(20)30195-X/fulltext). The seasonal flu has a [mortality rate around 0.1%](https://www.cdc.gov/flu/about/burden/preliminary-in-season-estimates.htm).
+
+A 3% mortality rate does not mean that 3% of the world will die. It means that *if you have corona, you have a 3% chance of death from corona*. 
+
+Luckily far fewer people have gotten Covid19 than the flu. [51,000,000 flu illnesses](https://www.cdc.gov/flu/about/burden/preliminary-in-season-estimates.htm) vs. "just" [174,000](https://coronavirus.jhu.edu/map.html) for Covid19. For now.
+
+**This is where social distancing comes into play.**
+
+Observe 👇
+
+<iframe src="https://corona-simulation.now.sh?title=Covid19+without+distancing&mortality=3.4&virality=70&reinfectability=20&lengthOfInfection=40" style="border: 0px; width: 100%; height: 670px"></iframe>
+
+Without social distancing the virus spreads through our population rapidly. Infections and deaths grow exponentially.
+
+Add social distancing, however, and the virus is so contained it can barely spread. A few people get infected, most recover, and that's it. No pandemic.
+
+<iframe src="https://corona-simulation.now.sh?title=Covid19+with+distancing&mortality=3.4&virality=70&reinfectability=20&socialDistancing=80&lengthOfInfection=40" style="border: 0px; width: 100%; height: 670px"></iframe>
+
+Try changing the social distancing slider yourself. See how different levels impact the spread of disease.
+
+**Here's what the sliders mean:**
+
+* **Social distancing**: limits amount of movement in the population. Between 3px and 0px per iteration.
+* **Mortality**: how likely you are to die during the length of infection. Spread evenly across each iteration for simplicity.
+* **Virality**: how likely you are to get infected after coming into contact with an infectious person. We don't know this data for Covid19 yet as far as I can tell.
+* **Reinfectability**: how much immunity does surviving a virus give you. We know some people have gotten Covid19 twice.
+* **Length of infection**: number of iterations before you recover. This does not directly map to weeks or days, but is useful for comparison between viruses.
+
+## Comparing Covid19 with other epidemics
+
+You saw above how Covid19 with social distancing compares to Covid19 without social distancing. But how does it compare to [other famous epidemics](https://www.visualcapitalist.com/history-of-pandemics-deadliest/)?
+
+Let's start with the seasonal flu as our baseline.
+
+<iframe src="https://corona-simulation.now.sh?title=Seasonal+flu&mortality=0.1&virality=35&reinfectability=0&socialDistancing=0&lengthOfInfection=20" style="border: 0px; width: 100%; height: 670px"></iframe>
+
+Everyone gets it, nobody dies.
+
+What about [The Black Death](https://en.wikipedia.org/wiki/Black_Death)?
+
+<iframe src="https://corona-simulation.now.sh?title=The+Black+Death&mortality=90&virality=100&reinfectability=0&socialDistancing=30&lengthOfInfection=60" style="border: 0px; width: 100%; height: 670px"></iframe>
+
+We know it was deadly, spread fast, and that quarantines were attempted. 30% of Europe died and it took 200 years for the population to recover.
+
+In my simulation it's almost too deadly to spread.
+
+A more recent famous was [The Spanish Flu](https://en.wikipedia.org/wiki/Spanish_flu). Aided by compromised immune systems from the war, it killed millions.
+
+<iframe src="https://corona-simulation.now.sh?title=The+Spanish+Flu&mortality=4&virality=75&reinfectability=0&socialDistancing=10&lengthOfInfection=20" style="border: 0px; width: 100%; height: 670px"></iframe>
+
+The mortality rate of 4% is similar to Covid19, but a typical influenza lasts just 2 weeks vs. corona's 4 weeks. Far fewer people die as a result and the simulation even reaches herd immunity on its own.
+
+Now let's compare all that to [HIV](https://en.wikipedia.org/wiki/HIV) – a virus that's deadly, forever, and surprisingly difficult to get with a virality ranging from [0.04% to 1.4%](https://www.thebodypro.com/article/putting-a-number-on-it-the-risk-from-an-exposure-t) in a single exposure.
+
+<iframe src="https://corona-simulation.now.sh?title=HIV&mortality=5&virality=1&reinfectability=0&socialDistancing=0&lengthOfInfection=1000" style="border: 0px; width: 100%; height: 670px"></iframe>
+
+What a huge difference that low virality makes 🤔
+
+## How the corona simulation works
+
+If you're curious how this simulation works, here are some of the interesting bits. [Watch the full build for details](https://www.youtube.com/watch?v=gbMiGtGcq6E)
+
+I'm using the game loop approach to animation from [ReactForDataviz](https://reactfordataviz.com). Render a bunch of dots, change their positions, re-render.
+
+This gives us 60fps animation on most machines.
+
+```javascript
+// the logic is contained in a usePopulation React hook
+// it returns the current population state
+// some meta data – simulating and iterationCount
+// and 2 setters – startSimulation, stopSimulation
+const {
+    population,
+    startSimulation,
+    stopSimulation,
+    simulating,
+    iterationCount
+} = usePopulation({
+    width,
+    height,
+    mortality,
+    virality,
+    socialDistancing,
+    lengthOfInfection,
+    reinfectability
+});
+
+// ...
+<svg
+    style={{
+        width,
+        height
+    }}
+>
+    {population.map(p => (
+        <Person {...p} />
+    ))}
+</svg>
+```
+
+Rendering happens in a loop. Go through the population and render each member as a `<Person>` component.
+
+The `<Person>` component takes care of colors based on `infected`, `dead`, and `recovered` flags. Renders a circle.
+
+### usePopulation
+
+The `usePopulation` hook creates the initial population, lays it out on the page, and drives the simulation with a `d3.timer`.
+
+```javascript
+function usePopulation({ ... }) {
+    // initial state
+    const [population, setPopulation] = useState(
+        createPopulation({
+            cx: width / 2,
+            cy: height / 2,
+            width: width - 15,
+            height: height - 15
+        })
+    );
+    // controls when the simulation is running
+    const [simulating, setSimulating] = useState(false);
+    const [iterationCount, setIterationCount] = useState(0);
+
+    function startSimulation() {
+        // infect a random person
+        const person =
+            nextPopulation[Math.floor(Math.random() * nextPopulation.length)];
+        person.infected = 0;
+
+        // simulation starts when effect from `simulating` runs
+        setPopulation(nextPopulation);
+        setIterationCount(0);
+        setSimulating(true);
+    }
+
+    function stopSimulation() {
+        setSimulating(false);
+    }
+
+    // this is the animation loop, d3.timer runs it at 60fps
+    function iteratePopulation(elapsedTime) {
+        const iterationCount = Math.floor(elapsedTime / 60);
+        setPopulation(population => {
+            // calculate the next state of our population on each tick
+
+            // first, people move around
+            nextPopulation = peopleMove(...);
+            // then, some get infected based on collisions
+            nextPopulation = infectPeople(...);
+            // finally, some die and some recover
+            nextPopulation = peopleDieOrGetBetter(...);
+
+            return nextPopulation;
+        });
+        setIterationCount(iterationCount);
+    }
+
+    // runs the simulation loop
+    useEffect(() => {
+        if (simulating) {
+            const t = d3.timer(iteratePopulation);
+
+            // stop timer when cleaning up
+            return () => t.stop();
+        }
+    }, [simulating]);
+
+    return { ... };
+}
+```
+
+I omitted some function arguments to keep the example cleaner. Comments explain the flow.
+
+The interesting parts are collision detection and that initial population layout. Movement just adds random deltas to `x` and `y` of each person and infections are just a bunch of `if` statements.
+
+### initial population layout
+
+The initial layout makes heavy use of D3's point scales – `d3.scalePoint`. They do most of the work for us.
+
+```javascript
+// generates a population oriented around (cx, cy)
+// fits into width and height
+function createPopulation({ cx, cy, width, height }) {
+    const Nrows = Math.ceil(height / 15);
+
+    // translates 0, 1, 2, 3 into evenly spaced Y coordinates
+    const yScale = d3
+        .scalePoint()
+        .domain(d3.range(0, Nrows))
+        .range([cy - height / 2, cy + height / 2]);
+
+    // this creates the diamond shape by changing the width of each row
+    // linearly going from 0 to full-width back to 0
+    // with some trigonometry, we could make a circle
+    const widthScale = d3
+        .scaleLinear()
+        .domain([0, Nrows / 2, Nrows])
+        .range([15, width, 15]);
+
+    // iterate 0, 1, 2, 3 ... and create rows
+    const rows = d3
+        .range(0, Nrows)
+        .map(i => createRow({ cx, cy: yScale(i), width: widthScale(i) }));
+
+    return rows.reduce((population, row) => [...population, ...row]);
+}
+```
+
+This creates vertically spaced rows that fit into a given `height`. 
+
+Same approach works for each individual row – a point scale spaces members along a given width.
+
+```javascript
+// creates a row of population
+function createRow({ cx, cy, width }) {
+    // fit as many as possible into a row
+    const N = Math.floor(width / 15);
+
+    // evenly spaces elements along the row
+    const xScale = d3
+        .scalePoint()
+        .domain(d3.range(0, N))
+        .range([cx - width / 2, cx + width / 2]);
+
+    // iterate and create population members { x, y, key, infected }
+    const row = d3.range(0, N).map(i => ({
+        x: xScale(i),
+        y: cy,
+        key: hexoid(25)(),
+        infected: null
+    }));
+
+    return row;
+}
+```
+
+### detecting collisions
+
+The other interesting part is detecting collisions between members of the population. Assuming a virus spreads through direct contact.
+
+A clever use of [D3-quadtree](https://github.com/d3/d3-quadtree) lets us avoid comparing every population member with every other member, which would grind our simulation to a halt. That's a O(n^n) algorithm 😅
+
+> A quadtree recursively partitions two-dimensional space into squares, dividing each square into four equally-sized squares. Each distinct point exists in a unique leaf node; coincident points are represented by a linked list.
+
+You get a fast way to search *"Is there a node within Width/Height of X, Y?"*
+
+So for collision detection you say *"Is there a node within Size of This Node?"*. If there is, you have a collision.
+
+```javascript
+// when people collide, they transfer viruses
+function peopleCollisions(population) {
+    // we only care about infected people
+    const infected = population.filter(p => p.infected !== null);
+
+    // find people in vicinity of infected people
+    const collisions = infected.map(person => {
+        // subdivides whole space to find nearest candidates
+        const subdvidedSpace = d3
+            .quadtree()
+            .extent([
+                [-1, -1],
+                [RADIUS * 2, RADIUS * 2]
+            ])
+            .x(d => d.x)
+            .y(d => d.y)
+            .addAll(
+                // everyone not infected and not current lookup
+                population
+                    .filter(p => !p.infected)
+                    .filter(p => p.key !== person.key)
+            );
+
+        // person within RADIUS*2 of lookup position
+        const candidate = subdvidedSpace.find(person.x, person.y, RADIUS * 2);
+
+        return candidate ? candidate : null;
+    });
+
+    // everyone who collided with an infected person
+    return collisions.filter(p => p !== null);
+}
+```
+
+Once you have the list of collisions, you go through them, calculate probability they got infected, and change their state.
+
+✌️
+
+## In conclusion
+
+Social distancing works, simulating viral spread is fun, and combining React with D3 is powerful as heck.
+
+Consider sharing this with friends :)
+
+Cheers,
+~Swizec
