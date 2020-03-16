@@ -4,8 +4,10 @@ description:
   Let's build a simulation of how viruses spread in populations and see the impact of social distancing for ourselves.
 date: 2020-03-16T15:13:00.000Z
 lastUpdated: 2020-03-16T15:13:00.000Z
-image: '../images/kNmeD4K.png'
+image: '../images/covid-spread.png'
 ---
+
+![](../images/covid-spread.gif)
 
 We live in strange times. Canada cancelled hockey, Ireland closed its pubs, USA banned baseball. Large gatherings the world over are closed until further notice. People are working from home, afraid to go out.
 
