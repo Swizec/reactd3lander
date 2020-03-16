@@ -11,11 +11,11 @@ image: '../images/covid-spread.png'
 
 We live in strange times. Canada cancelled hockey, Ireland closed its pubs, USA banned baseball. Large gatherings the world over are closed until further notice. People are working from home, afraid to go out.
 
-Toilet paper is a rare commodity. You couldn't buy hand sanitizer, if your life depended on it.
+Toilet paper is a rare commodity. 
 
 And it's all because of a novel coronavirus – [Covid19](https://en.wikipedia.org/wiki/Coronavirus_disease_2019) – turning into a global pandemic. We're told [social distancing](https://en.wikipedia.org/wiki/Social_distancing) is our best bet to [Flatten The Curve](https://www.flattenthecurve.com/) and save thousands, maybe millions, of lives.
 
-![](https://www.flattenthecurve.com/images/en/flatten-the-curve.jpg)
+[![](https://www.flattenthecurve.com/images/en/flatten-the-curve.jpg)](https://flattenthecurve.com)
 
 But how much does social distancing *really* slow down the spread of Covid19?
 
@@ -27,23 +27,23 @@ https://www.youtube.com/watch?v=gbMiGtGcq6E
 
 ## How big an impact does social distancing have?
 
-Not much is known about Covid19 yet. We know it's about 2x as virulent as the flu and 30x as deadly. Meaning each infected person infects 3 others on average (vs. 1.5 for flu) and is 30x more likely to die.
+Not much is known about Covid19 yet. We know it's about 2x as virulent as the flu and 30x as deadly. Each infected person infects 3 others on average (vs. 1.5 for flu).
 
 Estimates range from [3% to 6% mortality rate](https://www.thelancet.com/journals/laninf/article/PIIS1473-3099(20)30195-X/fulltext). The seasonal flu has a [mortality rate around 0.1%](https://www.cdc.gov/flu/about/burden/preliminary-in-season-estimates.htm).
 
 A 3% mortality rate does not mean that 3% of the world will die. It means that *if you have corona, you have a 3% chance of death from corona*. 
 
-Luckily far fewer people have gotten Covid19 than the flu. [51,000,000 flu illnesses](https://www.cdc.gov/flu/about/burden/preliminary-in-season-estimates.htm) vs. "just" [174,000](https://coronavirus.jhu.edu/map.html) for Covid19. For now.
+For now, many fewer people have gotten Covid19 than the flu. [51,000,000 flu illnesses](https://www.cdc.gov/flu/about/burden/preliminary-in-season-estimates.htm) vs. "just" [174,000](https://coronavirus.jhu.edu/map.html) for Covid19. With so far limited testing, numbers are likely to change.
 
-**This is where social distancing comes into play.**
+This huge difference in rate of infection is why you see some people saying *"Eh way fewer people die than with regular flu"*.
 
-Observe 👇
+Those people are wrong. **Observe how social distancing saves lives** 👇
 
 <iframe src="https://corona-simulation.now.sh?title=Covid19+without+distancing&mortality=3.4&virality=70&reinfectability=20&lengthOfInfection=40" style="border: 0px; width: 100%; height: 670px"></iframe>
 
-Without social distancing the virus spreads through our population rapidly. Infections and deaths grow exponentially.
+Without social distancing the virus spreads through our population exponentially. Infections and deaths grow like crazy.
 
-Add social distancing, however, and the virus is so contained it can barely spread. A few people get infected, most recover, and that's it. No pandemic.
+But add social distancing and the virus is so contained it barely spreads. A few people get infected, most recover, and that's it. No pandemic.
 
 <iframe src="https://corona-simulation.now.sh?title=Covid19+with+distancing&mortality=3.4&virality=70&reinfectability=20&socialDistancing=80&lengthOfInfection=40" style="border: 0px; width: 100%; height: 670px"></iframe>
 
@@ -71,15 +71,15 @@ What about [The Black Death](https://en.wikipedia.org/wiki/Black_Death)?
 
 <iframe src="https://corona-simulation.now.sh?title=The+Black+Death&mortality=90&virality=100&reinfectability=0&socialDistancing=30&lengthOfInfection=60" style="border: 0px; width: 100%; height: 670px"></iframe>
 
-We know it was deadly, spread fast, and that quarantines were attempted. 30% of Europe died and it took 200 years for the population to recover.
+We know it was deadly, spread fast, and that quarantines were attempted. 30% of Europe died and it took 200 years for the population to recover. yikes
 
 In my simulation it's almost too deadly to spread.
 
-A more recent famous was [The Spanish Flu](https://en.wikipedia.org/wiki/Spanish_flu). Aided by compromised immune systems from the war, it killed millions.
+A more recent famous epidemic was [The Spanish Flu](https://en.wikipedia.org/wiki/Spanish_flu). Aided by compromised immune systems from the war, it killed millions.
 
 <iframe src="https://corona-simulation.now.sh?title=The+Spanish+Flu&mortality=4&virality=75&reinfectability=0&socialDistancing=10&lengthOfInfection=20" style="border: 0px; width: 100%; height: 670px"></iframe>
 
-The mortality rate of 4% is similar to Covid19, but a typical influenza lasts just 2 weeks vs. corona's 4 weeks. Far fewer people die as a result and the simulation even reaches herd immunity on its own.
+The mortality rate of 4% is similar to Covid19, but a typical influenza lasts just 2 weeks vs. corona's 4 weeks. Far fewer people die as a result. The simulation even reaches herd immunity.
 
 Now let's compare all that to [HIV](https://en.wikipedia.org/wiki/HIV) – a virus that's deadly, forever, and surprisingly difficult to get with a virality ranging from [0.04% to 1.4%](https://www.thebodypro.com/article/putting-a-number-on-it-the-risk-from-an-exposure-t) in a single exposure.
 
