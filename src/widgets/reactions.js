@@ -1,4 +1,4 @@
-import React from "react"
+import React from 'react'
 import styled from 'styled-components'
 
 const Container = styled.div`
@@ -27,7 +27,7 @@ const SparkJoy = styled.div`
   a {
     font-size: 1.5em;
   }
-`;
+`
 
 const ShareButtons = styled.div`
   float: right;
@@ -38,23 +38,20 @@ const ShareButtons = styled.div`
 
 const SocialButton = styled.a`
   padding: 1px !important;
-`;
+`
 
+const Reactions = ({ pathname }) => {
+  const url = `https://reactfordataviz.com/${pathname}`
+  const sparkJoyId = '50c48f9e-66bd-47d0-9c78-4865719ad305'
+  const tweetUrl = `https://twitter.com/intent/tweet?text=${url}`
+  const fbShareUrl = `https://www.facebook.com/sharer/sharer.php?u=${url}`
 
-const Reactions = ({pathname}) => {
-  const url = `https://reactfordataviz.com/${pathname}`;
-  const sparkJoyId = '50c48f9e-66bd-47d0-9c78-4865719ad305';
-  const tweetUrl = `https://twitter.com/intent/tweet?text=${url}`;
-  const fbShareUrl = `https://www.facebook.com/sharer/sharer.php?u=${url}`;
-
-  return(
+  return (
     <Container>
       <SparkJoy>
         <style></style>
         <div className="Widget__WidgetLayout-sc-1ityn2x-2 cJHITu">
-          <h2>
-            Did you enjoy this dataviz article?
-          </h2>
+          <h2>Did you enjoy this dataviz article?</h2>
           <div className="styles__Flex-sc-1lygi1f-2 biiuQx">
             <a
               href={`https://spark-joy.netlify.com/${sparkJoyId}/thumbsdown?instanceOfJoy=${url}`}

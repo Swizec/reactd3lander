@@ -105,7 +105,7 @@ const ArticleTemplate = props => {
             __html: post.html,
           }}
         />
-        <Reactions pathname={props['*']} />
+        <Reactions pathname={pathname} />
         <hr />
         <CTA />
         <ConvertkitForm />
