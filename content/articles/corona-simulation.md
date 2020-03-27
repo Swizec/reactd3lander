@@ -7,7 +7,7 @@ lastUpdated: 2020-03-16T15:13:00.000Z
 image: '../images/covid-spread.png'
 ---
 
-![](../images/covid-spread.gif)
+[![](../images/covid-spread.gif)](https://reactfordataviz.com/articles/corona-simulation/)
 
 We live in strange times. Canada cancelled hockey, Ireland closed its pubs, USA banned baseball. Large gatherings the world over are closed until further notice. People are working from home, afraid to go out.
 
@@ -25,6 +25,8 @@ You can watch the [full build on YouTube](https://www.youtube.com/watch?v=gbMiGt
 
 https://www.youtube.com/watch?v=gbMiGtGcq6E
 
+*PS: you can [read and share this online, adjust simulation sliders yourself](https://reactfordataviz.com/articles/corona-simulation/) :)*
+
 ## How big an impact does social distancing have?
 
 Not much is known about Covid19 yet. We know it's about 2x as virulent as the flu and 30x as deadly. Each infected person infects 3 others on average (vs. 1.5 for flu).
@@ -39,13 +41,13 @@ This huge difference in rate of infection is why you see some people saying *"Eh
 
 Those people are wrong. **Observe how social distancing saves lives** 👇
 
-<iframe src="https://corona-simulation.now.sh?title=Covid19+without+distancing&mortality=3.4&virality=70&reinfectability=20&lengthOfInfection=40" style="border: 0px; width: 100%; height: 670px"></iframe>
+[![](https://i.imgur.com/3dApIaV.mp4)](https://reactfordataviz.com/articles/corona-simulation/)
 
 Without social distancing the virus spreads through our population exponentially. Infections and deaths grow like crazy.
 
 But add social distancing and the virus is so contained it barely spreads. A few people get infected, most recover, and that's it. No pandemic.
 
-<iframe src="https://corona-simulation.now.sh?title=Covid19+with+distancing&mortality=3.4&virality=70&reinfectability=20&socialDistancing=80&lengthOfInfection=40" style="border: 0px; width: 100%; height: 670px"></iframe>
+[![](https://i.imgur.com/beFbGtY.gif)](https://reactfordataviz.com/articles/corona-simulation/)
 
 Try changing the social distancing slider yourself. See how different levels impact the spread of disease.
 
@@ -63,13 +65,13 @@ You saw above how Covid19 with social distancing compares to Covid19 without soc
 
 Let's start with the seasonal flu as our baseline.
 
-<iframe src="https://corona-simulation.now.sh?title=Seasonal+flu&mortality=0.1&virality=35&reinfectability=0&socialDistancing=0&lengthOfInfection=20" style="border: 0px; width: 100%; height: 670px"></iframe>
+[![](https://i.imgur.com/JjDwoKp.mp4)](https://reactfordataviz.com/articles/corona-simulation/)
 
 Everyone gets it, nobody dies.
 
 What about [The Black Death](https://en.wikipedia.org/wiki/Black_Death)?
 
-<iframe src="https://corona-simulation.now.sh?title=The+Black+Death&mortality=90&virality=100&reinfectability=0&socialDistancing=30&lengthOfInfection=60" style="border: 0px; width: 100%; height: 670px"></iframe>
+[![](https://i.imgur.com/RzVwgYZ.gif)](https://reactfordataviz.com/articles/corona-simulation/)
 
 We know it was deadly, spread fast, and that quarantines were attempted. 30% of Europe died and it took 200 years for the population to recover. yikes
 
@@ -77,13 +79,13 @@ In my simulation it's almost too deadly to spread.
 
 A more recent famous epidemic was [The Spanish Flu](https://en.wikipedia.org/wiki/Spanish_flu). Aided by compromised immune systems from the war, it killed millions.
 
-<iframe src="https://corona-simulation.now.sh?title=The+Spanish+Flu&mortality=4&virality=75&reinfectability=0&socialDistancing=10&lengthOfInfection=20" style="border: 0px; width: 100%; height: 670px"></iframe>
+[![](https://i.imgur.com/oyHMtGM.mp4)](https://reactfordataviz.com/articles/corona-simulation/)
 
 The mortality rate of 4% is similar to Covid19, but a typical influenza lasts just 2 weeks vs. corona's 4 weeks. Far fewer people die as a result. The simulation even reaches herd immunity.
 
 Now let's compare all that to [HIV](https://en.wikipedia.org/wiki/HIV) – a virus that's deadly, forever, and surprisingly difficult to get with a virality ranging from [0.04% to 1.4%](https://www.thebodypro.com/article/putting-a-number-on-it-the-risk-from-an-exposure-t) in a single exposure.
 
-<iframe src="https://corona-simulation.now.sh?title=HIV&mortality=5&virality=1&reinfectability=0&socialDistancing=0&lengthOfInfection=1000" style="border: 0px; width: 100%; height: 670px"></iframe>
+[![](https://i.imgur.com/XYRqcHR.mp4)](https://reactfordataviz.com/articles/corona-simulation/)
 
 What a huge difference that low virality makes 🤔
 
@@ -269,7 +271,7 @@ function createRow({ cx, cy, width }) {
 
 The other interesting part is detecting collisions between members of the population. Assuming a virus spreads through direct contact.
 
-A clever use of [D3-quadtree](https://github.com/d3/d3-quadtree) lets us avoid comparing every population member with every other member, which would grind our simulation to a halt. That's a O(n^n) algorithm 😅
+A clever use of [D3-quadtree](https://github.com/d3/d3-quadtree) lets us avoid comparing every population member with every other member, which would grind our simulation to a halt. That's a O(n^2) algorithm.
 
 > A quadtree recursively partitions two-dimensional space into squares, dividing each square into four equally-sized squares. Each distinct point exists in a unique leaf node; coincident points are represented by a linked list.
 
@@ -322,5 +324,7 @@ Social distancing works, simulating viral spread is fun, and combining React wit
 
 Consider sharing this with friends :)
 
-Cheers,
+https://twitter.com/Swizec/status/1239599601537015808
+
+Cheers,<br>
 ~Swizec

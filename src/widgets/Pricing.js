@@ -1,4 +1,4 @@
-import React, { useEffect, useReducer, } from 'react'
+import React, { useEffect, useReducer } from 'react'
 import styled from 'styled-components'
 import PriceBox from '../widgets/PriceBox.js'
 import PriceBoxSpecial from '../widgets/PriceBoxSpecial.js'
