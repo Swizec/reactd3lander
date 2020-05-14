@@ -15,6 +15,7 @@ import FaqSection from '../widgets/FaqSection'
 import Pricing from '../widgets/Pricing'
 import TableOfContents from '../widgets/TableOfContents'
 import Testimonial from '../widgets/Testimonial'
+
 import Test3 from '../images/Test3.jpg'
 import Test5 from '../images/Test5.png'
 import Test6 from '../images/Test6.jpg'
