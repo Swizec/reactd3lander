@@ -1,61 +1,166 @@
-import { Link } from 'gatsby'
-import PropTypes from 'prop-types'
-import React from 'react'
-import styled from 'styled-components'
-import { StaticQuery, graphql } from 'gatsby'
+import React from "react"
+import { useStaticQuery } from "gatsby"
+import { Flex, Box, Link, Button } from "rebass"
+import { useColorMode } from "theme-ui"
+import { useAuth } from "react-use-auth"
 
 import Image from '../widgets/Image'
 
-const Wrapper = styled.div`
-  .gatsby-image-wrapper {
-    margin: 4rem 0rem 0rem 4rem;
-    height: 50px;
-  }
-  @media (max-width: 940px) {
-    .gatsby-image-wrapper {
-      margin: 4rem auto 0;
-      display: block;
-    }
-  }
+const modes = ["themed", "lite", "dark", "gray", "hack", "pink"]
 
-  a {
-    background-image: none;
-  }
-`
+const Burger = ({ size = 24 }) => (
+  <Box
+    as="svg"
+    xmlns="http://www.w3.org/2000/svg"
+    width={size}
+    height={size}
+    fill="currentcolor"
+    viewBox="0 0 24 24"
+    sx={{
+      display: "block",
+      margin: 0,
+    }}
+  >
+    <path d="M3 18h18v-2H3v2zm0-5h18v-2H3v2zm0-7v2h18V6H3z" />
+  </Box>
+)
 
-const Header = () => (
-  <StaticQuery
-    query={graphql`
-      query {
-        logo: file(relativePath: { eq: "logo.png" }) {
-          childImageSharp {
-            fixed(width: 128, height: 50) {
-              ...GatsbyImageSharpFixed
-            }
+const Dot = (props) => (
+  <svg
+    viewBox="0 0 32 32"
+    width="24"
+    height="24"
+    fill="currentcolor"
+    style={{
+      display: "block",
+    }}
+  >
+    <circle
+      cx="16"
+      cy="16"
+      r="14"
+      fill="none"
+      stroke="currentcolor"
+      strokeWidth="4"
+    />
+    <path
+      d={`
+        M 16 0
+        A 16 16 0 0 0 16 32
+        z
+      `}
+    />
+  </svg>
+)
+
+const Login = () => {
+  const { isAuthenticated, login, user } = useAuth()
+
+  return isAuthenticated() ? (
+    <Box mr={2}>
+      Hi <strong>{user.nickname}</strong>
+      <Box sx={{ display: ["none", "inline"] }}>,</Box>
+      <Link href="/module-0" ml={1} sx={{ display: ["none", "inline"] }}>
+        lessons
+      </Link>
+    </Box>
+  ) : (
+    <Link mr={2} variant="nav" href="#" onClick={login}>
+      Student Login
+    </Link>
+  )
+}
+
+export default ({ nav, menu, setMenu, style, showBanner }) => {
+  const [mode, setMode] = useColorMode()
+  const { isAuthenticated } = useAuth()
+
+  const data = useStaticQuery(graphql`
+    query {
+      logo: file(relativePath: { eq: "logo.png" }) {
+        childImageSharp {
+          fixed(width: 128, height: 50) {
+            ...GatsbyImageSharpFixed
           }
         }
       }
-    `}
-    render={({ logo }) => (
-      <header>
-        <div>
-          <Wrapper>
-            <Link to="/">
-              <Image {...logo.childImageSharp} />
-            </Link>
-          </Wrapper>
-        </div>
-      </header>
-    )}
-  />
-)
+    }
+  `)
 
-Header.propTypes = {
-  siteTitle: PropTypes.string,
+  const cycleMode = (e) => {
+    const i = (modes.indexOf(mode) + 1) % modes.length
+    setMode(modes[i])
+  }
+
+  showBanner = false
+
+  return (
+    <Flex
+      as="header"
+      px={3}
+      py={2}
+      height={64}
+      alignItems="center"
+      bg="background"
+      style={style}
+    >
+      {isAuthenticated() && (
+        <Button
+          title="Toggle Menu"
+          sx={{
+            width: 32,
+            height: 32,
+            p: 1,
+          }}
+          variant="transparent"
+          onClick={(e) => {
+            setMenu(!menu)
+            if (menu || !nav.current) return
+            const navlink = nav.current.querySelector("a")
+            navlink.focus()
+          }}
+        >
+          <Burger />
+        </Button>
+      )}
+      <Link variant="nav" variant="nav" href="/">
+        <Image {...data.logo.childImageSharp} />
+        {/* Reactfordataviz.com */}
+      </Link>
+      {showBanner ? (
+        <Box
+          mx="auto"
+          color="white"
+          bg="primary"
+          pl={[4, 5, 6]}
+          pr={[4, 5, 6]}
+          fontSize={[1, 3, 4]}
+        >
+          <Link
+            href="/#serverlessreact.dev"
+            color="white"
+            style={{ cursor: "pointer" }}
+          >
+            <strong>❤️ 37% off while The Situation lasts ❤️</strong>
+          </Link>
+        </Box>
+      ) : (
+        <Box mx="auto" />
+      )}
+      <Login />
+      <Button
+        title="Change color mode"
+        variant="transparent"
+        sx={{
+          width: 32,
+          height: 32,
+          p: 1,
+          borderRadius: 99999,
+        }}
+        onClick={cycleMode}
+      >
+        <Dot />
+      </Button>
+    </Flex>
+  )
 }
-
-Header.defaultProps = {
-  siteTitle: ``,
-}
-
-export default Header
