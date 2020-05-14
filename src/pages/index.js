@@ -22,9 +22,6 @@ import Test8 from '../images/Test8.png'
 import Test2 from '../images/Test2.jpg'
 import PerWiklander from '../images/perwiklander.jpeg'
 import EmailSignup from '../widgets/EmailSignup'
-import EmailHeaderText from '../widgets/EmailHeaderText'
-import EmailForm from '../widgets/EmailForm'
-import EmailSubmit from '../widgets/EmailSubmit'
 import CopyBlock from '../widgets/CopyBlock'
 import ActionButton from '../widgets/ActionButton'
 
@@ -69,15 +66,17 @@ const IndexPage = () => {
         />
         <Section6 />
         <ActionButton to="#pricing" style={{ marginTop: '15px' }}>
-          <span role="img" aria-label="finger-down">👇</span> Jump into ReactForDataviz<span role="img" aria-label="finger-down">👇</span>
+          <span role="img" aria-label="finger-down">
+            👇
+          </span>{' '}
+          Jump into ReactForDataviz
+          <span role="img" aria-label="finger-down">
+            👇
+          </span>
         </ActionButton>
         <TableOfContents />
         <Pricing />
-        <EmailSignup
-          header={<EmailHeaderText />}
-          input={<EmailForm />}
-          submit={<EmailSubmit />}
-        />
+        <EmailSignup />
         <Testimonial
           quote="I love having practical examples to help me learn new things faster. D3's docs alone are okay but marrying them with React (as a react newbie) is not as straightforward as someone handholding you through the process. And, since I don't have hours after work or on weekends to hack on things like I used to before I was married (or had kids), I need to optimize my learning."
           image={Test6}

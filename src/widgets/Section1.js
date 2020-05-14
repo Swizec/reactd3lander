@@ -3,6 +3,7 @@ import styled from 'styled-components'
 import { StaticQuery, graphql } from 'gatsby'
 
 import Image, { LazyImage } from '../widgets/Image'
+import EmailSignup from '../widgets/EmailSignup'
 import ActionButton from './ActionButton'
 
 const Wrapper = styled.div`
@@ -37,7 +38,12 @@ const Section1 = ({ scatterplotImg, spaghettiImg }) => (
     <Image {...scatterplotImg.childImageSharp} />
 
     <Wrapper>
-      <p>I was so proud! Only took me a week. <span role="img" aria-label="strong arm">💪</span></p>
+      <p>
+        I was so proud! Only took me a week.{' '}
+        <span role="img" aria-label="strong arm">
+          💪
+        </span>
+      </p>
 
       <h2>
         &quot;I've tried D3 in the past, found it powerful but a bit confusing
@@ -65,7 +71,11 @@ const Section1 = ({ scatterplotImg, spaghettiImg }) => (
 
       <p>
         You hunt the web for examples and omaigod what is this!? How the hell
-        is D3 doing that? <span role="img" aria-label="oO">😳</span>😳
+        is D3 doing that?{' '}
+        <span role="img" aria-label="oO">
+          😳
+        </span>
+        😳
       </p>
     </Wrapper>
 
@@ -95,8 +105,20 @@ const Section1 = ({ scatterplotImg, spaghettiImg }) => (
         height={260}
       />
 
-      <ActionButton to="#pricing"><span role="img" aria-label="finger-down">👇</span>Jump into ReactForDataviz<span role="img" aria-label="finger-down">👇</span></ActionButton>
+      <ActionButton to="#pricing">
+        <span role="img" aria-label="finger-down">
+          👇
+        </span>
+        Jump into ReactForDataviz
+        <span role="img" aria-label="finger-down">
+          👇
+        </span>
+      </ActionButton>
+    </Wrapper>
 
+    <EmailSignup />
+
+    <Wrapper>
       <h2>Libraries are hard to customize</h2>
 
       <p>
@@ -201,6 +223,6 @@ export default () => (
         }
       }
     `}
-    render={data => <Section1 {...data} />}
+    render={(data) => <Section1 {...data} />}
   />
 )
