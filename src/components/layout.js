@@ -13,7 +13,7 @@ import Footer from "./footer"
 import Nav from "./nav"
 import NavWorkshop from "./nav-workshop"
 import { default as PleaseLoginCopy } from "./please-login"
-import { isAuthorized, isWorkshopPage, currentLocation } from "../util"
+import { isAuthorized, isWorkshopPage, isArticlePage,currentLocation } from "../util"
 
 import Reactions from "./reactions"
 
@@ -129,7 +129,6 @@ const PleasePurchase = props => {
 const UNAUTH_PAGES = [
   "/",
   "/module-0",
-  "/articles/corona-simulation/",
   "/auth0_callback",
   "/thankyou",
   "/thankyou/", //it's necessary this duplicate because of old node version from ZEIT
@@ -137,7 +136,7 @@ const UNAUTH_PAGES = [
 
 export default props => {
   const allowUnauth =
-    isWorkshopPage(props) || UNAUTH_PAGES.includes(currentLocation(props))
+    isWorkshopPage(props) || isArticlePage(props) || UNAUTH_PAGES.includes(currentLocation(props))
   const fullwidth = allowUnauth && !isWorkshopPage(props)
   const [menu, setMenu] = useState(isWorkshopPage(props))
   const nav = useRef(null)

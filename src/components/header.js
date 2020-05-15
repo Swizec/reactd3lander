@@ -1,10 +1,9 @@
 import React from "react"
-import { useStaticQuery } from "gatsby"
+import { useStaticQuery, graphql } from "gatsby"
 import { Flex, Box, Link, Button } from "rebass"
 import { useColorMode } from "theme-ui"
 import { useAuth } from "react-use-auth"
-
-import Image from '../widgets/Image'
+import { Image } from './Image'
 
 const modes = ["themed", "lite", "dark", "gray", "hack", "pink"]
 
