@@ -110,6 +110,7 @@ export default ({ nav, menu, setMenu, style, showBanner }) => {
             width: 32,
             height: 32,
             p: 1,
+            cursor: 'pointer'
           }}
           variant="transparent"
           onClick={(e) => {
@@ -155,6 +156,7 @@ export default ({ nav, menu, setMenu, style, showBanner }) => {
           height: 32,
           p: 1,
           borderRadius: 99999,
+          cursor: 'pointer'
         }}
         onClick={cycleMode}
       >

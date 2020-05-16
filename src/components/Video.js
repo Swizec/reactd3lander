@@ -28,7 +28,7 @@ export const Video = ({ id }) => (
         src={`https://www.youtube.com/embed/${id}`}
         frameborder="0"
         allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"
-        allowfullscreen
+        allowFullScreen
       ></iframe>
     </Box>
   </Box>
@@ -82,7 +82,7 @@ export const Vimeo = ({ id }) => {
           height="100%"
           frameborder="0"
           allow="autoplay; fullscreen"
-          allowfullscreen
+          allowFullScreen
         ></iframe>
       </Box>
       <Box mt={1} textAlign="right">

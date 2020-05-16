@@ -1,13 +1,14 @@
 import React from "react"
 import { Helmet } from "react-helmet"
+import defaultThumb from '../images/metaimage.png'
 
 export default props => {
+  console.log("SHOWRIGHTMESSAGE", props.showRightMessage)
   const title = [props.title, "React for Data Visualization"].filter(Boolean).join(" | ")
   const description =
     props.description ||
     "Learn how to build scalable dataviz components your whole team can understand with React for Data Visualization."
-  const image = `https://reactfordataviz.com${props.image ||
-    "/serverlessreact-cover.png"}`
+  const image = `https://reactfordataviz.com${props.image || defaultThumb}`
   const url = `https://reactfordataviz.com${
     props.pageName !== undefined ? `/${props.pageName}` : ""
   }`
@@ -31,6 +32,42 @@ export default props => {
       <script src="https://gumroad.com/js/gumroad.js"> </script>{" "}
       <script src="https://gumroad.com/js/gumroad-embed.js"></script>
       <script>{` setTimeout(function() { var qs,js,q,s,d=document, gi=d.getElementById, ce=d.createElement, gt=d.getElementsByTagName, id="typef_orm", b="https://embed.typeform.com/"; if(!gi.call(d,id)) {js = ce.call(d, "script"); js.id=id; js.src=b+"embed.js"; q=gt.call(d,"script")[0]; q.parentNode.insertBefore(js,q) } },1000) `}</script>
+      <script
+        src="https://f.convertkit.com/785fc7ef1f/772ba7c9ba.js"
+        defer
+        async
+      />
+      <script
+        async
+        defer
+        data-uid="c3e0a312c3"
+        src="https://swizec-llc.ck.page/c3e0a312c3/index.js"
+      ></script>
+      <script type="text/javascript">{`
+        <!-- SegMetrics -->
+            var _segq = _segq || [];
+        var _segs = _segs || {};
+        _segs.integration = '1763';
+        _segs.link = ['swizec.com', 'reactfordataviz.com', 'es6cheatsheet.com', 'es2017.io', 'es2018.io'];
+        (function () {
+            var dc = document.createElement('script');
+            dc.type = 'text/javascript';
+            dc.async = true;
+            dc.src = '//tag.segmetrics.io/seg.js';
+            var s = document.getElementsByTagName('script')[0];
+            s.parentNode.insertBefore(dc, s);
+        })(); 
+        `}</script>
+        {props.showRightMessage && 
+      <script type="text/javascript">{`
+                    (function(p, a, n, d, o, b, c) {
+                        o = n.createElement('script'); o.type = 'text/javascript'; o.async = true; o.src = 'https://tag.rightmessage.com/'+p+'.js';
+    b = n.getElementsByTagName('script')[0]; d = function(h, u, i) { var c = n.createElement('style'); c.id = 'rmcloak'+i;
+        c.type = 'text/css'; c.appendChild(n.createTextNode('.rmcloak'+h+'{visibility:hidden}.rmcloak'+u+'{display:none}'));
+                    b.parentNode.insertBefore(c, b); return c; }; c = d('', '-hidden', ''); d('-stay-invisible', '-stay-hidden', '-stay');
+    setTimeout(o.onerror = function() {c.parentNode && c.parentNode.removeChild(c); }, a); b.parentNode.insertBefore(o, b);
+                })('188781816', 20000, document);
+      `}</script>}
     </Helmet>
   )
 }

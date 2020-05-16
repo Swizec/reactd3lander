@@ -116,11 +116,13 @@ const PleasePurchase = props => {
     <>
       <Head {...props} />
       <main id="content">
+        <Box textAlign="center">
         Please{" "}
-        <Button onClick={() => navigate("/")}>
-          purchase Serverless React Dev
+        <Button onClick={() => navigate("/")} sx={{ cursor: 'pointer' }}>
+          purchase Reactfordataviz
         </Button>{" "}
         to access this page
+        </Box>
       </main>
     </>
   )
@@ -128,7 +130,6 @@ const PleasePurchase = props => {
 
 const UNAUTH_PAGES = [
   "/",
-  "/module-0",
   "/auth0_callback",
   "/thankyou",
   "/thankyou/", //it's necessary this duplicate because of old node version from ZEIT
@@ -176,6 +177,7 @@ export default props => {
             menu={menu}
             setMenu={setMenu}
             nav={nav}
+            showRightMessage={!(isAuthenticated() || isAuthorized(user))}
           />
         ) : isAuthenticated() ? (
           <PleasePurchase />
