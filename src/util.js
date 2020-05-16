@@ -19,7 +19,10 @@ export function isArticlePage({ location }) {
 
 // candidate for useAuth feature
 export function isAuthorized(user) {
+  if (!user["https://serverlessreact.dev/user_metadata"]) {
+    return false;
+  }
   return user["https://serverlessreact.dev/user_metadata"].roles.includes(
-    "Student"
+    "RDV_Basic"
   )
 }

@@ -3,7 +3,6 @@ import { Helmet } from "react-helmet"
 import defaultThumb from '../images/metaimage.png'
 
 export default props => {
-  console.log("SHOWRIGHTMESSAGE", props.showRightMessage)
   const title = [props.title, "React for Data Visualization"].filter(Boolean).join(" | ")
   const description =
     props.description ||

@@ -1,4 +1,5 @@
 import { Box, Flex, Button } from "rebass"
+import { graphql } from "gatsby"
 import GumroadButton from "../components/GumroadButton"
 import TweetEmbed from 'react-tweet-embed'
 import { LazyImage, LinkImage } from '../components/Image'
@@ -7,13 +8,12 @@ import {
   EmailSignup,
   CopyBlock,
   AboutMeFeatures,
+  FeatureList,
+  TableOfContents,
+  Pricing,
+  Examples,
 } from '../components/Blocks/index'
 import Avatar from "../components/avatar"
-import FeatureList from "../components/FeatureList"
-import TableOfContent from "../components/TableOfContent"
-import Examples from "../components/Examples"
-import Pricing from "../components/Pricing/Pricing"
-import { graphql } from "gatsby"
 import { Video } from "../components/Video"
 import pshot2 from '../images/pshot2.gif'
 
@@ -310,7 +310,7 @@ It's all cut into bite sized pieces. Whether you've got 5 minutes or an hour, yo
 
 <JumpToCourse to="#pricing" style={{ marginTop: '15px' }}/>
 
-<TableOfContent />
+<TableOfContents />
 
 </Container>
 

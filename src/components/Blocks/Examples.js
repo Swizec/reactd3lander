@@ -2,17 +2,17 @@ import React from "react";
 import styled from "@emotion/styled";
 import { Box } from "rebass";
 
-import { LazyImage } from "./Image";
+import { LazyImage } from "../Image";
 
-import examp1 from '../images/landingexamples/examp1.gif'
-import examp2 from '../images/landingexamples/examp2.gif'
-import examp3 from '../images/landingexamples/examp3.gif'
-import examp4 from '../images/landingexamples/examp4.gif'
-import examp5 from '../images/landingexamples/examp5.gif'
-import examp6 from '../images/landingexamples/examp6.gif'
-import examp7 from '../images/landingexamples/examp7.gif'
-import examp8 from '../images/landingexamples/examp8.gif'
-import examp0 from '../images/landingexamples/pietobar.gif'
+import examp1 from '../../images/landingexamples/examp1.gif'
+import examp2 from '../../images/landingexamples/examp2.gif'
+import examp3 from '../../images/landingexamples/examp3.gif'
+import examp4 from '../../images/landingexamples/examp4.gif'
+import examp5 from '../../images/landingexamples/examp5.gif'
+import examp6 from '../../images/landingexamples/examp6.gif'
+import examp7 from '../../images/landingexamples/examp7.gif'
+import examp8 from '../../images/landingexamples/examp8.gif'
+import examp0 from '../../images/landingexamples/pietobar.gif'
 
 
 const Example = ({ image, header, copy }) => (

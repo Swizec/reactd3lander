@@ -9,27 +9,6 @@ module.exports = {
         path: `${__dirname}/src/images`,
       },
     },
-    {
-      resolve: `gatsby-source-filesystem`,
-      options: {
-        name: `content-images`,
-        path: `${__dirname}/content/images`,
-      },
-    },
-    // {
-    //   resolve: 'gatsby-source-filesystem',
-    //   options: {
-    //     path: `${__dirname}/content/articles`,
-    //     name: 'articles',
-    //   },
-    // },
-    {
-      resolve: 'gatsby-source-filesystem',
-      options: {
-        path: `${__dirname}/content/pages`,
-        name: 'pages',
-      },
-    },
     "gatsby-transformer-sharp",
     "gatsby-plugin-sharp",
     {
@@ -43,7 +22,7 @@ module.exports = {
           {
             resolve: "gatsby-remark-giphy",
             options: {
-              giphyApiKey: "tvyI1ARG6FOkW9PUzmgubJ3iY5P5rJmO",
+              giphyApiKey: process.env.GIPHY_API_KEY,
               useVideo: true,
               embedWidth: "80%",
             },
