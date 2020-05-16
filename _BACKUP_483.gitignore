@@ -69,7 +69,11 @@ yarn-error.log
 .pnp.js
 # Yarn Integrity file
 .yarn-integrity
+<<<<<<< HEAD
 
-.env.build
 .serverless
+=======
+.env.build
+>>>>>>> master
+
 .now
