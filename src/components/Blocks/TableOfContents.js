@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import styled from '@emotion/styled'
 import Topic from './Topic'
+import { LazyImage } from '../Image'
 
 import christmasTree from '../../images/christmas-trees.gif'
 import moneySpentChristmas from '../../images/money-spent-christmas.png'
@@ -432,21 +433,21 @@ export class TableOfContents extends Component {
               "Which emails sparked joy – an animated timeline",
               "A barchart race visualizing Moore's Law",
               "Building a Piet Mondrian art generator with treemaps",
-              <img src={christmasTree}           title="Christmas trees sold in USA - an emoji barchart"             alt="Christmas trees sold in USA - an emoji barchart"             loading="lazy" />,
-              <img src={moneySpentChristmas}     title="Money spent on Christmas - a line chart"                     alt="Money spent on Christmas - a line chart"                     loading="lazy" />,
-              <img src={christmasMovies}         title="Christmas movies at the box office - horizontal bar chart"   alt="Christmas movies at the box office - horizontal bar chart"   loading="lazy" />,
-              <img src={whatAmericasWhant}       title="What Americans want for Christmas - horizontal stack chart"  alt="What Americans want for Christmas - horizontal stack chart"  loading="lazy" />,
-              <img src={christmasCarols}         title="Christmas carols and their words - a word cloud"             alt="Christmas carols and their words - a word cloud"             loading="lazy" />,
-              <img src={willYouBuyChritmasTree}  title="Will you buy a christmas tree? - a pie chart"                alt="Will you buy a christmas tree? - a pie chart"                loading="lazy" />,
-              <img src={christmasStockings}      title="What goes in Chrstmas stockings - a piechart with tooltips"  alt="What goes in Chrstmas stockings - a piechart with tooltips"  loading="lazy" />,
-              <img src={whenChristmasStart}      title="When Americans buy Christmas presents - a curved line chart" alt="When Americans buy Christmas presents - a curved line chart" loading="lazy" />,
-              <img src={weeklyCandyRetails}      title="When people buy candy - animated barchart with easing"       alt="When people buy candy - animated barchart with easing"       loading="lazy" />,
-              <img src={responsiveStackChart}    title="A responsive stack chart of smartphone market share"         alt="A responsive stack chart of smartphone market share"         loading="lazy" />,
-              <img src={sankey}                  title="A Sankey diagram"                                            alt="A Sankey diagram"                                            loading="lazy" />,
-              <img src={compoundArc}             title="A compound arc chart"                                        alt="A compound arc chart"                                        loading="lazy" />,
-              <img src={emailsJoy}               title="Which emails sparked joy – an animated timeline"             alt="Which emails sparked joy – an animated timeline"             loading="lazy" />,
-              <img src={mooresLaw}               title="A barchart race visualizing Moore's Law"                     alt="A barchart race visualizing Moore's Law"                     loading="lazy" />,
-              <img src={mondrian}                title="Building a Piet Mondrian art generator with treemaps"        alt="Building a Piet Mondrian art generator with treemaps"        loading="lazy" />,
+              <LazyImage src={christmasTree}           title="Christmas trees sold in USA - an emoji barchart"             alt="Christmas trees sold in USA - an emoji barchart"             />,
+              <LazyImage src={moneySpentChristmas}     title="Money spent on Christmas - a line chart"                     alt="Money spent on Christmas - a line chart"                     />,
+              <LazyImage src={christmasMovies}         title="Christmas movies at the box office - horizontal bar chart"   alt="Christmas movies at the box office - horizontal bar chart"   />,
+              <LazyImage src={whatAmericasWhant}       title="What Americans want for Christmas - horizontal stack chart"  alt="What Americans want for Christmas - horizontal stack chart"  />,
+              <LazyImage src={christmasCarols}         title="Christmas carols and their words - a word cloud"             alt="Christmas carols and their words - a word cloud"             />,
+              <LazyImage src={willYouBuyChritmasTree}  title="Will you buy a christmas tree? - a pie chart"                alt="Will you buy a christmas tree? - a pie chart"                />,
+              <LazyImage src={christmasStockings}      title="What goes in Chrstmas stockings - a piechart with tooltips"  alt="What goes in Chrstmas stockings - a piechart with tooltips"  />,
+              <LazyImage src={whenChristmasStart}      title="When Americans buy Christmas presents - a curved line chart" alt="When Americans buy Christmas presents - a curved line chart" />,
+              <LazyImage src={weeklyCandyRetails}      title="When people buy candy - animated barchart with easing"       alt="When people buy candy - animated barchart with easing"       />,
+              <LazyImage src={responsiveStackChart}    title="A responsive stack chart of smartphone market share"         alt="A responsive stack chart of smartphone market share"         />,
+              <LazyImage src={sankey}                  title="A Sankey diagram"                                            alt="A Sankey diagram"                                            />,
+              <LazyImage src={compoundArc}             title="A compound arc chart"                                        alt="A compound arc chart"                                        />,
+              <LazyImage src={emailsJoy}               title="Which emails sparked joy – an animated timeline"             alt="Which emails sparked joy – an animated timeline"             />,
+              <LazyImage src={mooresLaw}               title="A barchart race visualizing Moore's Law"                     alt="A barchart race visualizing Moore's Law"                     />,
+              <LazyImage src={mondrian}                title="Building a Piet Mondrian art generator with treemaps"        alt="Building a Piet Mondrian art generator with treemaps"        />,
             ]
           }
         />

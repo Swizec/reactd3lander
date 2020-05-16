@@ -16,7 +16,7 @@ export default props => (
         <Link
           href="https://swizec.com"
           variant="nav"
-          style={{ textDecoration: "underline" }}>
+          style={{ textDecoration: "underline", color: '#f77b12' }}>
           
           Swizec
       </Link> with ❤️

@@ -5,9 +5,13 @@ import { StaticQuery, graphql } from "gatsby";
 import { Image } from "../Image";
 
 const Wrapper = styled.div`
-    max-width: 900px;
-    margin: 7rem auto;
-    padding: 0 2rem;
+    background: rgba(255, 135, 28, 0.1);
+    box-shadow: inset 0px 11px 8px -10px #ccc, inset 0px -11px 8px -10px #ccc;
+    width: 100%;
+    /* margin: 7rem auto;
+    padding: 0 2rem; */
+    padding: 24px 0;
+    margin-top: 24px;
     text-align: center;
     img {
         height: 300px;
@@ -28,13 +32,9 @@ const WrapperForm = styled.div`
     }
 `;
 
-const H1 = styled.h1`
-    text-transform: uppercase;
-`;
-
 const EmailSignup = ({ headerImg }) => (
     <Wrapper>
-        <H1>Try a free chapter</H1>
+        <h1>Try a free chapter</h1>
         <h2>
             See what React for Data Visualization is like and learn some basics.
         </h2>

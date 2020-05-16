@@ -7,30 +7,36 @@ const Div = styled.div`
 
   a {
     background-color: #ff871c;
-    line-height: 1.8;
-    color: #fff;
-    box-shadow: 0 3px 0 rgb(214, 106, 18);
-    text-decoration: none;
-
-    display: inline-block;
-    margin-bottom: 0;
-    font-weight: 900;
-    text-align: center;
-    vertical-align: middle;
-    cursor: pointer;
     background-image: none;
-    border: 1px solid transparent;
-    white-space: nowrap;
-    padding: 10px 20px;
-    font-size: 20px;
-    line-height: 1.42857143;
     border-radius: 4px;
-    text-shadow: none !important;
+    border: 1px solid transparent;
+    box-shadow: 0 3px 0 rgb(214, 106, 18);
+    color: #fff;
+    cursor: pointer;
+    display: inline-block;
+    font-size: 16px;
+    font-weight: 900;
+    line-height: 1.42857143;
+    line-height: 1.8;
+    margin-bottom: 0;
+    padding: 5px 10px;
     position: relative;
+    text-align: center;
+    text-decoration: none;
+    text-shadow: none !important;
+    vertical-align: middle;
+    white-space: nowrap;
   }
 
   a:hover {
     background: orange;
+  }
+
+  @media (min-width: 940px) {
+    a {
+      font-size: 20px;
+      padding: 10px 20px;
+    }
   }
 `
 

@@ -4,10 +4,10 @@ import FadeIn from "react-lazyload-fadein";
 import { Box } from 'rebass';
 
 /* eslint-disable jsx-a11y/no-noninteractive-element-interactions */
-export const LazyImage = ({ height, src }) => (
+export const LazyImage = ({ height, src, alt, title }) => (
     <Box textAlign="center" mt={2} sx={{maxWidth: '700px'}}>
         <FadeIn height={height} duration={300}>
-            {onload => <img src={src} alt="" style={{width: '100%'}} onLoad={onload} />}
+            {onload => <img src={src} alt={alt} title={title} style={{width: '100%'}} onLoad={onload} />}
         </FadeIn>
     </Box>
   );
