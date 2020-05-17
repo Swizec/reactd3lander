@@ -123,7 +123,7 @@ export default ({ nav, menu, setMenu, style, showBanner }) => {
           <Burger />
         </Button>
       )}
-      <Link variant="nav" variant="nav" href="/">
+      <Link variant="nav" href="/">
         <Image {...data.logo.childImageSharp} />
         {/* Reactfordataviz.com */}
       </Link>
@@ -141,7 +141,7 @@ export default ({ nav, menu, setMenu, style, showBanner }) => {
             color="white"
             style={{ cursor: "pointer" }}
           >
-            <strong>❤️ 37% off while The Situation lasts ❤️</strong>
+            <strong><span role="img" aria-label="heart">❤️</span> 37% off while The Situation lasts <span role="img" aria-label="finger-right">❤️</span></strong>
           </Link>
         </Box>
       ) : (

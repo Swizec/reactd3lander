@@ -1,4 +1,4 @@
-import React, { useState, useRef, useLayoutEffect } from "react"
+import React, { useState, useRef } from "react"
 import { Global } from "@emotion/core"
 import { Box, Flex, Button, Link } from "rebass"
 import { Sidenav, Pagination } from "@theme-ui/sidenav"

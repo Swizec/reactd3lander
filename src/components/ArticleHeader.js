@@ -37,9 +37,9 @@ const HeroTitle = styled.h1`
     font-size: 2.5em;
 `
 
-function DateText({ date, lastUpdated }) {
-    const time = date === lastUpdated ? date : lastUpdated
-    return <em>Last updated: {time}</em>
-}
+// function DateText({ date, lastUpdated }) {
+//     const time = date === lastUpdated ? date : lastUpdated
+//     return <em>Last updated: {time}</em>
+// }
 
 export default ArticleHeader

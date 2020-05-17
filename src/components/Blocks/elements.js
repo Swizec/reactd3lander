@@ -1,5 +1,5 @@
 import React from "react"
-import { Box, Heading, Text, Button, Image } from "rebass"
+import { Box, Heading, Text, Image } from "rebass"
 import { Link } from "gatsby"
 import slugify from "slugify"
 import FadeIn from "react-lazyload-fadein";

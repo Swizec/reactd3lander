@@ -77,6 +77,7 @@ export const Vimeo = ({ id }) => {
         }}
       >
         <iframe
+          title={`video ${id}`}
           src={`https://player.vimeo.com/video/${id}`}
           width="100%"
           height="100%"

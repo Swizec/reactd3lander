@@ -22,7 +22,10 @@ export function isAuthorized(user) {
   if (!user["https://serverlessreact.dev/user_metadata"]) {
     return false;
   }
-  return user["https://serverlessreact.dev/user_metadata"].roles.includes(
-    "RDV_Basic"
-  )
+  const roles = ["RDV_Basic", "RDV_Full", "Student"]
+
+  return user["https://serverlessreact.dev/user_metadata"].roles.some(r => roles.includes(r))
+  // return user["https://serverlessreact.dev/user_metadata"].roles.includes(
+  //   "RDV_Basic"
+  // )
 }
