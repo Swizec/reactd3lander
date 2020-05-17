@@ -1,14 +1,13 @@
 ---
-title: 'Visualizing how viruses spread in a population'
-description:
-  Let's build a simulation of how viruses spread in populations and see the impact of social distancing for ourselves.
+title: "Visualizing how viruses spread in a population"
+description: Let's build a simulation of how viruses spread in populations and see the impact of social distancing for ourselves.
 date: 2020-03-16T15:13:00.000Z
 lastUpdated: 2020-03-16T15:13:00.000Z
-image: '../../images/articles/covid-spread.png'
+image: "../../images/articles/covid-spread.png"
 ---
 
-import { Container } from '../../components/Blocks/index'
-import ArticleHeader from '../../components/ArticleHeader'
+import { Container } from "../../components/Blocks/index"
+import ArticleHeader from "../../components/ArticleHeader"
 
 <Container width={[1, 3/4, 1 / 2]}>
 
@@ -18,37 +17,37 @@ import ArticleHeader from '../../components/ArticleHeader'
 
 We live in strange times. Canada cancelled hockey, Ireland closed its pubs, USA banned baseball. Large gatherings the world over are closed until further notice. People are working from home, afraid to go out.
 
-Toilet paper is a rare commodity. 
+Toilet paper is a rare commodity.
 
 And it's all because of a novel coronavirus – [Covid19](https://en.wikipedia.org/wiki/Coronavirus_disease_2019) – turning into a global pandemic. We're told [social distancing](https://en.wikipedia.org/wiki/Social_distancing) is our best bet to [Flatten The Curve](https://www.flattenthecurve.com/) and save thousands, maybe millions, of lives.
 
 [![](https://www.flattenthecurve.com/images/en/flatten-the-curve.jpg)](https://flattenthecurve.com)
 
-But how much does social distancing *really* slow down the spread of Covid19?
+But how much does social distancing _really_ slow down the spread of Covid19?
 
 I decided to build a simulation and see for myself.
 
-You can watch the [full build on YouTube](https://www.youtube.com/watch?v=gbMiGtGcq6E), see the [code on Github](https://github.com/Swizec/corona-simulation), and read on for interactive examples of past epidemics. 
+You can watch the [full build on YouTube](https://www.youtube.com/watch?v=gbMiGtGcq6E), see the [code on Github](https://github.com/Swizec/corona-simulation), and read on for interactive examples of past epidemics.
 
 https://www.youtube.com/watch?v=gbMiGtGcq6E
 
-*PS: you can [read and share this online, adjust simulation sliders yourself](https://reactfordataviz.com/articles/corona-simulation/) :)*
+_PS: you can [read and share this online, adjust simulation sliders yourself](https://reactfordataviz.com/articles/corona-simulation/) :)_
 
 ## How big an impact does social distancing have?
 
 Not much is known about Covid19 yet. We know it's about 2x as virulent as the flu and 30x as deadly. Each infected person infects 3 others on average (vs. 1.5 for flu).
 
-Estimates range from [3% to 6% mortality rate](https://www.thelancet.com/journals/laninf/article/PIIS1473-3099(20)30195-X/fulltext). The seasonal flu has a [mortality rate around 0.1%](https://www.cdc.gov/flu/about/burden/preliminary-in-season-estimates.htm).
+Estimates range from [3% to 6% mortality rate](<https://www.thelancet.com/journals/laninf/article/PIIS1473-3099(20)30195-X/fulltext>). The seasonal flu has a [mortality rate around 0.1%](https://www.cdc.gov/flu/about/burden/preliminary-in-season-estimates.htm).
 
-A 3% mortality rate does not mean that 3% of the world will die. It means that *if you have corona, you have a 3% chance of death from corona*. 
+A 3% mortality rate does not mean that 3% of the world will die. It means that _if you have corona, you have a 3% chance of death from corona_.
 
 For now, many fewer people have gotten Covid19 than the flu. [51,000,000 flu illnesses](https://www.cdc.gov/flu/about/burden/preliminary-in-season-estimates.htm) vs. "just" [174,000](https://coronavirus.jhu.edu/map.html) for Covid19. With so far limited testing, numbers are likely to change.
 
-This huge difference in rate of infection is why you see some people saying *"Eh way fewer people die than with regular flu"*.
+This huge difference in rate of infection is why you see some people saying _"Eh way fewer people die than with regular flu"_.
 
 Those people are wrong. **Observe how social distancing saves lives** 👇
 
-[![](https://i.imgur.com/3dApIaV.mp4)](https://reactfordataviz.com/articles/corona-simulation/)
+[![](https://i.imgur.com/3dApIaV.gif)](https://reactfordataviz.com/articles/corona-simulation/)
 
 Without social distancing the virus spreads through our population exponentially. Infections and deaths grow like crazy.
 
@@ -60,11 +59,11 @@ Try changing the social distancing slider yourself. See how different levels imp
 
 **Here's what the sliders mean:**
 
-* **Social distancing**: limits amount of movement in the population. Between 3px and 0px per iteration.
-* **Mortality**: how likely you are to die during the length of infection. Spread evenly across each iteration for simplicity.
-* **Virality**: how likely you are to get infected after coming into contact with an infectious person. We don't know this data for Covid19 yet as far as I can tell.
-* **Reinfectability**: how much immunity does surviving a virus give you. We know some people have gotten Covid19 twice.
-* **Length of infection**: number of iterations before you recover. This does not directly map to weeks or days, but is useful for comparison between viruses.
+- **Social distancing**: limits amount of movement in the population. Between 3px and 0px per iteration.
+- **Mortality**: how likely you are to die during the length of infection. Spread evenly across each iteration for simplicity.
+- **Virality**: how likely you are to get infected after coming into contact with an infectious person. We don't know this data for Covid19 yet as far as I can tell.
+- **Reinfectability**: how much immunity does surviving a virus give you. We know some people have gotten Covid19 twice.
+- **Length of infection**: number of iterations before you recover. This does not directly map to weeks or days, but is useful for comparison between viruses.
 
 ## Comparing Covid19 with other epidemics
 
@@ -72,7 +71,7 @@ You saw above how Covid19 with social distancing compares to Covid19 without soc
 
 Let's start with the seasonal flu as our baseline.
 
-[![](https://i.imgur.com/JjDwoKp.mp4)](https://reactfordataviz.com/articles/corona-simulation/)
+[![](https://i.imgur.com/JjDwoKp.gif)](https://reactfordataviz.com/articles/corona-simulation/)
 
 Everyone gets it, nobody dies.
 
@@ -86,13 +85,13 @@ In my simulation it's almost too deadly to spread.
 
 A more recent famous epidemic was [The Spanish Flu](https://en.wikipedia.org/wiki/Spanish_flu). Aided by compromised immune systems from the war, it killed millions.
 
-[![](https://i.imgur.com/oyHMtGM.mp4)](https://reactfordataviz.com/articles/corona-simulation/)
+[![](https://i.imgur.com/oyHMtGM.gif)](https://reactfordataviz.com/articles/corona-simulation/)
 
 The mortality rate of 4% is similar to Covid19, but a typical influenza lasts just 2 weeks vs. corona's 4 weeks. Far fewer people die as a result. The simulation even reaches herd immunity.
 
 Now let's compare all that to [HIV](https://en.wikipedia.org/wiki/HIV) – a virus that's deadly, forever, and surprisingly difficult to get with a virality ranging from [0.04% to 1.4%](https://www.thebodypro.com/article/putting-a-number-on-it-the-risk-from-an-exposure-t) in a single exposure.
 
-[![](https://i.imgur.com/XYRqcHR.mp4)](https://reactfordataviz.com/articles/corona-simulation/)
+[![](https://i.imgur.com/XYRqcHR.gif)](https://reactfordataviz.com/articles/corona-simulation/)
 
 What a huge difference that low virality makes 🤔
 
@@ -110,31 +109,31 @@ This gives us 60fps animation on most machines.
 // some meta data – simulating and iterationCount
 // and 2 setters – startSimulation, stopSimulation
 const {
-    population,
-    startSimulation,
-    stopSimulation,
-    simulating,
-    iterationCount
+  population,
+  startSimulation,
+  stopSimulation,
+  simulating,
+  iterationCount,
 } = usePopulation({
-    width,
-    height,
-    mortality,
-    virality,
-    socialDistancing,
-    lengthOfInfection,
-    reinfectability
-});
+  width,
+  height,
+  mortality,
+  virality,
+  socialDistancing,
+  lengthOfInfection,
+  reinfectability,
+})
 
 // ...
-<svg
-    style={{
-        width,
-        height
-    }}
+;<svg
+  style={{
+    width,
+    height,
+  }}
 >
-    {population.map(p => (
-        <Person {...p} />
-    ))}
+  {population.map((p) => (
+    <Person {...p} />
+  ))}
 </svg>
 ```
 
@@ -221,56 +220,56 @@ The initial layout makes heavy use of D3's point scales – `d3.scalePoint`. Th
 // generates a population oriented around (cx, cy)
 // fits into width and height
 function createPopulation({ cx, cy, width, height }) {
-    const Nrows = Math.ceil(height / 15);
+  const Nrows = Math.ceil(height / 15)
 
-    // translates 0, 1, 2, 3 into evenly spaced Y coordinates
-    const yScale = d3
-        .scalePoint()
-        .domain(d3.range(0, Nrows))
-        .range([cy - height / 2, cy + height / 2]);
+  // translates 0, 1, 2, 3 into evenly spaced Y coordinates
+  const yScale = d3
+    .scalePoint()
+    .domain(d3.range(0, Nrows))
+    .range([cy - height / 2, cy + height / 2])
 
-    // this creates the diamond shape by changing the width of each row
-    // linearly going from 0 to full-width back to 0
-    // with some trigonometry, we could make a circle
-    const widthScale = d3
-        .scaleLinear()
-        .domain([0, Nrows / 2, Nrows])
-        .range([15, width, 15]);
+  // this creates the diamond shape by changing the width of each row
+  // linearly going from 0 to full-width back to 0
+  // with some trigonometry, we could make a circle
+  const widthScale = d3
+    .scaleLinear()
+    .domain([0, Nrows / 2, Nrows])
+    .range([15, width, 15])
 
-    // iterate 0, 1, 2, 3 ... and create rows
-    const rows = d3
-        .range(0, Nrows)
-        .map(i => createRow({ cx, cy: yScale(i), width: widthScale(i) }));
+  // iterate 0, 1, 2, 3 ... and create rows
+  const rows = d3
+    .range(0, Nrows)
+    .map((i) => createRow({ cx, cy: yScale(i), width: widthScale(i) }))
 
-    return rows.reduce((population, row) => [...population, ...row]);
+  return rows.reduce((population, row) => [...population, ...row])
 }
 ```
 
-This creates vertically spaced rows that fit into a given `height`. 
+This creates vertically spaced rows that fit into a given `height`.
 
 Same approach works for each individual row – a point scale spaces members along a given width.
 
 ```javascript
 // creates a row of population
 function createRow({ cx, cy, width }) {
-    // fit as many as possible into a row
-    const N = Math.floor(width / 15);
+  // fit as many as possible into a row
+  const N = Math.floor(width / 15)
 
-    // evenly spaces elements along the row
-    const xScale = d3
-        .scalePoint()
-        .domain(d3.range(0, N))
-        .range([cx - width / 2, cx + width / 2]);
+  // evenly spaces elements along the row
+  const xScale = d3
+    .scalePoint()
+    .domain(d3.range(0, N))
+    .range([cx - width / 2, cx + width / 2])
 
-    // iterate and create population members { x, y, key, infected }
-    const row = d3.range(0, N).map(i => ({
-        x: xScale(i),
-        y: cy,
-        key: hexoid(25)(),
-        infected: null
-    }));
+  // iterate and create population members { x, y, key, infected }
+  const row = d3.range(0, N).map((i) => ({
+    x: xScale(i),
+    y: cy,
+    key: hexoid(25)(),
+    infected: null,
+  }))
 
-    return row;
+  return row
 }
 ```
 
@@ -282,42 +281,42 @@ A clever use of [D3-quadtree](https://github.com/d3/d3-quadtree) lets us avoid c
 
 > A quadtree recursively partitions two-dimensional space into squares, dividing each square into four equally-sized squares. Each distinct point exists in a unique leaf node; coincident points are represented by a linked list.
 
-You get a fast way to search *"Is there a node within Width/Height of X, Y?"*
+You get a fast way to search _"Is there a node within Width/Height of X, Y?"_
 
-So for collision detection you say *"Is there a node within Size of This Node?"*. If there is, you have a collision.
+So for collision detection you say _"Is there a node within Size of This Node?"_. If there is, you have a collision.
 
 ```javascript
 // when people collide, they transfer viruses
 function peopleCollisions(population) {
-    // we only care about infected people
-    const infected = population.filter(p => p.infected !== null);
+  // we only care about infected people
+  const infected = population.filter((p) => p.infected !== null)
 
-    // find people in vicinity of infected people
-    const collisions = infected.map(person => {
-        // subdivides whole space to find nearest candidates
-        const subdvidedSpace = d3
-            .quadtree()
-            .extent([
-                [-1, -1],
-                [RADIUS * 2, RADIUS * 2]
-            ])
-            .x(d => d.x)
-            .y(d => d.y)
-            .addAll(
-                // everyone not infected and not current lookup
-                population
-                    .filter(p => !p.infected)
-                    .filter(p => p.key !== person.key)
-            );
+  // find people in vicinity of infected people
+  const collisions = infected.map((person) => {
+    // subdivides whole space to find nearest candidates
+    const subdvidedSpace = d3
+      .quadtree()
+      .extent([
+        [-1, -1],
+        [RADIUS * 2, RADIUS * 2],
+      ])
+      .x((d) => d.x)
+      .y((d) => d.y)
+      .addAll(
+        // everyone not infected and not current lookup
+        population
+          .filter((p) => !p.infected)
+          .filter((p) => p.key !== person.key)
+      )
 
-        // person within RADIUS*2 of lookup position
-        const candidate = subdvidedSpace.find(person.x, person.y, RADIUS * 2);
+    // person within RADIUS*2 of lookup position
+    const candidate = subdvidedSpace.find(person.x, person.y, RADIUS * 2)
 
-        return candidate ? candidate : null;
-    });
+    return candidate ? candidate : null
+  })
 
-    // everyone who collided with an infected person
-    return collisions.filter(p => p !== null);
+  // everyone who collided with an infected person
+  return collisions.filter((p) => p !== null)
 }
 ```
 

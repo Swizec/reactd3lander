@@ -1,9 +1,11 @@
 import React from "react"
 import { Helmet } from "react-helmet"
-import defaultThumb from '../images/metaimage.png'
+import defaultThumb from "../images/metaimage.png"
 
-export default props => {
-  const title = [props.title, "React for Data Visualization"].filter(Boolean).join(" | ")
+export default (props) => {
+  const title = [props.title, "React for Data Visualization"]
+    .filter(Boolean)
+    .join(" | ")
   const description =
     props.description ||
     "Learn how to build scalable dataviz components your whole team can understand with React for Data Visualization."
@@ -42,23 +44,8 @@ export default props => {
         data-uid="c3e0a312c3"
         src="https://swizec-llc.ck.page/c3e0a312c3/index.js"
       ></script>
-      <script type="text/javascript">{`
-        <!-- SegMetrics -->
-            var _segq = _segq || [];
-        var _segs = _segs || {};
-        _segs.integration = '1763';
-        _segs.link = ['swizec.com', 'reactfordataviz.com', 'es6cheatsheet.com', 'es2017.io', 'es2018.io'];
-        (function () {
-            var dc = document.createElement('script');
-            dc.type = 'text/javascript';
-            dc.async = true;
-            dc.src = '//tag.segmetrics.io/seg.js';
-            var s = document.getElementsByTagName('script')[0];
-            s.parentNode.insertBefore(dc, s);
-        })(); 
-        `}</script>
-        {props.showRightMessage && 
-      <script type="text/javascript">{`
+      {props.showRightMessage && (
+        <script type="text/javascript">{`
                     (function(p, a, n, d, o, b, c) {
                         o = n.createElement('script'); o.type = 'text/javascript'; o.async = true; o.src = 'https://tag.rightmessage.com/'+p+'.js';
     b = n.getElementsByTagName('script')[0]; d = function(h, u, i) { var c = n.createElement('style'); c.id = 'rmcloak'+i;
@@ -66,7 +53,8 @@ export default props => {
                     b.parentNode.insertBefore(c, b); return c; }; c = d('', '-hidden', ''); d('-stay-invisible', '-stay-hidden', '-stay');
     setTimeout(o.onerror = function() {c.parentNode && c.parentNode.removeChild(c); }, a); b.parentNode.insertBefore(o, b);
                 })('188781816', 20000, document);
-      `}</script>}
+      `}</script>
+      )}
     </Helmet>
   )
 }
