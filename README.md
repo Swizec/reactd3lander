@@ -1,3 +1,3 @@
-# Serverless React Course
+# React For Data Visualization
 
 Bla
