@@ -4,7 +4,13 @@ import ArticleHeader from '../components/Articles/ArticleHeader'
 import { isArticlePage } from '../util'
 
 const ArticlePage = (props) => {
-    const isArticle = isArticlePage({location: props.path})
+    if (!props.location) return (
+        <>
+            {props.children}
+        </>
+    )
+    console.log("PROPS", props.location)
+    const isArticle = isArticlePage(props)
 
     return (
         <>
