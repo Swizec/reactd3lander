@@ -16,7 +16,11 @@ import ArticleHeader from '../../components/Articles/ArticleHeader'
 
 <Container width={[1, 3/4, 1 / 2]}>
 
-<ArticleHeader title="Which emails sparked joy – an animated timeline built with React and D3 tutorial" />
+<ArticleHeader 
+  title={props.pageContext.frontmatter.title}
+  description={props.pageContext.frontmatter.description}
+  date={props.pageContext.frontmatter.date}
+  lastUpdated={props.pageContext.frontmatter.lastUpdated} />
 
 
 ![Which emails sparked joy?](https://i.imgur.com/iO6X09T.gif)
