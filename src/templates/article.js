@@ -9,7 +9,6 @@ const ArticlePage = (props) => {
             {props.children}
         </>
     )
-    console.log("PROPS", props.location)
     const isArticle = isArticlePage(props)
 
     return (
