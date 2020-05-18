@@ -2,13 +2,13 @@ import React from 'react'
 import { Box } from "rebass";
 import styled from '@emotion/styled'
 
-const ArticleHeader = ({ title }) => (
+const ArticleHeader = ({ title, date, lastUpdated }) => (
     <Box>
         <HeroTitle style={{ marginLeft: 'auto', marginRight: 'auto' }}>
             {title}
         </HeroTitle>
         <p>
-            {/* <DateText {...date} /> */}
+            {/* { <DateText date={date} lastUpdated={lastUpdated} /> } */}
             {/* <em>
             &nbsp;
             <span role="img" aria-label="finger-right">
@@ -37,9 +37,9 @@ const HeroTitle = styled.h1`
     font-size: 2.5em;
 `
 
-// function DateText({ date, lastUpdated }) {
-//     const time = date === lastUpdated ? date : lastUpdated
-//     return <em>Last updated: {time}</em>
-// }
+function DateText({ date, lastUpdated }) {
+    const time = date === lastUpdated ? date : lastUpdated
+    return <em>Last updated: {lastUpdated}</em>
+}
 
 export default ArticleHeader

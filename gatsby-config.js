@@ -1,6 +1,21 @@
 const remarkPlugins = [require("remark-slug")]
 
 module.exports = {
+  siteMetadata: {
+    title: `React for Data Visualization`,
+    description: `Learn how to build scalable dataviz components your whole team can understand with React for Data Visualization.`,
+    author: `@swizec`,
+    coverImageStaticPath: 'metaimage.png',
+    convertkit: {
+      userId: '785fc7ef1f',
+      formId: '772ba7c9ba',
+      url: 'https://pages.convertkit.com/785fc7ef1f/772ba7c9ba',
+    },
+    articles: {
+      title: `React for Data Visualization Articles`,
+      description: `A monthly data visualization built with React, D3, and others`,
+    },
+  },
   plugins: [
     {
       resolve: "gatsby-source-filesystem",

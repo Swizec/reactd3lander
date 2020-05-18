@@ -13,9 +13,10 @@ import Footer from "./footer"
 import Nav from "./nav"
 import NavWorkshop from "./nav-workshop"
 import { default as PleaseLoginCopy } from "./please-login"
-import { isAuthorized, isWorkshopPage, isArticlePage,currentLocation } from "../util"
+import { isAuthorized, isWorkshopPage, isArticlePage, currentLocation } from "../util"
 
 import Reactions from "./reactions"
+import ArticleFooter from "./Articles/ArticleFooter"
 
 const Sidebar = props => {
   return (
@@ -70,7 +71,18 @@ const Sidebar = props => {
   )
 }
 
-const Content = props =>
+const Content = props => {
+
+  const content = (
+    <>
+      <Head {...props} />
+      <main id="content">
+        {props.children}
+        {props.isArticle && <ArticleFooter />}  
+      </main>
+    </>
+  )
+  return (
   !props.fullwidth || props.menu ? (
     <Sidebar
       {...props}
@@ -78,15 +90,15 @@ const Content = props =>
       open={props.menu}
       setMenu={props.setMenu}
     >
-      <Head {...props} />
-      <main id="content">{props.children}</main>
+      {content}
     </Sidebar>
   ) : (
     <>
-      <Head {...props} />
-      <main id="content">{props.children}</main>
+      {content}
     </>
   )
+  )
+}
 
 const PleaseLogin = props => {
   const { login } = useAuth()
@@ -176,6 +188,7 @@ export default props => {
             fullwidth={fullwidth}
             menu={menu}
             setMenu={setMenu}
+            isArticle={isArticlePage(props)}
             nav={nav}
             showRightMessage={!(isAuthenticated() || isAuthorized(user))}
           />

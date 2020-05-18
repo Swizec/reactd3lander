@@ -1,17 +1,18 @@
 ---
 title: "Visualizing how viruses spread in a population"
-description: Let's build a simulation of how viruses spread in populations and see the impact of social distancing for ourselves.
+description: "Let's build a simulation of how viruses spread in populations and see the impact of social distancing for ourselves."
 date: 2020-03-16T15:13:00.000Z
 lastUpdated: 2020-03-16T15:13:00.000Z
 image: "../../images/articles/covid-spread.png"
 ---
 
 import { Container } from "../../components/Blocks/index"
-import ArticleHeader from "../../components/ArticleHeader"
+import ArticleHeader from "../../components/Articles/ArticleHeader"
 
 <Container width={[1, 3/4, 1 / 2]}>
 
-<ArticleHeader title="Visualizing how viruses spread in a population" />
+<ArticleHeader 
+  title={props.pageContext.frontmatter.title} />
 
 [![](../../images/articles/covid-spread.gif)](https://reactfordataviz.com/articles/corona-simulation/)
 
