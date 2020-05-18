@@ -1,19 +1,28 @@
 import React from 'react'
 import styled from '@emotion/styled'
 import ArticleHeader from '../components/Articles/ArticleHeader'
-
+import { isArticlePage } from '../util'
 
 const ArticlePage = (props) => {
-    console.log("PROPS", props.pageContext.frontmatter)
+    const isArticle = isArticlePage({location: props.path})
+
     return (
-        <ArticleWrapper>
-            <ArticleHeader 
-                title={props.pageContext.frontmatter.title}
-                description={props.pageContext.frontmatter.description}
-                date={props.pageContext.frontmatter.date}
-                lastUpdated={props.pageContext.frontmatter.lastUpdated} />
-            {props.children}
-        </ArticleWrapper>
+        <>
+            {isArticle ? (
+                <ArticleWrapper>
+                    <ArticleHeader 
+                        title={props.pageContext.frontmatter.title || "React for data visualization"}
+                        description={props.pageContext.frontmatter.description}
+                        date={props.pageContext.frontmatter.date}
+                        lastUpdated={props.pageContext.frontmatter.lastUpdated} />
+                    {props.children}
+                </ArticleWrapper>
+            ) : (
+                <>
+                    {props.children}
+                </>
+            )}
+        </>
     )
 }
 
