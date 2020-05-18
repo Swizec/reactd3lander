@@ -1,4 +1,5 @@
 import React from 'react'
+import { graphql } from 'gatsby'
 import { useStaticQuery } from 'gatsby';
 import { Box } from "rebass";
 import styled from '@emotion/styled'
@@ -68,7 +69,7 @@ const SubtitleWrapper = styled.p`
 
 function DateText({ date, lastUpdated }) {
     const time = date === lastUpdated ? date : lastUpdated
-    console.log("DA", time)
+
     const formattedTime = new Date(time);
     const formattedDate = formattedTime.toLocaleDateString('en-US', {
        month: 'long', year: 'numeric'

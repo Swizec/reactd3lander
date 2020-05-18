@@ -1,4 +1,5 @@
 const remarkPlugins = [require("remark-slug")]
+const path = require("path")
 
 module.exports = {
   siteMetadata: {
@@ -30,6 +31,9 @@ module.exports = {
       resolve: "gatsby-plugin-mdx",
       options: {
         extensions: [".mdx", ".md"],
+        defaultLayouts: {
+          default: path.resolve('./src/templates/article.js')
+        },
         remarkPlugins,
         plugins: ["gatsby-remark-images"],
         gatsbyRemarkPlugins: [
