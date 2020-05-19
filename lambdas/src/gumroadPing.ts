@@ -53,12 +53,18 @@ async function upsertUser(purchaseData: GumroadPing) {
   }
 }
 
-const SR_PRODUCTS = [
-  "https://gum.co/IeDvq",
-  "https://gum.co/WTeMS",
-  "https://gumroad.com/l/IeDvq",
-  "https://gumroad.com/l/WTeMS",
-]
+const PRODUCTS: {[key: string]: string} = {
+  "https://gum.co/IeDvq": "rol_uhLv74dIEcoIExRn", //SRD Professional
+  "https://gum.co/WTeMS": "rol_yOuRBy7Yaw50bwb9", //SRD Indie Hacker
+  "https://gumroad.com/l/IeDvq": "rol_uhLv74dIEcoIExRn", //SRD Professional
+  "https://gumroad.com/l/WTeMS": "rol_yOuRBy7Yaw50bwb9", //SRD Indie Hacker
+  "https://gum.co/Fqwwi": "rol_zpnkaVy2LcZtaKZL", //RDV_Basics,
+  "https://gum.co/KDLxE": "rol_j0hosj3n5mFTwkhu", //RDV_Full,
+  "https://gum.co/Hnbtz": "rol_j0hosj3n5mFTwkhu", //RDV All extras,
+  "https://gumroad.com/l/Fqwwi": "rol_zpnkaVy2LcZtaKZL", //RDV_Basics
+  "https://gumroad.com/l/KDLxE": "rol_j0hosj3n5mFTwkhu", //RDV_Full
+  "https://gumroad.com/l/Hnbtz": "rol_E0XpXwtbt1wezjIS",  //RDV All extras
+}
 
 export const pingHandler = async (
   event: APIGatewayEvent
@@ -67,18 +73,18 @@ export const pingHandler = async (
 
   console.log("ping for", ping.product_permalink)
 
-  if (SR_PRODUCTS.includes(ping.product_permalink)) {
+  if (ping.product_permalink in PRODUCTS) {
     console.log("doing the thing")
     const user = await upsertUser(ping)
 
     if (user) {
       const auth0 = await getAuth0Client()
+      const roleId = PRODUCTS[ping.product_permalink]
 
       await auth0.assignRolestoUser(
         { id: user.user_id! },
         {
-          // hardcoded Student role id from Auth0 URL
-          roles: ["rol_wyNa81ZMSaFU7wSW"],
+          roles: [roleId],
         }
       )
     }
