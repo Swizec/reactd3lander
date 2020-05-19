@@ -1,9 +1,5 @@
-const path = require('path')
-const dotenvPath = path.resolve(process.cwd(), '.env.build')
-require('dotenv').config({
-  path: dotenvPath,
-  debug: true,
-})
+const remarkPlugins = [require("remark-slug")]
+const path = require("path")
 
 module.exports = {
   siteMetadata: {
@@ -22,130 +18,104 @@ module.exports = {
     },
   },
   plugins: [
-    `gatsby-plugin-react-helmet`,
     {
-      resolve: `gatsby-plugin-styled-components`,
+      resolve: "gatsby-source-filesystem",
       options: {
-        // Add any options here
-      },
-    },
-    {
-      resolve: `gatsby-source-filesystem`,
-      options: {
-        name: `images`,
+        name: "images",
         path: `${__dirname}/src/images`,
       },
     },
+    "gatsby-transformer-sharp",
+    "gatsby-plugin-sharp",
     {
-      resolve: `gatsby-source-filesystem`,
+      resolve: "gatsby-plugin-mdx",
       options: {
-        name: `content-images`,
-        path: `${__dirname}/content/images`,
-      },
-    },
-    {
-      resolve: 'gatsby-source-filesystem',
-      options: {
-        path: `${__dirname}/content/articles`,
-        name: 'articles',
-      },
-    },
-    {
-      resolve: 'gatsby-source-filesystem',
-      options: {
-        path: `${__dirname}/content/pages`,
-        name: 'pages',
-      },
-    },
-    {
-      resolve: 'gatsby-transformer-remark',
-      options: {
-        plugins: [
+        extensions: [".mdx", ".md"],
+        defaultLayouts: {
+          default: path.resolve('./src/templates/article.js')
+        },
+        remarkPlugins,
+        plugins: ["gatsby-remark-images"],
+        gatsbyRemarkPlugins: [
+          "gatsby-remark-copy-linked-files",
           {
-            resolve: 'gatsby-remark-convertkit-form',
-            options: {
-              userId: '785fc7ef1f',
-              formId: '772ba7c9ba',
-            },
-          },
-          'gatsby-remark-cta',
-          'gatsby-remark-youtube',
-          {
-            resolve: 'gatsby-remark-giphy',
+            resolve: "gatsby-remark-giphy",
             options: {
               giphyApiKey: process.env.GIPHY_API_KEY,
+              useVideo: true,
+              embedWidth: "80%",
             },
           },
           {
-            resolve: 'gatsby-remark-images',
+            resolve: "gatsby-remark-images",
             options: {
-              showCaptions: true,
+              markdownCaptions: true,
+              maxWidth: 890,
+              linkImagestoOriginal: false,
+              showCaptions: ["title", "alt"],
               withWebp: true,
-            },
-          },
-          {
-            resolve: 'gatsby-remark-responsive-iframe',
-            options: {
-              wrapperStyle: 'margin-bottom: 1.0725rem',
-            },
-          },
-          'gatsby-remark-prismjs',
-          'gatsby-remark-copy-linked-files',
-          'gatsby-remark-smartypants',
-          {
-            resolve: `@raae/gatsby-remark-oembed`,
-            options: {
-              // defaults to false
-              // usePrefix: true,
-              providers: {
-                // Important to exclude providers
-                // that adds js to the page.
-                // If you do not need them.
-                exclude: ['Reddit'],
+              wrapperStyle: "text-align: center; font-style: italic",
+              tracedSVG: {
+                color: `lightgray`,
+                optTolerance: 0.4,
+                turdSize: 100,
+                turnPolicy: "TURNPOLICY_MAJORITY",
               },
             },
           },
-          'gatsby-remark-a11y-emoji',
           {
-            resolve: 'gatsby-plugin-typography',
+            resolve: "@raae/gatsby-remark-oembed",
             options: {
-              pathToConfigModule: 'src/typography',
+              usePrefix: false,
+              providers: {
+                include: [
+                  "YouTube",
+                  "CodeSandbox",
+                  "Codepen",
+                  "Twitter",
+                  "Instagram",
+                ],
+              },
             },
           },
         ],
       },
     },
-    `gatsby-transformer-sharp`,
-    `gatsby-plugin-sharp`,
+    "gatsby-plugin-catch-links",
+    "gatsby-plugin-theme-ui",
+    "gatsby-plugin-react-helmet",
+    "gatsby-plugin-twitter",
     {
-      resolve: `gatsby-plugin-manifest`,
+      resolve: "gatsby-plugin-google-analytics",
       options: {
-        name: `gatsby-starter-default`,
-        short_name: `starter`,
-        start_url: `/`,
-        background_color: `#663399`,
-        theme_color: `#663399`,
-        display: `minimal-ui`,
-        icon: `src/images/gatsby-icon.png`, // This path is relative to the root of the site.
-      },
-    },
-    {
-      resolve: 'gatsby-plugin-facebook-pixel',
-      options: {
-        pixelId: '714190382013726',
-      },
-    },
-    {
-      resolve: 'gatsby-plugin-google-analytics',
-      options: {
-        trackingId: 'UA-1464315-23',
+        trackingId: "UA-1464315-23",
         head: false,
         anonymize: false,
         respectDNT: true,
       },
     },
-    // this (optional) plugin enables Progressive Web App + Offline functionality
-    // To learn more, visit: https://gatsby.app/offline
-    // 'gatsby-plugin-offline',
+    {
+      resolve: "gatsby-plugin-facebook-pixel",
+      options: {
+        pixelId: "714190382013726",
+      },
+    },
+    "gatsby-plugin-simple-analytics",
+    {
+      resolve: "gatsby-plugin-manifest",
+      options: {
+        name: "React for Data Visualization",
+        short_name: "React for Data Visualization",
+        description:
+          "Learn how to build scalable dataviz components your whole team can understand with React for Data Visualization",
+        start_url: "/",
+        background_color: "#fff",
+        theme_color: "#FF002B",
+        display: "standalone",
+        icon: "./static/icon.png",
+      },
+    },
+
+    // "gatsby-plugin-offline",
   ],
 }

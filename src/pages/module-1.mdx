@@ -1,0 +1,112 @@
+export const title = "Module 1"
+
+export const description = ""
+
+export const image = "/chapter_headers/serverless-elements.png"
+import { Vimeo } from "../components/Video"
+
+# Module 1: The modern stack and mental models
+
+In [Module 1](/module-1) you will learn about the modern stack and some mental models about how it works. We discuss how to think about building a modern app, what to consider when deploying your infrastructure, and what each piece of the puzzle is doing for us.
+
+There are some light exercises for you to practice GraphQL.
+
+## What is the modern stack
+
+<Vimeo id="388889863" />
+
+The modern stack is all about flexibility, low cost, and letting others do the boring work so you can focus on what's unique to you. Build your special sauce, not the infrastructure around them.
+
+![Modern stack architecture](../images/diagrams/modern-stack-architecture.png)
+
+## The exact stack we use
+
+<Vimeo id="388892864" />
+
+_Your_ exact stack might differ, there's a bunch of competitors in this space and a clear default hasn't emerged yet. We're going to use Gatsby, Serverless Framework, Zeit, DynamoDB, Auth0 and a couple others. I explain why in the video.
+
+## Gatsby
+
+<Vimeo id="388899753" />
+
+Gatsby is a general React framework I like to use because of something Kyle Matthews, its founder, once said
+
+> We have a team of experts working on speed and performance. Leave that to us and focus on the other stuff.
+
+Building a high performance app is hard and it's nice when someone else makes everything you build fast by default.
+
+## Design systems and Rebass
+
+<Vimeo id="388904151" />
+
+Design systems help you divide and conquer between building your app and designing your app. Design it once then have everything come out perfect as you build.
+
+We use [Rebass](https://rebassjs.org/) because it's got good defaults and great support for theming.
+
+## GraphQL
+
+<Vimeo id="388908398" />
+
+You can think of GraphQL as a middle layer between your webapp and your server. It handles the heavy lifting and lets you focus on building your special sauce.
+
+A couple of functions on the server, a few queries on the web, and you're done. I find it much simpler than building REST APIs.
+
+## Serverless
+
+<Vimeo id="389017876" />
+
+Serverless is also known as _"other people's servers"_. Some providers call it Cloud Functions.
+
+You write a function of business logic (we'll use TypeScript) and the serverless or cloud function provider handles everything else. Someone hits a URL and your function is called. Boom.
+
+![Serverless launches a server for each request](../images/diagrams/serverless.png)
+
+![The JAMStack Serverless separation](../images/diagrams/serverless-jamstack.png)
+
+### Infrastructure as code
+
+<Vimeo id="389017213" />
+
+## DynamoDB
+
+<Vimeo id="389020327" />
+
+DynamoDB is a database from AWS that's been around quite a while. One of the first NoSQL databases actually.
+
+We use it because it's easy to get started, flexible to use, and does _okay_ at staying manageable. For a really real app I'd recommend using Postgres and there's going to be a bonus module about that.
+
+## Auth0 and useAuth
+
+<Vimeo id="389022411" />
+
+Authentication is hard and you shouldn't roll your own.
+
+Remember drive-by hacks on old PHP websites? Everyone built their own auth and it was so easy to hack there were bots doing it automatically.
+
+We use Auth0 as an authentication provider. Let them do the hard work. My useAuth library makes it a breeze to integrate.
+
+## Edge First Architecture
+
+<Vimeo id="389028295" />
+
+This is my favorite mental model from the whole course. If you take nothing else out of our time together, I want you to bake this into your mind.
+
+Why?
+
+Because it makes your apps _so much easier to understand and faster to work with_.
+
+The gist is that you move business logic as close to where it's used as possible. Keep it collocated with your components and rely on React context for any coordination.
+
+React Hooks make this a breeze.
+
+![The Edge First Architecture](../images/diagrams/edge-first-architecture.png)
+
+## Offline-first Architecture
+
+<Vimeo id="389033075" />
+
+You know how you sometimes open a webapp and it loads super hella fast, then you're sat there looking at spinners?
+
+We don't want that so we use Gatsby to bake-in that initial render at deploy time. Make the initial page have everything it needs to render as static HTML then re-hydrate into a normal React app 👌
+
+![Offline-first architecture](../images/diagrams/offline-first-architecture.png)
