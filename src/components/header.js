@@ -3,7 +3,7 @@ import { useStaticQuery, graphql } from "gatsby"
 import { Flex, Box, Link, Button } from "rebass"
 import { useColorMode } from "theme-ui"
 import { useAuth } from "react-use-auth"
-import { Image } from './Image'
+import { Image } from "./Image"
 
 const modes = ["themed", "lite", "dark", "gray", "hack", "pink"]
 
@@ -63,11 +63,10 @@ const Login = () => {
         lessons
       </Link>
     </Box>
-  ) : (
-    <Link mr={2} variant="nav" href="#" onClick={login}>
-      Student Login
-    </Link>
-  )
+  ) : null
+  // <Link mr={2} variant="nav" href="#" onClick={login}>
+  //   Student Login
+  // </Link>
 }
 
 export default ({ nav, menu, setMenu, style, showBanner }) => {
@@ -110,7 +109,7 @@ export default ({ nav, menu, setMenu, style, showBanner }) => {
             width: 32,
             height: 32,
             p: 1,
-            cursor: 'pointer'
+            cursor: "pointer",
           }}
           variant="transparent"
           onClick={(e) => {
@@ -141,7 +140,15 @@ export default ({ nav, menu, setMenu, style, showBanner }) => {
             color="white"
             style={{ cursor: "pointer" }}
           >
-            <strong><span role="img" aria-label="heart">❤️</span> 37% off while The Situation lasts <span role="img" aria-label="finger-right">❤️</span></strong>
+            <strong>
+              <span role="img" aria-label="heart">
+                ❤️
+              </span>{" "}
+              37% off while The Situation lasts{" "}
+              <span role="img" aria-label="finger-right">
+                ❤️
+              </span>
+            </strong>
           </Link>
         </Box>
       ) : (
@@ -156,7 +163,7 @@ export default ({ nav, menu, setMenu, style, showBanner }) => {
           height: 32,
           p: 1,
           borderRadius: 99999,
-          cursor: 'pointer'
+          cursor: "pointer",
         }}
         onClick={cycleMode}
       >
