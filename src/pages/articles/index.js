@@ -1,9 +1,9 @@
-import React from 'react'
+import React from "react"
 import { graphql } from "gatsby"
-import styled from '@emotion/styled'
+import styled from "@emotion/styled"
 import { ArticleListing } from "../../components/Articles/ArticleListing"
-import Head from '../../components/head'
-import ConvertkitForm from '../../components/Articles/ConvertkitForm'
+import Head from "../../components/head"
+import ConvertkitForm from "../../components/Articles/ConvertkitForm"
 
 export const pageQuery = graphql`
   query {
@@ -18,7 +18,7 @@ export const pageQuery = graphql`
     }
     allSitePage(
       filter: { path: { regex: "/articles/.+/" } }
-      sort: { fields: context___frontmatter___date, order: DESC }
+      sort: { fields: context___frontmatter___lastUpdated, order: DESC }
     ) {
       nodes {
         path
@@ -71,7 +71,7 @@ const Wrapper = styled.div`
   }
 `
 
-const HeroTitle = styled.h1 `
+const HeroTitle = styled.h1`
   width: 100%;
   margin: 0rem auto 1rem auto;
   text-align: center;
@@ -82,37 +82,36 @@ const ArticlesWrapper = styled.div`
   margin-top: 2rem;
 `
 
-const ArticlePage = props => {
+const ArticlePage = (props) => {
   const { title, description } = props.data.site.siteMetadata.articles
 
-    return (
-      <>
-        <Head title={title} description={description} />
-        <Wrapper>
-          <HeroTitle>React for Dataviz</HeroTitle>
-          <p>
-            A monthly data visualization built with React, D3, and others.
-            Livecoded last Sunday of the month.{' '}
-            <a href="https://www.youtube.com/channel/UCoyHgaeLLI7Knp7LDHOwZMw">
-              Join live
-            </a>{' '}
-            or subscribe to the newsletter{' '}
-            <span role="img" aria-label="heart">
-              {' '}
-              💌
-            </span>
-            .
-          </p>
-          <ConvertkitForm />
-          <ArticlesWrapper>
-            {props.data.allSitePage.nodes.map((props, i) => (
-              <ArticleListing {...props} key={i} />
-            ))}
-          </ArticlesWrapper>
-        </Wrapper>
-      </>
-    )
+  return (
+    <>
+      <Head title={title} description={description} />
+      <Wrapper>
+        <HeroTitle>React for Dataviz</HeroTitle>
+        <p>
+          A monthly data visualization built with React, D3, and others.
+          Livecoded last Sunday of the month.{" "}
+          <a href="https://www.youtube.com/channel/UCoyHgaeLLI7Knp7LDHOwZMw">
+            Join live
+          </a>{" "}
+          or subscribe to the newsletter{" "}
+          <span role="img" aria-label="heart">
+            {" "}
+            💌
+          </span>
+          .
+        </p>
+        <ConvertkitForm />
+        <ArticlesWrapper>
+          {props.data.allSitePage.nodes.map((props, i) => (
+            <ArticleListing {...props} key={i} />
+          ))}
+        </ArticlesWrapper>
+      </Wrapper>
+    </>
+  )
 }
-
 
 export default ArticlePage

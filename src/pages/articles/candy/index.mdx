@@ -1,28 +1,27 @@
 ---
 title: When do people buy candy? 🍬
-description:
-  Candy is delicious. When do people buy it most? Visualize the data in a fun way
+description: Candy is delicious. When do people buy it most? Visualize the data in a fun way
 date: 2018-12-12T08:00:00.000Z
 lastUpdated: 2018-12-12T08:00:00.000Z
-image: './candy.png'
+image: "./candy.png"
 ---
 
-<Video id="Dn_kHCFTUP4" />
+https://www.youtube.com/watch?v=Dn_kHCFTUP4
 
 Candy is delicious. When do people buy it most? Visualize the data in a fun way
 
 <strong>Dataset: </strong>
-<a href={`./statistic_id947149_retail-sales-of-candy-in-the-united-states-in-2018-by-week.xlsx`}>
-                  Download dataset 🗳{' '}
-                </a>
+<a
+  href={`./statistic_id947149_retail-sales-of-candy-in-the-united-states-in-2018-by-week.xlsx`}
+>
+  Download dataset 🗳{" "}
+</a>
 
-##My solution 👇
+## My solution 👇
 
-Codepen: `https://codesandbox.io/s/ov0lzxmplz`
+https://codesandbox.io/s/ov0lzxmplz
 
-##How it works ⚙️
-
-import TweetEmbed from 'react-tweet-embed'
+## How it works ⚙️
 
 Did you know Americans buy `Eight hundred million dollars` worth of candy on Easter? That's crazy. Absolutely bonkers. Even the normal baseline of `$300,000,000`/week throughout the year is just staggering. 🍭
 
@@ -50,16 +49,16 @@ Let's start with the basics and get them out of the way. Bottom up in the Codesa
 const FallingCandy = ({ data, x = 0, y = 0, width = 600, height = 600 }) => {
   const xScale = d3
     .scalePoint()
-    .domain(data.map(d => d.week))
+    .domain(data.map((d) => d.week))
     .range([0, width])
   const yScale = d3
     .scaleLinear()
-    .domain([250, d3.max(data, d => d.sales)])
+    .domain([250, d3.max(data, (d) => d.sales)])
     .range([height, 0])
 
   return (
     <g transform={`translate(${x}, ${y})`}>
-      {data.map(d => (
+      {data.map((d) => (
         <CandyJar
           x={xScale(d.week)}
           y={height}
@@ -98,7 +97,7 @@ const BottomAxis = d3blackbox((anchor, props) => {
   const axis = d3
     .axisBottom()
     .scale(props.scale)
-    .tickFormat(d => `wk ${d}`)
+    .tickFormat((d) => `wk ${d}`)
   d3.select(anchor.current).call(axis)
 })
 
@@ -106,7 +105,7 @@ const LeftAxis = d3blackbox((anchor, props) => {
   const axis = d3
     .axisLeft()
     .scale(props.scale)
-    .tickFormat(d => `$${d} million`)
+    .tickFormat((d) => `$${d} million`)
   d3.select(anchor.current).call(axis)
 })
 ```
@@ -125,7 +124,7 @@ Candy jars are just columns of emojis. There's not much logic here.
 const CandyJar = ({ x, y, height, delay, type }) =>
   d3
     .range(height / 12)
-    .map(i => (
+    .map((i) => (
       <Candy
         x={x}
         y={y - i * 12}
@@ -177,9 +176,9 @@ class Candy extends React.Component {
       .duration(1500)
       .delay(delay)
       .ease(d3.easeLinear)
-      .attrTween('y', candyYTween(this.state.y, this.props.y))
-      .attr('x', this.props.x)
-      .on('end', () => this.setState({ y: this.props.y }))
+      .attrTween("y", candyYTween(this.state.y, this.props.y))
+      .attr("x", this.props.x)
+      .on("end", () => this.setState({ y: this.props.y }))
   }
 
   get emoji() {
@@ -190,7 +189,7 @@ class Candy extends React.Component {
     const { x, y } = this.state
 
     return (
-      <text x={x} y={y} style={{ fontSize: '12px' }} ref={this.candyRef}>
+      <text x={x} y={y} style={{ fontSize: "12px" }} ref={this.candyRef}>
         {this.emoji}
       </text>
     )
@@ -268,8 +267,8 @@ We can use that to create a custom tween for the vertical coordinate, `y`.
 ```javascript
 function candyYTween(oldY, newY) {
   const interpolator = d3.interpolate(oldY, newY)
-  return function() {
-    return function(t) {
+  return function () {
+    return function (t) {
       return interpolator(d3.easeBounceOut(t))
     }
   }
@@ -288,18 +287,18 @@ Randomness makes our visualization look better. More natural.
 
 Here's what it looks like without any `Math.random()`
 
-<TweetEmbed id="1073285327282876416" options={{ conversation: 'none' }} />
+https://twitter.com/Swizec/status/1073285327282876416
 
 Randomness on the CandyJar level.
 
-<TweetEmbed id="1073285329237401600" options={{ conversation: 'none' }} />
+https://twitter.com/Swizec/status/1073285329237401600
 
 Randomness on the CandyJar _and_ Candy level.
 
-<TweetEmbed id="1073285332555194369" options={{ conversation: 'none' }} />
+https://twitter.com/Swizec/status/1073285332555194369
 
 Randomness in the start position as well.
 
-<TweetEmbed id="1073285334291501056" options={{ conversation: 'none' }} />
+https://twitter.com/Swizec/status/1073285334291501056
 
 You decide which looks best ✌️
