@@ -1,26 +1,27 @@
 ---
 title: What do Americans want for Christmas?
-description:
-  Different ages want different things. Create a horizontal stack chart showing what everyone wants for Christmas.
+description: Different ages want different things. Create a horizontal stack chart showing what everyone wants for Christmas.
 date: 2018-12-06T08:00:00.000Z
 lastUpdated: 2018-12-06T08:00:00.000Z
-image: './what-americas-want.png'
+image: "./what-americas-want.png"
 ---
 
-<Video id="pn45HcG1faM" />
+https://www.youtube.com/watch?v=pn45HcG1faM
 
 Different ages want different things. Create a horizontal stack chart showing what everyone wants for Christmas.
 
 <strong>Dataset: </strong>
-<a href={`./statistic_id643714_christmas-gifts-desired-by-us-consumers-2017-by-age-group.xlsx`}>
-                  Download dataset 🗳{' '}
-                </a>
+<a
+  href={`./statistic_id643714_christmas-gifts-desired-by-us-consumers-2017-by-age-group.xlsx`}
+>
+  Download dataset 🗳{" "}
+</a>
 
-##My solution 👇
+## My solution 👇
 
-Codepen: `https://codesandbox.io/s/v874323625`
+https://codesandbox.io/s/v874323625
 
-##How it works ⚙️
+## How it works ⚙️
 
 Today's challenge is a perfect example of how [chroma-js](https://gka.github.io/chroma.js/) automatically makes your dataviz beautiful. Best magic trick I ever learned from Shirley Wu.
 
@@ -47,7 +48,7 @@ We begin once more by loading the data. If you've been following along so far, t
 
 Building axes and legends from scratch is not hard, but it is fiddly and time consuming and fraught with tiny little traps for you to fall into. No time for that on a daily challenge!
 
-[d3blackbox](https://d3blackbox.com) to the rescue! &lt;supermanemoji>
+[d3blackbox](https://d3blackbox.com) to the rescue!
 
 ```javascript
 const VerticalAxis = d3blackbox((anchor, props) => {
@@ -57,10 +58,7 @@ const VerticalAxis = d3blackbox((anchor, props) => {
 
 const Legend = d3blackbox((anchor, props) => {
   d3.select(anchor.current).call(
-    legend
-      .legendColor()
-      .scale(props.scale)
-      .title('Age group')
+    legend.legendColor().scale(props.scale).title("Age group")
   )
 })
 ```
@@ -116,14 +114,14 @@ Here's how all of that ties together 👇
 class StackChart extends React.Component {
   y = d3
     .scaleBand()
-    .domain(this.props.data.map(d => d.category))
+    .domain(this.props.data.map((d) => d.category))
     .range([0, this.props.height])
     .paddingInner(0.1)
-  stack = d3.stack().keys(['young', 'mid', 'old'])
+  stack = d3.stack().keys(["young", "mid", "old"])
   color = chroma.brewer.pastel1
   colorScale = d3
     .scaleOrdinal()
-    .domain(['🧒 18 to 29 years', '🙍‍♂️ 30 to 59 years', '🧓 60 years or older'])
+    .domain(["🧒 18 to 29 years", "🙍‍♂️ 30 to 59 years", "🧓 60 years or older"])
     .range(this.color)
 
   render() {
@@ -133,7 +131,7 @@ class StackChart extends React.Component {
 
     const width = d3
       .scaleLinear()
-      .domain([0, d3.max(stack[2], d => d[1])])
+      .domain([0, d3.max(stack[2], (d) => d[1])])
       .range([0, 400])
 
     return (

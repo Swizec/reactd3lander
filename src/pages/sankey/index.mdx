@@ -1,30 +1,25 @@
 ---
 title: Let's build a Sankey diagram
-description:
-  "Have you ever tried making a sankey diagram with d3+react, I can''t seem to make it work for some reason.:/" ~Emil
+description: "Have you ever tried making a sankey diagram with d3+react, I can''t seem to make it work for some reason.:/"
 date: 2018-12-16T08:00:00.000Z
 lastUpdated: 2018-12-16T08:00:00.000Z
-image: './sankey.png'
+image: "./sankey.png"
 ---
 
-<Video id="SAmKimb8wFo" />
+https://www.youtube.com/watch?v=SAmKimb8wFo
 
 > Have you ever tried making a sankey diagram with d3+react, I can't seem to make it work for some reason.:/
 >
-> ~Emil
+> \~Emil
 
 No Emil, I have not. Let's give it a shot! Thanks for finding us a dataset that fits :)
 
 <strong>Dataset: </strong>
-<a href={`./ugr-sankey-openspending.json`}>
-                  Download dataset 🗳{' '}
-                </a>
+<a href={`./ugr-sankey-openspending.json`}>Download dataset 🗳 </a>
 
-##My solution 👇
+## My solution 👇
 
-Codepen: `https://codesandbox.io/s/m9vy7mr5k8`
-
-##How it works ⚙️
+https://codesandbox.io/s/m9vy7mr5k8
 
 ## What is a Sankey diagram?
 
@@ -114,7 +109,7 @@ You use them in two loops in the main `<MysteriousSankey>` component.
 
 ```javascript
 return (
-  <g style={{ mixBlendMode: 'multiply' }}>
+  <g style={{ mixBlendMode: "multiply" }}>
     {nodes.map((node, i) => (
       <SankeyNode
         {...node}
@@ -155,8 +150,8 @@ const SankeyLink = ({ link, color }) => (
   <path
     d={sankeyLinkHorizontal()(link)}
     style={{
-      fill: 'none',
-      strokeOpacity: '.3',
+      fill: "none",
+      strokeOpacity: ".3",
       stroke: color,
       strokeWidth: Math.max(1, link.width),
     }}

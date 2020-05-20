@@ -1,26 +1,27 @@
 ---
 title: Will you buy a Christmas tree?
-description:
-  Not everyone buys a Christmas tree. 🎄 Draw a donut chart of people's thoughts.
+description: Not everyone buys a Christmas tree. 🎄 Draw a donut chart of people's thoughts.
 date: 2018-12-08T08:00:00.000Z
 lastUpdated: 2018-12-08T08:00:00.000Z
-image: './buy-christmas-tree.png'
+image: "./buy-christmas-tree.png"
 ---
 
-<Video id="aaqfCnE0G6s" />
+https://www.youtube.com/watch?v=aaqfCnE0G6s
 
 Not everyone buys a Christmas tree. 🎄 Draw a donut chart of people's thoughts.
 
 <strong>Dataset: </strong>
-<a href={`./statistic_id644150_christmas-tree_-purchase-plans-among-us-consumers-2017.xlsx`}>
-                  Download dataset 🗳{' '}
-                </a>
+<a
+  href={`./statistic_id644150_christmas-tree_-purchase-plans-among-us-consumers-2017.xlsx`}
+>
+  Download dataset 🗳{" "}
+</a>
 
-##My solution 👇
+## My solution 👇
 
-Codepen: `https://codesandbox.io/s/zlkrm04jjl`
+https://codesandbox.io/s/zlkrm04jjl
 
-##How it works ⚙️
+## How it works ⚙️
 
 This donut chart build was short and sweet. D3 has all the ingredients we need, Chroma's got the colors, d3-svg-legend has nice legend stuff. Oh and we used it as an excuse to update my [d3blackbox](https://d3blackbox.com) library so it actually exports the hooks version.
 
@@ -43,16 +44,12 @@ Takes `data`, `x,y` coordinates for positioning, and `r` for the total radius.
 We begin with a bunch of D3 objects. Scales, pie generators, things like that.
 
 ```javascript
-const pie = d3.pie().value(d => d.percentage)
-const arc = d3
-  .arc()
-  .innerRadius(90)
-  .outerRadius(r)
-  .padAngle(0.01)
+const pie = d3.pie().value((d) => d.percentage)
+const arc = d3.arc().innerRadius(90).outerRadius(r).padAngle(0.01)
 const color = chroma.brewer.set1
 const colorScale = d3
   .scaleOrdinal()
-  .domain(data.map(d => d.answer))
+  .domain(data.map((d) => d.answer))
   .range(color)
 ```
 
@@ -76,7 +73,7 @@ Then we render it all with a loop.
 ```javascript
 return (
   <g transform={`translate(${x}, ${y})`}>
-    {pie(data).map(d => (
+    {pie(data).map((d) => (
       <path
         d={arc
           .outerRadius(selected === d.index ? r + 10 : r)
@@ -106,8 +103,8 @@ Perfect 👌
 `d3-svg-legend` does it all for us. We use `useD3` from my d3blackbox to make it work.
 
 ```javascript
-const Legend = function({ x, y, colorScale }) {
-  const ref = useD3(anchor => {
+const Legend = function ({ x, y, colorScale }) {
+  const ref = useD3((anchor) => {
     d3.select(anchor).call(d3legend.legendColor().scale(colorScale))
   })
 

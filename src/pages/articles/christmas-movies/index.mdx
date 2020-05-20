@@ -1,26 +1,27 @@
 ---
 title: Christmas movies at the box office
-description:
-  Christmas movies are the best movies. How much do they make at the box office? Show the power distribution curve with a vertical barchart.
+description: Christmas movies are the best movies. How much do they make at the box office? Show the power distribution curve with a vertical barchart.
 date: 2018-12-05T08:00:00.000Z
 lastUpdated: 2018-12-05T08:00:00.000Z
-image: './homealone.png'
+image: "./homealone.png"
 ---
 
-<Video id="qD6i9h66LbI" />
+https://www.youtube.com/watch?v=qD6i9h66LbI
 
 Christmas movies are the best movies. How much do they make at the box office? Show the power distribution curve with a vertical barchart.
 
 <strong>Dataset: </strong>
-<a href={`./statistic_id209295_box-office-revenue-of-the-most-successful-christmas-movies.xlsx`}>
-                  Download dataset 🗳{' '}
-                </a>
+<a
+  href={`./statistic_id209295_box-office-revenue-of-the-most-successful-christmas-movies.xlsx`}
+>
+  Download dataset 🗳{" "}
+</a>
 
-##My solution 👇
+## My solution 👇
 
-Codepen: `https://codesandbox.io/s/6v6zvx8zjk`
+https://codesandbox.io/s/6v6zvx8zjk
 
-##How it works ⚙️
+## How it works ⚙️
 
 We built this one with React hooks because we can. Not a class-based component in sight ✌️
 
@@ -118,7 +119,7 @@ const VerticalBarchart = ({ data, width, height, value }) => {
   const yScale = d3
     .scaleBand()
     .paddingInner(0.1)
-    .domain(data.map(d => d.movie))
+    .domain(data.map((d) => d.movie))
     .range([0, height])
   const widthScale = d3
     .scaleLinear()
@@ -127,7 +128,7 @@ const VerticalBarchart = ({ data, width, height, value }) => {
 
   return (
     <g>
-      {data.map(d => (
+      {data.map((d) => (
         <React.Fragment key={d.movie}>
           <Bar
             x={0}

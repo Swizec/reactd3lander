@@ -1,26 +1,27 @@
 ---
 title: When do Americans buy their Christmas presents?
-description:
-  My girlfriend likes to buy her presents early, I wait until the last minute. What do other people do? Create a way to visualize the last few weeks of the year and rank them by popularity.
+description: My girlfriend likes to buy her presents early, I wait until the last minute. What do other people do? Create a way to visualize the last few weeks of the year and rank them by popularity.
 date: 2018-12-10T08:00:00.000Z
 lastUpdated: 2018-12-10T08:00:00.000Z
-image: './approximation.png'
+image: "./approximation.png"
 ---
 
-<Video id="VzAAGCudLe8" />
+https://www.youtube.com/watch?v=VzAAGCudLe8
 
 My girlfriend likes to buy her presents early, I wait until the last minute. What do other people do? Create a way to visualize the last few weeks of the year and rank them by popularity.
 
 <strong>Dataset: </strong>
-<a href={`./statistic_id246669_period-during-which-us-consumers-will-start-holiday-shopping-2018.xlsx`}>
-                  Download dataset 🗳{' '}
-                </a>
+<a
+  href={`./statistic_id246669_period-during-which-us-consumers-will-start-holiday-shopping-2018.xlsx`}
+>
+  Download dataset 🗳{" "}
+</a>
 
-##My solution 👇
+## My solution 👇
 
-Codepen: `https://codesandbox.io/s/oq730593n9`
+https://codesandbox.io/s/oq730593n9
 
-##How it works ⚙️
+## How it works ⚙️
 
 Well that was fun. What do you when you have a sparse dataset? A dataset with so few data points positioned so weirdly that it's almost certain to hide important trends?
 
@@ -69,7 +70,7 @@ const LeftAxis = d3blackbox((anchor, props) => {
   const axis = d3
     .axisLeft()
     .scale(props.scale)
-    .tickFormat(d => `${d}%`)
+    .tickFormat((d) => `${d}%`)
   d3.select(anchor.current).call(axis)
 })
 ```
@@ -89,7 +90,7 @@ const Circle = styled.circle`
 
 const Datapoints = ({ data, x, y }) => (
   <g>
-    {data.map(d => (
+    {data.map((d) => (
       <Circle cx={x(d.descriptor)} cy={y(d.percentage)}>
         <title>{d.descriptor}</title>
       </Circle>
@@ -234,7 +235,7 @@ state = {
   x: d3.scalePoint().range([0, 600]),
   xDescriptive: d3
     .scaleOrdinal()
-    .domain(this.props.data.map(d => d.descriptor)),
+    .domain(this.props.data.map((d) => d.descriptor)),
 }
 ```
 
