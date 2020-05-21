@@ -1,0 +1,47 @@
+## Step 4: Load Bootstrap styles
+
+We're going to use Bootstrap styles to avoid reinventing the wheel. We're
+ignoring their JavaScript widgets and the amazing integration built by the
+[react-bootstrap](https://react-bootstrap.github.io/) team. Just the
+stylesheets please.
+
+They'll make our fonts look better, help with layouting, and make buttons look
+like buttons. We _could_ use styled components, but writing our own styles
+detracts from this tutorial.
+
+We load stylesheets in `src/index.js`.
+
+```{.javascript caption="Add Bootstrap in index.js"}
+// src/index.js
+
+import React from 'react';
+import ReactDOM from 'react-dom';
+import App from './App';
+// Insert the line(s) between here...
+import 'bootstrap/dist/css/bootstrap.css';
+// ...and here.
+
+ReactDOM.render(
+  <App />,
+  document.getElementById('root')
+);
+```
+
+Another benefit of Webpack: `import`-ing stylesheets. These imports turn into
+`<style>` tags with CSS in their body at runtime.
+
+This is also a good opportunity to see how `index.js` works to render our app
+:point_down:
+
+1. loads `App` and React
+2. loads styles
+3. Uses `ReactDOM` to render `<App />` into the DOM
+
+That's it.
+
+Your preloader screen should look better now.
+
+![Preloader screenshot](https://raw.githubusercontent.com/Swizec/react-d3js-es6-ebook/2018-version/manuscript/resources/images/es6v2/preloader-screenshot.png)
+
+If you don't, try comparing your changes to this
+[diff on Github](https://github.com/Swizec/react-d3-walkthrough-livecode/commit/f068b950b7a1a75e9417e126ee53fb7925c27569).
