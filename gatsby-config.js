@@ -1,5 +1,6 @@
 const remarkPlugins = [require("remark-slug")]
 const path = require("path")
+const fs = require("fs")
 
 module.exports = {
   siteMetadata: {
@@ -25,6 +26,17 @@ module.exports = {
         path: `${__dirname}/src/images`,
       },
     },
+    // add a gatsby-source-filesystem entry for every article's images
+    ...fs
+    .readdirSync(`${__dirname}/src/pages/articles`)
+    .map((path) => `${__dirname}/src/pages/articles/${path}`)
+    .filter((path) => fs.lstatSync(path).isDirectory() && fs.readdirSync(path).length > 0)
+    .map((path) => ({
+      resolve: "gatsby-source-filesystem",
+      options: {
+        path
+      }
+    })),
     "gatsby-transformer-sharp",
     "gatsby-plugin-sharp",
     {
