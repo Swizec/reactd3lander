@@ -2,11 +2,11 @@
 
 Here comes the fun part. The one with our game loop.
 
-There's also a video explaining how this works :point_right:
+There's also a video explaining how this works 👉
 [Watch it on YouTube](https://www.youtube.com/watch?v=H84fmXjTElM). With
 hand-drawn sketches that explain the math, and I think that's neat.
 
-```{.javascript caption="Full simulationStep function"}
+```javascript
 
 @action simulationStep() {
     const { width, height, MarbleR } = this;
@@ -64,12 +64,12 @@ hand-drawn sketches that explain the math, and I think that's neat.
 }
 ```
 
-That's a lot of code :sweat_smile:. Let's break it down.
+That's a lot of code 😅. Let's break it down.
 
 You can think of `simulationStep` as a function and a loop. At the bottom,
 there is a `.forEach` that applies a `moveMarble` function to each marble.
 
-```{.javascript caption="Loop through marbles"}
+```javascript
     this.marbles.forEach((marble, i) => {
         const { x, y, vx, vy } = moveMarble(marble);
 
@@ -95,7 +95,7 @@ lifting, but more explicit code is easier to read.
 
 **Handling collisions with walls** happens in two lines of code. One per axis.
 
-```{.javascript caption="Detecting wall collisions"}
+```javascript
 let _vx = ((x+vx < MarbleR) ? -vx : (x+vx > width-MarbleR) ? -vx : vx)*.99,
     _vy = ((y+vy < MarbleR) ? -vy : (y+vy > height-MarbleR) ? -vy : vy)*.99;
 ```
@@ -114,7 +114,7 @@ making too many position comparisons.
 Checking every marble with every other marble produces 81 comparisons. Versus 2
 comparisons using a quadtree. {/aside}
 
-```{.javascript caption="Finding collision candidates"}
+```javascript
 // nearest marble is a collision candidate
 const subdividedSpace = quadtree().extent([[-1, -1],
                                            [this.width+1, this.height+1]])
@@ -135,7 +135,7 @@ out of our list before feeding the quadtree.
 
 Once we have a quadtree, we use `.find` to look for the nearest marble within
 two radiuses – `MarbleR*2` – of the current marble. That's exactly the one
-we're colliding with! :smile:
+we're colliding with! 😄
 
 **Handling collisions with marbles** involves math. The sort of thing you think
 you remember from high school, and suddenly realize you don't when the time
@@ -143,7 +143,7 @@ comes to use it.
 
 Code looks like this:
 
-```{.javascript caption="Handling marble collisions"}
+```javascript
 if (candidate) {
 
     // borrowing @air_hadoken's implementation from here:
@@ -190,7 +190,7 @@ normalize it by distance. Multiplying distance by `2` accounts for there being
 two marbles in the collision. That extra `.3` made the simulation look better.
 
 Fiddling and experimentation are your best tools for magic values like that
-:wink:
+😉
 
 Then we use the dot product scalar to adjust the marble's speed vector.
 Dividing by `2` takes into account that half the energy goes to the other

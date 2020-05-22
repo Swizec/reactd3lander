@@ -14,9 +14,9 @@ Inside `src/App.js`, we first have to add an import, then extract the median
 household value from state, and in the end, add `MedianLine` to the render
 method.
 
-Let's see if we can do it in a single code block :smile:
+Let's see if we can do it in a single code block 😄
 
-```{.javascript caption="Adding MedianLine to App.js"}
+```javascript
 // src/App.js
 import Histogram from './components/Histogram';
 import { Title, Description, GraphDescription } from './components/Meta';
@@ -60,7 +60,7 @@ back when
 [tying datasets together](https://swizec1.teachable.com/courses/react-for-data-visualization/lectures/6888897#tie-datasets-together).
 It groups our salary data by US state.
 
-See, using good names helps :smile:
+See, using good names helps 😄
 
 When rendering `MedianLine`, we give it sizing and positioning props, the
 dataset, a `value` accessor, and the median value to show. We could make it
@@ -73,7 +73,7 @@ The `MedianLine` component looks similar to what you've seen so far. Some
 imports, a `constructor` that sets up D3 objects, an `updateD3` method that
 keeps them in sync, and a `render` method that outputs SVG.
 
-```{.javascript caption="MedianLine component stub"}
+```javascript
 // src/components/MedianLine.js
 
 import React from "react";
@@ -100,7 +100,7 @@ and an export. It should cause an error because it's not returning anything.
 
 Everything we need to render the line, fits into this function.
 
-```{.javascript caption="MedianLine render"}
+```javascript
 // src/components/MedianLine.js
 
 const MedianLine = ({
@@ -146,7 +146,7 @@ to return a `<g>` grouping element containing a `<text>` for our label, and a
 Building the `d` attribute for the path, that's interesting. We use a `line`
 generator from D3.
 
-```{.javascript caption="Line generator"}
+```javascript
 line = d3.line()([[0, 5], [width, 5]]);
 ```
 

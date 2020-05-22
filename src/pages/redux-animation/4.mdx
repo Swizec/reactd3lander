@@ -14,7 +14,7 @@ we can use `componentDidMount`. We need it to attach D3 event listeners.
 
 The `Particle` component is a circle. It looks like this:
 
-```{.javascript caption="Particle component"}
+```javascript
 // src/components/Particles/Particle.jsx
 import React from 'react';
 
@@ -32,7 +32,7 @@ It takes `x` and `y` coordinates and returns an SVG circle.
 The `Particles` component isn't much smarter – it returns a list of circles
 wrapped in a grouping element, like this:
 
-```{.javascript caption="Particles list"}
+```javascript
 // src/components/Particles/index.jsx
 import React from 'react';
 import Particle from './Particle';
@@ -48,7 +48,7 @@ export default Particles;
 ```
 
 Walk through the array of particles, render a Particle component for each.
-Declarative rendering that you've seen before :smiley:
+Declarative rendering that you've seen before 😃
 
 We can take an array of `{id, x, y}` objects and render SVG circles. Now comes
 our first fun component: the `App`.
@@ -62,7 +62,7 @@ through many levels of props.
 
 The rendering part looks like this:
 
-```{.javascript caption="App component"}
+```javascript
 // src/components/index.jsx
 
 import React, { Component } from 'react';
@@ -113,7 +113,7 @@ have the clock running _before_ any particles exist.
 To let users generate particles, we have to wire up some functions in
 `componentDidMount`. That looks like this:
 
-```{.javascript caption="Event listeners"}
+```javascript
 // src/components/index.jsx
 
 class App extends Component {

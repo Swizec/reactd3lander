@@ -15,7 +15,7 @@ The
 [whole Physics store](https://github.com/Swizec/declarative-canvas-react-konva/blob/master/src/logic/Physics.js)
 is some 120 lines of code. We'll go slow. Here's the skeleton:
 
-```{.javascript caption="Physics skeleton"}
+```javascript
 // src/logic/Physics.js
 
 class Physics {
@@ -51,7 +51,7 @@ Let's walk through.
 
 #### initialPositions
 
-```{.javascript caption="initialPositions function"}
+```javascript
 // src/logic/Physics.js
 class Physics {
     // ..
@@ -119,7 +119,7 @@ Positions in the array may change.
 
 #### shoot and startGameLoop
 
-```{.javascript caption="shoot and startGameLoop functions"}
+```javascript
 // src/logic/Physics.js
 class Physics {
     // ...
@@ -147,4 +147,4 @@ class Physics {
 `startGameLoop` gets the initial `marbles` array and starts a D3 timer. `shoot`
 updates a specific marble's coordinates and speed vector.
 
-:ok_hand:
+👌

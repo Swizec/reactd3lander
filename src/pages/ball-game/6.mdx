@@ -16,7 +16,7 @@ our animation silky smooth, we have to take this into account.
 
 That involves calculating how many frames we dropped and adjusting our physics.
 
-```{.javascript caption="Adjust for frame drops"}
+```javascript
 // BouncingBall.js
   gameLoop = () => {
     let { y, vy, lastFrame } = this.state;

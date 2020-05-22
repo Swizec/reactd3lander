@@ -5,7 +5,7 @@ ensures only one at a time is selected.
 
 We'll start with a stub and go from there.
 
-```{.javascript caption="ControlRow stub"}
+```javascript
 // src/components/Controls/ControlRow.js
 import React from "react";
 
@@ -34,7 +34,7 @@ guess what they are?
 - `_addToggle` is a rendering helper method
 - `render` renders a row of buttons
 
-```{.javascript caption="makePick implementation"}
+```javascript
 // src/components/Controls/ControlRow.js
 
 class ControlRow extends React.Component {
@@ -47,7 +47,7 @@ class ControlRow extends React.Component {
 `makePick` calls the data filter update and passes in the new value and whether
 we want to unselect. Pretty simple right?
 
-```{.javascript caption="Render a row of controls"}
+```javascript
 // src/components/Controls/ControlRow.js
 class ControlRow extends React.Component {
     // ...

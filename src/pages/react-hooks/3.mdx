@@ -13,7 +13,7 @@ and recomputes them when particular props change. Think of it like a cache.
 Say you have a D3 linear scale. You want to update its range when your
 component's width changes.
 
-```{.javascript caption="useMemo for a scale"}
+```javascript
 function MyComponent({ data, width }) {
 	const scale = useMemo(() =>
 		d3.scaleLinear()
@@ -41,4 +41,4 @@ uniqueness.
 
 And that's exactly what we want. No more futzing around with
 `getDerivedStateFromProps` and `this.state`. Just `useMemo` and leave the rest
-to React. :v:
+to React. ✌️

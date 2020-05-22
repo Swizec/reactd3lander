@@ -3,7 +3,7 @@
 You know the drill, don't you? Import some stuff, add it to the `render()`
 method in the `App` component.
 
-```{.javascript caption="Histogram imports"}
+```javascript
 // src/App.js
 import _ from 'lodash';
 
@@ -34,7 +34,7 @@ because it works and means we don't have to learn yet another dependency.
 
 After the imports, we can render our `Histogram` in the `App` component.
 
-```{.javascript caption="Render Histogram in App"}
+```javascript
 // src/App.js
 // ...
 render() {
@@ -71,7 +71,7 @@ render() {
 We render the `Histogram` component with a bunch of props. They specify the
 dimensions we want, positioning, and pass data to the component. We're using
 `filteredSalaries` even though we haven't set up any filtering yet. One less
-line of code to change later :ok_hand:
+line of code to change later 👌
 
 That's it. `App` is ready to render our `Histogram`.
 

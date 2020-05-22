@@ -10,7 +10,7 @@ how little code it takes.
 
 Start with the imports: React, D3, lodash, topojson, County component.
 
-```{.javascript caption="Import CountyMap dependencies"}
+```javascript
 // src/components/CountyMap/CountyMap.js
 import React, { Component } from 'react';
 import * as d3 from 'd3';
@@ -37,7 +37,7 @@ Maybe it's a case of [competing standards](https://xkcd.com/927/).
 
 We stub out the `CountyMap` component then fill it in with logic.
 
-```{.javascript caption="CountyMap stub"}
+```javascript
 // src/components/CountyMap/CountyMap.js
 class CountyMap extends Component {
     constructor(props) {
@@ -73,7 +73,7 @@ We'll set up default D3 state in `constructor` and keep it up to date with
 We need three D3 objects to build a choropleth map: a geographical projection,
 a path generator, and a quantize scale for colors.
 
-```{.javascript caption="D3 objects for a map"}
+```javascript
 // src/components/CountyMap/CountyMap.js
 class CountyMap extends React.Component {
     constructor(props) {
@@ -115,9 +115,9 @@ pick colors from an array.
 
 Keeping our geo path and quantize scale up to date is simple, but we'll make it
 harder by adding a zoom feature. It won't work until we build the filtering,
-but hey, we'll already have it by then! :smile:
+but hey, we'll already have it by then! 😄
 
-```{.javascript caption="CountyMap getDerivedStateFromProps"}
+```javascript
     // src/components/CountyMap/CountyMap.js
     static getDerivedStateFromProps(props, state) {
         let { projection, quantize, geoPath } = state;
@@ -197,7 +197,7 @@ principles.
 After all that hard work, the `render` method is a breeze. We prep our data
 then loop through it and render a `County` element for each entry.
 
-```{.javascript caption="CountyMap render"}
+```javascript
     render() {
         const { geoPath, quantize } = this.state,
             { usTopoJson, values, zoom } = this.props;

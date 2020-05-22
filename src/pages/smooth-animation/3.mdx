@@ -18,7 +18,7 @@ component. The unnecessary layer of nesting was slowing us down.
 
 The new `Particles` component looks like this:
 
-```{.javascript caption="Sprite-based Particles component"}
+```javascript
 // src/components/Particles.jsx
 
 import React, { Component } from 'react';
@@ -67,7 +67,7 @@ export default Particles;
 
 #### componentDidMount
 
-```{.javascript caption="componentDidMount method"}
+```javascript
 // src/components/Particles.jsx
 
 // ...
@@ -88,7 +88,7 @@ ref to the Konva layer, then spelunk through Konva internals to get the canvas
 itself. As the `_` prefix indicates, Anton Lavrenov did not intend this to be a
 public API.
 
-Thanks to JavaScript's permissiveness, we can use it anyway. :raised_hands:
+Thanks to JavaScript's permissiveness, we can use it anyway. 🙌
 
 `this.canvasContext` is a reference to our canvas's
 [CanvasRenderingContext2D](https://developer.mozilla.org/en-US/docs/Web/API/CanvasRenderingContext2D).
@@ -116,7 +116,7 @@ again and update our reference.
 
 #### drawParticle
 
-```{.javascript caption="drawParticle code"}
+```javascript
 // src/components/Particles.jsx
 
 // ...
@@ -141,7 +141,7 @@ you can see for yourself.
 
 #### componentDidUpdate
 
-```{.javascript caption="componentDidUpdate code"}
+```javascript
 // src/components/Particles.jsx
 
 // ...
@@ -183,7 +183,7 @@ you want as long as you give them different names.
 
 #### render
 
-```{.javascript caption="render code"}
+```javascript
 // src/components/Particles.jsx
 
 // ...

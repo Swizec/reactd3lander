@@ -21,7 +21,7 @@ We use the same approach as before:
 All the interesting complexity goes into finding the richest city and county.
 That part looks like this:
 
-```{.javascript caption="Richest county calculation"}
+```javascript
 // src/components/Meta/Description.js
 get countyFragment() {
   const byCounty = _.groupBy(this.props.data, 'countyID'),
@@ -60,7 +60,7 @@ combining sentence fragments based on props.
 
 You then render the Description like this:
 
-```{.javascript caption="Render Description component"}
+```javascript
 // src/components/App.js
 
 import { Title, Description } from "./components/Meta";

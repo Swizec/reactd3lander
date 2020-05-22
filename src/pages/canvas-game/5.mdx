@@ -26,7 +26,7 @@ Let's start with `App` and work our way down.
 Our `App` component doesn't do much. It imports MobX stores, triggers sprite
 loading, and starts the game loop.
 
-```{.javascript caption="The App component"}
+```javascript
 // src/components/App.js
 
 import React, { Component } from 'react';
@@ -84,7 +84,7 @@ still be small and functional. Every prop it needs comes from our two stores.
 
 Like this:
 
-```{.javascript caption="MarbleList component"}
+```javascript
 // src/components/MarbleList.js
 
 import React from 'react';
@@ -155,7 +155,7 @@ final vector.
 
 The Marble component looks like this:
 
-```{.javascript caption="Marble component"}
+```javascript
 // src/components/Marble.js
 
 import React, { Component } from 'react';
@@ -226,7 +226,7 @@ understand. MobX even batches value changes before triggering re-renders.
 
 The code inside those callbacks is pretty mathsy.
 
-```{.javascript caption="Dragging callbacks"}
+```javascript
 // src/components/Marble.js
 
 class Marble extends Component {
@@ -306,9 +306,9 @@ To use this sprite, we need two things:
 
 The first is a `MarbleDefinitions` dictionary. We used it in `Marble`
 component's render method. If you're playing along, you should copy paste this.
-Too much typing :smiley:
+Too much typing 😃
 
-```{.javascript caption="MarbleDefinitions dictionary"}
+```javascript
 // src/logic/Sprite.js
 
 const MarbleDefinitions = {
@@ -337,7 +337,7 @@ All values painstakingly assembled by hand. You're welcome. :relieved:
 The MobX store that loads our sprite into memory and helps us use it looks like
 this:
 
-```{.javascript caption="Sprite store"}
+```javascript
 // src/logic/Sprite.js
 
 import { observable, action, computed } from 'mobx';

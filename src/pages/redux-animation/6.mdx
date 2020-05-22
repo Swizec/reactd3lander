@@ -18,7 +18,7 @@ project because the community has decided that's the way to go.
 
 We use the idiomatic `connect()` approach. Like this:
 
-```{.javascript caption="Main container component"}
+```javascript
 // src/containers/AppContainer.jsx
 
 import { connect } from "react-redux";
@@ -107,7 +107,7 @@ and starts the D3 interval if necessary. Each interval iteration triggers the
 
 ### AppContainer talks to the store
 
-```{.javascript caption="The Reduxy part"}
+```javascript
 // src/containers/AppContainer.jsx
 
 const mapStateToProps = ({
@@ -169,7 +169,7 @@ That's a syntax supported in most modern JavaScript environments, called object
 literal property value shorthand. Our build system expands that
 `mapDispatchToProps` dictionary into something like this:
 
-```{.javascript caption="Compiler expands our dictionaries"}
+```javascript
 const mapDispatchToProps = {
     tickTime: tickTime,
     tickerStarted: tickerStarted,

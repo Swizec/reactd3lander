@@ -3,9 +3,9 @@
 We begin with the title because it shows up first.
 
 We start with an import in `App.js` and add it to the render method. You know
-the drill :smile:
+the drill 😄
 
-```{.javascript caption="Adding Title to main App component"}
+```javascript
 // src/App.js
 import CountyMap from './components/CountyMap';
 import Histogram from './components/Histogram';
@@ -66,7 +66,7 @@ Grouping them in a directory makes sense.
 We make a `components/Meta` directory and add an `index.js`. It makes importing
 easier.
 
-```{.javascript caption="Meta index.js"}
+```javascript
 // src/components/Meta/index.js
 export { default as Title } from './Title'
 export { default as Description } from './Description';
@@ -97,7 +97,7 @@ the _and_. First option when _both_ are selected, second when either/or.
 
 We start with imports, a stub, and a default export.
 
-```{.javascript caption="Title component stub"}
+```javascript
 // src/components/Meta/Title.js
 import React, { Component } from 'react';
 import { scaleLinear } from 'd3-scale';
@@ -143,7 +143,7 @@ arguments, and you use it without `()`. It's neat.
 We can implement `yearsFragment`, `USstateFragment`, and `format` in one code
 sample. They're short.
 
-```{.javascript caption="3 short getters in Title"}
+```javascript
 // src/components/Meta/Title.js
 class Title extends Component {
     get yearsFragment() {
@@ -179,12 +179,12 @@ the scale itself.
 `format` returns a function, which makes it a
 [higher order function](https://en.wikipedia.org/wiki/Higher-order_function).
 Being a getter makes it really nice to use: `this.format()`. Looks just like a
-normal function call :smile:
+normal function call 😄
 
 The `jobTitleFragment` getter is conceptually no harder than `yearsFragment`
 and `USstateFragment`, but it comes with a few more conditionals.
 
-```{.javascript caption="Title.jobTitleFragment"}
+```javascript
 // src/components/Meta/Title.js
 
 class Title extends Component {
@@ -222,7 +222,7 @@ other when building the fragment for a total 4 different options.
 We put all this together in the `render` method. A conditional decides which of
 the two situations we're in, and we return an `<h2>` tag with the right text.
 
-```{.javascript caption="Title.render"}
+```javascript
 // src/components/Meta/Title.js
 class Title extends Component {
     // ...

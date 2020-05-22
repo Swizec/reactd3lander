@@ -8,13 +8,13 @@ The core hooks are:
 - `useEffect` for side-effects
 - `useContext` for React's context API
 
-Here's how to think about them in a nutshell :point_down:
+Here's how to think about them in a nutshell 👇
 
 ### useState
 
 The `useState` hook replaces pairs of state getters and setters.
 
-```{.javascript caption="State without hooks"}
+```javascript
 class myComponent extends React.Component {
 	state = {
 	  value: 'default'
@@ -32,9 +32,9 @@ class myComponent extends React.Component {
 }
 ```
 
-:point_down:
+👇
 
-```{.javascript caption="useState hook"}
+```javascript
 const myComponent = () => {
   const [value, setValue] = useState('default');
 
@@ -76,7 +76,7 @@ Wanna do all this only when certain props change? Gotta check for that.
 
 Class:
 
-```{.javascript caption="Side-effects without hooks"}
+```javascript
 class myComp extends Component {
   state = {
 	  value: 'default'
@@ -109,9 +109,9 @@ class myComp extends Component {
 }
 ```
 
-:point_down:
+👇
 
-```{.javascript caption="useEffect hook"}
+```javascript
 const myComponent = () => {
   const [value, setValue] = useState('default');
 
@@ -140,7 +140,7 @@ component itself through a state setter, the second argument acts as a
 When you return a method from `useEffect`, it acts as a `componentWillUnmount`.
 Listening to, say, your mouse position looks like this:
 
-```{.javascript caption="A mouse listener hook"}
+```javascript
 const [mouseX, setMouseX] = useState();
 const handleMouse = (e) => setMouseX(e.screenX);
 
@@ -150,13 +150,13 @@ useEffect(() => {
 })
 ```
 
-Neat :okay_hand:
+Neat 👌
 
 ### useContext
 
 `useContext` cleans up your render prop callbacky hell.
 
-```{.javascript caption="Context without hooks"}
+```javascript
 const SomeContext = React.createContext()
 
 // ...
@@ -166,9 +166,9 @@ const SomeContext = React.createContext()
 </SomeContext.Consumer>
 ```
 
-:point_down:
+👇
 
-```{.javascript caption="Context with hooks"}
+```javascript
 const state = useContext(SomeContext)
 ```
 
@@ -176,4 +176,4 @@ Context state becomes just a value in your function. React auto subscribes to
 all updates.
 
 And those are the core hooks. useState, useEffect, and useContext. You can use
-them to build almost everything. :okay_hand:
+them to build almost everything. 👌

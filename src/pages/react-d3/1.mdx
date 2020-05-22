@@ -32,7 +32,7 @@ that HTML uses.
 That makes React's rendering engine particularly suited for SVG. Our 100x200
 rectangle from before looks like this as a React component:
 
-```{.javascript caption="A simple rectangle in React"}
+```javascript
 const Rectangle = () => (
     <rect width="100" height="200" x="50" y="20" />
 );
@@ -40,7 +40,7 @@ const Rectangle = () => (
 
 To use this rectangle component in a picture, you'd use a component like this:
 
-```{.javascript caption="Rect component in a picture"}
+```javascript
 const Picture = () => (
     <svg width="800" height="600">
         <Rectangle />
@@ -54,7 +54,7 @@ it's a `Picture` of a `Rectangle`.
 
 Compare that to a pure D3 approach:
 
-```{.javascript caption="A static rectangle in d3.js"}
+```javascript
 d3.select("svg")
   .attr("width", 800)
   .attr("height", 600)
@@ -75,7 +75,7 @@ and `y`.
 
 Those 8 lines of code create HTML that looks like this:
 
-```{.javascript caption="HTML of a rectangle"}
+```javascript
 <svg width="800" height="600">
     <rect width="100" height="200" x="50" y="20" />
 </svg>

@@ -4,7 +4,7 @@ The `County` component is built from two parts: imports and color constants,
 and a component that returns a `<path>`. All the hard calculation happens in
 `CountyMap`.
 
-```{.javascript caption="Imports and color constants"}
+```javascript
 // src/components/CountyMap/County.js
 import React, { Component } from 'react';
 import _ from 'lodash';
@@ -31,7 +31,7 @@ gray.
 
 Now we need the `County` component.
 
-```{.javascript caption="County component"}
+```javascript
 // src/components/CountyMap/County.js
 class County extends Component {
     shouldComponentUpdate(nextProps, nextState) {
