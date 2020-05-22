@@ -13,13 +13,13 @@ change anything.
 
 You can think of decorators as function wrappers. Instead of code like this:
 
-```{.javascript caption="Decoratorless function wrapping"}
+```javascript
 inject('store', ({ store }) => <div>A thing with {store.value}</div>);
 ```
 
 You can write the same code like this:
 
-```{.javascript caption="Function wrapping with decorators"}
+```javascript
 @inject('store')
 ({ store }) => <div>A thing with {store.value}</div>
 ```

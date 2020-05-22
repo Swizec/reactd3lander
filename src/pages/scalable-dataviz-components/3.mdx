@@ -12,7 +12,7 @@ The official recommended solution is that anything that used to go in
 `componentWillUpdate`, can go in `componentDidUpdate`. But not so fast!
 
 Updating D3 objects in `componentDidUpdate` would mean our visualization always
-renders one update behind. Stale renders! :scream:
+renders one update behind. Stale renders! 😱
 
 The new `getDerivedStateFromProps` to the rescue. Our integration follows a
 3-step pattern:
@@ -33,7 +33,7 @@ stuff like that.
 
 Let's update our scatterplot so it can deal with resizing and updating data.
 
-3 steps :point_down:
+3 steps 👇
 
 - add an interaction that resizes the scatterplot
 - move scales to state
@@ -55,7 +55,7 @@ by 30%.
 
 Move sizing into App state and add an `onClick` handler.
 
-```{.javascript caption="Sizing into state and click handler"}
+```javascript
 // App.js
 class App extends React.Component {
   state = {
@@ -82,7 +82,7 @@ The `render` method reads `width` and `height` from state.
 Now gotta change rendering to listen to these values and fire the `onClick`
 handler.
 
-```{.javascript caption="Use state in rendering"}
+```javascript
 // App.js
 
 <svg width="800" height="800" onClick={this.onClick}>
@@ -116,7 +116,7 @@ Datapoints don't move because the scales that position them are calculated once
 First step to keeping scales up to date is to move them from component values
 into state.
 
-```{.javascript caption="Move scales into state"}
+```javascript
 // Scatterplot.js
 class Scatterplot extends React.Component {
   state = {
@@ -137,7 +137,7 @@ it's `xScale: d3 ...` instead of `xScale = d3 ...`.
 
 Our render function should use these as well. Small change:
 
-```{.javascript caption="Render function uses state scales"}
+```javascript
 // Scatterplot.js
   render() {
     const { x, y, data, height } = this.props,
@@ -159,7 +159,7 @@ Just one more step.
 Last step is to update our scales' ranges in `getDerivedStateFromProps`. This
 method runs every time React touches our component for any reason.
 
-```{.javascript caption="Update scales"}
+```javascript
 // Scatterplot.js
 class Scatterplot extends React.PureComponent {
   // ..

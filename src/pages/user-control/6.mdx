@@ -7,7 +7,7 @@ the `Controls` component.
 We'll start with the `render` method, then handle the parts I said earlier
 would look repetitive.
 
-```{.javascript caption="Adding two more rows to Controls"}
+```javascript
 // src/components/Controls/index.js
 class Controls extends Component {
     // ...
@@ -56,7 +56,7 @@ callback, and we tell US states to render capitalized.
 The implementations of those `updateDataFilter` callbacks follow the same
 pattern as `updateYearFilter`.
 
-```{.javascript caption="new updateDataFilter callbacks"}
+```javascript
 // src/components/Controls/index.js
 
 class Controls extends React.Component {
@@ -118,7 +118,7 @@ harder to read.
 Our last step is to add these new keys to the `reportUpdateUpTheChain`
 function.
 
-```{.javascript caption="Add new filters to main state update"}
+```javascript
 // src/components/Controls/index.js
 
 class Controls extends React.Component {
@@ -146,7 +146,7 @@ Two more rows of filters show up.
 
 ![All the filters](https://raw.githubusercontent.com/Swizec/react-d3js-es6-ebook/2018-version/manuscript/resources/images/es6v2/all-filters.png)
 
-:clap:
+👏
 
 Again, if it didn't work, consult
 [the diff on GitHub](https://github.com/Swizec/react-d3-walkthrough-livecode/commit/813cdd496d06a38bb2816a8f973ab6c816119dca).

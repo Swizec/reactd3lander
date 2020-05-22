@@ -4,7 +4,7 @@ Like we said: the hard stuff happens inside our Ball component. That means App
 has render our Ball and implement a mechanism to toggle the `x` coordinate
 between two states: Left and right.
 
-```{.javascript caption="Rendering a declarative transitionable component"}
+```javascript
 class App extends React.Component {
   state = {
     ballLeft: true
@@ -19,7 +19,7 @@ class App extends React.Component {
     return (
       <div style={styles}>
         <h1>D3 transitions in React 16.3 {"\u2728"}</h1>
-        <p>Click the ball :point_down:</p>
+        <p>Click the ball 👇</p>
         <svg style={{ width: "300", height: "300px" }} onClick={this.ballJump}>
           <Ball x={ballLeft ? 15 : 250} />
         </svg>

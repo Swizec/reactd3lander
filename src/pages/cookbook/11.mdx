@@ -1,202 +1,235 @@
 # Challenge
 
-> Have you ever tried making a sankey diagram with d3+react, I can't seem to
-> make it work for some reason.:/ Emil
+Smartphones, magnificent little things. But there's only 4 kinds. Draw a
+responsive stackchart of their marketshare.
 
-No Emil, I have not. Let's give it a shot! Thanks for finding us a dataset that
-fits :)
-
-[Dataset](https://reactviz.holiday/datasets/ugr-sankey-openspending.json)
+[Dataset](https://reactviz.holiday/datasets/statistic_id266572_us-smartphone-market-share-2012-2018-by-month.xlsx)
 
 # My Solution
 
-<iframe width="560" height="315" src="https://www.youtube.com/embed/SAmKimb8wFo" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+<iframe width="560" height="315" src="https://www.youtube.com/embed/lbHy8SF39k8" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
 
-<iframe src="https://codesandbox.io/embed/m9vy7mr5k8?fontsize=14" style="width:100%; height:500px; border:0; border-radius: 4px; overflow:hidden;" sandbox="allow-modals allow-forms allow-popups allow-scripts allow-same-origin"></iframe>
+<iframe src="https://codesandbox.io/embed/0xj8q4k2pp?fontsize=14" style="width:100%; height:500px; border:0; border-radius: 4px; overflow:hidden;" sandbox="allow-modals allow-forms allow-popups allow-scripts allow-same-origin"></iframe>
 
-## What is a Sankey diagram?
+We've built stackcharts before, on the
+[What do Americans want for Christmas](https://reactviz.holiday/christmas-gifts/)
+day. That means we can focus on teh responsive part today.
 
-[Sankey diagrams](https://en.wikipedia.org/wiki/Sankey_diagram) are flow
-diagrams. They're often used to show flows of money and other resources between
-different parts of an organization. Or between different organizations. Sankey
-originally designed them to show energy flows in factories.
+Although I still had to build the full stack chart from scratch and my
+jetlagged brain struggled. Sorry viewers. You might want to skip the first
+several minutes of the stream 😅
 
-Vertical rectangles represent nodes in the flow, lines connecting the
-rectangles show how each node contributes to the inputs of the next node. Line
-thickness correlates to flow magnitude.
+## How to make a responsive chart with React and D3
 
-One of the most famous Sankey diagrams in history is this visualization of
-Napoleon's invasion into Russia.
+There's two parts to making responsive charts and data visualizations:
 
-![](https://upload.wikimedia.org/wikipedia/commons/2/29/Minard.png)
+1. Build your chart so it conforms to a width and height
+2. Use CSS to resize your SVG based on viewport size
+3. React to window size changes
+4. Read SVG size
+5. Pass it into your chart
 
-No I'm not quite sure how to read that either. But it's cool and it's old ✌️
+We'll go from the outside-in.
 
-## How do you make a sankey with React and D3?
+### Dynamically sized SVG
 
-Turns out building a Sankey diagram with React and D3 isn't terribly difficult.
-A D3 extension library called [d3-sankey](https://github.com/d3/d3-sankey)
-provides a generator for them. Your job is to fill it with data, then render.
+There's a few ways you can render your SVG so it resizes based on available
+space. Flexbox, css grid, old school CSS tricks.
 
-The dataset Emil found for us was specifically designed for Sankey diagrams so
-that was awesome. Thanks Emil. 🙏🏻
+The easist is a `100%` width.
 
-I don't know what _our_ data represents, but you gotta wrangle yours into
-`nodes` and `links`.
+```javascript
+<svg width="100%" height="400" ref={this.svgRef}>
+  {data && (
+    <ResponsiveStackChart
+      data={data}
+      keys={['android', 'ios', 'blackberry', 'microsoft']}
+      width={width}
+      height={height}
+    />
+  )}
+</svg>
+```
 
-1. `nodes` are an array of representative keys, names in our case
-2. `links` are an array of objects mapping a `source` inex to a `target` index
-   with a numeric `value`
+Our SVG always occupies the full width of its parent div - the whole page in
+our case. It contains a `<ResponsiveStackChart>` that accepts width, height,
+and data.
 
-```json
-{
-  "nodes": [
-    {
-      "name": "Universidad de Granada"
-    },
-    {
-      "name": "De Comunidades Autónomas"
-    },
-   //...
-  ],
-  "links": [
-    {
-      "source": 19,
-      "target": 26,
-      "value": 1150000
-    },
-    {
-      "source": 0,
-      "target": 19,
-      "value": 283175993
-    },
-    //...
+Those four come from state.
+
+```javascript
+const { data, width, height } = this.state;
+```
+
+You could track different widths for different charts, do some layouting,
+things like that. We don't need those complications because this is a small
+example.
+
+### Listen to window size changes
+
+Now that we have a dynamic SVG, we have to read its size every time the window
+size changes. That happens when users resize their browser (never), or when
+they turn their phone (sometimes).
+
+In reality this part almost never happens. People rarely resize their browsers
+and only turn their phones if you give them a reason to. But it's a nice touch
+when we're talking about responsive :)
+
+We add a listener to the `resize` window event in `componentDidMount` and
+remove it in `componentWillUnmount`. Both in the main App componenet.
+
+```javascript
+componentDidMount() {
+    // data loading
+
+    this.measureSVG();
+    window.addEventListener("resize", this.measureSVG);
+}
+
+componentWillUnmount() {
+    window.removeEventListener("resize", this.measureSVG);
 }
 ```
 
-### Turn data into a Sankey layout
+`measureSVG` is where the next bit happens.
 
-We can keep things simple with a functional component that calculates the
-Sankey layout on the fly with every render. We'll need some color stuff too.
-That was actually the hardest, lol.
+### Measure SVG element size
 
-```javascript
-import { sankey, sankeyLinkHorizontal } from "d3-sankey";
-//...
-
-const MysteriousSankey = ({ data, width, height }) => {
-  const { nodes, links } = sankey()
-    .nodeWidth(15)
-    .nodePadding(10)
-    .extent([[1, 1], [width - 1, height - 5]])(data);
-  const color = chroma.scale("Set3").classes(nodes.length);
-  const colorScale = d3
-    .scaleLinear()
-    .domain([0, nodes.length])
-    .range([0, 1]);
-```
-
-It's called `MysteriousSankey` because I don't know what our dataset
-represents. Takes a width, a height, and a data prop.
-
-We get the `sankey` generator from `d3-sankey`, initialize a new generator with
-`sankey()`, define a width for our nodes and give them some vertical padding.
-Extent defines the size of our diagram with 2 coordinates: the top left and
-bottom right corner.
-
-Colors are a little trickier. We use `chroma` to define a color scale based on
-the predefined `Set3` brewer category. We split it up into `nodes.length` worth
-of colors - one for each node. But this expects inputs like `0.01`, `0.1` etc.
-
-To make that easier we define a `colorScale` as well. It takes indexes of our
-nodes and translates them into those 0 to 1 numbers. Feed that into the `color`
-thingy and it returns a color for each node.
-
-### Render your Sankey
-
-A good approach to render your Sankey diagram is using two components:
-
-1. `<SankeyNode>` for each node
-2. `<SankeyLink>` for each link between them
-
-You use them in two loops in the main `<MysteriousSankey>` component.
+A useful DOM method engineers often forget exists is `getBoundingClientRect`.
+Tells you the exact size of a DOM node. Great for stuff like this 👌
 
 ```javascript
-return (
-  <g style={{ mixBlendMode: 'multiply' }}>
-    {nodes.map((node, i) => (
-      <SankeyNode
-        {...node}
-        color={color(colorScale(i)).hex()}
-        key={node.name}
-      />
-    ))}
-    {links.map((link, i) => (
-      <SankeyLink
-        link={link}
-        color={color(colorScale(link.source.index)).hex()}
-      />
-    ))}
-  </g>
-);
+measureSVG = () => {
+  const { width, height } = this.svgRef.current.getBoundingClientRect();
+
+  this.setState({
+    width,
+    height,
+  });
+};
 ```
 
-Here you can see a case of inconsistent API design. `SankeyNode` gets node data
-splatted into props, `SankeyLink` prefers a single prop for all the `link`
-info. There's a reason for that and you might want to keep to the same approach
-in both anyway.
+Take the bounding client rect of our SVG element, read out its width and
+height, save it to state. This triggers a re-render of our app, passes new
+sizing props into the chart, and the chart resizes itself.
 
-Both also get a `color` prop with the messiness of translating a node index
-into a `[0, 1]` number passed into the chroma color scale, translated into a
-hex string. Mess.
+![](https://media.giphy.com/media/12NUbkX6p4xOO4/giphy.gif)
 
-### &lt;SankeyNode>
+## A chart that listens to its width and height
+
+Now that we've got dynamic always accurate width and height, we have to listen
+to them.
+
+Best way to do that is with D3 scales that you keep up to date. We use the
+dynamic full integration approach from my
+[React for Data Visualization](https://swizec1.teachable.com/p/react-for-data-visualization/)
+course.
+
+That means:
+
+1. Scales go into state
+2. Scales update their domain and range in `getDerivedStateFromProps`
 
 ```javascript
-const SankeyNode = ({ name, x0, x1, y0, y1, color }) => (
-  <rect x={x0} y={y0} width={x1 - x0} height={y1 - y0} fill={color}>
-    <title>{name}</title>
-  </rect>
-);
+class ResponsiveStackChart extends React.Component {
+  state = {
+    xScale: d3
+      .scaleBand()
+      .domain(this.props.data.map(d => d.date))
+      .range([0, 600]),
+    yScale: d3.scaleLinear().range([0, 600])
+  };
+  stack = d3.stack().keys(this.props.keys);
+  color = chroma.brewer.Paired;
+
+  static getDerivedStateFromProps(props, state) {
+    let { xScale, yScale } = state;
+
+    xScale.domain(props.data.map(d => d.date)).range([0, props.width]);
+    yScale.range([0, props.height - 50]);
+
+    return {
+      ...state,
+      xScale,
+      yScale
+    };
+  }
 ```
 
-`SankeyNode`s are rectangles with a title. We take top left and bottom right
-coordinates from the sankey generator and feed them into rect SVG elements.
-Color comes form the color prop.
+We define default state for our `xScale` and `yScale`. Both assume the chart is
+going to be 600x600 pixels. xScale has a domain with every identifier in our
+dataset, the month/year, and yScale will get its domain in the render function.
+I'll explain why.
 
-### &lt;SankeyLink>
+`getDerivedStateFromProps` runs every time our component updates for any
+reason. A good place to update our scales so they fit any new into from props.
+
+We redefine their ranges to match the `width` and `height` props. If we are
+careful to always rely on scales to position and size elements on our chart,
+the chart will automatically resize.
+
+### The stack layout
+
+To avoid calculating the stack layout multiple times, we do it in the render
+method. Need its data for rendering and for the `yScale` domain.
 
 ```javascript
-const SankeyLink = ({ link, color }) => (
-  <path
-    d={sankeyLinkHorizontal()(link)}
-    style={{
-      fill: 'none',
-      strokeOpacity: '.3',
-      stroke: color,
-      strokeWidth: Math.max(1, link.width),
-    }}
-  />
-);
+render() {
+    const { data, height } = this.props,
+      { yScale, xScale } = this.state;
+    const stack = this.stack(data);
+
+    yScale.domain([0, d3.max(stack[stack.length - 1].map(d => d[1]))]);
 ```
 
-`SankeyLink`s are paths. We initialze a `sankeyLinkHorizontal` path generator
-instance, feed it `link` info and that creates the path shape for us. This is
-why it was easier to get everything in a single `link` prop. No idea which
-arguments the generator actually uses.
+The `stack` generator returns an array of arrays. At the top level we have an
+array for every `key` in our dataset. Inside is an array of tuples for each
+datapoint. The touples hold a `min` and `max` value that tells us where a
+datapoint starts and ends.
 
-Styling is tricky too.
+We use `d3.max` to find the highest value in the stack data and feed it into
+yScale's domain so it can proportionally size everything when we render.
 
-Sankey links are lines. They don't look like lines, but that's what they are.
-You want to make sure `fill` is set to nothing, and use `strokeWidth` to get
-that nice volume going.
+👌
 
-The rest is just colors and opacities to make it look prettier.
+## An axis with dynamic number of tricks
 
-A sankey diagram comes out 👇
+The last step is making our axis look good at every size. We have to make sure
+ticks don't overlap and their number adapts to available space.
 
-![](https://github.com/Swizec/datavizAdvent/raw/master/src/content/sankey/sankey.png)
+```javascript
+const BottomAxis = d3blackbox((anchor, props) => {
+  const scale = props.scale,
+    tickWidth = 60,
+    width = scale.range()[1],
+    tickN = Math.floor(width / tickWidth),
+    keepEveryNth = Math.floor(scale.domain().length / tickN);
 
-You can make it betterer with some interaction on the nodes or even links.
-They're components so the world is your oyster. Anything you can do with
-components, you can do with these.
+  scale.domain(scale.domain().filter((_, i) => i % keepEveryNth === 0));
+
+  const timeFormat = d3.timeFormat('%b %Y');
+  const axis = d3
+    .axisBottom()
+    .scale(props.scale)
+    .tickFormat(timeFormat);
+  d3.select(anchor.current).call(axis);
+});
+```
+
+This is quite mathsy. The idea works like this:
+
+1. Decide how much room you want for each tick - `tickWidth`
+2. Read the width from scale.range - `width`
+3. Use division to decide how many ticks fit - `tickN`
+4. Some more division to decide every Nth tick you can keep - `keepEveryNth`
+
+Then we filter the scale's domain and keep only every `keepEveryNth` element.
+
+Only reason we need this is because we're using a band scale, which is an
+ordinal scale. Means D3 can't easily interpolate datapoints and figure these
+things out on its own.
+
+The result is a perfectly responsive chart 👇
+
+<blockquote class="twitter-tweet" data-lang="en"><p lang="en" dir="ltr">A responsive <a href="https://twitter.com/hashtag/react?src=hash&amp;ref_src=twsrc%5Etfw">#react</a> and <a href="https://twitter.com/hashtag/d3?src=hash&amp;ref_src=twsrc%5Etfw">#d3</a> stackchart. <a href="https://twitter.com/hashtag/ReactVizHoliday?src=hash&amp;ref_src=twsrc%5Etfw">#ReactVizHoliday</a> 10<br/><br/>👉 <a href="https://t.co/8a8r5ifhyz">https://t.co/8a8r5ifhyz</a> <a href="https://t.co/kMWgUAZB4J">pic.twitter.com/kMWgUAZB4J</a></p>&mdash; Swizec Teller (@Swizec) <a href="https://twitter.com/Swizec/status/1074202928221700097?ref_src=twsrc%5Etfw">December 16, 2018</a></blockquote>
+<script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>

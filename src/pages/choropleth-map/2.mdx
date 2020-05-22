@@ -3,7 +3,7 @@
 You might guess the pattern already: add an import, add a helper method or two,
 update `render`.
 
-```{.javascript caption="Import CountyMap component"}
+```javascript
 // src/App.js
 import Preloader from './components/Preloader';
 import { loadAllData } from './DataHandling';
@@ -21,7 +21,7 @@ In the `App` class itself, we add a `countyValue` method. It takes a county
 entry and a map of tech salaries, and it returns the delta between median
 household income and a single tech salary.
 
-```{.javascript caption="App.countyValue method"}
+```javascript
     // src/App.js
     countyValue(county, techSalariesMap) {
         const medianHousehold = this.state.medianIncomes[county.id],
@@ -54,7 +54,7 @@ In the `render` method, we'll:
 - remove the "data loaded" indicator
 - render the map
 
-```{.javascript caption="Render the CountyMap component"}
+```javascript
 // src/App.js
 render() {
     // Insert the line(s) between here...
@@ -103,7 +103,7 @@ We call our dataset `filteredTechSalaries` because we're going to add filtering
 in the
 [subchapter about adding user controls](https://swizec1.teachable.com/courses/react-for-data-visualization/lectures/6888938#user-controls).
 Using the proper name now means less code to change later. The magic of
-foresight :smile:
+foresight 😄
 
 We use `_.groupBy` to build a dictionary mapping each `countyID` to an array of
 salaries, and we use our `countyValue` method to build an array of counties for

@@ -15,7 +15,7 @@ Let's start with the basics: a `Histogram` directory and an `index.js` file.
 Keeps our code organized and imports easy. I like to use directories for
 components made of multiple files.
 
-```{.javascript caption="Re-export Histogram"}
+```javascript
 export { default } from "./Histogram";
 ```
 
@@ -29,7 +29,7 @@ internal structure.
 Now we need the `Histogram.js` file. Start with some imports, a default export,
 and a stubbed out `Histogram` class.
 
-```{.javascript caption="Histogram component stub"}
+```javascript
 // src/components/Histogram/Histogram.js
 import React from "react";
 import * as d3 from "d3";
@@ -74,7 +74,7 @@ each bar, and `render` returning null for now.
 
 ### getDerivedStateFromProps
 
-```{.javascript caption="getDerivedStateFromProps in Histogram"}
+```javascript
 // src/components/Histogram/Histogram.js
     static getDerivedStateFromProps(props, state) {
         let { histogram, widthScale, yScale } = state;
@@ -131,7 +131,7 @@ Now let's render this puppy.
 
 ### render
 
-```{.javascript caption="Histogram.render"}
+```javascript
 // src/components/Histogram/Histogram.js
 class Histogram extends React.Component {
     // ...
@@ -168,7 +168,7 @@ it goes, or anything like that. Walk through data, render, done.
 `makeBar` is a function that takes a histogram bar's metadata and returns a
 `HistogramBar` component. We use it to make our declarative loop more readable.
 
-```{.javascript caption="Histogram.makeBar"}
+```javascript
 // src/components/Histogram/Histogram.js
 class Histogram extends React.Component {
     // ...

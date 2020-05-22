@@ -23,7 +23,7 @@ components wrapping other React components and a function that makes it easy.
 
 A HOC for D3 blackbox integration, called `D3blackbox`, looks like like this:
 
-```{.javascript caption="React blackbox HOC"}
+```javascript
 function D3blackbox(D3render) {
   return class Blackbox extends React.Component {
     anchor = React.createRef();
@@ -59,7 +59,7 @@ syntax.
 
 Using our new `D3blackbox` HOC to make an axis looks like this:
 
-```{.javascript caption="React blackbox HOC"}
+```javascript
 const Axis = D3blackbox(function () {
     const scale = d3.scaleLinear()
               .domain([0, 10])

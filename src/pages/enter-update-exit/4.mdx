@@ -5,7 +5,7 @@ a collection of `Letter` components in a loop.
 
 We start with a skeleton like this:
 
-```{.javascript caption="Alphabet skeleton"}
+```javascript
 // src/components/Alphabet.js
 import React from "react";
 import * as d3 from "d3";
@@ -48,7 +48,7 @@ To showcase enter-update-exit transitions, we create a new alphabet every
 second and a half. Using `d3.interval` lets us do that in a browser friendly
 way.
 
-```{.javascript caption="Alphabet game loop"}
+```javascript
 // src/components/Alphabet/index.js
     componentDidMount() {
         d3.interval(this.shuffleAlphabet, 1500);

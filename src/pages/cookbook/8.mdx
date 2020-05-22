@@ -1,365 +1,387 @@
 # Challenge
 
-My girlfriend likes to buy her presents early, I wait until the last minute.
-What do other people do? Create a way to visualize the last few weeks of the
-year and rank them by popularity.
+Ever seen Christmas stockings? They get stuffed with all sorts of stuff. Build
+a donut chart of what's what and add a mouse hover effect that shows what a
+slice represents.
 
-[Dataset](https://reactviz.holiday/datasets/statistic_id246669_period-during-which-us-consumers-will-start-holiday-shopping-2018.xlsx)
+[Dataset](https://reactviz.holiday/datasets/statistic_id946574_gifts-likely-to-be-put-in-childs-christmas-stocking-in-the-us-in-2018.xlsx)
 
 # My Solution
 
-<iframe width="560" height="315" src="https://www.youtube.com/embed/VzAAGCudLe8" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+<iframe width="560" height="315" src="https://www.youtube.com/embed/8IOHiwI74Fc" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
 
-<iframe src="https://codesandbox.io/embed/oq730593n9?fontsize=14" style="width:100%; height:500px; border:0; border-radius: 4px; overflow:hidden;" sandbox="allow-modals allow-forms allow-popups allow-scripts allow-same-origin"></iframe>
+<iframe src="https://codesandbox.io/embed/7mlxwrjw4x?fontsize=14" style="width:100%; height:500px; border:0; border-radius: 4px; overflow:hidden;" sandbox="allow-modals allow-forms allow-popups allow-scripts allow-same-origin"></iframe>
 
-Well that was fun. What do you when you have a sparse dataset? A dataset with
-so few data points positioned so weirdly that it's almost certain to hide
-important trends?
+Tooltips ... tooltips are hard. So simple in theory yet organizing it into
+sensible code will wreck your mind. 🤯
 
-You try to fix it.
+Your goal is to build this:
 
-With science! Math! Code!
+1. A tooltip component
+2. Some way to store tooltip position and content
+3. Ability to change that on mouse over
 
-Or ... well ... you can try. We tried a few things until we were forced to
-admit defeat in the face of mathematics beyond our station. Or at least beyond
-mine.
+Mousing over a thing - slice of the donut chart in this case - updates
+positioning and content. This triggers a tooltip re-render. Tooltip shows up
+where you need saying what you want.
 
-## Our dataset and what's wrong with it
-
-We're visualizing results of a poll asking people _When do you start christmas
-shopping?_. The poll had over 4000 responses. We get just the result.
-
-```
-Before October end	39
-November before Thanksgiving	21
-November after Thanksgiving	27
-December	11
-Janaury	2
-February	0
-```
-
-39% start shopping before October ends, 21% in November before thanksgiving,
-27% right after thanksgiving, and so on.
-
-You can imagine these are long timespans. Ranging from basically a whole year
-to just a week in length. That's a problem for us because it makes the
-datapoints hard to compare.
-
-Of course Before October end is overrepresented: It's got almost four times as
-long to accumulate its result as the rest of the time periods combined.
-
-## A simple presentation
-
-We start exploring with a line chart. Borrowing a lot of code from the
-[Money spent on Christmas](https://reactviz.holiday/money-spent/) challenge.
-
-![](https://github.com/Swizec/datavizAdvent/raw/master/src/content/when-to-buy-gifts/plainchart.png)
-
-That's our data plotted as a curved line. Circles represent the actual
-datapoints we've got. Curves are a a good first approach to show that our data
-might not be all that exact.
-
-We borrow axis implementation from
-[Money spent on Christmas](https://reactviz.holiday/money-spent/) using my
-[d3blackbox](https://d3blackbox.com) library.
-
-```javascript
-const BottomAxis = d3blackbox((anchor, props) => {
-  const axis = d3.axisBottom().scale(props.scale);
-  d3.select(anchor.current).call(axis);
-});
-
-const LeftAxis = d3blackbox((anchor, props) => {
-  const axis = d3
-    .axisLeft()
-    .scale(props.scale)
-    .tickFormat(d => `${d}%`);
-  d3.select(anchor.current).call(axis);
-});
-```
-
-Each axis implementation renders an anchor element and injects a pure D3
-rendered axis on every update. No need to fiddle with building our own.
-
-### &lt;Datapoint>
-
-A `<Datapoints>` component keeps our main code cleaner. Renders those tiny
-little circles.
-
-```javascript
-const Circle = styled.circle`
-  fill: none;
-  stroke: black;
-  r: 3px;
-`;
-
-const Datapoints = ({ data, x, y }) => (
-  <g>
-    {data.map(d => (
-      <Circle cx={x(d.descriptor)} cy={y(d.percentage)}>
-        <title>{d.descriptor}</title>
-      </Circle>
-    ))}
-  </g>
-);
-```
-
-Takes data, an `x` scale and a `y` scale. Walks through data in a loop, renders
-circles with a title. Makes it so you can mouse over a circle and if you do it
-just right a browser native tooltip appears.
-
-### &lt;LineChart>
-
-The LineChart component brings all of this together and uses a D3 line
-generator for a single path definition.
-
-```javascript
-const Line = styled.path`
-  fill: none;
-  stroke: ${chroma("green").brighten(1.5)};
-  stroke-width: 2px;
-`;
-
-class LineChart extends React.Component {
-  height = 500
-
-  x = d3.scalePoint()
-    .domain(this.props.data.map(d => d.descriptor)
-    .range([0, 600]),
-  y = d3
-    .scaleLinear()
-    .domain([0, d3.max(this.props.data, d => d.percentage)])
-    .range([this.height, 0])
-
-  line = d3
-    .line()
-    .x(d => this.x(d.percentage))
-    .y(d => this.y(d.descriptor))
-    .curve(d3.curveCatmullRom.alpha(0.5))
-
-  render() {
-    const { data, x, y } = this.props;
-
-    return (
-      <g transform={`translate(${x}, ${y})`}>
-        <Line d={this.line(data)} />
-        <Datapoints data={data} x={this.x} y={this.y} />
-        <BottomAxis scale={this.x} x={0} y={this.height} />
-        <LeftAxis scale={this.y} x={0} y={0} />
-      </g>
-    )
-  }
-}
-```
-
-Sets up a horizontal `x` point scale, a vertical `y` scale with an inverted
-range, a `line` generator with a curve, then renders it all.
-
-Nothing too crazy going on here. You've seen it all before. If not, the
-[Money spent on Christmas](https://reactviz.holiday/money-spent/) article
-focuses more on the line chart part.
-
-## Is it realistic?
-
-So how realistic does this chart look to you? Does it represent the true
-experience?
-
-![](https://github.com/Swizec/datavizAdvent/raw/master/src/content/when-to-buy-gifts/plainchart.png)
-
-Yes according to the data _most_ people start shopping before the end of
-October. And it's true, very many start some time in November, with a moderate
-spike around Black Friday and Cyber Monday.
-
-Does the variation in time period hide important truths?
+So how do you organize that in a way that makes sense?
 
 🤔
 
-## Making an approximation
+You can watch me flounder around trying different solutions in the stream
+above. In the end we went with a combination of state in the `App` component
+and React Context shared between everyone else.
 
-All of the above is true. And yet it hides an important fact.
+We're using React hooks because hooks are the hot new kid on the block and
+learning new coding paradigms is fun.
 
-39% before October end is a huge percentage. But it might mean August, last day
-of October, or even March. Who knows? The data sure don't tell us.
-
-And that week after thanksgiving? It's got more starting shoppers than all of
-the rest of November combined. Even though it's just 1 week versus 3 weeks.
-
-We can tease out these truths 👉 normalize our data by week.
-
-![](https://github.com/Swizec/datavizAdvent/raw/master/src/content/when-to-buy-gifts/approximation.png)
-
-Assume each datapoint spreads uniformly over its entire period, and a different
-picture comes out.
-
-October doesn't look so hot anymore, November looks better, January is chilly,
-but then that Black Friday and Cyber Monday. Hot damn. Now _that_ is a spike in
-shopping activity!
-
-See how much stronger that spike looks when you normalize data by time period?
-Wow.
-
-### You can do it with a little elbow grease
-
-We have to construct a fake dataset with extra points in between the original
-data. Because our dataset is small, we could do this manually with just a bit
-of maths.
-
-Goes in `getDerivedStateFromProps`
+## Managing and sharing tooltip state
 
 ```javascript
-static getDerivedStateFromProps(props, state) {
-    // Basic goal:
-    // Split "Before October end" into 4 weekly datapoints
-    // split "November before Thanksgiving" into 3 weekly datapoints
-    // split "November after Thanksgiving" into 1 weekly datapoint
-    // split "December" into 4 weekly datapoints
-    // split "January" into 4 weekly datapoints
-    const { data } = props,
-      { x, xDescriptive } = state;
-
-    const approximateData = [
-      ...d3.range(4).map(_ => data[1].percentage / 4),
-      ...d3.range(3).map(_ => data[1].percentage / 3),
-      ...d3.range(1).map(_ => data[2].percentage / 1),
-      ...d3.range(4).map(_ => data[3].percentage / 4),
-      ...d3.range(4).map(_ => data[4].percentage / 4)
-    ];
-
-    x.domain(d3.range(approximateData.length));
-    // Manually define range to match number of fake datapoints in approximateData
-    xDescriptive.range([
-      x(0),
-      x(4),
-      x(4 + 3),
-      x(4 + 3 + 1),
-      x(4 + 3 + 1 + 4),
-      x(4 + 3 + 1 + 4 + 4 - 1)
-    ]);
-
-    return {
-      approximateData,
-      x,
-      xDescriptive
-    };
-  }
+const [tooltip, setTooltip] = useState({
+  show: false,
+  x: 0,
+  y: 0,
+  content: '',
+  orientLeft: false,
+});
 ```
 
-We take `props` and `state`, then split every datapoint into its appropriate
-number of weeks. Our approach is roughly based on the idea of a running
-average. You could make a more generalized algorithm for this, but for a small
-dataset it's easier to just do it like this.
+Our `tooltip` state holds a `show` flag, tooltip coordinates, and `content`.
+`orientLeft` is the nascent beginnings of a fuller tooltip API. The tooltip
+component is going to consume this context and use it to render itself.
 
-So the whole of October, that first datapoint, becomes 4 entries with a fourth
-of the value each. November turns into 3 with thirds. And so on.
-
-Since we want to keep the original labeled axis and datapoints, we have to use
-two different horizontal scales. One for the approximate dataset, one for the
-original.
-
-We put them in state so we can set them up in `getDerivedStateFromProps`.
+To make changing this state easier, we sneakily include `setTooltip` in the
+object passed into React Context itself.
 
 ```javascript
-state = {
-  x: d3.scalePoint().range([0, 600]),
-  xDescriptive: d3
-    .scaleOrdinal()
-    .domain(this.props.data.map(d => d.descriptor)),
+<TooltipContext.Provider value={{ ...tooltip, setTooltip }}>
+```
+
+Now any consumer can change values in context. Whoa
+
+![](https://media.giphy.com/media/SDogLD4FOZMM8/giphy.gif)
+
+## The &lt;Tooltip> component
+
+Our `<Tooltip>` component doesn't do much on its own. It's a wrapper that
+handles positioning, visibility, and supports a nascent orientation API. We can
+use `orientLeft` to align our tooltip left or right. A fuller API would also
+have top/bottom and a bunch of similar features.
+
+```javascript
+const Tooltip = ({ width, height, children }) => {
+  const { x, y, show, orientLeft } = useContext(TooltipContext);
+
+  return (
+    <g
+      transform={`translate(${orientLeft ? x - width : x}, ${y})`}
+      style={{ visibility: show ? 'visible' : 'hidden' }}
+    >
+      <foreignObject width={width} height={height}>
+        {children}
+      </foreignObject>
+    </g>
+  );
 };
 ```
 
-`x` is a point scale with a range. Its domain comes from our approximate
-dataset. One for each entry based on the index.
+`useContext` takes the `TooltipContext` object and returns its current value on
+every render. We use destructuring to get at the parts we need: coordinates,
+show flag, orientation.
 
-`xDescriptive` works much like our old horizontal point scale. But because we
-have to spread it over more datapoints that it never receives, it needs to be
-an ordinal scale.
+Tooltip then renders a `<g>` grouping element with positioning based on the
+orientation, and visibility based on the flag. Inside it wraps children in a
+sized `foreignObject` element. This allows us to embed HTML inside SVG.
 
-Ordinal scales map inputs directly into outputs. Like a dictionary. Our domain
-becomes every descriptor from the dataset, the range we define manually to line
-up with output from the `x` scale.
+HTML is better for tooltip content than SVG because HTML supports text
+automatic layouting. Set a width and the browser will figure out what to do
+with long strings. Don't get that with SVG.
 
-Rendering is still the same, we just gotta be careful which scale we pass into
-which element.
+The `Tooltip.js` file also exports a React Context.
 
 ```javascript
-render() {
-    const { data, x, y } = this.props,
-      { approximateData } = this.state;
+const TooltipContext = React.createContext({
+  show: false,
+  x: 0,
+  y: 0,
+  orientLeft: false,
+  content: '',
+});
 
-    return (
-      <g transform={`translate(${x}, ${y})`}>
-        <Line d={this.line(approximateData)} />
-        <Datapoints data={data} x={this.state.xDescriptive} y={this.y} />
-        <BottomAxis scale={this.state.xDescriptive} x={0} y={this.height} />
-        <LeftAxis scale={this.y} x={0} y={0} />
-      </g>
-    );
-  }
+// ...
+export default Tooltip;
+export { TooltipContext };
 ```
 
-`<Line>` gets the approximate data set, `<Datapoints>` gets the original
-dataset with the descriptive horizontal scale. The `<BottomAxis>` gets the
-descriptive scale, and the `<LeftAxis>` stays the same.
+Makes it easier to share the same context between different consumers.
 
-End result is a chart that tells a more accurate story overlayed with the
-original data.
+## Render Tooltip in App
 
-![](https://github.com/Swizec/datavizAdvent/raw/master/src/content/when-to-buy-gifts/approximation.png)
+Rendering our tooltip happens in the main App component. It also holds tooltip
+state that gets passed into React Context.
 
-## Attempting a more sophisticated solution
+```javascript
+import Tooltip, { TooltipContext } from "./Tooltip";
 
-One thing still bothers me though. I bet you those weekly distributions aren't
-uniform.
+// ...
 
-You're less likely to start Christmas shopping in the first week of October
-than you are in the last week of October. Just like you're less likely to start
-at the beginning of November than towards the end.
+function App() {
+  const [tooltip, setTooltip] = useState({
+    show: false,
+    x: 0,
+    y: 0,
+    content: "",
+    orientLeft: false
+  });
 
-December should be the inverse. You're more likely to start in the first week
-than you are the day before Christmas.
+  return (
+      <TooltipContext.Provider value={{ ...tooltip, setTooltip }}>
+        <svg width="800" height="600">
+          {* // where you put tooltip triggerers *}
 
-Know what I mean?
+          <Tooltip width={150} height={60}>
+            <TooltipP>{tooltip.content}</TooltipP>
+          </Tooltip>
+        </svg>
+      </TooltipContext.Provider>
+  );
+}
+```
 
-It just doesn't seem to fit real world experience that those weeks would have
-even probabilities.
+We import tooltip and its context, then `useState` to create a local `tooltip`
+state and its setter. Pass both of those in a common object into a
+`<TooltipContext.Provider`.
 
-And that's our clue for next steps: You can fit a probability distribution over
-your weeks, then generate random datapoints that fit the distribition to make a
-nice smooth curve.
+That part took me a while to figure out. Yes with React hooks you still need to
+render Providers. Hooks are consumer side.
 
-A sort of [Monte Carlo](https://en.wikipedia.org/wiki/Monte_Carlo_method)
-approach. Commonly used for integration, fitting complex lines to
-probabilities, and stuff like that.
+Render our Tooltip as a sibling to all the other SVG stuff. Any components that
+want to render a tooltip will share the same one. That's how it usually works.
 
-> Monte Carlo methods (or Monte Carlo experiments) are a broad class of
-> computational algorithms that rely on repeated random sampling to obtain
-> numerical results. Their essential idea is using randomness to solve problems
-> that might be deterministic in principle. They are often used in physical and
-> mathematical problems and are most useful when it is difficult or impossible
-> to use other approaches.
+`<TooltipP>` is a styled component by the way.
 
-Is it difficult or impossible to use other approaches? I'm not sure.
+```javascript
+const TooltipP = styled.p`
+  background: ${chroma('green')
+    .brighten()
+    .hex()};
+  border-radius: 3px;
+  padding: 1em;
+`;
+```
 
-There's different ways to fit a polygon to a set of known numbers. Our curve
-approach did that actually.
+Nice green background, rounded corners, and a bit of padding.
 
-Not sure we can do more than that with normal mathematics.
+![I am no designer](https://github.com/Swizec/datavizAdvent/raw/master/src/content/gift-stockings/tooltip-closeup.png)
 
-Unfortunately we were unable to implement a monte carlo method to approximate
-more datapoints. We tried. It didn't produce good results.
+I am no designer 😅
 
-The line kept being random, my math wasn't good enough to fit those random
-numbers to a probability distribution and it was just a mess. But a promising
-mess.
+## Trigger tooltips from donuts
 
-Basic idea goes something like this:
+Donut code itself is based on code we built for the
+[Will you buy a Christmas tree?](https://reactviz.holiday/buy-a-tree/) donut
+chart.
 
-1. Define a probability distribution (less likely week 1, more likely week 4)
-2. Pick random numbers
-3. Keep going until the sum of your points adds up to the known value
-4. Voila, in theory
+We split it into the main donut component and a component for each slice, or
+`<Arc>`. Makes it easier to calculate coordinates for tooltips. Means we ca
+handle slice highlighted state locally in its own component.
 
-You can watch me flounder around with this before I finally gave up in the
-stream above.
+```javascript
+const Arc = ({ d, r, color, offsetX, offsetY }) => {
+  const [selected, setSelected] = useState(false);
+  const tooltipContext = useContext(TooltipContext);
 
-See you tomorrow ✌️
+  const arc = d3
+    .arc()
+    .outerRadius(selected ? r + 10 : r)
+    .innerRadius(selected ? r - 80 : r - 75)
+    .padAngle(0.01);
+
+  const mouseOver = () => {
+    const [x, y] = arc.centroid(d);
+
+    setSelected(true);
+    tooltipContext.setTooltip({
+      show: d.index !== null,
+      x: x + offsetX + 30,
+      y: y + offsetY + 30,
+      content: d.data.stuffer,
+      orientLeft: offsetX < 0,
+    });
+  };
+
+  const mouseOut = () => {
+    setSelected(null);
+    tooltipContext.setTooltip({ show: false });
+  };
+
+  return (
+    <path
+      d={arc(d)}
+      fill={color}
+      onMouseOver={mouseOver}
+      onMouseOut={mouseOut}
+      style={{ cursor: 'pointer' }}
+    />
+  );
+};
+```
+
+Here you can see a downside of hooks: They can lead to pretty sizeable
+functions if you aren't careful.
+
+We create a `selected` flag and its setter with a `useState` hook and we hook
+into our tooltip context with `useContext`. We'll be able to use that
+`setTooltip` method we added to show a tooltip.
+
+Then we've got that `const arc` stuff. It creates an arc path shape generator.
+Radius depends on `selected` status.
+
+All that is followed by our mouse eve handling fucntions.
+
+```javascript
+const mouseOver = () => {
+  const [x, y] = arc.centroid(d);
+
+  setSelected(true);
+  tooltipContext.setTooltip({
+    show: d.index !== null,
+    x: x + offsetX + 30,
+    y: y + offsetY + 30,
+    content: d.data.stuffer,
+    orientLeft: offsetX < 0,
+  });
+};
+```
+
+`mouseOver` is the active function. Mouse over an arc and it calculates its
+center, sets the arc to `selected`, and pushes necessary info into tooltip
+state. This triggers a re-render of the tooltip component and makes it show up.
+
+Technically it triggers a re-render of our whole app because it's tied to `App`
+state. You could split that out in a bigger app. Or rely on React being smart
+enough to figure out the smallest possible re-render.
+
+Deselecting the arc happens in a `mouseOut` function
+
+```javascript
+const mouseOut = () => {
+  setSelected(false);
+  tooltipContext.setTooltip({ show: false });
+};
+```
+
+Set `selected` to falls and hide the tooltip.
+
+With all that defined, rendering our arc is a matter of returning a path with
+some attributes.
+
+```javascript
+return (
+  <path
+    d={arc(d)}
+    fill={color}
+    onMouseOver={mouseOver}
+    onMouseOut={mouseOut}
+    style={{ cursor: 'pointer' }}
+  />
+);
+```
+
+Use the arc generator to create the shape, fill it with color, set up mouse
+events, add a dash of styling.
+
+### Render a donut 🍩
+
+We did all the complicated state and tooltip stuff in individual arcs. The
+donut component uses a `pie` generator and renders them in a loop.
+
+```javascript
+const StockingDonut = ({ data, x, y, r }) => {
+  const pie = d3.pie().value(d => d.percentage);
+
+  const color = chroma.brewer.set3;
+  return (
+    <g transform={`translate(${x}, ${y})`}>
+      {pie(data).map(d => (
+        <Arc
+          d={d}
+          color={color[d.index]}
+          r={r}
+          key={d.index}
+          offsetX={x}
+          offsetY={y}
+        />
+      ))}
+    </g>
+  );
+};
+```
+
+`d3.pie` takes our data and returns all the info you need to build a donut.
+Start angles, end angles, stuff like that.
+
+Render a grouping element that centers our donut on `(x, y)` coordiantes,
+render `<Arc>`s in a loop.
+
+Make sure to pass offsetX and offsetY into each arc. Arcs are positioned
+relatively to our donut center, which means they don't know their absolute
+position to pass into the tooltip context. Offsets help with that.
+
+## ✌️
+
+And that's how you make tooltips in SVG with React hooks. Same concepts and
+complications apply if you're using normal React state or even Redux or
+something.
+
+You need a global way to store info about the tooltip and some way to trigger
+it from sibling components.
+
+![](https://github.com/Swizec/datavizAdvent/raw/master/src/content/gift-stockings/christmas-stockings.png)
+
+## PS: A neat way to useData
+
+<blockquote class="twitter-tweet" data-lang="en"><p lang="en" dir="ltr">Yeah I&#39;ve been doing that pattern a lot.<br/><br/>const [state, setState] = useState(null)<br/>useEffect(() =&gt; doStuff().then(setState), [!state])</p>&mdash; Swizec Teller (@Swizec) <a href="https://twitter.com/Swizec/status/1071461874170945536?ref_src=twsrc%5Etfw">December 8, 2018</a></blockquote>
+<script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
+
+Got tired of the `useState`/`useEffect` dance when loading data with hooks.
+Built a new hook called `useData`. That's a neat feature of hooks; you can make
+new ones.
+
+```javascript
+function useData(loadData) {
+  const [data, setData] = useState(null);
+
+  useEffect(() => {
+    loadData(setData);
+  }, [!data]);
+
+  return data;
+}
+```
+
+Takes a loadData function, sets up `useState` for the data, uses an effect to
+load it, gives you `setData` so you can return the value, and returns the final
+value to your component.
+
+You use it like this 👇
+
+```javascript
+function App() {
+  const data = useData(setData =>
+    d3
+      .tsv("/data.tsv", d => ({
+        stuffer: d.stuffer,
+        percentage: Number(d.percentage)
+      }))
+      .then(setData)
+  );
+```
+
+Much cleaner I think 👌
+
+Might be cleaner to take a promise and handle `setData` internally. Hmm ... 🤔
+
+Thinking I might open source this, but it needs a few more iterations.

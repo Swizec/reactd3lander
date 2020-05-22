@@ -8,7 +8,7 @@ To tie them together and prepare a dictionary for `setState` back in the `App`
 component, we need to add some logic. We're building a dictionary of county
 household incomes and removing any empty salaries.
 
-```{.javascript caption="Tie our datasets together"}
+```javascript
 // src/DataHandling.js
 ]).then(([us, countyNames, medianIncomes, techSalaries, USstateNames]) => {
     let medianIncomesMap = {};

@@ -11,7 +11,7 @@ project.
 We start with the D3blackbox higher order component. Same as before, except we
 put it in `src/components`.
 
-```{.javascript caption="D3blackbox HOC"}
+```javascript
 import React from "react";
 
 export default function D3blackbox(D3render) {
@@ -44,7 +44,7 @@ hook into.
 With `D3blackbox`, we can reduce the `Axis` component to a wrapped function.
 We're implementing the `D3render` method.
 
-```{.javascript caption="Axis component using D3blackbox"}
+```javascript
 import * as d3 from "d3";
 import D3blackbox from "../D3blackbox";
 
@@ -79,7 +79,7 @@ step process:
 1. Import `Axis` component
 2. Render it
 
-```{.javascript caption="Import and render Axis"}
+```javascript
 // src/components/Histogram/Histogram.js
 import React, { Component } from 'react';
 import * as d3 from 'd3';

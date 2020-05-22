@@ -15,7 +15,7 @@ changes, how do I create the new state?
 
 A "sum numbers" example would look like this:
 
-```{.javascript caption="Reducer concept"}
+```javascript
 let sum = [1,2,3,4].reduce((sum, n) => sum+n, 0);
 ```
 
@@ -27,7 +27,7 @@ state.
 
 Start with a default state and some D3 random number helpers.
 
-```{.javascript caption="Default state and constants"}
+```javascript
 import { randomNormal } from "d3";
 
 const Gravity = 0.5,
@@ -49,7 +49,7 @@ const initialState = {
 
 Using D3's `randomNormal` random number generator creates a better random
 distribution than using JavaScript's own `Math.random`. The rest is a bunch of
-default state :point_down:
+default state 👇
 
 - `particles` holds an array of particles to draw
 - `particleIndex` defines the ID of the next generated particle
@@ -67,7 +67,7 @@ Redux does come with a `combineReducers` function, but I wanted to keep our
 state flat and that doesn't fit `combineReducers`'s view of how life should
 work.
 
-```{.javascript caption="Combining two reducers"}
+```javascript
 // src/reducers/index.js
 
 // Manually combineReducers
@@ -101,7 +101,7 @@ Our `appReducer` handles the boring actions with a big switch statement. These
 are common in the Redux world. They help us decide what to do based on action
 type.
 
-```{.javascript caption="appReducer big switch"}
+```javascript
 // src/reducers/index.js
 function appReducer(state, action) {
     switch (action.type) {
@@ -148,7 +148,7 @@ current state, then overwrite specific values with new ones. This is fast
 enough even with large state trees thanks to modern JavaScript engines.
 
 Note that when a reducer doesn't recognize an action, it has to return the same
-state it received. Otherwise you end up wiping state. :sweat_smile:
+state it received. Otherwise you end up wiping state. 😅
 
 So that's the boilerplatey state updates. Manages starting and stopping the
 animation, flipping the particle generation switch, and resizing our viewport.
@@ -169,7 +169,7 @@ On each tick of the animation we have to:
 
 We can do all that in one big reducer, like this:
 
-```{.javascript caption="The particles logic"}
+```javascript
 // src/reducers/index.js
 function particlesReducer(state, action) {
     switch (action.type) {
@@ -233,7 +233,7 @@ function particlesReducer(state, action) {
 }
 ```
 
-That's a lot of code, I know. Let me explain :smiley:
+That's a lot of code, I know. Let me explain 😃
 
 The first part takes important values out of `state`, calculates the dropped
 frame multiplier, and makes a new copy of the particles array with `.slice(0)`.
@@ -250,7 +250,7 @@ pure: produce the same result every time they are called with the same argument
 values. Randomness is impure.
 
 We don't need our particle vectors to be deterministic, so I think this is
-fine. Let's say our universe is stochastic instead :smile:
+fine. Let's say our universe is stochastic instead 😄
 
 {aside} Stochastic means that our universe/physic simulation is governed by
 probabilities. You can still model such a universe and reason about its

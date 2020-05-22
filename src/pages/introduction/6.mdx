@@ -11,7 +11,7 @@ can return HTML, SVG, or XML.
 For instance, code that renders one of our first examples – a color swatch
 – looks like this:
 
-```{.javascript caption="Render a color swatch"}
+```javascript
 ReactDOM.render(
   <Colors width="400" />,
   document.getElementById('svg')
@@ -20,7 +20,7 @@ ReactDOM.render(
 
 Which compiles to:
 
-```{.javascript caption="JSX compiled result"}
+```javascript
 ReactDOM.render(
   React.createElement(Colors, {width: "400"}),
   document.querySelectorAll('svg')[0]

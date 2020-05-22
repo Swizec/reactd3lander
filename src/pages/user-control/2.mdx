@@ -7,7 +7,7 @@ and render a white rectangle and `Controls`.
 The white rectangle makes it so the zoomed-in map doesn't cover up the
 histogram. I'll explain when we get there.
 
-```{.javascript caption="Imports and filter updates in App.js"}
+```javascript
 // src/App.js
 import MedianLine from './components/MedianLine';
 
@@ -51,7 +51,7 @@ in `Controls`.
 
 The rest of filtering setup happens in the render method.
 
-```{.javascript caption="Filtering data and updating map zoom in App render"}
+```javascript
 // src/App.js
 class App extends React.Component {
     // ...
@@ -101,7 +101,7 @@ boundaries. It just renders stuff.
 See, it goes under the histogram. Let's fix that and add the `Controls` render
 while we're at it.
 
-```{.javascript caption="Add opaque background to histogram"}
+```javascript
 // src/App.js
 class App extends React.Component {
     // ...

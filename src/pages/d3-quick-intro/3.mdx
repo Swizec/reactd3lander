@@ -21,9 +21,9 @@ You can
 When you hover on a bar, it changes color. Pretty neat.
 
 Mike Bostock, the creator of D3, built this chart in 43 lines of code. Here
-they are :point_down:
+they are 👇
 
-```{.javascript caption="Example D3 barchart"}
+```javascript
 var svg = d3.select("svg"),
     margin = {top: 20, right: 20, bottom: 30, left: 40},
     width = +svg.attr("width") - margin.left - margin.right,
@@ -72,7 +72,7 @@ d3.tsv("data.tsv", function(d) {
 
 There are two parts to this code: Data manipulation and DOM manipulation.
 
-```{.javascript caption="Data manipulation code"}
+```javascript
 var // ..,
     margin = {top: 20, right: 20, bottom: 30, left: 40},
     width = +svg.attr("width") - margin.left - margin.right,
@@ -105,7 +105,7 @@ Bostock here first prepares his data:
 In the DOM manipulation part, he puts shapes and objects into an SVG. This is
 the part that shows up in your browser.
 
-```{.javascript caption="DOM manipulation code"}
+```javascript
 var svg = d3.select("svg"),
     // ..
 
@@ -160,7 +160,7 @@ Here Bostock does a few things
 That last part is where people get lost. It looks like magic. Even to me.
 
 It's a declarative approach to rendering data. Works great, hard to understand.
-That's why we'll do it in React instead :smiley:
+That's why we'll do it in React instead 😃
 
 You can think of `.enter` as a loop over your data. Everything chained after
 `.enter` is your loop's body. Sort of like doing

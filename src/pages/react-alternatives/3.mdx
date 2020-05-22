@@ -36,7 +36,7 @@ change your imports.
 He changed the functional `Pythagoras` component into a stateful component to
 enable async rendering.
 
-```{.javascript caption="Change <Pythagoras> to a class"}
+```javascript
 // src/Pythagoras.js
 export default class {
   render(props) {
@@ -47,7 +47,7 @@ export default class {
 
 And enabled debounced asynchronous rendering:
 
-```{.javascript caption="Debounce rendering"}
+```javascript
 // src/index.js
 import { options } from 'preact';
 options.syncComponentUpdates = false;
@@ -88,7 +88,7 @@ He also had to change a string-based ref into a callback ref. Inferno doesn't
 do string-based refs for performance reasons, and we need refs so we can use D3
 to detect mouse position on SVG.
 
-```{.javascript caption="Change ref to callback"}
+```javascript
 // src/App.js
 
 class App extends Component {
@@ -102,6 +102,7 @@ class App extends Component {
     <svg width={this.svg.width} height={this.svg.height} ref={this.svgElemeRef }>
   }
 ```
+
 
 In the core `Pythagoras` component, he added two Inferno-specific props:
 `noNormalize` and `hasNonKeyedChildren`.
