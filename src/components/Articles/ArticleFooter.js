@@ -1,5 +1,4 @@
 import React from 'react'
-import { Box } from 'rebass'
 import styled from '@emotion/styled'
 import ArticleCTA from './ArticleCTA'
 import ConvertkitForm from './ConvertkitForm'

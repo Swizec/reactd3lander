@@ -19,6 +19,9 @@ import Reactions from "./reactions"
 import ArticleFooter from "./Articles/ArticleFooter"
 
 const Sidebar = props => {
+
+  console.log("LOCAT", props.location.pathname)
+
   return (
     <Flex>
       <Box
