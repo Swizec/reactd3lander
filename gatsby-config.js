@@ -43,9 +43,9 @@ module.exports = {
       resolve: "gatsby-plugin-mdx",
       options: {
         extensions: [".mdx", ".md"],
-        defaultLayouts: {
-          default: path.resolve('./src/templates/article.js')
-        },
+        // defaultLayouts: {
+        //   default: path.resolve('./src/templates/article.js')
+        // },
         remarkPlugins,
         plugins: ["gatsby-remark-images"],
         gatsbyRemarkPlugins: [

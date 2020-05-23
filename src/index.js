@@ -18,6 +18,6 @@ export const wrapPageElement = ({ element, props }) => (
       scope: "openid profile email user_metadata",
     }}
   >
-    <Layout {...props}>{element}</Layout>
+      <Layout {...props}>{element}</Layout>
   </AuthProvider>
 )

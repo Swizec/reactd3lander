@@ -4,7 +4,6 @@ import ArticleHeader from '../components/Articles/ArticleHeader'
 import { isArticlePage } from '../util'
 
 const ArticlePage = (props) => {
-    console.log("TEMPLATEPROPS", props)
     if (!props.location) return (
         <>
             {props.children}

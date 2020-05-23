@@ -1,5 +1,6 @@
 import React, { useState, useRef } from "react"
 import { Global } from "@emotion/core"
+import styled from '@emotion/styled'
 import { Box, Flex, Button, Link } from "rebass"
 import { Sidenav, Pagination } from "@theme-ui/sidenav"
 import { useAuth } from "react-use-auth"
@@ -73,7 +74,7 @@ const Sidebar = props => {
 
 const Content = props => {
 
-  const content = (
+  let content = (
     <>
       <Head {...props} />
       <main id="content">
@@ -82,6 +83,15 @@ const Content = props => {
       </main>
     </>
   )
+
+  if (props.isArticle) {
+    content = (
+      <ArticleWrapper>
+        {content}
+      </ArticleWrapper>
+    )
+  }
+  
   return (
   !props.fullwidth || props.menu ? (
     <Sidebar
@@ -99,6 +109,12 @@ const Content = props => {
   )
   )
 }
+
+const ArticleWrapper = styled.div`
+  max-width: 700px;
+  margin: 7rem auto;
+  padding: 0 2rem;
+`
 
 const PleaseLogin = props => {
   const { login } = useAuth()
@@ -148,6 +164,7 @@ const UNAUTH_PAGES = [
 ]
 
 export default props => {
+  console.log("PROPS", props)
   const allowUnauth =
     isWorkshopPage(props) || isArticlePage(props) || UNAUTH_PAGES.includes(currentLocation(props))
   const fullwidth = allowUnauth && !isWorkshopPage(props)
