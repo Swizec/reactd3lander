@@ -34,7 +34,7 @@ module.exports = {
     .map((path) => ({
       resolve: "gatsby-source-filesystem",
       options: {
-        path
+        path,
       }
     })),
     "gatsby-transformer-sharp",
