@@ -20,7 +20,6 @@
         "@jxnblk/react-live": "^2.1.2-1",
         "@mdx-js/mdx": "^1.1.4",
         "@mdx-js/react": "^1.1.4",
-        "@raae/gatsby-remark-oembed": "Swizec/gatsby-remark-oembed#fix-mdx-support",
         "@rebass/forms": "^4.0.6",
         "@rebass/layout": "^4.0.6",
         "@rebass/preset": "^4.0.5",

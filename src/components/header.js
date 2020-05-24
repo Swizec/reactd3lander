@@ -63,10 +63,11 @@ const Login = () => {
         lessons
       </Link>
     </Box>
-  ) : null
-  // <Link mr={2} variant="nav" href="#" onClick={login}>
-  //   Student Login
-  // </Link>
+  ) : (
+    <Link mr={2} variant="nav" href="#" onClick={login}>
+      Student Login
+    </Link>
+  )
 }
 
 export default ({ nav, menu, setMenu, style, showBanner }) => {
