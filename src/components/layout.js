@@ -12,9 +12,8 @@ import SkipLink from "./skip-link"
 import Header from "./header"
 import Footer from "./footer"
 import Nav from "./nav"
-import NavWorkshop from "./nav-workshop"
 import { default as PleaseLoginCopy } from "./please-login"
-import { isAuthorized, isArticlePage, currentLocation } from "../util"
+import { isArticlePage, currentLocation } from "../util"
 
 import Reactions from "./reactions"
 import ArticleFooter from "./Articles/ArticleFooter"
@@ -161,7 +160,7 @@ export default (props) => {
   const fullwidth = allowUnauth
   const [menu, setMenu] = useState(fullwidth)
   const nav = useRef(null)
-  const { isAuthenticated, user } = useAuth()
+  const { isAuthenticated, isAuthorized, user } = useAuth()
 
   return (
     <Box
@@ -189,7 +188,8 @@ export default (props) => {
             </div>
           )}
         </Sticky>
-        {allowUnauth || (isAuthenticated() && isAuthorized(user)) ? (
+        {allowUnauth ||
+        isAuthorized(["RDV_Basic", "RDV_Full", "RDV_AllExtras"]) ? (
           <Content
             {...props}
             fullwidth={fullwidth}
@@ -197,7 +197,9 @@ export default (props) => {
             setMenu={setMenu}
             isArticle={isArticlePage(props)}
             nav={nav}
-            showRightMessage={!(isAuthenticated() || isAuthorized(user))}
+            showRightMessage={
+              !isAuthorized(["RDV_Basic", "RDV_Full", "RDV_AllExtras"])
+            }
           />
         ) : isAuthenticated() ? (
           <PleasePurchase />
