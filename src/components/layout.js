@@ -86,6 +86,8 @@ const Content = (props) => {
     content = <ArticleWrapper>{content}</ArticleWrapper>
   }
 
+  console.log("content", props.fullwidth, props.menu)
+
   return !props.fullwidth || props.menu ? (
     <Sidebar
       {...props}
@@ -154,11 +156,10 @@ const UNAUTH_PAGES = [
 ]
 
 export default (props) => {
-  console.log("PROPS", props)
   const allowUnauth =
     isArticlePage(props) || UNAUTH_PAGES.includes(currentLocation(props))
   const fullwidth = allowUnauth
-  const [menu, setMenu] = useState(fullwidth)
+  const [menu, setMenu] = useState(!allowUnauth)
   const nav = useRef(null)
   const { isAuthenticated, isAuthorized, user } = useAuth()
 
