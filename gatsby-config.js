@@ -7,11 +7,11 @@ module.exports = {
     title: `React for Data Visualization`,
     description: `Learn how to build scalable dataviz components your whole team can understand with React for Data Visualization.`,
     author: `@swizec`,
-    coverImageStaticPath: 'metaimage.png',
+    coverImageStaticPath: "metaimage.png",
     convertkit: {
-      userId: '785fc7ef1f',
-      formId: '772ba7c9ba',
-      url: 'https://pages.convertkit.com/785fc7ef1f/772ba7c9ba',
+      userId: "785fc7ef1f",
+      formId: "772ba7c9ba",
+      url: "https://pages.convertkit.com/785fc7ef1f/772ba7c9ba",
     },
     articles: {
       title: `React for Data Visualization Articles`,
@@ -28,15 +28,18 @@ module.exports = {
     },
     // add a gatsby-source-filesystem entry for every article's images
     ...fs
-    .readdirSync(`${__dirname}/src/pages/articles`)
-    .map((path) => `${__dirname}/src/pages/articles/${path}`)
-    .filter((path) => fs.lstatSync(path).isDirectory() && fs.readdirSync(path).length > 0)
-    .map((path) => ({
-      resolve: "gatsby-source-filesystem",
-      options: {
-        path,
-      }
-    })),
+      .readdirSync(`${__dirname}/src/pages/articles`)
+      .map((path) => `${__dirname}/src/pages/articles/${path}`)
+      .filter(
+        (path) =>
+          fs.lstatSync(path).isDirectory() && fs.readdirSync(path).length > 0
+      )
+      .map((path) => ({
+        resolve: "gatsby-source-filesystem",
+        options: {
+          path,
+        },
+      })),
     "gatsby-transformer-sharp",
     "gatsby-plugin-sharp",
     {
@@ -76,19 +79,8 @@ module.exports = {
             },
           },
           {
-            resolve: "@raae/gatsby-remark-oembed",
-            options: {
-              usePrefix: false,
-              providers: {
-                include: [
-                  "YouTube",
-                  "CodeSandbox",
-                  "Codepen",
-                  "Twitter",
-                  "Instagram",
-                ],
-              },
-            },
+            resolve: "gatsby-remark-embedder",
+            options: {},
           },
         ],
       },
