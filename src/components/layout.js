@@ -86,8 +86,6 @@ const Content = (props) => {
     content = <ArticleWrapper>{content}</ArticleWrapper>
   }
 
-  console.log("content", props.fullwidth, props.menu)
-
   return !props.fullwidth || props.menu ? (
     <Sidebar
       {...props}
