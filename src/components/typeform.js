@@ -1,7 +1,8 @@
 import React, { useEffect } from "react"
+import styled from '@emotion/styled'
 import { Box } from "rebass"
 
-const Typeform = () => {
+const Typeform = ({ url }) => {
   useEffect(() => {
     // Taken from typeform
     ;(function() {
@@ -28,7 +29,8 @@ const Typeform = () => {
   return (
     <Box
       className="typeform-widget"
-      data-url="https://swizecteller.typeform.com/to/AJgFM5"
+      // data-url="https://swizecteller.typeform.com/to/AJgFM5"
+      data-url={url}
       data-transparency="50"
       data-hide-headers="true"
       data-hide-footer="true"
@@ -36,5 +38,41 @@ const Typeform = () => {
     ></Box>
   )
 }
+
+export const TypeformLink = ({ url }) => (
+  <Box textAlign="center">
+    <TypeFormStyledLink
+      className="typeform-share button"
+      href={url}
+      data-mode="popup"
+      target="_blank">
+        Answer 2 quick questions
+    </TypeFormStyledLink>
+  </Box>
+)
+
+
+const TypeFormStyledLink = styled.a`
+    display: inline-block;
+    text-decoration: none;
+    background-color: #267ddd;
+    color: white;
+    cursor: pointer;
+    font-family: Helvetica, Arial, sans-serif;
+    font-size: 20px;
+    line-height: 50px;
+    text-align: center;
+    margin: 0;
+    height: 50px;
+    padding: 0px 33px;
+    border-radius: 25px;
+    max-width: 100%;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    font-weight: bold;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+`;
 
 export default Typeform
