@@ -1,5 +1,6 @@
 import React, { useState, useRef } from "react"
 import { Global } from "@emotion/core"
+import styled from "@emotion/styled"
 import { Box, Flex, Button, Link } from "rebass"
 import { Sidenav, Pagination } from "@theme-ui/sidenav"
 import { useAuth } from "react-use-auth"
@@ -11,27 +12,26 @@ import SkipLink from "./skip-link"
 import Header from "./header"
 import Footer from "./footer"
 import Nav from "./nav"
-import NavWorkshop from "./nav-workshop"
 import { default as PleaseLoginCopy } from "./please-login"
-import { isAuthorized, isWorkshopPage, isArticlePage, currentLocation } from "../util"
+import { isArticlePage, currentLocation } from "../util"
 
 import Reactions from "./reactions"
 import ArticleFooter from "./Articles/ArticleFooter"
 
-const Sidebar = props => {
+const Sidebar = (props) => {
   return (
     <Flex>
       <Box
         as={Sidenav}
         ref={props.nav}
         open={props.open}
-        onClick={e => {
+        onClick={(e) => {
           props.setMenu(false)
         }}
-        onBlur={e => {
+        onBlur={(e) => {
           props.setMenu(false)
         }}
-        onFocus={e => {
+        onFocus={(e) => {
           props.setMenu(true)
         }}
         sx={{
@@ -45,7 +45,7 @@ const Sidebar = props => {
           },
         }}
       >
-        {isWorkshopPage(props) ? <NavWorkshop /> : <Nav />}
+        <Nav />
       </Box>
       <Box
         sx={{
@@ -71,19 +71,22 @@ const Sidebar = props => {
   )
 }
 
-const Content = props => {
-
-  const content = (
+const Content = (props) => {
+  let content = (
     <>
       <Head {...props} />
       <main id="content">
         {props.children}
-        {props.isArticle && <ArticleFooter />}  
+        {props.isArticle && <ArticleFooter />}
       </main>
     </>
   )
-  return (
-  !props.fullwidth || props.menu ? (
+
+  if (props.isArticle) {
+    content = <ArticleWrapper>{content}</ArticleWrapper>
+  }
+
+  return !props.fullwidth || props.menu ? (
     <Sidebar
       {...props}
       nav={props.nav}
@@ -93,14 +96,17 @@ const Content = props => {
       {content}
     </Sidebar>
   ) : (
-    <>
-      {content}
-    </>
-  )
+    <>{content}</>
   )
 }
 
-const PleaseLogin = props => {
+const ArticleWrapper = styled.div`
+  max-width: 700px;
+  margin: 7rem auto;
+  padding: 0 2rem;
+`
+
+const PleaseLogin = (props) => {
   const { login } = useAuth()
   return (
     <>
@@ -123,17 +129,17 @@ const PleaseLogin = props => {
   )
 }
 
-const PleasePurchase = props => {
+const PleasePurchase = (props) => {
   return (
     <>
       <Head {...props} />
       <main id="content">
         <Box textAlign="center">
-        Please{" "}
-        <Button onClick={() => navigate("/")} sx={{ cursor: 'pointer' }}>
-          purchase Reactfordataviz
-        </Button>{" "}
-        to access this page
+          Please{" "}
+          <Button onClick={() => navigate("/")} sx={{ cursor: "pointer" }}>
+            purchase Reactfordataviz
+          </Button>{" "}
+          to access this page
         </Box>
       </main>
     </>
@@ -147,13 +153,13 @@ const UNAUTH_PAGES = [
   "/thankyou/", //it's necessary this duplicate because of old node version from ZEIT
 ]
 
-export default props => {
+export default (props) => {
   const allowUnauth =
-    isWorkshopPage(props) || isArticlePage(props) || UNAUTH_PAGES.includes(currentLocation(props))
-  const fullwidth = allowUnauth && !isWorkshopPage(props)
-  const [menu, setMenu] = useState(isWorkshopPage(props))
+    isArticlePage(props) || UNAUTH_PAGES.includes(currentLocation(props))
+  const fullwidth = allowUnauth
+  const [menu, setMenu] = useState(!allowUnauth)
   const nav = useRef(null)
-  const { isAuthenticated, user } = useAuth()
+  const { isAuthenticated, isAuthorized, user } = useAuth()
 
   return (
     <Box
@@ -177,12 +183,12 @@ export default props => {
                 setMenu={setMenu}
                 nav={nav}
                 style={style}
-                showBanner={!isAuthenticated() && !isWorkshopPage(props)}
               />
             </div>
           )}
         </Sticky>
-        {allowUnauth || (isAuthenticated() && isAuthorized(user)) ? (
+        {allowUnauth ||
+        isAuthorized(["RDV_Basic", "RDV_Full", "RDV_AllExtras"]) ? (
           <Content
             {...props}
             fullwidth={fullwidth}
@@ -190,7 +196,9 @@ export default props => {
             setMenu={setMenu}
             isArticle={isArticlePage(props)}
             nav={nav}
-            showRightMessage={!(isAuthenticated() || isAuthorized(user))}
+            showRightMessage={
+              !isAuthorized(["RDV_Basic", "RDV_Full", "RDV_AllExtras"])
+            }
           />
         ) : isAuthenticated() ? (
           <PleasePurchase />

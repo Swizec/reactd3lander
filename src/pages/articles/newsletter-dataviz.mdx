@@ -11,6 +11,14 @@ lastUpdated: 2019-05-05T15:13:00.000Z
 image: '../../images/articles/RP9ZY3C.png'
 ---
 
+import ArticleHeader from '../../components/Articles/ArticleHeader'
+
+<ArticleHeader 
+  title={props.pageContext.frontmatter.title || "React for data visualization"}
+  description={props.pageContext.frontmatter.description}
+  date={props.pageContext.frontmatter.date}
+  lastUpdated={props.pageContext.frontmatter.lastUpdated} />
+
 ![Which emails sparked joy?](https://i.imgur.com/iO6X09T.gif)
 
 Ever wondered if the emails you send spark joy? You can ask!

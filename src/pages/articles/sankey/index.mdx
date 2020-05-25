@@ -6,6 +6,14 @@ lastUpdated: 2018-12-16T08:00:00.000Z
 image: "./sankey.png"
 ---
 
+import ArticleHeader from '../../../components/Articles/ArticleHeader'
+
+<ArticleHeader 
+  title={props.pageContext.frontmatter.title || "React for data visualization"}
+  description={props.pageContext.frontmatter.description}
+  date={props.pageContext.frontmatter.date}
+  lastUpdated={props.pageContext.frontmatter.lastUpdated} />
+
 https://www.youtube.com/watch?v=SAmKimb8wFo
 
 > Have you ever tried making a sankey diagram with d3+react, I can't seem to make it work for some reason.:/

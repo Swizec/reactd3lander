@@ -18,6 +18,13 @@ const Container = styled.div`
   span {
     font-size: 0.6em;
   }
+
+  .topic-item {
+    margin-bottom: 0px;
+    margin-top: 1em;
+    padding-left: 2em;
+    font-size: 0.8em;
+  }
 `
 
 const Topic = ({title, content = []}) => {
@@ -33,7 +40,7 @@ const Topic = ({title, content = []}) => {
       <Collapse isOpened={isOpened} >
         <div>
           {
-            content.map((item, index) => <p key={index}>{item}</p>)
+            content.map((item, index) => <div className="topic-item" key={index}>{item}</div>)
           }
         </div>
       </Collapse>

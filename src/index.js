@@ -17,6 +17,7 @@ export const wrapPageElement = ({ element, props }) => (
     auth0_params={{
       scope: "openid profile email user_metadata",
     }}
+    customPropertyNamespace="https://serverlessreact.dev"
   >
     <Layout {...props}>{element}</Layout>
   </AuthProvider>

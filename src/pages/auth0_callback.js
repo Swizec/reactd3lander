@@ -6,7 +6,7 @@ import { useAuth } from "react-use-auth"
 const Auth0CallbackPage = () => {
   const { handleAuthentication } = useAuth()
   useEffect(() => {
-    handleAuthentication({ postLoginRoute: "/module-0" })
+    handleAuthentication({ postLoginRoute: "/introduction/1" })
   }, [])
 
   return (

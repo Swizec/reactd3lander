@@ -59,14 +59,15 @@ const Login = () => {
     <Box mr={2}>
       Hi <strong>{user.nickname}</strong>
       <Box sx={{ display: ["none", "inline"] }}>,</Box>
-      <Link href="/module-0" ml={1} sx={{ display: ["none", "inline"] }}>
+      <Link href="/introduction/1" ml={1} sx={{ display: ["none", "inline"] }}>
         lessons
       </Link>
     </Box>
-  ) : null
-  // <Link mr={2} variant="nav" href="#" onClick={login}>
-  //   Student Login
-  // </Link>
+  ) : (
+    <Link mr={2} variant="nav" href="#" onClick={login}>
+      Student Login
+    </Link>
+  )
 }
 
 export default ({ nav, menu, setMenu, style, showBanner }) => {

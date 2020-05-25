@@ -1,0 +1,126 @@
+# Use tweens to drive state – hybrid animation
+
+You now have all the ingredients for hybrid animation:
+
+1. Custom tweens for tight transition control
+2. State changes to drive animation
+
+Let's bring them together ✌️
+
+https://codesandbox.io/s/optimistic-architecture-oluvf
+
+Red squares in a circle. Click one, they all fly out – bouncing like they're
+tied to an elastic. Click again and the circle contracts.
+
+Silly example, sure, but a useful technique. Same way the piechart to bar chart
+transition worked.
+
+It all happens in the `<HybridExample />` component.
+
+```javascript
+<HybridExample width={500} height={500} x={250} y={250} />
+```
+
+## <HybridExample />
+
+Hybrid example is a functional component based on React Hooks. We use state for
+the `radius`, an `angleScale` to position rectangles, and an `explode` function
+to trigger the transition.
+
+```javascript
+const HybridExample = ({ x, y }) => {
+  const [radius, setRadius] = useState(10);
+  const N = 10;
+
+  const angleScale = d3
+    .scaleLinear()
+    .domain([0, N])
+    .range([0, Math.PI * 2]);
+
+  const explode = () => {
+    // transition
+  };
+
+  return (
+    <g transform={`translate(${x}, ${y})`} onClick={explode}>
+      {d3.range(N).map(i => (
+        <Square
+          x={Math.cos(angleScale(i)) * radius}
+          y={Math.sin(angleScale(i)) * radius}
+          key={i}
+        />
+      ))}
+    </g>
+  );
+```
+
+`useState` hook gives us initial `radius` of 10 and a `setRadius` function to
+change it. `angleScale` translates linearly between a domain of 0 to N, and
+angles in radians. 0 is 0, 2PI is a full circle.
+
+We render squares the usual way:
+
+- grouping element for positioning
+- loop over a range of size `N`
+- `<Square />` for each iteration
+- use trigonometry to translate angles to `x` and `y` coordinates
+
+Here's a helpful image, if you've forgotten your high school maths like I have
+
+![sin for vertical, cos for horizontal](https://upload.wikimedia.org/wikipedia/commons/thumb/7/72/Sinus_und_Kosinus_am_Einheitskreis_1.svg/1920px-Sinus_und_Kosinus_am_Einheitskreis_1.svg.png)
+
+## Tween-driven state changes for animation
+
+We used `onClick={explode}` to trigger the animation. Here's what that looks
+like
+
+```javascript
+const explode = () => {
+  const elastic = d3.easeElasticOut;
+  elastic.amplitude(5);
+  elastic.period(-0.3);
+
+  d3.selection()
+    .transition('radius-boom')
+    .ease(elastic)
+    .duration(1000)
+    .tween('radius', () => {
+      const radiusInt = d3.interpolate(radius, radius > 10 ? 10 : 60);
+      return t => setRadius(radiusInt(t));
+    });
+};
+```
+
+`explode` starts by creating a new easing function – `elastic`. Elastic easing
+is built into D3 and you can tweak its `amplitude` and `period`. Try different
+values to see what happens.
+
+We start a new virtual `d3.selection()`. Doesn't select anything, lets us run a
+transition. Gotta give it a name though – `radius-boom`.
+
+Then we specify the easing function, the duration, and create a custom tween.
+
+```javascript
+.tween("radius", () => {
+	const radiusInt = d3.interpolate(radius, radius > 10 ? 10 : 60);
+	return t => setRadius(radiusInt(t));
+});
+```
+
+Our tween operates on the `radius`, which isn't even an SVG property. That's
+just a logical name we use.
+
+The tween itself uses an interpolator that goes from current radius – that's
+the state – to either `10` or `60`. Small or large. That way we can use the
+same tween both for growing and shrinking the circle.
+
+We return a parametrized function that takes a `t` parameter and calls
+`setRadius` with a value from our interpolator.
+
+`setRadius` is the set state function we defined earlier with `useState`, which
+means we update state on every tick of the transition animation. Update state,
+component re-renders, you get smooth animation.
+
+Works great ✌️
+
+![](https://raw.githubusercontent.com/Swizec/react-d3js-es6-ebook/2018-version/manuscript/resources/images/2018/state-tween.gif)

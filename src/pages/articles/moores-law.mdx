@@ -8,6 +8,14 @@ lastUpdated: '2019-10-07T09:13:00.000Z'
 image: '../../images/articles/moores-law.png'
 ---
 
+import ArticleHeader from '../../components/Articles/ArticleHeader'
+
+<ArticleHeader 
+  title={props.pageContext.frontmatter.title || "React for data visualization"}
+  description={props.pageContext.frontmatter.description}
+  date={props.pageContext.frontmatter.date}
+  lastUpdated={props.pageContext.frontmatter.lastUpdated} />
+
 [Moore's Law](https://en.wikipedia.org/wiki/Moore%27s_law) states that the
 number of transistors on a chip roughly doubles every two years. But how does
 that stack up against reality?
