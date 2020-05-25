@@ -56,7 +56,7 @@ module.exports = {
           {
             resolve: "gatsby-remark-giphy",
             options: {
-              giphyApiKey: process.env.GIPHY_API_KEY,
+              giphyApiKey: "tvyI1ARG6FOkW9PUzmgubJ3iY5P5rJmO",
               useVideo: true,
               embedWidth: "80%",
             },
