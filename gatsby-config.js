@@ -19,38 +19,14 @@ module.exports = {
     },
   },
   plugins: [
-    {
-      resolve: "gatsby-source-filesystem",
-      options: {
-        name: "images",
-        path: `${__dirname}/src/images`,
-      },
-    },
-    // add a gatsby-source-filesystem entry for every article's images
-    ...fs
-      .readdirSync(`${__dirname}/src/pages/articles`)
-      .map((path) => `${__dirname}/src/pages/articles/${path}`)
-      .filter(
-        (path) =>
-          fs.lstatSync(path).isDirectory() && fs.readdirSync(path).length > 0
-      )
-      .map((path) => ({
-        resolve: "gatsby-source-filesystem",
-        options: {
-          path,
-        },
-      })),
     "gatsby-transformer-sharp",
     "gatsby-plugin-sharp",
+    "gatsby-remark-images",
     {
       resolve: "gatsby-plugin-mdx",
       options: {
         extensions: [".mdx", ".md"],
-        // defaultLayouts: {
-        //   default: path.resolve('./src/templates/article.js')
-        // },
         remarkPlugins,
-        plugins: ["gatsby-remark-images"],
         gatsbyRemarkPlugins: [
           "gatsby-remark-copy-linked-files",
           {
@@ -79,12 +55,36 @@ module.exports = {
             },
           },
           {
+            resolve: `${__dirname}/src/gatsby-remark-social-cards`,
+          },
+          {
             resolve: "gatsby-remark-embedder",
             options: {},
           },
         ],
+        plugins: [{ resolve: "gatsby-remark-images"}],
       },
     },
+    {
+      resolve: "gatsby-source-filesystem",
+      options: {
+        path: `${__dirname}/src/images`,
+      },
+    },
+    // add a gatsby-source-filesystem entry for every article's images
+    ...fs
+      .readdirSync(`${__dirname}/src/pages/articles`)
+      .map((path) => `${__dirname}/src/pages/articles/${path}`)
+      .filter(
+        (path) =>
+          fs.lstatSync(path).isDirectory() && fs.readdirSync(path).length > 0
+      )
+      .map((path) => ({
+        resolve: "gatsby-source-filesystem",
+        options: {
+          path,
+        },
+      })),
     "gatsby-plugin-catch-links",
     "gatsby-plugin-theme-ui",
     "gatsby-plugin-react-helmet",

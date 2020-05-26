@@ -1,6 +1,18 @@
 import React from "react"
 import { Helmet } from "react-helmet"
+import slugify from "slugify"
 import defaultThumb from "../images/metaimage.png"
+
+function getSocialCard({ title, image }) {
+  if (image) {
+    const ext = image.split(".").pop()
+
+    // URL guaranteed by src/gatsby-remark-social-card
+    return `/social-cards/${slugify(title)}.${ext}`
+  } else {
+    return ""
+  }
+}
 
 export default (props) => {
   const title = [props.title, "React for Data Visualization"]
@@ -10,7 +22,8 @@ export default (props) => {
   const description =
     props.description ||
     "Learn how to build scalable dataviz components your whole team can understand with React for Data Visualization."
-  const image = `https://reactfordataviz.com${props.image || defaultThumb}`
+  const socialImage = getSocialCard({ title: props.title, image: props.image})
+  const image = `https://reactfordataviz.com${socialImage || defaultThumb}`
   const url = `https://reactfordataviz.com${
     props.pageName !== undefined ? `/${props.pageName}` : ""
   }`

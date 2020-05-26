@@ -182,6 +182,7 @@ const UNAUTH_PAGES = [
 ]
 
 export default (props) => {
+
   const allowUnauth =
     isArticlePage(props) || UNAUTH_PAGES.includes(currentLocation(props))
   const fullwidth = allowUnauth
