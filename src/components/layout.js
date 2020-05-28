@@ -17,8 +17,10 @@ import { isArticlePage, currentLocation } from "../util"
 
 import Reactions from "./reactions"
 import ArticleFooter from "./Articles/ArticleFooter"
+import ArticleHeader from "./Articles/ArticleHeader"
 
 const Sidebar = (props) => {
+
   return (
     <Flex>
       <Box
@@ -72,18 +74,41 @@ const Sidebar = (props) => {
 }
 
 const Content = (props) => {
-  let content = (
-    <>
-      <Head {...props} />
-      <main id="content">
-        {props.children}
-        {props.isArticle && <ArticleFooter />}
-      </main>
-    </>
-  )
+  let content;
 
   if (props.isArticle) {
-    content = <ArticleWrapper>{content}</ArticleWrapper>
+    let header;
+    if (props.pageContext.frontmatter) {
+      const { title, description, lastUpdated, image, date } = props.pageContext.frontmatter
+      header = <ArticleHeader 
+          title={title}
+          description={description}
+          lastUpdated={lastUpdated}
+          date={date}
+          image={image}
+        />
+    } else {
+      header = <Head {...props} />
+    }
+
+    content = ( 
+      <ArticleWrapper>
+        {header}
+        <main id="content">
+          {props.children}
+          <ArticleFooter />
+        </main>
+      </ArticleWrapper>
+    )
+  } else {
+    content = (
+      <>
+        <Head {...props} />
+        <main id="content">
+          {props.children}
+        </main>
+      </>
+    )
   }
 
   return !props.fullwidth || props.menu ? (
@@ -151,9 +176,13 @@ const UNAUTH_PAGES = [
   "/auth0_callback",
   "/thankyou",
   "/thankyou/", //it's necessary this duplicate because of old node version from ZEIT
+  "/thanks-basics",
+  "/thanks-extra",
+  "/thanks-full"
 ]
 
 export default (props) => {
+
   const allowUnauth =
     isArticlePage(props) || UNAUTH_PAGES.includes(currentLocation(props))
   const fullwidth = allowUnauth

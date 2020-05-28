@@ -17,7 +17,7 @@ const pageQuery = graphql`
   }
 `
 
-const ArticleHeader = ({ title, description, date, lastUpdated }) => {
+const ArticleHeader = ({ title, description, date, lastUpdated, image }) => {
 
     const data = useStaticQuery(pageQuery)
 
@@ -25,7 +25,7 @@ const ArticleHeader = ({ title, description, date, lastUpdated }) => {
 
     return (
         <Box sx={{ marginBottom: '2rem' }}>
-            <Head title={title} description={description} />
+            <Head title={title} description={description} image={image} />
             <HeroTitle style={{ marginLeft: 'auto', marginRight: 'auto' }}>
                 {title}
             </HeroTitle>

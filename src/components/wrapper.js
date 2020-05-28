@@ -32,10 +32,10 @@ export const Breadcrumbs = ({ title }) => {
 
 export const wrapper = ({ title, description, image, ...props }) => {
   const children = React.Children.toArray(props.children).reduce(
-    (acc, child) => {
+    (acc, child, index) => {
       const type = child.props.mdxType
       if (type !== "h1") return [...acc, child]
-      return [...acc, child, <Breadcrumbs key="breadcrumbs" title={title} />]
+      return [...acc, child, <Breadcrumbs key={`breadcrumbs-${index}`} title={title} />]
     },
     []
   )
