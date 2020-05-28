@@ -5,7 +5,6 @@ import { Box, Flex, Button, Link } from "rebass"
 import { Sidenav, Pagination } from "@theme-ui/sidenav"
 import { useAuth } from "react-use-auth"
 import { navigate } from "gatsby"
-import { StickyContainer, Sticky } from "react-sticky"
 
 import Head from "./head"
 import SkipLink from "./skip-link"
@@ -196,47 +195,39 @@ export default (props) => {
         variant: "styles.root",
       }}
     >
-      <StickyContainer>
         <SkipLink />
         <Global
           styles={{
             body: { margin: 0 },
           }}
         />
-        <Sticky>
-          {({ style, ...rest }) => (
-            <div style={{ marginBottom: "20px" }}>
-              <Header
-                fullwidth={fullwidth}
-                menu={menu}
-                setMenu={setMenu}
-                nav={nav}
-                style={style}
-              />
-            </div>
+        <Header
+          fullwidth={fullwidth}
+          menu={menu}
+          setMenu={setMenu}
+          nav={nav}
+        />
+        <div style={{ paddingTop: "64px" }}>
+          {allowUnauth ||
+          isAuthorized(["RDV_Basic", "RDV_Full", "RDV_AllExtras"]) ? (
+            <Content
+              {...props}
+              fullwidth={fullwidth}
+              menu={menu}
+              setMenu={setMenu}
+              isArticle={isArticlePage(props)}
+              nav={nav}
+              showRightMessage={
+                !isAuthorized(["RDV_Basic", "RDV_Full", "RDV_AllExtras"])
+              }
+            />
+          ) : isAuthenticated() ? (
+            <PleasePurchase />
+          ) : (
+            <PleaseLogin />
           )}
-        </Sticky>
-        {allowUnauth ||
-        isAuthorized(["RDV_Basic", "RDV_Full", "RDV_AllExtras"]) ? (
-          <Content
-            {...props}
-            fullwidth={fullwidth}
-            menu={menu}
-            setMenu={setMenu}
-            isArticle={isArticlePage(props)}
-            nav={nav}
-            showRightMessage={
-              !isAuthorized(["RDV_Basic", "RDV_Full", "RDV_AllExtras"])
-            }
-          />
-        ) : isAuthenticated() ? (
-          <PleasePurchase />
-        ) : (
-          <PleaseLogin />
-        )}
-
+        </div>
         <Footer />
-      </StickyContainer>
     </Box>
   )
 }
