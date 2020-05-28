@@ -94,82 +94,87 @@ export default ({ nav, menu, setMenu, style, showBanner }) => {
   showBanner = false
 
   return (
-    <Flex
-      as="header"
-      px={3}
-      py={2}
-      height={64}
-      alignItems="center"
-      bg="background"
-      style={style}
-    >
-      {isAuthenticated() && (
+      <Flex
+        as="header"
+        px={3}
+        py={2}
+        height={64}
+        alignItems="center"
+        bg="background"
+        style={style}
+        width="100%"
+        sx={{
+          position:"fixed",
+          zIndex: 1100,
+        }}
+      >
+        {isAuthenticated() && (
+          <Button
+            title="Toggle Menu"
+            sx={{
+              width: 32,
+              height: 32,
+              p: 1,
+              cursor: "pointer",
+            }}
+            variant="transparent"
+            onClick={(e) => {
+              setMenu(!menu)
+              if (menu || !nav.current) return
+              const navlink = nav.current.querySelector("a")
+              navlink.focus()
+            }}
+          >
+            <Burger />
+          </Button>
+        )}
+        <Link variant="nav" href="/">
+          <Image {...data.logo.childImageSharp} />
+          {/* Reactfordataviz.com */}
+        </Link>
+        {showBanner ? (
+          <Box
+            mx="auto"
+            color="white"
+            bg="primary"
+            pl={[4, 5, 6]}
+            pr={[4, 5, 6]}
+            fontSize={[1, 3, 4]}
+          >
+            <Link
+              href="/#serverlessreact.dev"
+              color="white"
+              style={{ cursor: "pointer" }}
+            >
+              <strong>
+                <span role="img" aria-label="heart">
+                  ❤️
+                </span>{" "}
+                37% off while The Situation lasts{" "}
+                <span role="img" aria-label="finger-right">
+                  ❤️
+                </span>
+              </strong>
+            </Link>
+          </Box>
+        ) : (
+          <Box mx="auto" />
+        )}
+        <Login />
         <Button
-          title="Toggle Menu"
+          title="Change color mode"
+          variant="transparent"
           sx={{
             width: 32,
             height: 32,
             p: 1,
+            borderRadius: 99999,
             cursor: "pointer",
           }}
-          variant="transparent"
-          onClick={(e) => {
-            setMenu(!menu)
-            if (menu || !nav.current) return
-            const navlink = nav.current.querySelector("a")
-            navlink.focus()
-          }}
+          onClick={cycleMode}
         >
-          <Burger />
+          <Dot />
         </Button>
-      )}
-      <Link variant="nav" href="/">
-        <Image {...data.logo.childImageSharp} />
-        {/* Reactfordataviz.com */}
-      </Link>
-      {showBanner ? (
-        <Box
-          mx="auto"
-          color="white"
-          bg="primary"
-          pl={[4, 5, 6]}
-          pr={[4, 5, 6]}
-          fontSize={[1, 3, 4]}
-        >
-          <Link
-            href="/#serverlessreact.dev"
-            color="white"
-            style={{ cursor: "pointer" }}
-          >
-            <strong>
-              <span role="img" aria-label="heart">
-                ❤️
-              </span>{" "}
-              37% off while The Situation lasts{" "}
-              <span role="img" aria-label="finger-right">
-                ❤️
-              </span>
-            </strong>
-          </Link>
-        </Box>
-      ) : (
-        <Box mx="auto" />
-      )}
-      <Login />
-      <Button
-        title="Change color mode"
-        variant="transparent"
-        sx={{
-          width: 32,
-          height: 32,
-          p: 1,
-          borderRadius: 99999,
-          cursor: "pointer",
-        }}
-        onClick={cycleMode}
-      >
-        <Dot />
-      </Button>
-    </Flex>
+      </Flex>
   )
 }
