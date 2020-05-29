@@ -22,9 +22,6 @@ Smartphones, magnificent little things. But there's only 4 kinds. Draw a respons
 https://codesandbox.io/s/0xj8q4k2pp
 
 ## How it works ⚙️
-<>
-
-import TweetEmbed from 'react-tweet-embed'
 
 We've built stackcharts before, on the [What do Americans want for Christmas](https://reactviz.holiday/christmas-gifts/) day. That means we can focus on teh responsive part today.
 
@@ -53,7 +50,7 @@ The easist is a `100%` width.
   {data && (
     <ResponsiveStackChart
       data={data}
-      keys={['android', 'ios', 'blackberry', 'microsoft']}
+      keys={["android", "ios", "blackberry", "microsoft"]}
       width={width}
       height={height}
     />
@@ -117,7 +114,7 @@ Take the bounding client rect of our SVG element, read out its width and height,
 
 Now that we've got dynamic always accurate width and height, we have to listen to them.
 
-Best way to do that is with D3 scales that you keep up to date. We use the dynamic full integration approach from my [React for Data Visualization](https://swizec1.teachable.com/p/react-for-data-visualization/) course.
+Best way to do that is with D3 scales that you keep up to date. We use the dynamic full integration approach from my [React for Data Visualization](https://reactfordataviz.com) course.
 
 That means:
 
@@ -189,11 +186,8 @@ const BottomAxis = d3blackbox((anchor, props) => {
 
   scale.domain(scale.domain().filter((_, i) => i % keepEveryNth === 0))
 
-  const timeFormat = d3.timeFormat('%b %Y')
-  const axis = d3
-    .axisBottom()
-    .scale(props.scale)
-    .tickFormat(timeFormat)
+  const timeFormat = d3.timeFormat("%b %Y")
+  const axis = d3.axisBottom().scale(props.scale).tickFormat(timeFormat)
   d3.select(anchor.current).call(axis)
 })
 ```
@@ -211,4 +205,4 @@ Only reason we need this is because we're using a band scale, which is an ordina
 
 The result is a perfectly responsive chart 👇
 
-<TweetEmbed id="1074202928221700097" />
+https://twitter.com/Swizec/status/1074202928221700097
