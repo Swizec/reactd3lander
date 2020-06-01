@@ -19,7 +19,6 @@ import ArticleFooter from "./Articles/ArticleFooter"
 import ArticleHeader from "./Articles/ArticleHeader"
 
 const Sidebar = (props) => {
-
   return (
     <Flex>
       <Box
@@ -73,24 +72,32 @@ const Sidebar = (props) => {
 }
 
 const Content = (props) => {
-  let content;
+  let content
 
   if (props.isArticle) {
-    let header;
+    let header
     if (props.pageContext.frontmatter) {
-      const { title, description, lastUpdated, image, date } = props.pageContext.frontmatter
-      header = <ArticleHeader 
+      const {
+        title,
+        description,
+        lastUpdated,
+        image,
+        date,
+      } = props.pageContext.frontmatter
+      header = (
+        <ArticleHeader
           title={title}
           description={description}
           lastUpdated={lastUpdated}
           date={date}
           image={image}
         />
+      )
     } else {
       header = <Head {...props} />
     }
 
-    content = ( 
+    content = (
       <ArticleWrapper>
         {header}
         <main id="content">
@@ -103,9 +110,7 @@ const Content = (props) => {
     content = (
       <>
         <Head {...props} />
-        <main id="content">
-          {props.children}
-        </main>
+        <main id="content">{props.children}</main>
       </>
     )
   }
@@ -174,14 +179,16 @@ const UNAUTH_PAGES = [
   "/",
   "/auth0_callback",
   "/thankyou",
-  "/thankyou/", //it's necessary this duplicate because of old node version from ZEIT
+  "/thankyou/",
   "/thanks-basics",
+  "/thanks-basics/",
   "/thanks-extra",
-  "/thanks-full"
+  "/thanks-extra/",
+  "/thanks-full",
+  "/thanks-full/",
 ]
 
 export default (props) => {
-
   const allowUnauth =
     isArticlePage(props) || UNAUTH_PAGES.includes(currentLocation(props))
   const fullwidth = allowUnauth
@@ -195,39 +202,34 @@ export default (props) => {
         variant: "styles.root",
       }}
     >
-        <SkipLink />
-        <Global
-          styles={{
-            body: { margin: 0 },
-          }}
-        />
-        <Header
-          fullwidth={fullwidth}
-          menu={menu}
-          setMenu={setMenu}
-          nav={nav}
-        />
-        <div style={{ paddingTop: "64px" }}>
-          {allowUnauth ||
-          isAuthorized(["RDV_Basic", "RDV_Full", "RDV_AllExtras"]) ? (
-            <Content
-              {...props}
-              fullwidth={fullwidth}
-              menu={menu}
-              setMenu={setMenu}
-              isArticle={isArticlePage(props)}
-              nav={nav}
-              showRightMessage={
-                !isAuthorized(["RDV_Basic", "RDV_Full", "RDV_AllExtras"])
-              }
-            />
-          ) : isAuthenticated() ? (
-            <PleasePurchase />
-          ) : (
-            <PleaseLogin />
-          )}
-        </div>
-        <Footer />
+      <SkipLink />
+      <Global
+        styles={{
+          body: { margin: 0 },
+        }}
+      />
+      <Header fullwidth={fullwidth} menu={menu} setMenu={setMenu} nav={nav} />
+      <div style={{ paddingTop: "64px" }}>
+        {allowUnauth ||
+        isAuthorized(["RDV_Basic", "RDV_Full", "RDV_AllExtras"]) ? (
+          <Content
+            {...props}
+            fullwidth={fullwidth}
+            menu={menu}
+            setMenu={setMenu}
+            isArticle={isArticlePage(props)}
+            nav={nav}
+            showRightMessage={
+              !isAuthorized(["RDV_Basic", "RDV_Full", "RDV_AllExtras"])
+            }
+          />
+        ) : isAuthenticated() ? (
+          <PleasePurchase />
+        ) : (
+          <PleaseLogin />
+        )}
+      </div>
+      <Footer />
     </Box>
   )
 }
