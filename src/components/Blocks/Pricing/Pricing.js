@@ -1,11 +1,11 @@
-import React, { useEffect, useReducer } from 'react'
-import styled from '@emotion/styled'
-import PriceBox from './PriceBox.js'
-import PriceBoxSpecial from './PriceBoxSpecial.js'
-import FadeIn from 'react-lazyload-fadein'
-import { ParityPrice } from 'bigmac-index-price-calculator'
+import React, { useEffect, useReducer } from "react"
+import styled from "@emotion/styled"
+import PriceBox from "./PriceBox.js"
+import PriceBoxSpecial from "./PriceBoxSpecial.js"
+import FadeIn from "react-lazyload-fadein"
+import { ParityPrice } from "bigmac-index-price-calculator"
 
-const parityPrice = new ParityPrice('cb952dd732eb8e511d44d441788fcf67', true)
+const parityPrice = new ParityPrice("cb952dd732eb8e511d44d441788fcf67", true)
 
 const Wrapper = styled.div`
   margin: 7rem 0rem;
@@ -54,7 +54,7 @@ export const FadeInButton = ({ id, price, coupon }) => {
     //     Buy now for ${price}
     // </a>
     <FadeIn height={55} duration={150}>
-      {onload => (
+      {(onload) => (
         <BigBuyButton id={id} coupon={coupon} price={price} onload={onload} />
       )}
     </FadeIn>
@@ -63,7 +63,7 @@ export const FadeInButton = ({ id, price, coupon }) => {
 
 const priceReducer = (state, action) => {
   switch (action.type) {
-    case 'loaded':
+    case "loaded":
       return {
         ...action.data,
       }
@@ -73,58 +73,58 @@ const priceReducer = (state, action) => {
 }
 
 const countryList = [
-  'Canada',
-  'Denmark',
-  'Israel',
-  'Brazil',
-  'Australia',
-  'Lebanon',
-  'Uruguay',
-  'Singapore',
-  'New Zealand',
-  'Britain',
-  'South Korea',
-  'Chile',
-  'United Arab Emirates',
-  'Czech Republic',
-  'Costa Rica',
-  'Colombia',
-  'Thailand',
-  'Japan',
-  'Honduras',
-  'Kuwait',
-  'Pakistan',
-  'Qatar',
-  'Croatia',
-  'Guatemala',
-  'Saudi Arabia',
-  'Bahrain',
-  'Nicaragua',
-  'Sri Lanka',
-  'Peru',
-  'China',
-  'Hungary',
-  'Vietnam',
-  'Poland',
-  'Jordan',
-  'Oman',
-  'Philippines',
-  'India',
-  'Hong Kong',
-  'Mexico',
-  'Indonesia',
-  'Azerbaijan',
-  'Moldova',
-  'Romania',
-  'Taiwan',
-  'South Africa',
-  'Egypt',
-  'Malaysia',
-  'Argentina',
-  'Turkey',
-  'Ukraine',
-  'Russia',
-].map(s => s.toLowerCase())
+  "Canada",
+  "Denmark",
+  "Israel",
+  "Brazil",
+  "Australia",
+  "Lebanon",
+  "Uruguay",
+  "Singapore",
+  "New Zealand",
+  "Britain",
+  "South Korea",
+  "Chile",
+  "United Arab Emirates",
+  "Czech Republic",
+  "Costa Rica",
+  "Colombia",
+  "Thailand",
+  "Japan",
+  "Honduras",
+  "Kuwait",
+  "Pakistan",
+  "Qatar",
+  "Croatia",
+  "Guatemala",
+  "Saudi Arabia",
+  "Bahrain",
+  "Nicaragua",
+  "Sri Lanka",
+  "Peru",
+  "China",
+  "Hungary",
+  "Vietnam",
+  "Poland",
+  "Jordan",
+  "Oman",
+  "Philippines",
+  "India",
+  "Hong Kong",
+  "Mexico",
+  "Indonesia",
+  "Azerbaijan",
+  "Moldova",
+  "Romania",
+  "Taiwan",
+  "South Africa",
+  "Egypt",
+  "Malaysia",
+  "Argentina",
+  "Turkey",
+  "Ukraine",
+  "Russia",
+].map((s) => s.toLowerCase())
 
 const Pricing = () => {
   const [{ tier1, tier2, tier3, location, adjusted }, dispatch] = useReducer(
@@ -156,7 +156,7 @@ const Pricing = () => {
     }
 
     dispatch({
-      type: 'loaded',
+      type: "loaded",
       data: {
         location,
         tier1,
@@ -190,15 +190,13 @@ const Pricing = () => {
           plan="Basics course"
           features={
             <div>
-              A quick intro to D3
+              D3 the good parts
               <br />
               How React makes D3 easier
               <br />
               Quick React+D3 integration
               <br />
               Scalable dataviz components with full integration
-              <br />
-              Downloadable PDF/epub/mobi
               <br />
               <b>3 extra projects you can use as a cookbook</b>
               <br />
@@ -232,21 +230,25 @@ const Pricing = () => {
                 <strong>FULL COURSE</strong>
               </p>
               <p>
-                <strong>+ consultation</strong>
+                <strong>+ 1on1 call</strong>
               </p>
             </div>
           }
           features={
             <div>
-              <b>30min consultation where we discuss your usecase</b>
+              <b>30min 1on1 call where we discuss your usecase</b>
               <br />
-              A quick intro to D3
+              <b>Bonus React, D3, and hooks live workshop</b>
+              <br />
+              D3 the good parts
               <br />
               How React makes D3 easier
               <br />
               Quick React+D3 integration
               <br />
               Scalable dataviz components with full integration
+              <br />
+              React, D3, and hooks
               <br />
               Detailed walkthrough of a large dataviz dashboard project
               <br />
@@ -264,9 +266,7 @@ const Pricing = () => {
               <br />
               Refactoring to React Hooks
               <br />
-              Downloadable PDF/epub/mobi
-              <br />
-              <b>14 extra projects you can use as a cookbook</b>
+              <b>All extra projects you can use as a cookbook</b>
               <br />
               <b>​Monthly livestream of a real dataviz project</b>
               <br />
@@ -295,13 +295,17 @@ const Pricing = () => {
           plan="FULL COURSE"
           features={
             <div>
-              A quick intro to D3
+              <b>Bonus React, D3, and hooks live workshop</b>
+              <br />
+              D3 the good parts
               <br />
               How React makes D3 easier
               <br />
               Quick React+D3 integration
               <br />
               Scalable dataviz components with full integration
+              <br />
+              React, D3, and hooks
               <br />
               Detailed walkthrough of a large dataviz dashboard project
               <br />

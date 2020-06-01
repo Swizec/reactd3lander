@@ -1,6 +1,6 @@
 import React from "react"
 import { useStaticQuery, graphql } from "gatsby"
-import { Flex, Box, Link, Button } from "rebass"
+import { Flex, Box, Link, Button, Heading } from "rebass"
 import { useColorMode } from "theme-ui"
 import { useAuth } from "react-use-auth"
 import { Image } from "./Image"
@@ -131,7 +131,11 @@ export default ({ nav, menu, setMenu, style }) => {
         {/* Reactfordataviz.com */}
       </Link>
 
-      <Box mx="auto" />
+      <Box mx="auto">
+        <Heading fontSize={[2, 3, 4]}>
+          🤘bonus <em>React, D3, and hooks</em> workshop this week only 🤘
+        </Heading>
+      </Box>
 
       <Login />
       <Button

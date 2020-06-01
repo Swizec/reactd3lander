@@ -21,8 +21,8 @@ export default (props) => {
 
   const description =
     props.description ||
-    "Learn how to build scalable dataviz components your whole team can understand with React for Data Visualization."
-  const socialImage = getSocialCard({ title: props.title, image: props.image})
+    "Learn how to build scalable dataviz components your whole team can understand with React for Data Visualization - updated for 2020."
+  const socialImage = getSocialCard({ title: props.title, image: props.image })
   const image = `https://reactfordataviz.com${socialImage || defaultThumb}`
   const url = `https://reactfordataviz.com${
     props.pageName !== undefined ? `/${props.pageName}` : ""
