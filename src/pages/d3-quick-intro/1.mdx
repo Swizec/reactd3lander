@@ -1,3 +1,9 @@
+import { Vimeo } from "../../components/Video"
+
+# Why D3
+
+<Vimeo id={424610124} />
+
 D3 is the best library out there for custom data visualization. It comes with a
 rich ecosystem of functions for almost anything you can think of. From simple
 medians, to automatic axis generators, and force diagrams.
@@ -30,39 +36,59 @@ least some D3.
 But D3 is hard to read. Take this barchart code, for example 👇
 
 ```javascript
-d3.tsv("data.tsv", function(d) {
-  d.frequency = +d.frequency;
-  return d;
-}, function(error, data) {
-  if (error) throw error;
+d3.tsv(
+  "data.tsv",
+  function (d) {
+    d.frequency = +d.frequency
+    return d
+  },
+  function (error, data) {
+    if (error) throw error
 
-  x.domain(data.map(function(d) { return d.letter; }));
-  y.domain([0, d3.max(data, function(d) { return d.frequency; })]);
+    x.domain(
+      data.map(function (d) {
+        return d.letter
+      })
+    )
+    y.domain([
+      0,
+      d3.max(data, function (d) {
+        return d.frequency
+      }),
+    ])
 
-  g.append("g")
+    g.append("g")
       .attr("class", "axis axis--x")
       .attr("transform", "translate(0," + height + ")")
-      .call(d3.axisBottom(x));
+      .call(d3.axisBottom(x))
 
-  g.append("g")
+    g.append("g")
       .attr("class", "axis axis--y")
       .call(d3.axisLeft(y).ticks(10, "%"))
-    .append("text")
+      .append("text")
       .attr("transform", "rotate(-90)")
       .attr("y", 6)
       .attr("dy", "0.71em")
       .attr("text-anchor", "end")
-      .text("Frequency");
+      .text("Frequency")
 
-  g.selectAll(".bar")
-    .data(data)
-    .enter().append("rect")
+    g.selectAll(".bar")
+      .data(data)
+      .enter()
+      .append("rect")
       .attr("class", "bar")
-      .attr("x", function(d) { return x(d.letter); })
-      .attr("y", function(d) { return y(d.frequency); })
+      .attr("x", function (d) {
+        return x(d.letter)
+      })
+      .attr("y", function (d) {
+        return y(d.frequency)
+      })
       .attr("width", x.bandwidth())
-      .attr("height", function(d) { return height - y(d.frequency); });
-});
+      .attr("height", function (d) {
+        return height - y(d.frequency)
+      })
+  }
+)
 ```
 
 Can you tell what's going on? I'd need to read it pretty carefully.

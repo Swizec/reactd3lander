@@ -1,8 +1,30 @@
-# Visualizing data with React and d3.js {#the-meat-start}
+import { Vimeo } from "../../components/Video"
 
-Welcome to the main part of React + D3 2018. We're going to talk a little
-theory, learn some principles, then get our hands dirty with some examples.
-Through this book you're going to build:
+# Visualizing data with React and d3.js
+
+<Vimeo id={424598200} />
+
+Let's talk about how React and D3 fit together.
+
+The initial chapters get you up to speed and teach you the mental models. Later on we apply them in various scenarios.
+
+Focus on the building blocks first. Use the bigger projects as ideas to play around with. A practice ground if you will :)
+
+This initial section has five core chapters:
+
+- [D3 the good parts](/d3-quick-intro/1)
+- [How React makes D3 easier](react-d3/1)
+- [When should you use an existing library? Which one?](/react-d3/2)
+- [Quickly integrate any D3 code in your React project with Blackbox Components](/blackbox-components/1)
+- [Build scalable dataviz components with full integration](/scalable-dataviz-components/1)
+
+That gives you the 80/20 rule right there.
+
+Dig through those 5 chapters and you get 80% of the value. Because your time is valuable and I want you to build stuff, not grind theory ❤️
+
+When you're ready, I encourage you to have fun with the examples and the cookbook section in particular. That's where I've been adding new projects every few months.
+
+If you build every example in this course, you'll get:
 
 - [A few small components in Codesandbox](https://swizec1.teachable.com/courses/react-for-data-visualization/lectures/6887721#basic-approach)
 - [A choropleth map](https://swizec1.teachable.com/courses/react-for-data-visualization/lectures/6888908#choropleth-map)
@@ -31,8 +53,8 @@ We look at how far we can push React's performance with a simple particle
 generator and a dancing fractal tree. A billiards game helps us learn about
 complex canvas manipulation.
 
-Throughout these examples, we're going to use **React 16**, compatible with
-**React 17**, **D3v5**, and modern **ES6+** JavaScript syntax. The particle
+Throughout these examples, we're going to use **React 16**, probably compatible with
+**React 17**[^1], **D3v5**, and modern **ES6+** JavaScript syntax. The particle
 generator also uses **Redux** for the game loop and the billiards simulation
 uses MobX. We use **Konva** for complex canvas stuff.
 
@@ -46,25 +68,4 @@ Until then, here's an interactive cheatsheet:
 [es6cheatsheet.com](https://es6cheatsheet.com/). It uses runnable code samples
 to compare the ES5 way with the ES6 way so you can brush up quickly.
 
-To give you a taste of React alternatives, we'll check out **Preact**,
-**Inferno**, and **Vue** in the fractal tree example. They're component-based
-UI frameworks similar to React. Preact is tiny, Inferno is fast, and Vue is
-about as popular as React.
-
----
-
-Let's talk about how React and D3 fit together. If there's just one chapter you
-should read, this is the one. It explains how things work and fit together.
-Takes you from beginning to being able to figure out the rest on your own.
-
-Although you should still play with the bigger examples. They're fun.
-
-This section has five chapters:
-
-- [A quick intro to D3](https://swizec1.teachable.com/courses/react-for-data-visualization/lectures/6887710)
-- [How React makes D3 easier](https://swizec1.teachable.com/courses/react-for-data-visualization/lectures/6887721#basic-approach)
-- [When should you use an existing library? Which one?](https://swizec1.teachable.com/courses/react-for-data-visualization/lectures/6887723#existing-libraries)
-- [Quickly integrate any D3 code in your React project with Blackbox Components](https://swizec1.teachable.com/courses/react-for-data-visualization/lectures/6887730#blackbox-components)
-- [Build scalable dataviz components with full integration](https://swizec1.teachable.com/courses/react-for-data-visualization/lectures/6887740#full-feature-integration)
-- [Handling state in your React app](https://swizec1.teachable.com/courses/react-for-data-visualization/lectures/6887771#state-handling-architecture)
-- [Structuring your React App](https://swizec1.teachable.com/courses/react-for-data-visualization/lectures/6887772#structuring-your-app)
+[^1] React 17 is a future the team has been promising for 2 years. Everything you learn should be future proof. React has been _fantastic_ at keeping backwards compatibility.
