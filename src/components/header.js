@@ -133,7 +133,7 @@ export default ({ nav, menu, setMenu, style }) => {
 
       <Box mx="auto">
         <Heading fontSize={[2, 3, 4]}>
-          🤘bonus <em>React, D3, and hooks</em> workshop this week only 🤘
+          🤘get bonus <em>React, D3, and hooks</em> live workshop 🤘
         </Heading>
       </Box>
 
