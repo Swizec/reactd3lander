@@ -126,8 +126,15 @@ export default ({ nav, menu, setMenu, style }) => {
           <Burger />
         </Button>
       )}
-      <Link variant="nav" href="/">
-        <Image {...data.logo.childImageSharp} />
+      <Link
+        variant="nav"
+        href="/"
+        style={{
+          width: "100%",
+          maxWidth: 148,
+        }}
+      >
+        <Image {...data.logo.childImageSharp} style={{ width: "100%" }} />
         {/* Reactfordataviz.com */}
       </Link>
 
