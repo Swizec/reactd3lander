@@ -12182,9 +12182,9 @@ react-tweet-embed@^1.2.2:
   integrity sha512-Y932BlSaJsDUsKDucC2opzzd+uhc0YNhrlTa/4Beb2be1od+AjLGo6Fhuo2wPT0D+fF4VTXOyoZyA8Yc88RdYA==
 
 react-use-auth@^0.7.3:
-  version "0.7.4"
-  resolved "https://registry.yarnpkg.com/react-use-auth/-/react-use-auth-0.7.4.tgz#154841b502e0e20a2b99be7efb415e4a232a9a45"
-  integrity sha512-sQ1/CvY3LvTfABa4IT5Wp+r7nnmxbMLljlgbUfgR3nFJrYiPEOl4cf9MK7AaYhohKAkPSv3PFGiqVdzl9lt+gQ==
+  version "0.7.5"
+  resolved "https://registry.yarnpkg.com/react-use-auth/-/react-use-auth-0.7.5.tgz#2a03643a07c8e38fd46c18cca6b47dd165dccc4a"
+  integrity sha512-rAjSQdbEYFBgANq8tZieRGMWp2DMOzuSD/H7+i42pYxrwMRiii0wQVLWRKMEJIorW5aDDkwLkIPvsg5+mE7c0g==
   dependencies:
     "@types/react-test-renderer" "^16.9.2"
     auth0-js "^9.13.2"
