@@ -24,9 +24,23 @@ const UNAUTH_PAGES = [
   "/thanks-full/",
 ]
 
-const Default = ({ children }) => children
+const SCOPE_PAGE_MAP = {
+  "/introduction/*": ["RDV_Basic", "RDV_Full", "RDV_AllExtras"],
+}
 
-export const wrapPageElement = ({ element, props }) => (
+const Default = ({ children, ...props }) => (
+  <Layout
+    authenticated={false}
+    authorized={false}
+    fullwidth={true}
+    {...props}
+    {...props.props}
+  >
+    {children}
+  </Layout>
+)
+
+export const wrapPageElement = ({ element, path, ...props }) => (
   <AuthProvider
     navigate={navigate}
     auth0_domain="serverlessreactcourse.auth0.com"
@@ -37,14 +51,20 @@ export const wrapPageElement = ({ element, props }) => (
     customPropertyNamespace="https://serverlessreact.dev"
   >
     <Router basepath="/">
-      <ScopedRoute path="/introduction/*" scopes={["RDV_Basic"]}>
-        {element}
-      </ScopedRoute>
+      {Object.keys(SCOPE_PAGE_MAP).map((path) => (
+        <ScopedRoute
+          path={path}
+          key={path}
+          scopes={SCOPE_PAGE_MAP[path]}
+          {...props}
+        >
+          {element}
+        </ScopedRoute>
+      ))}
+
       {UNAUTH_PAGES.map((path) => (
-        <Default path={path} key={path}>
-          <Layout authenticated={false} fullwidth={true} {...props}>
-            {element}
-          </Layout>
+        <Default path={path} key={path} {...props}>
+          {element}
         </Default>
       ))}
     </Router>

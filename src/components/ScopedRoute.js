@@ -38,7 +38,7 @@ const PleasePurchase = (props) => {
         <Box textAlign="center">
           Please{" "}
           <Button onClick={() => navigate("/")} sx={{ cursor: "pointer" }}>
-            purchase Reactfordataviz
+            purchase ReactForDataviz
           </Button>{" "}
           to access this page
         </Box>
@@ -52,19 +52,19 @@ export const ScopedRoute = ({ scopes, children, ...props }) => {
 
   if (isAuthorized(scopes)) {
     return (
-      <Layout authorized={true} fullwidth={false} {...props}>
+      <Layout authorized={true} fullwidth={false} {...props} {...props.props}>
         {children}
       </Layout>
     )
   } else if (isAuthenticated()) {
     return (
-      <Layout authorized={false} fullwidth={true} {...props}>
+      <Layout authorized={false} fullwidth={true} {...props} {...props.props}>
         <PleasePurchase />
       </Layout>
     )
   } else {
     return (
-      <Layout authorized={false} fullwidth={true} {...props}>
+      <Layout authorized={false} fullwidth={true} {...props} {...props.props}>
         <PleaseLogin />
       </Layout>
     )
