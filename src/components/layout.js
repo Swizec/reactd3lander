@@ -4,14 +4,13 @@ import styled from "@emotion/styled"
 import { Box, Flex, Button, Link } from "rebass"
 import { Sidenav, Pagination } from "@theme-ui/sidenav"
 import { useAuth } from "react-use-auth"
-import { navigate } from "gatsby"
 
 import Head from "./head"
 import SkipLink from "./skip-link"
 import Header from "./header"
 import Footer from "./footer"
 import Nav from "./nav"
-import { default as PleaseLoginCopy } from "./please-login"
+
 import { isArticlePage, currentLocation } from "../util"
 
 import Reactions from "./reactions"
@@ -135,66 +134,13 @@ const ArticleWrapper = styled.div`
   padding: 0 2rem;
 `
 
-const PleaseLogin = (props) => {
-  const { login } = useAuth()
-  return (
-    <>
-      <Head {...props} />
-      <main
-        id="content"
-        style={{
-          textAlign: "center",
-          margin: "auto auto",
-        }}
-      >
-        Please{" "}
-        <Link href="" onClick={login}>
-          login
-        </Link>{" "}
-        to access this page
-        <PleaseLoginCopy />
-      </main>
-    </>
-  )
-}
-
-const PleasePurchase = (props) => {
-  return (
-    <>
-      <Head {...props} />
-      <main id="content">
-        <Box textAlign="center">
-          Please{" "}
-          <Button onClick={() => navigate("/")} sx={{ cursor: "pointer" }}>
-            purchase Reactfordataviz
-          </Button>{" "}
-          to access this page
-        </Box>
-      </main>
-    </>
-  )
-}
-
-const UNAUTH_PAGES = [
-  "/",
-  "/auth0_callback",
-  "/thankyou",
-  "/thankyou/",
-  "/thanks-basics",
-  "/thanks-basics/",
-  "/thanks-extra",
-  "/thanks-extra/",
-  "/thanks-full",
-  "/thanks-full/",
-]
-
 export default (props) => {
   const allowUnauth =
     isArticlePage(props) || UNAUTH_PAGES.includes(currentLocation(props))
   const fullwidth = allowUnauth
   const [menu, setMenu] = useState(!allowUnauth)
   const nav = useRef(null)
-  const { isAuthenticated, isAuthorized, user } = useAuth()
+  const { isAuthorized } = useAuth()
 
   return (
     <Box
@@ -210,24 +156,17 @@ export default (props) => {
       />
       <Header fullwidth={fullwidth} menu={menu} setMenu={setMenu} nav={nav} />
       <div style={{ paddingTop: "64px" }}>
-        {allowUnauth ||
-        isAuthorized(["RDV_Basic", "RDV_Full", "RDV_AllExtras"]) ? (
-          <Content
-            {...props}
-            fullwidth={fullwidth}
-            menu={menu}
-            setMenu={setMenu}
-            isArticle={isArticlePage(props)}
-            nav={nav}
-            showRightMessage={
-              !isAuthorized(["RDV_Basic", "RDV_Full", "RDV_AllExtras"])
-            }
-          />
-        ) : isAuthenticated() ? (
-          <PleasePurchase />
-        ) : (
-          <PleaseLogin />
-        )}
+        <Content
+          {...props}
+          fullwidth={fullwidth}
+          menu={menu}
+          setMenu={setMenu}
+          isArticle={isArticlePage(props)}
+          nav={nav}
+          showRightMessage={
+            !isAuthorized(["RDV_Basic", "RDV_Full", "RDV_AllExtras"])
+          }
+        />
       </div>
       <Footer />
     </Box>
