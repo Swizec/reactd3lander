@@ -2,6 +2,7 @@ import React from "react"
 import { useAuth } from "react-use-auth"
 import { Box, Button, Link } from "rebass"
 import { navigate } from "gatsby"
+import Layout from "./layout"
 
 import { default as PleaseLoginCopy } from "./please-login"
 import Head from "./head"
@@ -46,14 +47,26 @@ const PleasePurchase = (props) => {
   )
 }
 
-export const ScopedRoute = ({ location, scopes, children }) => {
+export const ScopedRoute = ({ scopes, children, ...props }) => {
   const { isAuthenticated, isAuthorized } = useAuth()
 
   if (isAuthorized(scopes)) {
-    return children
+    return (
+      <Layout authorized={true} fullwidth={false} {...props}>
+        {children}
+      </Layout>
+    )
   } else if (isAuthenticated()) {
-    return <PleasePurchase />
+    return (
+      <Layout authorized={false} fullwidth={true} {...props}>
+        <PleasePurchase />
+      </Layout>
+    )
   } else {
-    return <PleaseLogin />
+    return (
+      <Layout authorized={false} fullwidth={true} {...props}>
+        <PleaseLogin />
+      </Layout>
+    )
   }
 }

@@ -36,17 +36,17 @@ export const wrapPageElement = ({ element, props }) => (
     }}
     customPropertyNamespace="https://serverlessreact.dev"
   >
-    <Layout {...props}>
-      <Router basepath="/">
-        <ScopedRoute path="/introduction/*" scopes={["RDV_Basic"]}>
-          {element}
-        </ScopedRoute>
-        {UNAUTH_PAGES.map((path) => (
-          <Default path={path} key={path}>
+    <Router basepath="/">
+      <ScopedRoute path="/introduction/*" scopes={["RDV_Basic"]}>
+        {element}
+      </ScopedRoute>
+      {UNAUTH_PAGES.map((path) => (
+        <Default path={path} key={path}>
+          <Layout authenticated={false} fullwidth={true} {...props}>
             {element}
-          </Default>
-        ))}
-      </Router>
-    </Layout>
+          </Layout>
+        </Default>
+      ))}
+    </Router>
   </AuthProvider>
 )

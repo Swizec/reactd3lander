@@ -135,12 +135,11 @@ const ArticleWrapper = styled.div`
 `
 
 export default (props) => {
-  const allowUnauth =
-    isArticlePage(props) || UNAUTH_PAGES.includes(currentLocation(props))
-  const fullwidth = allowUnauth
-  const [menu, setMenu] = useState(!allowUnauth)
+  //   const allowUnauth =
+  // isArticlePage(props) || UNAUTH_PAGES.includes(currentLocation(props))
+  const fullwidth = props.fullwidth
+  const [menu, setMenu] = useState(props.authorized)
   const nav = useRef(null)
-  const { isAuthorized } = useAuth()
 
   return (
     <Box
@@ -163,9 +162,7 @@ export default (props) => {
           setMenu={setMenu}
           isArticle={isArticlePage(props)}
           nav={nav}
-          showRightMessage={
-            !isAuthorized(["RDV_Basic", "RDV_Full", "RDV_AllExtras"])
-          }
+          showRightMessage={!authenticated}
         />
       </div>
       <Footer />
