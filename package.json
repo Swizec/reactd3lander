@@ -66,7 +66,7 @@
         "react-helmet": "^5.2.1",
         "react-lazyload-fadein": "^1.1.0",
         "react-tweet-embed": "^1.2.2",
-        "react-use-auth": "^0.7.3",
+        "react-use-auth": "^0.7.5",
         "rebass": "^4.0.6",
         "remark-html": "^11.0.2",
         "remark-slug": "^5.1.2",
