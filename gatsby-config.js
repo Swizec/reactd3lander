@@ -62,7 +62,7 @@ module.exports = {
             options: {},
           },
         ],
-        plugins: [{ resolve: "gatsby-remark-images"}],
+        plugins: [{ resolve: "gatsby-remark-images" }],
       },
     },
     {
