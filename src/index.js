@@ -18,7 +18,6 @@ const UNAUTH_PAGES = [
   "/thanks-basics",
   "/thanks-extra",
   "/thanks-full",
-  "/articles",
   "/articles/*",
 ]
 
@@ -45,6 +44,7 @@ const SCOPE_PAGE_MAP = {
   "/react-hooks/*": [],
   "/redux-animation/*": [],
   "/salaries-histogram/*": [],
+  "/state-app-structure/*": [],
   "/simple-animation/*": [],
   "/smooth-animation/*": [],
   "/speed-optimizations/*": [],
