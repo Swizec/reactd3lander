@@ -17,6 +17,7 @@
         "deploy-lambda": "npm run build-lambda && cd lambdas && serverless deploy && cd .."
     },
     "dependencies": {
+        "@jxnblk/react-live": "^2.1.2-2",
         "@mdx-js/mdx": "^1.6.5",
         "@mdx-js/react": "^1.6.5",
         "@rebass/forms": "^4.0.6",
