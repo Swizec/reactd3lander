@@ -72,19 +72,19 @@ module.exports = {
       },
     },
     // add a gatsby-source-filesystem entry for every article's images
-    ...fs
-      .readdirSync(`${__dirname}/src/pages/articles`)
-      .map((path) => `${__dirname}/src/pages/articles/${path}`)
-      .filter(
-        (path) =>
-          fs.lstatSync(path).isDirectory() && fs.readdirSync(path).length > 0
-      )
-      .map((path) => ({
-        resolve: "gatsby-source-filesystem",
-        options: {
-          path,
-        },
-      })),
+    // ...fs
+    //   .readdirSync(`${__dirname}/src/pages/articles`)
+    //   .map((path) => `${__dirname}/src/pages/articles/${path}`)
+    //   .filter(
+    //     (path) =>
+    //       fs.lstatSync(path).isDirectory() && fs.readdirSync(path).length > 0
+    //   )
+    //   .map((path) => ({
+    //     resolve: "gatsby-source-filesystem",
+    //     options: {
+    //       path,
+    //     },
+    //   })),
     "gatsby-plugin-catch-links",
     "gatsby-plugin-theme-ui",
     "gatsby-plugin-react-helmet",

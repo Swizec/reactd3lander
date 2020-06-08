@@ -66,33 +66,35 @@ const Default = ({ children, ...props }) => (
   </Layout>
 )
 
-export const wrapPageElement = ({ element, path, ...props }) => (
-  <AuthProvider
-    navigate={navigate}
-    auth0_domain="serverlessreactcourse.auth0.com"
-    auth0_client_id="pCO5jInBC1g4aCAtEfJNL6uftWSw40un"
-    auth0_params={{
-      scope: "openid profile email user_metadata",
-    }}
-    customPropertyNamespace="https://serverlessreact.dev"
-  >
-    <Router basepath="/">
-      {Object.keys(SCOPE_PAGE_MAP).map((path) => (
-        <ScopedRoute
-          path={path}
-          key={path}
-          scopes={SCOPE_PAGE_MAP[path]}
-          {...props}
-        >
-          {element}
-        </ScopedRoute>
-      ))}
+export const wrapPageElement = ({ element }) => element
 
-      {UNAUTH_PAGES.map((path) => (
-        <Default path={path} key={path} {...props}>
-          {element}
-        </Default>
-      ))}
-    </Router>
-  </AuthProvider>
-)
+// export const wrapPageElement = ({ element, path, ...props }) => (
+//   <AuthProvider
+//     navigate={navigate}
+//     auth0_domain="serverlessreactcourse.auth0.com"
+//     auth0_client_id="pCO5jInBC1g4aCAtEfJNL6uftWSw40un"
+//     auth0_params={{
+//       scope: "openid profile email user_metadata",
+//     }}
+//     customPropertyNamespace="https://serverlessreact.dev"
+//   >
+//     <Router basepath="/">
+//       {Object.keys(SCOPE_PAGE_MAP).map((path) => (
+//         <ScopedRoute
+//           path={path}
+//           key={path}
+//           scopes={SCOPE_PAGE_MAP[path]}
+//           {...props}
+//         >
+//           {element}
+//         </ScopedRoute>
+//       ))}
+
+//       {UNAUTH_PAGES.map((path) => (
+//         <Default path={path} key={path} {...props}>
+//           {element}
+//         </Default>
+//       ))}
+//     </Router>
+//   </AuthProvider>
+// )
