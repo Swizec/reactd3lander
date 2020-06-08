@@ -142,8 +142,6 @@ export default (props) => {
   const [menu, setMenu] = useState(props.authorized)
   const nav = useRef(null)
 
-  console.log({ props })
-
   return (
     <Box
       sx={{
