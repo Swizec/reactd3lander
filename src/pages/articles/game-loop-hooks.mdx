@@ -1,0 +1,173 @@
+---
+title: "Game loop animation with React Hooks"
+description: "Change state at 60fps and voila, animation 🤯"
+date: "2020-06-09T09:13:00.000Z"
+lastUpdated: "2020-06-09T09:13:00.000Z"
+image: "../../images/articles/flatten-the-curve.jpg"
+---
+
+When React came on the scene it made a big splash with its DOM diffing engine. You could build UI just like you'd build a game 😍
+
+No more fiddly work with figuring out the difference between one frame and another. Change state, let React handle the rest.
+
+It was amazing.
+
+I built a simple Space Invaders clone and gave my first big tech talk in San Francisco about it.
+
+https://www.youtube.com/watch?v=UP1nCXG2t4M
+
+Nowadays that's nothing special. Every framework can do it. Oh you can change state, re-render, and it all just works?
+
+Boooooring.
+
+But a lot of people don't realize that you can use this trick for animation. Change state 60 times per second and magic happens.
+
+That's how video games work.
+
+You can think of a video game as a mutating state tree. Each action adds some change to the tree. The game then engine re-renders your frame as a pure representation of that state.
+
+Very much like React.
+
+Your components render from state and props. Change those and the components re-render. Change them fast enough and they animate.
+
+![](giphy:magic)
+
+## Animating with Hooks and state
+
+Here's how this game loop approach to animation works in action. An animated spiral.
+
+Silly example I know. We're focusing on the technique 😛
+
+https://codesandbox.io/s/game-loop-animation-hooks-kxxml?file=/src/Spiral.js
+
+[![](https://i.imgur.com/twA82JK.gif)](https://codesandbox.io/s/game-loop-animation-hooks-kxxml?file=/src/Spiral.js)
+
+Frame mismatch between gif and UI makes it look jittery. Silky smooth if you click through I promise.
+
+### Here's how it works
+
+We have a `<Spiral>` component that's rendered inside an SVG element.
+
+```javascript
+<svg width="400" height="400">
+  <Spiral cx={200} cy={150} maxR={75} />
+</svg>
+```
+
+Takes a center-x, center-y, and max radius as props.
+
+The component uses those to render a `<circle>` element with some colors.
+
+```javascript
+return (
+  <g transform={`translate(${cx}, ${cy})`}>
+    <circle
+      cx={x}
+      cy={y}
+      r={10}
+      fill={color}
+      stroke={borderColor}
+      strokeWidth={2}
+    />
+  </g>
+)
+```
+
+The grouping `<g>` elements moves our coordinate system to `cx, cy` and the `<circle>` renders a circle. Attributes define its coordinates and color.
+
+We get those attributes with high school trigonometry.
+
+```javascript
+const x = Math.cos((angle * Math.PI) / 180) * radius.r
+const y = Math.sin((angle * Math.PI) / 180) * radius.r
+const color = d3.interpolateRdBu(angle / 360)
+const borderColor = d3.interpolateRdBu((360 - angle) / 360)
+```
+
+X is the cosine of `angle` in radians multiplied with current radius. Y is the sine.
+
+D3 helps us get a new color for every angle. Makes it flashy.
+
+### The game loop
+
+All of that won't make an animation. It just makes a circle.
+
+What you need next is the game loop. It comes in 3 parts.
+
+1. The state
+2. The animation tick method
+3. The timer
+
+**The state** defines the 2 parameters we'll change with each tick of the animation.
+
+```javascript
+// using R and V for radius helps us invert the spiral at 0
+const [radius, setRadius] = useState({ r: maxR, v: -(maxR / 360) })
+const [angle, setAngle] = useState(0)
+```
+
+The `radius` state has two parts. The current radius, `r`, and the current velocity, `v`. This helps us change between making it bigger or smaller when we hit an edge.
+
+The `angle` state holds the current angle. Feed it into sine and cosine to get coordinates.
+
+**The animation tick method** runs about 60 times per second and manipulates this state.
+
+```javascript
+function tickAnimation() {
+  // run angle in a circle
+  // adjust +2 to speed up and fit entire animation in a certain time
+  setAngle((angle) => (angle + 2) % 360)
+  setRadius((radius) => {
+    let { r, v } = radius
+    r += v
+
+    // invert movement direction at 0 and maxR
+    if (r < 0) {
+      v = +(maxR / 360)
+    } else if (r > maxR) {
+      v = -(maxR / 360)
+    }
+
+    return { r, v }
+  })
+}
+```
+
+Change angle with a modus of 360 to run in a circle, change radius inward or outward depending on velocity. Invert velocity when you reach different limits.
+
+**The timer** triggers our `tickAnimation` function to drive the animation.
+
+```javascript
+// start game loop timer on mount
+useEffect(() => {
+  const t = d3.timer(tickAnimation)
+  return () => t.stop()
+}, [])
+```
+
+The `useEffect` hook runs on mount, starts a `d3.timer` which calls our method about 60 times per second, and cleans up with a `stop()`. Ensures we don't run the animation after component unmounts.
+
+You can think of D3 timer as a more reliable `setInterval` ✌️
+
+And voila, an animated spiral that looks jittery on a gif and wonderful in real life.
+
+[![](https://i.imgur.com/twA82JK.gif)](https://codesandbox.io/s/game-loop-animation-hooks-kxxml?file=/src/Spiral.js)
+
+## How this approach scales
+
+The game loop approach is fantastic because it gives you lots of power. You can do whatever you want, as intricate as you want.
+
+The game loop approach sucks because it gives you lots of power and lets you do whatever you want.
+
+😅
+
+Oftentimes you don't want this much power. You want something simpler and easy to use. Less power, more magic.
+
+That's where transitions come in. Let D3 handle the details.
+
+![](https://media2.giphy.com/media/d3mlE7uhX8KFgEmY/giphy.gif)
+
+Wanna learn more about animating with modern React? Check out [React for Dataviz](https://reactfordataviz.com). Comes with a special live workshop just this week
+
+Cheers,<br/>
+~Swizec
