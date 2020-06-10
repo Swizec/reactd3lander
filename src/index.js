@@ -15,9 +15,13 @@ const UNAUTH_PAGES = [
   "/",
   "/auth0_callback",
   "/thankyou",
+  "/thankyou/*",
   "/thanks-basics",
+  "/thanks-basics/*",
   "/thanks-extra",
+  "/thanks-extra/*",
   "/thanks-full",
+  "/thanks-full/*",
   "/articles/*",
 ]
 
