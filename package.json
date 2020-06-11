@@ -35,7 +35,7 @@
         "countries-list": "^2.4.3",
         "date-fns": "^2.13.0",
         "deepmerge": "^4.0.0",
-        "gatsby": "^2.13.48",
+        "gatsby": "^2.23.3",
         "gatsby-image": "2.2.0",
         "gatsby-plugin-catch-links": "^2.1.2",
         "gatsby-plugin-facebook-pixel": "^1.0.3",

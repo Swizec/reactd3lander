@@ -47,24 +47,24 @@ const PleasePurchase = (props) => {
   )
 }
 
-export const ScopedRoute = ({ scopes, children, ...props }) => {
+export const ScopedRoute = ({ scopes, element, ...props }) => {
   const { isAuthenticated, isAuthorized } = useAuth()
 
   if (isAuthorized(scopes)) {
     return (
-      <Layout authorized={true} fullwidth={false} {...props} {...props.props}>
-        {children}
+      <Layout authorized={true} fullwidth={false} {...props}>
+        {element}
       </Layout>
     )
   } else if (isAuthenticated()) {
     return (
-      <Layout authorized={false} fullwidth={true} {...props} {...props.props}>
+      <Layout authorized={false} fullwidth={true} {...props}>
         <PleasePurchase />
       </Layout>
     )
   } else {
     return (
-      <Layout authorized={false} fullwidth={true} {...props} {...props.props}>
+      <Layout authorized={false} fullwidth={true} {...props}>
         <PleaseLogin />
       </Layout>
     )

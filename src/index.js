@@ -12,17 +12,13 @@ export { default as Note } from "./components/note"
 export { default as RecipeCard } from "./components/recipe-card"
 
 const UNAUTH_PAGES = [
-  "/",
   "/auth0_callback",
   "/thankyou",
-  "/thankyou/*",
   "/thanks-basics",
-  "/thanks-basics/*",
   "/thanks-extra",
-  "/thanks-extra/*",
   "/thanks-full",
-  "/thanks-full/*",
   "/articles/*",
+  "/",
 ]
 
 const SCOPE_PAGE_MAP = {
@@ -58,15 +54,9 @@ const SCOPE_PAGE_MAP = {
   "/using-canvas/*": [],
 }
 
-const Default = ({ children, ...props }) => (
-  <Layout
-    authenticated={false}
-    authorized={false}
-    fullwidth={true}
-    {...props}
-    {...props.props}
-  >
-    {children}
+const Default = ({ element, ...props }) => (
+  <Layout authenticated={false} authorized={false} fullwidth={true} {...props}>
+    {element}
   </Layout>
 )
 
@@ -80,22 +70,19 @@ export const wrapPageElement = ({ element, path, ...props }) => (
     }}
     customPropertyNamespace="https://serverlessreact.dev"
   >
-    <Router basepath="/">
+    <Router>
       {Object.keys(SCOPE_PAGE_MAP).map((path) => (
         <ScopedRoute
           path={path}
           key={path}
           scopes={SCOPE_PAGE_MAP[path]}
+          element={element}
           {...props}
-        >
-          {element}
-        </ScopedRoute>
+        />
       ))}
 
       {UNAUTH_PAGES.map((path) => (
-        <Default path={path} key={path} {...props}>
-          {element}
-        </Default>
+        <Default path={path} key={path} element={element} {...props} />
       ))}
     </Router>
   </AuthProvider>

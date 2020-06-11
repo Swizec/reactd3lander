@@ -135,9 +135,8 @@ const ArticleWrapper = styled.div`
 `
 
 export default (props) => {
+  console.log(props)
   const { isAuthenticated } = useAuth()
-  //   const allowUnauth =
-  // isArticlePage(props) || UNAUTH_PAGES.includes(currentLocation(props))
   const fullwidth = props.fullwidth
   const [menu, setMenu] = useState(props.authorized)
   const nav = useRef(null)
