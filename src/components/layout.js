@@ -135,7 +135,6 @@ const ArticleWrapper = styled.div`
 `
 
 export default (props) => {
-  console.log(props)
   const { isAuthenticated } = useAuth()
   const fullwidth = props.fullwidth
   const [menu, setMenu] = useState(props.authorized)
