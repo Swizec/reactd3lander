@@ -17,6 +17,11 @@ const WrapperBlock = styled.div`
   @media (max-width: 940px) {
     font-size: 20px;
   }
+
+  @media (max-width: 940px) {
+    display: flex;
+    flex-direction: column-reverse;
+  }
 `
 
 /* eslint-disable react-hooks/exhaustive-deps */
@@ -238,7 +243,9 @@ const Pricing = () => {
             <div>
               <b>30min 1on1 call where we discuss your usecase</b>
               <br />
-              <b>Bonus React, D3, and hooks live workshop</b>
+              <b style={{ fontSize: "1.2em" }}>
+                Bonus React, D3, and hooks live workshop
+              </b>
               <br />
               D3 the good parts
               <br />
@@ -295,7 +302,9 @@ const Pricing = () => {
           plan="FULL COURSE"
           features={
             <div>
-              <b>Bonus React, D3, and hooks live workshop</b>
+              <b style={{ fontSize: "1.2em" }}>
+                Bonus React, D3, and hooks live workshop
+              </b>
               <br />
               D3 the good parts
               <br />
@@ -322,8 +331,6 @@ const Pricing = () => {
               Rendering to Canvas
               <br />
               Refactoring to React Hooks
-              <br />
-              Downloadable PDF/epub/mobi
               <br />
               <b>14 extra projects you can use as a cookbook</b>
               <br />
