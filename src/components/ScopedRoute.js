@@ -2,6 +2,7 @@ import React from "react"
 import { useAuth } from "react-use-auth"
 import { Box, Button, Link } from "rebass"
 import { navigate } from "gatsby"
+
 import Layout from "./layout"
 
 import { default as PleaseLoginCopy } from "./please-login"
@@ -47,7 +48,7 @@ const PleasePurchase = (props) => {
   )
 }
 
-export const ScopedRoute = ({ scopes, element, ...props }) => {
+export const ScopedRoute = ({ scopes, element, scopedPages, ...props }) => {
   const { isAuthenticated, isAuthorized } = useAuth()
 
   if (isAuthorized(scopes)) {

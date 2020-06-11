@@ -1,7 +1,7 @@
 import React from "react"
 import { navigate } from "gatsby"
 import { AuthProvider } from "react-use-auth"
-import { Router } from "@reach/router"
+import minimatch from "minimatch"
 import Layout from "./components/layout"
 import { ScopedRoute } from "./components/ScopedRoute"
 
@@ -60,6 +60,23 @@ const Default = ({ element, ...props }) => (
   </Layout>
 )
 
+const MyRouter = ({ element, ...props }) => {
+  const scopedPages = Object.keys(SCOPE_PAGE_MAP)
+  const scopedKey = scopedPages.find((page) => minimatch(props.path, page))
+
+  if (scopedKey) {
+    return (
+      <ScopedRoute
+        element={element}
+        scopes={SCOPE_PAGE_MAP[scopedKey]}
+        {...props}
+      />
+    )
+  } else {
+    return <Default element={element} {...props} />
+  }
+}
+
 export const wrapPageElement = ({ element, path, ...props }) => (
   <AuthProvider
     navigate={navigate}
@@ -70,27 +87,6 @@ export const wrapPageElement = ({ element, path, ...props }) => (
     }}
     customPropertyNamespace="https://serverlessreact.dev"
   >
-    <Router>
-      {Object.keys(SCOPE_PAGE_MAP).map((path) => (
-        <ScopedRoute
-          path={path}
-          key={path}
-          scopes={SCOPE_PAGE_MAP[path]}
-          element={element}
-          {...props}
-          {...props.props}
-        />
-      ))}
-
-      {UNAUTH_PAGES.map((path) => (
-        <Default
-          path={path}
-          key={path}
-          element={element}
-          {...props}
-          {...props.props}
-        />
-      ))}
-    </Router>
+    <MyRouter {...props.props} element={element} />
   </AuthProvider>
 )
