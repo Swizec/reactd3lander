@@ -77,7 +77,7 @@ const MyRouter = ({ element, ...props }) => {
   }
 }
 
-export const wrapPageElement = ({ element, path, ...props }) => (
+export const wrapPageElement = ({ element, ...props }) => (
   <AuthProvider
     navigate={navigate}
     auth0_domain="serverlessreactcourse.auth0.com"
@@ -87,6 +87,6 @@ export const wrapPageElement = ({ element, path, ...props }) => (
     }}
     customPropertyNamespace="https://serverlessreact.dev"
   >
-    <MyRouter {...props.props} element={element} />
+    <MyRouter element={element} {...props} {...props.props} />
   </AuthProvider>
 )
