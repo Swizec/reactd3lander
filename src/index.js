@@ -78,11 +78,18 @@ export const wrapPageElement = ({ element, path, ...props }) => (
           scopes={SCOPE_PAGE_MAP[path]}
           element={element}
           {...props}
+          {...props.props}
         />
       ))}
 
       {UNAUTH_PAGES.map((path) => (
-        <Default path={path} key={path} element={element} {...props} />
+        <Default
+          path={path}
+          key={path}
+          element={element}
+          {...props}
+          {...props.props}
+        />
       ))}
     </Router>
   </AuthProvider>
