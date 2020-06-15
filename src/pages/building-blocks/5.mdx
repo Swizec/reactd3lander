@@ -218,9 +218,21 @@ them to build almost everything. 👌
 
 # React, D3, and hooks
 
-Now that you know more about the basics of hooks, and you've got the mental models of combining D3 and React for modern dataviz, let's build those building blocks with hooks.
+Now that you know the basics of hooks, and you've got the mental models of combining D3 and React for modern dataviz, let's try an exercise. Learn how to combine that knowledge into using React, D3, and hooks for dataviz.
 
 ## Blackbox components with hooks
+
+We'll start with blackbox components. Take the final blackbox example below and refactor it to using hooks.
+
+You'll need the `useRef` hook to reference a rendered `<g>` element and the `useEffect` hook to trigger D3 rendering when the component changes. Don't forget to update React version to latest.
+
+Try solving it yourself before watching my video. Helps you learn :)
+
+https://codesandbox.io/s/5v21r0wo4x
+
+### My solution
+
+<Vimeo id={429150499} />
 
 https://codesandbox.io/s/react-d3-axis-hooks-df304
 
@@ -253,6 +265,12 @@ const MyD3Component = ({ x, y }) => {
 
 You'll see how this works in more detail when we build the big example project. We'll use `useD3` to build axes.
 
+Here's how the above example looks when you use `useD3` ✌️
+
+<Vimeo id={429150604} />
+
+https://codesandbox.io/s/react-d3-axis-used3-prq3g
+
 ## Full integration components with hooks
 
 The core mental shift with hooks comes in where your D3 code lives 👉 in the main render.
@@ -262,6 +280,12 @@ Where we used to spread D3 code around the whole component class, hooks let us d
 Anything bound to component lifecycle goes into `useEffect`, anything we need every time, goes in the function body. When a lot of logic builds up, extract it to a custom hook.
 
 If you're worried about performance or have a large dataset 👉 wrap in `useMemo`.
+
+Take this Scatterplot example from before and try to refactor it using hooks. After you gave it a shot, watch the video to check my solution.
+
+https://codesandbox.io/s/j73xlyr8v5
+
+<Vimeo id={429154818} />
 
 https://codesandbox.io/s/scatterplot-hooks-y4un7
 
