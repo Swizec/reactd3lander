@@ -48,7 +48,7 @@ const PleasePurchase = (props) => {
   )
 }
 
-export const ScopedRoute = ({ scopes, element, scopedPages, ...props }) => {
+export const ScopedRoute = ({ scopes, element, ...props }) => {
   const { isAuthenticated, isAuthorized } = useAuth()
 
   if (isAuthorized(scopes)) {
