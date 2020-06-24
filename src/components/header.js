@@ -138,11 +138,7 @@ export default ({ nav, menu, setMenu, style }) => {
         {/* Reactfordataviz.com */}
       </Link>
 
-      <Box mx="auto">
-        <Heading fontSize={[2, 3, 4]}>
-          🤘get bonus <em>React, D3, and hooks</em> live workshop 🤘
-        </Heading>
-      </Box>
+      <Box mx="auto"></Box>
 
       <Login />
       <Button

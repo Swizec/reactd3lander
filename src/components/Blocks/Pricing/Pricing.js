@@ -243,9 +243,6 @@ const Pricing = () => {
             <div>
               <b>30min 1on1 call where we discuss your usecase</b>
               <br />
-              <b style={{ fontSize: "1.2em" }}>
-                Bonus React, D3, and hooks live workshop
-              </b>
               <br />
               D3 the good parts
               <br />
@@ -302,9 +299,6 @@ const Pricing = () => {
           plan="FULL COURSE"
           features={
             <div>
-              <b style={{ fontSize: "1.2em" }}>
-                Bonus React, D3, and hooks live workshop
-              </b>
               <br />
               D3 the good parts
               <br />
