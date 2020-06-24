@@ -1,4 +1,8 @@
-# Add user controls for data slicing and dicing {#user-controls}
+import { Vimeo } from "../../components/Video"
+
+# Add user controls for data slicing and dicing
+
+<Vimeo id={432211014} />
 
 Now comes the fun part. All that extra effort we put into making our components
 aware of filtering, and it all comes down to this: User controls.
@@ -38,3 +42,557 @@ maybe a thing from render. For instance, it's complaining about `ControlRow` in
 this screenshot. Remove the `ControlRow` import on top and delete
 `<ControlRow ... />` from render. The error goes away, and you see what you're
 doing.
+
+## Step 1: Update App.js
+
+<Vimeo id={432211494} />
+
+All right, you know the drill. Add imports, tweak some things, add to render.
+We have to import `Controls`, set up filtering, update the map's `zoom` prop,
+and render a white rectangle and `Controls`.
+
+The white rectangle makes it so the zoomed-in map doesn't cover up the
+histogram. I'll explain when we get there.
+
+```javascript
+// src/App.js
+import MedianLine from "./components/MedianLine"
+
+// Insert the line(s) between here...
+import Controls from "./components/Controls"
+// ...and here.
+
+class App extends React.Component {
+    // Insert the line(s) between here...
+    const [salariesFilter, setSalariesFilter] = useState(() => () => true);
+    // ...and here.
+    const [filteredBy, setFilteredBy] = useState({
+        USstate: "*",
+        year: "*",
+        jobTitle: "*",
+    });
+
+
+  // ...
+
+  // Insert the line(s) between here...
+  function updateDataFilter(filter, filteredBy) {
+        setFilteredBy(filteredBy);
+        setSalariesFilter(() => filter);
+    }
+  // ...and here.
+
+  render() {
+    // ...
+  }
+}
+```
+
+We import the `Controls` component and add a default `salariesFilter` function
+to `this.state`. The `updateDataFilter` method passes the filter function and
+`filteredBy` dictionary from arguments to App state. We'll use it as a callback
+in `Controls`.
+
+The rest of filtering setup happens in the render method.
+
+```javascript
+// src/App.js
+function App() {
+    // ...
+
+        // ...
+        // Delete the line(s) between here...
+        const filteredSalaries = techSalaries
+        // ...and here.
+        // Insert the line(s) between here...
+        const filteredSalaries = techSalaries
+                                     .filter(salariesFilter)
+        // ...and here.
+
+        // ...
+
+        let zoom = null,
+            medianHousehold = // ...
+        // Insert the line(s) between here...
+        if (filteredBy.USstate !== "*") {
+            zoom = filteredBy.USstate;
+            medianHousehold = d3.mean(
+                medianIncomesByUSState[zoom],
+                (d) => d.medianIncome
+            );
+        }
+        // ...and here.
+
+        // ...
+    }
+}
+```
+
+We add a `.filter` call to `filteredSalaries`, which uses our `salariesFilter`
+method to throw out anything that doesn't fit. Then we set up `zoom`, if a US
+state was selected.
+
+We built the `CountyMap` component to focus on a given US state. Finding the
+centroid of a polygon, re-centering the map, and increasing the sizing factor.
+It creates a nice zoom effect.
+
+![Zoom effect](https://raw.githubusercontent.com/Swizec/react-d3js-es6-ebook/2018-version/manuscript/resources/images/es6v2/zoom-effect.png)
+
+And here's the downside of this approach. SVG doesn't know about element
+boundaries. It just renders stuff.
+
+![Zoom without white rectangle](https://raw.githubusercontent.com/Swizec/react-d3js-es6-ebook/2018-version/manuscript/resources/images/es6v2/zoom-without-rectangle.png)
+
+See, it goes under the histogram. Let's fix that and add the `Controls` render
+while we're at it.
+
+```javascript
+// src/App.js
+function App() {
+    // ...
+
+        // ...
+
+        return (
+            <div //...>
+                <svg //...>
+                    <CountyMap //... />
+
+                    // Insert the line(s) between here...
+                    <rect x="500" y="0"
+                          width="600"
+                          height="500"
+                          style={{fill: 'white'}} />
+                    // ...and here.
+
+                    <Histogram //... />
+                    <MedianLine //.. />
+                </svg>
+
+                // Insert the line(s) between here...
+                <Controls data={techSalaries}
+                          updateDataFilter={updateDataFilter} />
+                // ...and here.
+            </div>
+        )
+    }
+}
+```
+
+Rectangle, `500` to the right, `0` from top, `600` wide and `500` tall, with a
+white background. Gives the histogram an opaque background, so it doesn't
+matter what the map is doing.
+
+We render the `Controls` component just after `</svg>` because it's not an SVG
+component – it uses normal HTML. Unlike other components, it needs our entire
+dataset as `data`. We use the `updateDataFilter` prop to say which callback
+function it should call when a new filter is ready.
+
+If this seems roundabout ... I've seen worse. The callbacks approach makes our
+app easier to componentize and keeps the code relatively unmessy. Imagine
+putting everything we've done so far in `App`! :satisfied:
+
+## Step 2: Build Controls component
+
+<Vimeo id={432212029} />
+
+The `Controls` component builds our filter function and `filteredBy` dictionary
+based on user choices.
+
+`Controls` renders 3 rows of buttons and builds filtering out of the choice
+made on each row. That makes `Controls` kind of repetitive, but that's okay.
+
+To keep this book shorter, we're going to build everything for a `year` filter
+first. Then I'll explain how to add `USstate` and `jobTitle` filters on a
+higher level. Once you have one working, the rest follows that same pattern.
+
+Make a `Controls` directory in `src/components/` and let's begin. The main
+`Controls` component goes in your `index.js` file.
+
+### Stub Controls
+
+```javascript
+// src/components/Controls.js
+import React from "react"
+
+import ControlRow from "./ControlRow"
+
+const Controls = ({ data, updateDataFilter }) => {
+  const [filteredBy, setFilteredBy] = useState({
+    year: "*",
+  })
+  const [filterFunctions, setFilter] = useState({
+    year: () => true,
+  })
+
+  const updateYearFilter = (year, reset) => {}
+}
+
+export default Controls
+```
+
+We start with some imports and a `Controls` class-based component. Inside, we
+define default `state` with an always-true `yearFilter` and an asterisk for
+`year`.
+
+We also need an `updateYearFilter` function, which we'll use to update the
+filter, a `reportUpdateUpTheChain` function, and a `render` method. We're using
+`reportUpdateUpTheChain` to bubble updates to our parent component. It's a
+simpler alternative to using React Context or a state management library.
+
+### Filter logic
+
+<Vimeo id={432212799} />
+
+```javascript
+// src/components/Controls.js
+const Controls = (...) => {
+  // ...
+  const updateYearFilter = (year, reset) => {
+    let yearFilter = (d) => d.submit_date.getFullYear() === year
+
+    if (reset || !year) {
+      yearFilter = () => true
+      year = "*"
+    }
+
+    setFilteredBy((filteredBy) => {
+      return { ...filteredBy, year }
+    })
+    setFilter((filterFunctions) => {
+      return { ...filterFunctions, year: yearFilter }
+    })
+  }
+}
+```
+
+`updateYearFilter` is a callback we pass into `ControlRow`. When a user picks a
+year, their action triggers this function.
+
+When that happens, we create a new partial filter function. The `App` component
+uses it inside a `.filter` call like you saw earlier. We have to return `true`
+for elements we want to keep and `false` for elements we don't.
+
+Comparing `submit_date.getFullYear()` with `year` achieves that.
+
+The `reset` argument lets us reset filters back to defaults. Enables users to
+unselect options.
+
+When we have the `year` and `filter`, we update component state with
+`this.setState`. This triggers a re-render and calls `reportUpdateUpTheChain`
+afterwards. Great use-case for the little known setState callback 😃
+
+`reportUpdateUpTheChain` then calls `this.props.updateDataFilter`, which is a
+callback method on `App`. We defined it earlier – it needs a new filter method
+and a `filteredBy` dictionary.
+
+```
+// src/components/Controls.js
+const Controls = ( ... ) => {
+    // ...
+    function reportUpdateUpTheChain() {
+        window.location.hash = [
+            filteredBy.year
+        ].join("-");
+
+        const filter = (d) =>
+            filterFunctions.year(d)
+
+        updateDataFilter(filter, filteredBy);
+    }
+}
+```
+
+Building the filter method looks tricky because we're composing multiple
+functions. The new arrow function takes a dictionary of filters as an argument
+and returns a new function that `&&`s them all. We invoke it immediately with
+`this.state` as the argument.
+
+It looks silly when there's just one filter, but I promise it makes sense.
+
+### Render
+
+Great, we have the filter logic. Let's render those rows of controls we've been
+talking about.
+
+```javascript
+// src/components/Controls/index.js
+const Controls = (...) => {
+  // ...
+    const years = new Set(data.map((d) => d.submit_date.getFullYear()));
+
+    return (
+      <div>
+         <ControlRow
+                data={data}
+                toggleNames={Array.from(years.values())}
+                picked={filteredBy.year}
+                updateDataFilter={updateYearFilter}
+            />
+      </div>
+    )
+
+}
+```
+
+Once more, this is generalized code used for a single example: the `year`
+filter.
+
+We build a `Set` of distinct years in our dataset, then render a `ControlRow`
+using props to give it our `data`, a set of `toggleNames`, a callback to update
+the filter, and which entry is `picked` right now. Also known as the controlled
+component pattern, it enables us to maintain the data-flows-down,
+events-bubble-up architecture.
+
+If you don't know about `Set`s, they're an ES6 data structure that ensures
+every entry is unique. Just like a mathematical set. They're pretty fast.
+
+## Step 3: Build ControlRow component
+
+<Vimeo id={432213165} />
+
+Let's build the `ControlRow` component. It renders a row of controls and
+ensures only one at a time is selected.
+
+We'll start with a stub and go from there.
+
+```javascript
+// src/components/Controls.js
+import React from "react"
+
+const ControlRow = ({
+  data,
+  toggleNames,
+  picked,
+  updateDataFilter,
+  capitalize,
+}) => {
+  function makePick(picked, newState) {
+    updateDataFilter(picked, !newState)
+  }
+}
+```
+
+`makePick` calls the data filter update and passes in the new value and whether
+we want to unselect. Pretty simple right?
+
+```javascript
+// src/components/Controls.js
+const ControlRow = () => {
+  // ...
+
+  return (
+    <div className="row">
+      <div className="col-md-12">
+        {toggleNames.map((name) => (
+          <Toggle
+            label={capitalize ? name.toUpperCase() : name}
+            name={name}
+            key={name}
+            value={picked === name}
+            onClick={makePick}
+          />
+        ))}
+      </div>
+    </div>
+  )
+}
+```
+
+In render, we set up two `div`s with Bootstrap classes. The first is a `row`,
+and the second is a full-width column. I tried using a column for each button,
+but it was annoying to manage and used too much space.
+
+Inside the divs, we map over all toggles and use the `<Toggle>` component to render each of them. The label is a prettier version of the name, which
+also serves as a key in our `toggleValues` dictionary. It's going to be the
+`picked` attribute in `makePick`.
+
+Your browser should continue showing an error, but it should change to talking
+about the `Toggle` component instead of `ControlRow`.
+
+![](https://raw.githubusercontent.com/Swizec/react-d3js-es6-ebook/2018-version/manuscript/resources/images/es6v2/toggle-error.png)
+
+Let's build it.
+
+## Step 5: Add US state and Job Title filters
+
+<Vimeo id={432214569} />
+
+With all that done, we can add two more filters: US states and job titles. Our
+`App` component is already set up to use them, so we just have to add them to
+the `Controls` component.
+
+We'll start with the `render` method, then handle the parts I said earlier
+would look repetitive.
+
+```javascript
+// src/components/Controls.js
+const Controls = () => {
+  // ...
+
+    const years = new Set(data.map((d) => d.submit_date.getFullYear())),
+      // Insert the line(s) between here...
+      jobTitles = new Set(data.map((d) => d.clean_job_title)),
+      USstates = new Set(data.map((d) => d.USstate))
+    // ...and here.
+
+    return (
+      <div>
+        <ControlRow
+          data={data}
+          toggleNames={Array.from(years.values())}
+          picked={this.state.year}
+          updateDataFilter={this.updateYearFilter}
+        />
+        // Insert the line(s) between here...
+        <ControlRow
+          data={data}
+          toggleNames={Array.from(jobTitles.values())}
+          picked={this.state.jobTitle}
+          updateDataFilter={this.updateJobTitleFilter}
+        />
+        <ControlRow
+          data={data}
+          toggleNames={Array.from(USstates.values())}
+          picked={this.state.USstate}
+          updateDataFilter={this.updateUSstateFilter}
+          capitalize="true"
+        />
+        // ...and here.
+      </div>
+    )
+  }
+}
+```
+
+Ok, this part is plenty repetitive, too.
+
+We created new sets for `jobTitles` and `USstates`, then rendered two more
+`ControlRow` elements with appropriate attributes. They get `toggleNames` for
+building the buttons, `picked` to know which is active, an `updateDataFilter`
+callback, and we tell US states to render capitalized.
+
+The implementations of those `updateDataFilter` callbacks follow the same
+pattern as `updateYearFilter`.
+
+```javascript
+// src/components/Controls.js
+
+const Controls = () => {
+  const [filteredBy, setFilteredBy] = useState({
+    year: "*",
+    USstate: "*",
+    jobTitle: "*",
+  })
+  const [filterFunctions, setFilter] = useState({
+    year: () => true,
+    USstate: () => true,
+    jobTitle: () => true,
+  })
+
+  const updateJobTitleFilter = (jobTitle, reset) => {
+    let jobTitleFilter = (d) => d.clean_job_title === jobTitle
+
+    if (reset || !jobTitle) {
+      jobTitleFilter = () => true
+      jobTitle = "*"
+    }
+
+    setFilteredBy((filteredBy) => {
+      return { ...filteredBy, jobTitle }
+    })
+    setFilter((filterFunctions) => {
+      return { ...filterFunctions, jobTitle: jobTitleFilter }
+    })
+
+    reportUpdateUpTheChain()
+  }
+
+  const updateUSstateFilter = (USstate, reset) => {
+    let USstateFilter = (d) => d.clean_job_title === USstate
+
+    if (reset || !USstate) {
+      USstateFilter = () => true
+      USstate = "*"
+    }
+
+    setFilteredBy((filteredBy) => {
+      return { ...filteredBy, USstate }
+    })
+    setFilter((filterFunctions) => {
+      return { ...filterFunctions, USstate: USstateFilter }
+    })
+
+    reportUpdateUpTheChain()
+  }
+
+  // ..
+}
+
+export default Controls
+```
+
+Yes, they're basically the same as `updateYearFilter`. The only difference is a
+changed `filter` function and using different keys when setting state.
+
+Why separate functions then? No need to get fancy. It would've made the code
+harder to read.
+
+Our last step is to add these new keys to the `reportUpdateUpTheChain`
+function.
+
+```javascript
+// src/components/Controls/index.js
+
+const Controls = () => {
+  function reportUpdateUpTheChain() {
+    window.location.hash = [
+      filteredBy.year,
+      filteredBy.USstate,
+      filteredBy.jobTitle,
+    ].join("-")
+
+    const filter = (d) =>
+      filterFunctions.year(d) &&
+      filterFunctions.USstate(d) &&
+      filterFunctions.jobTitle(d)
+
+    updateDataFilter(filter, filteredBy)
+  }
+}
+```
+
+We add them to the filter condition with `&&` and expand the `filteredBy`
+argument.
+
+Two more rows of filters show up.
+
+![All the filters](https://raw.githubusercontent.com/Swizec/react-d3js-es6-ebook/2018-version/manuscript/resources/images/es6v2/all-filters.png)
+
+👏
+
+## Stale state is stale 🤨
+
+<Vimeo id={432215286} />
+
+A funny thing happened. We were calling `reportUpdateUpTheChain` which relies on local state in the component.
+
+But that state doesn't update right away. And the state hook provides no callback like the old `this.setState` used to.
+
+`reportUpdateUpTheChain` is a side-effect! We have to use `useEffect`.
+
+```javascript
+// src/components/Controls.js
+
+const Controls = ({ data, updateDataFilter }) => {
+  useEffect(() => {
+    reportUpdateUpTheChain()
+  }, [filteredBy, filterFunctions])
+}
+```
+
+You should now have a working data visualization dashboard with user controls. It struggles on certain clicks because of the shortened dataset.
+
+If that didn't work, consult the [diff on GitHub](https://github.com/Swizec/reactdataviz-project/commit/eb3533b04e91977ae26ae8e983b93a823d328f87)
+
+Next up - going live 🚀
