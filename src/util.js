@@ -11,3 +11,7 @@ export function currentLocation({ location }) {
 export function isArticlePage({ location }) {
   return currentLocation({ location }).includes("articles")
 }
+
+export function isWorkshopPage({ location }) {
+  return currentLocation({ location }).includes("workshop")
+}

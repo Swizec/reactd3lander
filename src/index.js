@@ -4,6 +4,7 @@ import { AuthProvider } from "react-use-auth"
 import minimatch from "minimatch"
 import Layout from "./components/layout"
 import { ScopedRoute } from "./components/ScopedRoute"
+import { isWorkshopPage } from "./util"
 
 export { default as Layout } from "./components/layout"
 export * from "./components/Blocks"
@@ -18,6 +19,7 @@ const UNAUTH_PAGES = [
   "/thanks-extra",
   "/thanks-full",
   "/articles/*",
+  "/workshop/*",
   "/",
 ]
 
@@ -54,7 +56,12 @@ const SCOPE_PAGE_MAP = {
 }
 
 const Default = ({ element, ...props }) => (
-  <Layout authenticated={false} authorized={false} fullwidth={true} {...props}>
+  <Layout
+    authenticated={false}
+    authorized={false}
+    fullwidth={!isWorkshopPage(props)}
+    {...props}
+  >
     {element}
   </Layout>
 )

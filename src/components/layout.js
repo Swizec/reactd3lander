@@ -10,8 +10,9 @@ import SkipLink from "./skip-link"
 import Header from "./header"
 import Footer from "./footer"
 import Nav from "./nav"
+import NavWorkshop from "./nav-workshop"
 
-import { isArticlePage, currentLocation } from "../util"
+import { isArticlePage, isWorkshopPage } from "../util"
 
 import Reactions from "./reactions"
 import ArticleFooter from "./Articles/ArticleFooter"
@@ -44,7 +45,7 @@ const Sidebar = (props) => {
           },
         }}
       >
-        <Nav />
+        {isWorkshopPage(props) ? <NavWorkshop /> : <Nav />}
       </Box>
       <Box
         sx={{
@@ -59,12 +60,21 @@ const Sidebar = (props) => {
       >
         {props.children}
         <Reactions page={props.uri} />
-        <Nav
-          pathname={props.location.pathname}
-          components={{
-            wrapper: Pagination,
-          }}
-        />
+        {isWorkshopPage(props) ? (
+          <NavWorkshop
+            pathname={props.location.pathname}
+            components={{
+              wrapper: Pagination,
+            }}
+          />
+        ) : (
+          <Nav
+            pathname={props.location.pathname}
+            components={{
+              wrapper: Pagination,
+            }}
+          />
+        )}
       </Box>
     </Flex>
   )
