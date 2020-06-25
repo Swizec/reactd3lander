@@ -1,0 +1,68 @@
+# Blackbox components with hooks
+
+Blackbox components wrap any D3 code in React. They're called blackbox because React can't see inside and can't help you with rendering
+
+Perfect for small components like axes (which are tedious to build yourself) and
+
+Use this D3 code for an axis to create a simple `<Axis>` component.
+
+```javascript
+const scale = d3.scaleLinear().domain([0, 10]).range([0, 200])
+const axis = d3.axisBottom(scale)
+```
+
+You'll need the `useRef` hook to reference a rendered `<g>` element and the `useEffect` hook to trigger D3 rendering when the component changes.
+
+https://codesandbox.io/s/react-d3-axis-unsolved-c2o79?file=/src/Axis.js
+
+Try solving it without looking at my solution.
+
+## My solution
+
+https://codesandbox.io/s/react-d3-axis-hooks-df304
+
+## my useD3 hook for blackbox components
+
+Even better than doing it yourself is using the ready-made `useD3` hook I opensourced for you :)
+
+Read the full docs at [d3blackbox.com](https://d3blackbox.com/)
+
+It works as a combination of `useRef` and `useEffect`. Hooks into component
+re-renders, gives you control of the anchor element, and re-runs your D3 render
+function on every component render.
+
+You use it like this:
+
+```javascript
+import { useD3 } from "d3blackbox"
+function renderSomeD3(anchor) {
+  d3.select(anchor)
+  // ...
+}
+
+const MyD3Component = ({ x, y }) => {
+  const refAnchor = useD3((anchor) => renderSomeD3(anchor))
+  return <g ref={refAnchor} transform={`translate(${x}, ${y})`} />
+}
+```
+
+You'll see how this works in more detail when we build the big example project. We'll use `useD3` to build axes.
+
+Here's how the above example looks when you use `useD3` ✌️
+
+# Exercise
+
+Now try using the `useD3` hook to create a barchart component based on the earlier D3 example.
+
+<iframe
+  src="https://cdn.rawgit.com/mbostock/3885304/raw/a91f37f5f4b43269df3dbabcda0090310c05285d/index.html"
+  width="100%"
+  height="480"
+  style="border: 0px; overflow: hidden"
+></iframe>
+
+You can get the code by right-click + view source [on this link here](https://cdn.rawgit.com/mbostock/3885304/raw/a91f37f5f4b43269df3dbabcda0090310c05285d/index.html)
+
+This example was written with d3v4 so you'll have to change `d3.tsv()` to return `data` as a promise. I've prepared the dataset and styling for you :)
+
+https://codesandbox.io/s/react-d3-blackbox-barchart-unsolved-gq0su
