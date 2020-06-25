@@ -1,0 +1,76 @@
+# Using transitions for simple animation
+
+Game loops are great when you need fine-grained control. But what, if you just want an element to animate a little bit when a user does something? You don't care about the details, you just want a little flourish.
+
+That's where transitions come in.
+
+Transitions are a way to animate SVG elements by saying "I want this property to change to this new value and take this long to do it". And you can use easing functions to make it look better.
+
+I won't go into details about why easing functions are important, but they make movement look more natural. You can read more about it in Disney's 12 Basic Principles of Animation.
+
+The two we can achieve with easing functions are:
+
+- Squash and Stretch
+- Slow In Slow Out
+
+<iframe
+  src="http://easings.net/"
+  width="110%"
+  height="400"
+  style="border: 0px"
+></iframe>
+
+[From easings.net](http://easings.net)
+
+Let me show you how it works on a small example. We're creating a component that swipes left or right when you click. You can think of it as a toggle button.
+
+## A Ball swipe transition
+
+https://codesandbox.io/s/d3-transition-ball-swipe-hooks-n60lb
+
+Just like with earlier examples, our goal is to build a component that's fully controlled by its props. We're still using React for rendering and D3 for calculating things, but we have to mix approaches.
+
+- React controls the DOM
+- D3 takes over during transition
+- React regains control
+
+We're using `state` as a staging area for our prop changes. That allows us to apply changes over time.
+
+A 4-step approach develops:
+
+1.  Copy relevant props into state
+2.  Render from state
+3.  Use D3 transitions in `componentDidUpdate`
+4.  Update state when transition ends
+
+It's important to tell React what's going on after we're done updating the DOM. Otherwise it gets confused and might start throwing errors about DOM nodes not matching their React state.
+
+### Practical exercise
+
+Fork the sandbox above and add a similar transition on the vertical axis. Or maybe a circle size transition.
+
+Try different easing functions as well. [Here](https://github.com/d3/d3/blob/master/API.md#easings-d3-ease)'s a list of all that exist.
+
+## A note on transition and animation performance
+
+JavaScript transitions and animations are great when you need a lot of control over your transitions. Or when you need to stack and coordinate different animations.
+
+But they have a big flaw: No GPU optimization.
+
+When you run into trouble depends on what exactly your'e doing, but eventually you're going to struggle with UI lag and jitteriness. You can solve this by using CSS transitions instead.
+
+The approach is similar, even easier in some cases. You don't have to worry about props and state at all, just set up the transition in your CSS and the browser will handle everything. You can render the same old way.
+
+### Why even use D3 transitions then?
+
+Good question!
+
+Think of it as a spectrum of control and performance.
+
+Game loop gives you most control and least performance. You're running React's full rendering engine on every update.
+
+D3 transition gives you a lot of control and decent performance. You're running javascript for transitions, but updating the DOM directly.
+
+CSS transition gives you least control and best performance. You change props and the GPU optimized CSS engine handles the rest.
+
+There are ways to make both game loops and D3 transitions more or less performant, but consider whether it's worth it to go through all that trouble.

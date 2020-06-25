@@ -1,0 +1,37 @@
+# Advanced transitions
+
+This is where shit gets fun.
+
+You can drive React state changes with D3 transitions. 🤯
+
+The idea is that:
+
+1. Your components are a pure representation of state+props
+2. Change state lots and components animate
+3. D3 transitions are a javascript game loop inside
+4. Use the transition to change state, drive renders
+
+You can build stuff like this:
+
+![](https://i.imgur.com/hzKOMXi.gif)
+
+But we're going to do something simpler 👉 a bouncy scatterplot.
+
+Take your final scatterplot from before and make its size transition into smaller dimensions on click.
+
+You'll need to:
+
+1. Change the click handling function
+2. Use a custom `.tween` transition to hook into D3's game loop
+3. Use that tween to update dimension state
+
+Here are some tips:
+
+- `.tween()` calls a function that should return a parametrized function
+- that function will get a `t` which says _"We're on this frame of animation"_
+- you can use `d3.interpolate` to parametrize between 2 values
+- your parametrized method can update state to trigger renders 😉
+
+Here's my final solution, I'll walk you through after you give it a shot:
+
+https://codesandbox.io/s/react-d3-scatterplot-bouncy-i6hr6
