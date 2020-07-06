@@ -8,6 +8,10 @@ export const ArticleListing = ({
     frontmatter: { title, description, date },
   },
 }) => {
+  if (!title && !description && !date) {
+    return null
+  }
+
   return (
     <Box mb={4}>
       <Link href={path}>
