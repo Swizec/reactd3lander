@@ -1,8 +1,8 @@
 import React from 'react'
-import styled from '@emotion/styled'
 import { StaticQuery, graphql } from 'gatsby'
+import styled from '@emotion/styled'
 
-import { Image } from '../Image'
+import { Image } from 'course-platform'
 
 const Wrapper = styled.div`
 

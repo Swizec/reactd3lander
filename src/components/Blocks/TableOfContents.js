@@ -1,7 +1,6 @@
 import React, { Component } from 'react'
 import styled from '@emotion/styled'
-import Topic from './Topic'
-import { LazyImage } from '../Image'
+import { LazyImage, Topic } from 'course-platform'
 
 import christmasTree from '../../images/christmas-trees.gif'
 import moneySpentChristmas from '../../images/money-spent-christmas.png'

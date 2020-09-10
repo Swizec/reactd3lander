@@ -2,7 +2,7 @@ import React from "react";
 import styled from "@emotion/styled";
 import { Box } from "rebass";
 
-import { LazyImage } from "../Image";
+import { LazyImage } from "course-platform";
 
 import examp1 from '../../images/landingexamples/examp1.gif'
 import examp2 from '../../images/landingexamples/examp2.gif'

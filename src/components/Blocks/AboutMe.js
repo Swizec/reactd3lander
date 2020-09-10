@@ -3,7 +3,7 @@ import styled from '@emotion/styled'
 import AboutMeFeatures from './AboutMeFeatures'
 import { StaticQuery, graphql } from 'gatsby'
 
-import { Image } from '../Image'
+import { Image } from 'course-platform'
 
 const Wrapper = styled.div`
   max-width: 700px;

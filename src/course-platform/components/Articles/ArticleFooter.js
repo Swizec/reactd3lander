@@ -1,8 +1,8 @@
 import React from 'react'
 import styled from '@emotion/styled'
-import ArticleCTA from './ArticleCTA'
-import ConvertkitForm from './ConvertkitForm'
-import AboutMe from '../Blocks/AboutMe'
+import ArticleCTA from '../../../components/Articles/ArticleCTA'
+import { AboutMe } from '../../../components/Blocks/'
+import { ConvertkitForm } from 'course-platform'
 
 const Wrapper = styled.div`
     max-width: 700px;
@@ -12,7 +12,6 @@ const Wrapper = styled.div`
     @media (min-width: 940px) {
         padding: 0 2rem;
     }
-
 `
 
 const ArticleFooter = () => (

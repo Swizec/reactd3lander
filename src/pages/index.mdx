@@ -1,26 +1,28 @@
 import { Box, Flex, Button } from "rebass"
 import { graphql } from "gatsby"
-import GumroadButton from "../components/GumroadButton"
 import TweetEmbed from "react-tweet-embed"
-import { LazyImage, LinkImage } from "../components/Image"
-import {
-  Banner,
-  NavGrid,
-  Container,
-  Grid,
-  Title,
-  JumpToCourse,
-  Testimonial,
-  EmailSignup,
-  CopyBlock,
+import { 
   AboutMeFeatures,
+  Examples,
   FeatureList,
   TableOfContents,
+  } from '../components/Blocks/'
+
+import {
+  Banner,
+  Container,
+  CopyBlock,
+  EmailSignup,
+  Grid,
+  GumroadButton,
+  JumpToCourse,
+  LazyImage, 
+  LinkImage,
+  NavGrid,
   Pricing,
-  Examples,
-} from "../components/Blocks/index"
-import Avatar from "../components/avatar"
-import { Video } from "../components/Video"
+  Testimonial,
+  Title,
+  Video } from "course-platform"
 import pshot2 from "../images/pshot2.gif"
 
 export const pageQuery = graphql`

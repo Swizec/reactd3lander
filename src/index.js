@@ -86,12 +86,12 @@ const MyRouter = ({ element, ...props }) => {
 export const wrapPageElement = ({ element, ...props }) => (
   <AuthProvider
     navigate={navigate}
-    auth0_domain="serverlessreactcourse.auth0.com"
-    auth0_client_id="pCO5jInBC1g4aCAtEfJNL6uftWSw40un"
+    auth0_domain={process.env.GATSBY_AUTH0_DOMAIN}
+    auth0_client_id={process.env.GATSBY_AUTH0_CLIENTID}
     auth0_params={{
-      scope: "openid profile email user_metadata",
+      scope: process.env.GATSBY_AUTH0_SCOPE,
     }}
-    customPropertyNamespace="https://serverlessreact.dev"
+    customPropertyNamespace={process.env.GATSBY_AUTH0_CUSTOMPROPERTYNAMESPACE}
   >
     <MyRouter element={element} {...props} {...props.props} />
   </AuthProvider>

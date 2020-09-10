@@ -1,8 +1,7 @@
 import React, { useEffect, useReducer } from "react"
 import styled from "@emotion/styled"
-import PriceBox from "./PriceBox.js"
-import PriceBoxSpecial from "./PriceBoxSpecial.js"
 import FadeIn from "react-lazyload-fadein"
+import { PriceBox, PriceBoxSpecial } from "course-platform"
 import { ParityPrice } from "bigmac-index-price-calculator"
 
 const parityPrice = new ParityPrice("cb952dd732eb8e511d44d441788fcf67", true)

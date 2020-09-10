@@ -6,7 +6,7 @@ import Test6 from '../../images/Test6.jpg'
 import Test8 from '../../images/Test8.png'
 import Test2 from '../../images/Test2.jpg'
 import PerWiklander from '../../images/perwiklander.jpeg'
-import { Testimonial } from '../Blocks/elements'
+import { Testimonial } from 'course-platform'
 import { Link } from 'gatsby'
 
 

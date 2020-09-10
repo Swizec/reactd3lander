@@ -5,8 +5,9 @@ const fs = require("fs")
 module.exports = {
   siteMetadata: {
     title: `React for Data Visualization`,
-    description: `Learn how to build scalable dataviz components your whole team can understand with React for Data Visualization.`,
+    description: `Learn how to build scalable dataviz components your whole team can understand with React for Data Visualization  - updated for 2020.`,
     author: `@swizec`,
+    siteUrl: `https://reactfordataviz.com`,
     coverImageStaticPath: "metaimage.png",
     convertkit: {
       userId: "785fc7ef1f",
@@ -14,81 +15,25 @@ module.exports = {
       url: "https://pages.convertkit.com/785fc7ef1f/772ba7c9ba",
     },
     articles: {
-      title: `React for Data Visualization Articles`,
-      description: `A monthly data visualization built with React, D3, and others`,
+      title: `React for Dataviz`,
+      description: `
+        A monthly data visualization built with React, D3, and others.
+        Livecoded last Sunday of the month. 
+        <a href="https://www.youtube.com/channel/UCoyHgaeLLI7Knp7LDHOwZMw">
+          Join live
+        </a>
+        or subscribe to the newsletter 💌
+      `,
+      titleSeo: `React for Data Visualization Articles`,
+      descriptionSeo: `A monthly data visualization built with React, D3, and others`,
     },
   },
   plugins: [
-    "gatsby-transformer-sharp",
-    "gatsby-plugin-sharp",
-    "gatsby-remark-images",
     {
-      resolve: "gatsby-plugin-mdx",
+      resolve: "course-platform",
       options: {
-        extensions: [".mdx", ".md"],
-        remarkPlugins,
-        gatsbyRemarkPlugins: [
-          "gatsby-remark-copy-linked-files",
-          {
-            resolve: "gatsby-remark-giphy",
-            options: {
-              giphyApiKey: "tvyI1ARG6FOkW9PUzmgubJ3iY5P5rJmO",
-              useVideo: true,
-              embedWidth: "80%",
-            },
-          },
-          {
-            resolve: "gatsby-remark-images",
-            options: {
-              markdownCaptions: true,
-              maxWidth: 890,
-              linkImagestoOriginal: false,
-              showCaptions: ["title", "alt"],
-              withWebp: true,
-              wrapperStyle: "text-align: center; font-style: italic",
-              tracedSVG: {
-                color: `lightgray`,
-                optTolerance: 0.4,
-                turdSize: 100,
-                turnPolicy: "TURNPOLICY_MAJORITY",
-              },
-            },
-          },
-          {
-            resolve: `${__dirname}/src/gatsby-remark-social-cards`,
-          },
-          {
-            resolve: "gatsby-remark-embedder",
-            options: {},
-          },
-        ],
-        plugins: [{ resolve: "gatsby-remark-images" }],
-      },
+      }
     },
-    {
-      resolve: "gatsby-source-filesystem",
-      options: {
-        path: `${__dirname}/src/images`,
-      },
-    },
-    // add a gatsby-source-filesystem entry for every article's images
-    ...fs
-      .readdirSync(`${__dirname}/src/pages/articles`)
-      .map((path) => `${__dirname}/src/pages/articles/${path}`)
-      .filter(
-        (path) =>
-          fs.lstatSync(path).isDirectory() && fs.readdirSync(path).length > 0
-      )
-      .map((path) => ({
-        resolve: "gatsby-source-filesystem",
-        options: {
-          path,
-        },
-      })),
-    "gatsby-plugin-catch-links",
-    "gatsby-plugin-theme-ui",
-    "gatsby-plugin-react-helmet",
-    "gatsby-plugin-twitter",
     {
       resolve: "gatsby-plugin-google-analytics",
       options: {
@@ -104,7 +49,6 @@ module.exports = {
         pixelId: "714190382013726",
       },
     },
-    "gatsby-plugin-simple-analytics",
     {
       resolve: "gatsby-plugin-manifest",
       options: {
@@ -119,7 +63,5 @@ module.exports = {
         icon: "./static/icon.png",
       },
     },
-
-    // "gatsby-plugin-offline",
   ],
 }
