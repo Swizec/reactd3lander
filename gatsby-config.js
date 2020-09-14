@@ -29,13 +29,7 @@ module.exports = {
     },
   },
   plugins: [
-    {
-      resolve: "course-platform",
-      options: {
-        trakingId: "UA-1464315-23",
-        facebookPixel: "714190382013726"
-      }
-    },
+     "course-platform",
     {
       resolve: "gatsby-plugin-manifest",
       options: {
