@@ -8,7 +8,7 @@ module.exports = {
     description: `Learn how to build scalable dataviz components your whole team can understand with React for Data Visualization  - updated for 2020.`,
     author: `@swizec`,
     siteUrl: `https://reactfordataviz.com`,
-    coverImageStaticPath: "metaimage.png",
+    courseFirstLesson: `/introduction/1`,
     convertkit: {
       userId: "785fc7ef1f",
       formId: "772ba7c9ba",
@@ -32,22 +32,9 @@ module.exports = {
     {
       resolve: "course-platform",
       options: {
+        trakingId: "UA-1464315-23",
+        facebookPixel: "714190382013726"
       }
-    },
-    {
-      resolve: "gatsby-plugin-google-analytics",
-      options: {
-        trackingId: "UA-1464315-23",
-        head: false,
-        anonymize: false,
-        respectDNT: true,
-      },
-    },
-    {
-      resolve: "gatsby-plugin-facebook-pixel",
-      options: {
-        pixelId: "714190382013726",
-      },
     },
     {
       resolve: "gatsby-plugin-manifest",

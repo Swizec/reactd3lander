@@ -1,9 +1,8 @@
 import React  from 'react'
 import styled from '@emotion/styled'
-import AboutMeFeatures from './AboutMeFeatures'
 import { StaticQuery, graphql } from 'gatsby'
 
-import { Image } from 'course-platform'
+import { AboutMeFeatures, Image } from 'course-platform'
 
 const Wrapper = styled.div`
   max-width: 700px;
@@ -38,26 +37,6 @@ const Title = styled.h1 `
   margin: 7rem auto;
   margin-bottom: 3rem;
 `
-
-/*{
- /*display: grid;
-align-items: top;
-justify-items: center;
-grid-gap: 1rem;
-grid-template-columns: 1fr 1fr;
-grid-template-areas:
- 'Picture Copy'
- '. Feat';
-@media (max-width: 940px) {
- align-items: center;
- justify-items: center;
- display: grid;
- grid-template-columns: 1fr;
- grid-template-areas:
-   'Picture'
-   'Copy'
-   'Feat';
-}*/
 
 const About = ({ swizec }) => (
   <Wrapper>
